@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 17:19",
+    "lastUpdated": "2026-04-14 17:25",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -451,11 +451,11 @@
         {
           "id": "l-22",
           "name": "교각직선",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "실행하면 선분 선택되게는 되는데, 아무런 변화가 없음."
         }
       ]
     },
@@ -466,7 +466,7 @@
         {
           "id": "pf-01",
           "name": "원 (중심과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -475,7 +475,7 @@
         {
           "id": "pf-02",
           "name": "원 (중심과 반지름)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -484,7 +484,7 @@
         {
           "id": "pf-03",
           "name": "원 (지름)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -493,7 +493,7 @@
         {
           "id": "pf-04",
           "name": "부채꼴 (원호)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -502,7 +502,7 @@
         {
           "id": "pf-05",
           "name": "외접원",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -511,7 +511,7 @@
         {
           "id": "pf-06",
           "name": "내접원",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -520,7 +520,7 @@
         {
           "id": "pf-07",
           "name": "방접원",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -529,7 +529,7 @@
         {
           "id": "pf-08",
           "name": "원 (점, 점, 선)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -538,6 +538,15 @@
         {
           "id": "pf-09",
           "name": "원 (점, 선, 선)",
+          "webMigrated": "yes",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "pf-31",
+          "name": "원 (점, 점, 원)",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
