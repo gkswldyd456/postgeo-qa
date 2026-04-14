@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 17:36",
+    "lastUpdated": "2026-04-14 18:26",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -742,7 +742,7 @@
         {
           "id": "td-01",
           "name": "원뿔 (직원뿔)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -751,7 +751,7 @@
         {
           "id": "td-02",
           "name": "다각뿔 (n각뿔, n:3~10)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -760,7 +760,7 @@
         {
           "id": "td-03",
           "name": "원기둥 (직원기둥)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -769,7 +769,7 @@
         {
           "id": "td-04",
           "name": "다각기둥 (n각기둥, n:3~10)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -778,7 +778,7 @@
         {
           "id": "td-05",
           "name": "구",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -787,7 +787,7 @@
         {
           "id": "td-06",
           "name": "뿔/기둥 평행단면",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -802,7 +802,7 @@
         {
           "id": "fp-01",
           "name": "일차함수 (한 점과 기울기)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -811,7 +811,7 @@
         {
           "id": "fp-02",
           "name": "이차함수 (꼭짓점과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -820,7 +820,7 @@
         {
           "id": "fp-03",
           "name": "이차함수 (세 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -829,7 +829,7 @@
         {
           "id": "fp-04",
           "name": "삼차함수 (두 극점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -838,7 +838,7 @@
         {
           "id": "fp-05",
           "name": "삼차함수 (한 극점과 두 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -847,7 +847,7 @@
         {
           "id": "fp-06",
           "name": "삼차함수 (네 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -856,7 +856,7 @@
         {
           "id": "fp-07",
           "name": "사차함수 (세 극점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -865,7 +865,7 @@
         {
           "id": "fp-08",
           "name": "사차함수 — 대칭 (두 극점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -874,7 +874,7 @@
         {
           "id": "fp-09",
           "name": "사차함수 — 극점+변곡점 (미분계수 0)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -883,7 +883,7 @@
         {
           "id": "fp-10",
           "name": "사차함수 — 극점+변곡점+한점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -892,7 +892,7 @@
         {
           "id": "fp-11",
           "name": "사차함수 (다섯점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -901,16 +901,16 @@
         {
           "id": "fp-12",
           "name": "유리함수 (대칭점과 한점)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "점근선 생기는데 가로 점근선 안생김"
         },
         {
           "id": "fp-13",
           "name": "무리함수 (꼭짓점과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -919,7 +919,7 @@
         {
           "id": "fp-14",
           "name": "지수함수 (점근선과 두 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -928,7 +928,7 @@
         {
           "id": "fp-15",
           "name": "로그함수 (점근선과 두 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -937,7 +937,7 @@
         {
           "id": "fp-16",
           "name": "삼각함수 sin (y=A·sin(px+q)+n)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -946,7 +946,7 @@
         {
           "id": "fp-17",
           "name": "삼각함수 cos (y=A·cos(px+q)+n)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -955,7 +955,7 @@
         {
           "id": "fp-18",
           "name": "삼각함수 tan",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -964,7 +964,7 @@
         {
           "id": "fp-19",
           "name": "정규분포곡선 (두 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -973,16 +973,16 @@
         {
           "id": "fp-20",
           "name": "포물선 (준선과 초점)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "준선 선택이 아님."
         },
         {
           "id": "fp-21",
           "name": "포물선 (꼭짓점과 초점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -991,16 +991,16 @@
         {
           "id": "fp-22",
           "name": "포물선 (준선과 꼭짓점)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "준선 선택이 아님."
         },
         {
           "id": "fp-23",
           "name": "타원 (두 초점과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1009,7 +1009,7 @@
         {
           "id": "fp-24",
           "name": "타원 (장축 양 끝점과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1018,7 +1018,7 @@
         {
           "id": "fp-25",
           "name": "타원 (두 꼭짓점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1027,7 +1027,7 @@
         {
           "id": "fp-26",
           "name": "쌍곡선 (두 초점과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1036,7 +1036,7 @@
         {
           "id": "fp-27",
           "name": "쌍곡선 (두 꼭짓점과 한 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1045,7 +1045,7 @@
         {
           "id": "fp-28",
           "name": "자유곡선",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1054,7 +1054,7 @@
         {
           "id": "fp-29",
           "name": "스플라인 1",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1063,16 +1063,7 @@
         {
           "id": "fp-30",
           "name": "스플라인 2",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-31",
-          "name": "그래프호",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1624,6 +1615,24 @@
       "date": "2026-04-14 15:46",
       "type": "일반",
       "content": "점 클릭 현재 컨트롤 클릭만 됨. Shift+클릭으로 격자점에 찍을 수 있는 것 추가 필요."
+    },
+    {
+      "id": "note-1776156122921",
+      "date": "2026-04-14 17:42",
+      "type": "일반",
+      "content": "선 토글에 대해 무선으로 바뀌는 개념이 없음."
+    },
+    {
+      "id": "note-1776156155057",
+      "date": "2026-04-14 17:42",
+      "type": "일반",
+      "content": "점 토글에 대해 빈점이 없고, 빈점이라는 점 모양이 없음. + 점 크기 0이 없음."
+    },
+    {
+      "id": "note-1776156361525",
+      "date": "2026-04-14 17:46",
+      "type": "일반",
+      "content": "점근선 - 함수에 딸려있는 기능으로 생각되어야함. 토글 느낌."
     }
   ]
 }
