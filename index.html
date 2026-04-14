@@ -216,29 +216,11 @@
   // 데이터 로드
   // ────────────────────────────────────────
   async function loadData() {
-    const owner = getOwner();
-    if (!owner) {
-      showSetupPrompt();
-      return;
-    }
     try {
-      const token = getToken();
-      const hdrs  = token ? { Authorization: `Bearer ${token}` } : {};
-      const res   = await fetch(`${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`, { headers: hdrs });
-
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        if (res.status === 404) throw new Error('저장소 또는 qa-data.json 파일을 찾을 수 없습니다.');
-        if (res.status === 401) throw new Error('토큰이 유효하지 않습니다. 설정을 확인하세요.');
-        throw new Error(body.message || `GitHub API 오류 ${res.status}`);
-      }
-
-      const meta = await res.json();
-      fileSha    = meta.sha;
-      // base64 → UTF-8
-      const raw  = decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
-      qaData     = JSON.parse(raw);
-
+      // 공개 저장소이므로 인증 없이 raw URL로 직접 로드 (누구나 볼 수 있음)
+      const res = await fetch('https://raw.githubusercontent.com/gkswldyd456/postgeo-qa/main/qa-data.json');
+      if (!res.ok) throw new Error(`데이터 로드 실패 (${res.status})`);
+      qaData = await res.json();
       renderAll();
     } catch (e) {
       showError(e.message);
@@ -622,11 +604,6 @@
       openSettings();
       return;
     }
-    if (!fileSha) {
-      alert('파일 SHA 정보가 없습니다. 페이지를 새로고침 해주세요.');
-      return;
-    }
-
     const btn = document.getElementById('saveBtn');
     btn.textContent = '저장 중...';
     btn.disabled = true;
@@ -639,6 +616,13 @@
 
       const jsonStr = JSON.stringify(qaData, null, 2);
       const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+      // 저장 직전 최신 SHA 조회 (raw URL 로드 시 SHA 정보가 없으므로)
+      const shaRes = await fetch(
+        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+        { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
+      );
+      if (shaRes.ok) fileSha = (await shaRes.json()).sha;
 
       const res = await fetch(
         `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
