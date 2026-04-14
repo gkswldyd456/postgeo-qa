@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 15:58",
+    "lastUpdated": "2026-04-14 16:01",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -219,57 +219,12 @@
         },
         {
           "id": "p-22",
-          "name": "교점 (두 직선)",
+          "name": "교점",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "자유도 0"
-        },
-        {
-          "id": "p-23",
-          "name": "교점 (직선과 원)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-24",
-          "name": "교점 (두 원)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-25",
-          "name": "교점 (직선과 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-26",
-          "name": "교점 (원과 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-27",
-          "name": "교점 (두 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
         },
         {
           "id": "p-28",
