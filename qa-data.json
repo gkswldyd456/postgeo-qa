@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 18:49",
+    "lastUpdated": "2026-04-14 18:51",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1096,7 +1096,7 @@
         {
           "id": "fi-03",
           "name": "매개변수 함수 x=f(t), y=g(t)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1105,7 +1105,7 @@
         {
           "id": "fi-04",
           "name": "다항함수 (계수 입력)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1114,43 +1114,7 @@
         {
           "id": "fi-05",
           "name": "이차곡선 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-06",
-          "name": "일차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-07",
-          "name": "이차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-08",
-          "name": "삼차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-09",
-          "name": "사차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
