@@ -1123,7 +1123,7 @@
         {
           "id": "fi-10",
           "name": "미분 (도함수 그래프)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1132,7 +1132,7 @@
         {
           "id": "fi-11",
           "name": "적분 (적분 그래프)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
