@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 15:52",
+    "lastUpdated": "2026-04-14 15:55",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -148,7 +148,7 @@
         {
           "id": "p-14",
           "name": "두 점의 등분점 (n등분, n:2~15)",
-          "webMigrated": "partial",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -157,7 +157,7 @@
         {
           "id": "p-15",
           "name": "선분의 등분점 (n등분, n:2~15)",
-          "webMigrated": "partial",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -166,16 +166,16 @@
         {
           "id": "p-16",
           "name": "원호의 등분점 (n등분, n:2~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
         },
         {
           "id": "p-17",
           "name": "세 점의 무게중심",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -310,11 +310,11 @@
         {
           "id": "p-32",
           "name": "원호의 등분점 (두 점 선택) (n등분, n=2~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
         }
       ]
     },
