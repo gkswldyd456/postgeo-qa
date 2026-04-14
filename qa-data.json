@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.0",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 12:53",
+    "lastUpdated": "2026-04-14 14:29",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -33,16 +33,16 @@
         {
           "id": "p-01",
           "name": "자유점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 zzzz"
+          "notes": "자유도 2"
         },
         {
           "id": "p-02",
           "name": "선분 위의 점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -51,7 +51,7 @@
         {
           "id": "p-03",
           "name": "호 위의 점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -60,7 +60,7 @@
         {
           "id": "p-04",
           "name": "그래프 위의 점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -69,7 +69,7 @@
         {
           "id": "p-05",
           "name": "원의 중심",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -78,7 +78,7 @@
         {
           "id": "p-06",
           "name": "수선의 발 (선분 선택)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -87,7 +87,7 @@
         {
           "id": "p-07",
           "name": "수선의 발 (두 점 선택)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -96,7 +96,7 @@
         {
           "id": "p-08",
           "name": "점 대칭점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -105,7 +105,7 @@
         {
           "id": "p-09",
           "name": "선 대칭점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -114,7 +114,7 @@
         {
           "id": "p-10",
           "name": "좌표 고정점 (X좌표점)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
