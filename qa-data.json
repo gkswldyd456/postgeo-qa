@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 18:52",
+    "lastUpdated": "2026-04-14 19:03",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1147,25 +1147,25 @@
         {
           "id": "ce-01",
           "name": "객체 선택",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "하나의 객체 선택만 가능.\n다중선택은 아직 X"
         },
         {
           "id": "ce-02",
           "name": "객체 이동 (드래그)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "점, 선분 정도만 이동되고 나머지는 대부분 안됨."
         },
         {
           "id": "ce-03",
           "name": "객체 회전 (점, 텍스트, 이미지)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1174,16 +1174,16 @@
         {
           "id": "ce-04",
           "name": "객체 크기 조절",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "점 크기 조정은 됨."
         },
         {
           "id": "ce-05",
           "name": "스타일 변경 — 색상",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1192,7 +1192,7 @@
         {
           "id": "ce-06",
           "name": "스타일 변경 — 굵기",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1201,7 +1201,7 @@
         {
           "id": "ce-07",
           "name": "스타일 변경 — 화살표",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1210,7 +1210,7 @@
         {
           "id": "ce-08",
           "name": "영역 채우기",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1219,7 +1219,7 @@
         {
           "id": "ce-09",
           "name": "실행 취소 (Undo)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1228,7 +1228,7 @@
         {
           "id": "ce-10",
           "name": "다시 실행 (Redo)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1237,7 +1237,7 @@
         {
           "id": "ce-11",
           "name": "잘라내기 (Cut)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1246,7 +1246,7 @@
         {
           "id": "ce-12",
           "name": "복사 (Copy)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1255,7 +1255,7 @@
         {
           "id": "ce-13",
           "name": "붙여넣기 (Paste)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1264,7 +1264,7 @@
         {
           "id": "ce-14",
           "name": "객체 삭제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1273,7 +1273,7 @@
         {
           "id": "ce-15",
           "name": "항목 첨부 및 의존관계 변경",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1288,7 +1288,7 @@
         {
           "id": "cs-01",
           "name": "격자 설정",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1297,7 +1297,7 @@
         {
           "id": "cs-02",
           "name": "축 표시 설정",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1306,7 +1306,7 @@
         {
           "id": "cs-03",
           "name": "좌표 범위 설정",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1315,7 +1315,7 @@
         {
           "id": "cs-04",
           "name": "확대/축소 (Zoom)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1324,7 +1324,7 @@
         {
           "id": "cs-05",
           "name": "배경 이미지 추가",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1333,16 +1333,16 @@
         {
           "id": "cs-06",
           "name": "배경 이미지 제거",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "배경이미지 표시 클릭"
         },
         {
           "id": "cs-07",
           "name": "자동 자르기 (Autocrop) ON/OFF",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1357,7 +1357,7 @@
         {
           "id": "fs-01",
           "name": "로컬 저장소에 저장",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1366,7 +1366,7 @@
         {
           "id": "fs-02",
           "name": "로컬 저장소에서 불러오기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1375,7 +1375,7 @@
         {
           "id": "fs-03",
           "name": "파일로 내보내기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1384,7 +1384,7 @@
         {
           "id": "fs-04",
           "name": "파일에서 불러오기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1393,7 +1393,7 @@
         {
           "id": "fs-05",
           "name": "레거시 .dfd 파일 가져오기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1408,7 +1408,7 @@
         {
           "id": "ti-01",
           "name": "텍스트 객체 생성",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1417,7 +1417,7 @@
         {
           "id": "ti-02",
           "name": "이미지 객체 생성",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1426,7 +1426,7 @@
         {
           "id": "ti-03",
           "name": "OCR 문자 삽입",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1435,7 +1435,7 @@
         {
           "id": "ti-04",
           "name": "레이블 (LABEL_BITMAP)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1444,7 +1444,7 @@
         {
           "id": "ti-05",
           "name": "항목 순서 표시 (ITEM_ORDER)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1555,7 +1555,7 @@
         {
           "id": "st-01",
           "name": "언어 옵션 설정",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1564,7 +1564,7 @@
         {
           "id": "st-02",
           "name": "단축키 설정",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
