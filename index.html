@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostGeo QA Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .badge { @apply px-2 py-0.5 rounded-full border text-xs font-medium cursor-pointer transition-opacity hover:opacity-75; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+  <!-- ── Header ── -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="min-w-0">
+        <h1 class="text-lg font-bold text-gray-900 truncate">PostGeo QA Dashboard</h1>
+        <p id="lastUpdated" class="text-xs text-gray-400">마지막 업데이트: —</p>
+      </div>
+      <div class="flex gap-2 items-center shrink-0">
+        <span id="saveStatus" class="text-xs text-green-600 font-medium hidden">✓ 저장됨</span>
+        <span id="dirtyDot" class="text-xs text-amber-500 font-medium hidden">● 미저장</span>
+        <button onclick="openSettings()"
+          class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">⚙ 설정</button>
+        <button id="saveBtn" onclick="saveToGitHub()"
+          class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">💾 저장</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-4">
+
+    <!-- ── Stats Bar ── -->
+    <div id="statsBar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4"></div>
+
+    <!-- ── Filter Bar ── -->
+    <div class="flex flex-wrap gap-2 mb-4 items-center">
+      <select id="filterCategory" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">전체 카테고리</option>
+      </select>
+      <select id="filterMigrated" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">웹이식: 전체</option>
+        <option value="yes">✓ 완료</option>
+        <option value="partial">△ 부분</option>
+        <option value="no">✗ 미이식</option>
+        <option value="unknown">? 미확인</option>
+      </select>
+      <select id="filterDetail" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">구현: 전체</option>
+        <option value="done">완료</option>
+        <option value="in-progress">진행중</option>
+        <option value="planned">계획</option>
+        <option value="not-started">미시작</option>
+      </select>
+      <select id="filterQa" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">QA: 전체</option>
+        <option value="pass">통과</option>
+        <option value="fail">실패</option>
+        <option value="skip">건너뜀</option>
+        <option value="not-tested">미테스트</option>
+      </select>
+      <button onclick="resetFilters()" class="text-xs text-gray-400 hover:text-gray-700 px-2 py-1">↺ 초기화</button>
+      <span id="filterCount" class="text-xs text-gray-400 ml-auto"></span>
+    </div>
+
+    <!-- ── Feature Table ── -->
+    <div id="featureTable">
+      <div class="text-center py-16 text-gray-400">
+        <div class="text-4xl mb-3 animate-pulse">⏳</div>
+        <p>데이터 로딩 중...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       설정 모달
+  ══════════════════════════════════════ -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4">
+      <h2 class="text-lg font-bold mb-4">⚙ 설정</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            내 GitHub 사용자명 <span class="text-red-500">*</span>
+          </label>
+          <input id="inputOwner" type="text" placeholder="예: myusername"
+            oninput="updateRepoPreview()"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-xs text-gray-400 mt-1">저장소: <code id="repoPreview" class="text-blue-600">—</code></p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            GitHub Personal Access Token <span class="text-red-500">*</span>
+          </label>
+          <input id="inputToken" type="password" placeholder="ghp_xxxxxxxxxxxx"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-xs text-gray-400 mt-1">
+            브라우저 localStorage에만 저장 · 외부 전송 없음 ·
+            <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=PostGeoQA"
+               target="_blank" class="text-blue-500 hover:underline">토큰 발급 →</a>
+          </p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            개발자 GitHub 저장소 (이슈 링크용)
+          </label>
+          <input id="inputDevRepo" type="text" placeholder="예: devuser/postgeo-web"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-xs text-gray-400 mt-1">입력 시 이슈 번호가 클릭 가능한 링크로 표시됩니다</p>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-6 justify-end">
+        <button onclick="closeSettings()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveSettings()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">저장 후 새로고침</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       이슈/메모 편집 모달
+  ══════════════════════════════════════ -->
+  <div id="issueModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4">
+      <h2 class="text-base font-bold mb-1">이슈 / 메모 편집</h2>
+      <p id="issueItemName" class="text-sm text-gray-500 mb-4 truncate"></p>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-medium text-gray-600 mb-1">이슈 번호 (쉼표로 구분)</label>
+          <input id="inputIssues" type="text" placeholder="예: 3, 7, 12"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-600 mb-1">메모</label>
+          <textarea id="inputNotes" rows="2" placeholder="간단한 메모"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-4 justify-end">
+        <button onclick="closeIssueModal()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveIssueEdit()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       JavaScript
+  ══════════════════════════════════════ -->
+  <script>
+  // ────────────────────────────────────────
+  // 상수
+  // ────────────────────────────────────────
+  const REPO_NAME    = 'postgeo-qa';
+  const DATA_PATH    = 'qa-data.json';
+  const GH_API       = 'https://api.github.com';
+
+  const CYCLES = {
+    webMigrated: ['unknown','yes','partial','no'],
+    detail:      ['not-started','planned','in-progress','done'],
+    qa:          ['not-tested','pass','fail','skip']
+  };
+
+  const DISPLAY = {
+    webMigrated: {
+      yes:     { label:'✓ 완료',   cls:'bg-green-100 text-green-800 border-green-300' },
+      partial: { label:'△ 부분',   cls:'bg-amber-100 text-amber-800 border-amber-300' },
+      no:      { label:'✗ 미이식', cls:'bg-red-100 text-red-700 border-red-300' },
+      unknown: { label:'? 미확인', cls:'bg-gray-100 text-gray-500 border-gray-300' }
+    },
+    detail: {
+      done:          { label:'완료',   cls:'bg-green-100 text-green-800 border-green-300' },
+      'in-progress': { label:'진행중', cls:'bg-blue-100 text-blue-800 border-blue-300' },
+      planned:       { label:'계획',   cls:'bg-amber-100 text-amber-800 border-amber-300' },
+      'not-started': { label:'미시작', cls:'bg-gray-100 text-gray-500 border-gray-300' }
+    },
+    qa: {
+      pass:        { label:'통과',    cls:'bg-green-100 text-green-800 border-green-300' },
+      fail:        { label:'실패',    cls:'bg-red-100 text-red-700 border-red-300' },
+      skip:        { label:'건너뜀', cls:'bg-orange-100 text-orange-800 border-orange-300' },
+      'not-tested':{ label:'미테스트',cls:'bg-gray-100 text-gray-500 border-gray-300' }
+    }
+  };
+
+  // ────────────────────────────────────────
+  // 상태
+  // ────────────────────────────────────────
+  let qaData    = null;
+  let fileSha   = '';
+  let isDirty   = false;
+  let editTarget = { catId: null, itemId: null };
+  let filters   = { category:'all', migrated:'all', detail:'all', qa:'all' };
+  let collapsed = {};
+
+  const getOwner = () => localStorage.getItem('gh_owner') || '';
+  const getToken = () => localStorage.getItem('gh_token') || '';
+
+  // ────────────────────────────────────────
+  // 데이터 로드
+  // ────────────────────────────────────────
+  async function loadData() {
+    const owner = getOwner();
+    if (!owner) {
+      showSetupPrompt();
+      return;
+    }
+    try {
+      const token = getToken();
+      const hdrs  = token ? { Authorization: `Bearer ${token}` } : {};
+      const res   = await fetch(`${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`, { headers: hdrs });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        if (res.status === 404) throw new Error('저장소 또는 qa-data.json 파일을 찾을 수 없습니다.');
+        if (res.status === 401) throw new Error('토큰이 유효하지 않습니다. 설정을 확인하세요.');
+        throw new Error(body.message || `GitHub API 오류 ${res.status}`);
+      }
+
+      const meta = await res.json();
+      fileSha    = meta.sha;
+      // base64 → UTF-8
+      const raw  = decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
+      qaData     = JSON.parse(raw);
+
+      renderAll();
+    } catch (e) {
+      showError(e.message);
+    }
+  }
+
+  function showSetupPrompt() {
+    document.getElementById('featureTable').innerHTML = `
+      <div class="text-center py-20 text-gray-400">
+        <div class="text-5xl mb-4">📋</div>
+        <p class="text-lg font-semibold text-gray-600 mb-2">처음 사용하시나요?</p>
+        <p class="text-sm mb-6">GitHub 사용자명과 Personal Access Token을 설정해주세요.</p>
+        <button onclick="openSettings()"
+          class="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">⚙ 설정 열기</button>
+      </div>`;
+  }
+
+  function showError(msg) {
+    document.getElementById('featureTable').innerHTML = `
+      <div class="text-center py-16 text-gray-400">
+        <div class="text-4xl mb-3">⚠️</div>
+        <p class="font-medium text-gray-700 mb-1">로드 실패</p>
+        <p class="text-sm text-red-500 mb-4">${msg}</p>
+        <button onclick="loadData()"
+          class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300 mr-2">↺ 다시 시도</button>
+        <button onclick="openSettings()"
+          class="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:bg-gray-100">⚙ 설정</button>
+      </div>`;
+  }
+
+  // ────────────────────────────────────────
+  // 전체 렌더
+  // ────────────────────────────────────────
+  function renderAll() {
+    if (!qaData) return;
+    renderStats();
+    renderCategoryFilter();
+    renderTable();
+    document.getElementById('lastUpdated').textContent =
+      `마지막 업데이트: ${qaData.config.lastUpdated || '—'}`;
+  }
+
+  // ────────────────────────────────────────
+  // 통계
+  // ────────────────────────────────────────
+  function renderStats() {
+    let total=0, migrated=0, passN=0, failN=0, notTested=0;
+    for (const cat of qaData.categories) {
+      for (const item of cat.items) {
+        total++;
+        if (item.webMigrated==='yes') migrated++;
+        if (item.qa==='pass')         passN++;
+        if (item.qa==='fail')         failN++;
+        if (item.qa==='not-tested')   notTested++;
+      }
+    }
+    const pct = total ? Math.round(migrated/total*100) : 0;
+    document.getElementById('statsBar').innerHTML = `
+      <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <div class="text-3xl font-bold text-gray-800">${total}</div>
+        <div class="text-xs text-gray-500 mt-1">전체 기능</div>
+      </div>
+      <div class="bg-white rounded-xl border border-green-200 p-4 text-center">
+        <div class="text-3xl font-bold text-green-600">${migrated}</div>
+        <div class="text-xs text-gray-500 mt-1">웹 이식 완료 <span class="text-gray-400">(${pct}%)</span></div>
+      </div>
+      <div class="bg-white rounded-xl border border-green-200 p-4 text-center">
+        <div class="text-3xl font-bold text-green-600">${passN}</div>
+        <div class="text-xs text-gray-500 mt-1">QA 통과</div>
+      </div>
+      <div class="bg-white rounded-xl border border-red-200 p-4 text-center">
+        <div class="text-3xl font-bold text-red-500">${failN}</div>
+        <div class="text-xs text-gray-500 mt-1">QA 실패 <span class="text-gray-400">(미테스트 ${notTested})</span></div>
+      </div>`;
+  }
+
+  // ────────────────────────────────────────
+  // 카테고리 필터 드롭다운
+  // ────────────────────────────────────────
+  function renderCategoryFilter() {
+    const sel = document.getElementById('filterCategory');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="all">전체 카테고리</option>';
+    for (const cat of qaData.categories) {
+      const o = document.createElement('option');
+      o.value = cat.id;
+      o.textContent = cat.name;
+      sel.appendChild(o);
+    }
+    sel.value = cur;
+  }
+
+  // ────────────────────────────────────────
+  // 테이블 렌더
+  // ────────────────────────────────────────
+  function renderTable() {
+    const devRepo = qaData.config.developerRepo || '';
+    let html = '';
+    let totalShown = 0;
+
+    for (const cat of qaData.categories) {
+      if (filters.category !== 'all' && filters.category !== cat.id) continue;
+
+      const items = cat.items.filter(item => {
+        if (filters.migrated !== 'all' && item.webMigrated !== filters.migrated) return false;
+        if (filters.detail  !== 'all' && item.detail      !== filters.detail)   return false;
+        if (filters.qa      !== 'all' && item.qa          !== filters.qa)       return false;
+        return true;
+      });
+      if (items.length === 0) continue;
+      totalShown += items.length;
+
+      const isCollapsed = collapsed[cat.id];
+      html += `
+        <div class="mb-5">
+          <button class="flex items-center gap-2 w-full text-left mb-2 group"
+            onclick="toggleCategory('${cat.id}')">
+            <span class="text-gray-400 text-sm group-hover:text-gray-600 transition-transform ${isCollapsed?'':'rotate-90'}"
+              id="arrow-${cat.id}">▶</span>
+            <span class="font-semibold text-gray-700 group-hover:text-gray-900">${cat.name}</span>
+            <span class="text-xs text-gray-400 font-normal">${items.length}개</span>
+          </button>
+          <div id="cat-${cat.id}" class="${isCollapsed?'hidden':''}">
+            <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto shadow-sm">
+              <table class="w-full text-sm min-w-[640px]">
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200 text-left">
+                    <th class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider w-16">ID</th>
+                    <th class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">기능명</th>
+                    <th class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider w-24 text-center">웹이식</th>
+                    <th class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider w-24 text-center">구현상태</th>
+                    <th class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider w-24 text-center">QA</th>
+                    <th class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider w-32 text-center">이슈/메모</th>
+                  </tr>
+                </thead>
+                <tbody>`;
+
+      items.forEach((item, i) => {
+        const wm = DISPLAY.webMigrated[item.webMigrated] || DISPLAY.webMigrated.unknown;
+        const dt = DISPLAY.detail[item.detail]           || DISPLAY.detail['not-started'];
+        const qa = DISPLAY.qa[item.qa]                   || DISPLAY.qa['not-tested'];
+        const rowBg = i % 2 ? 'bg-gray-50/40' : '';
+
+        // 이슈 링크
+        const issueHtml = (item.issues||[]).length > 0
+          ? (item.issues).map(n =>
+              devRepo
+                ? `<a href="https://github.com/${devRepo}/issues/${n}" target="_blank"
+                     class="text-blue-600 hover:underline font-mono">#${n}</a>`
+                : `<span class="text-gray-600 font-mono">#${n}</span>`
+            ).join(' ')
+          : '';
+
+        // 메모 툴팁
+        const notesHtml = item.notes
+          ? `<span class="text-gray-400 text-xs ml-1 italic" title="${item.notes}">💬</span>`
+          : '';
+
+        html += `
+                  <tr class="${rowBg} hover:bg-blue-50/40 border-b border-gray-100 last:border-0 transition-colors">
+                    <td class="px-3 py-2.5 text-xs text-gray-400 font-mono">${item.id}</td>
+                    <td class="px-3 py-2.5 text-gray-800">${item.name}${notesHtml}</td>
+                    <td class="px-3 py-2.5 text-center">
+                      <button onclick="cycleStatus('${cat.id}','${item.id}','webMigrated')"
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${wm.cls}">
+                        ${wm.label}
+                      </button>
+                    </td>
+                    <td class="px-3 py-2.5 text-center">
+                      <button onclick="cycleStatus('${cat.id}','${item.id}','detail')"
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${dt.cls}">
+                        ${dt.label}
+                      </button>
+                    </td>
+                    <td class="px-3 py-2.5 text-center">
+                      <button onclick="cycleStatus('${cat.id}','${item.id}','qa')"
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${qa.cls}">
+                        ${qa.label}
+                      </button>
+                    </td>
+                    <td class="px-3 py-2.5 text-center">
+                      <button onclick="openIssueModal('${cat.id}','${item.id}')"
+                        class="text-xs hover:bg-blue-50 px-2 py-0.5 rounded transition-colors min-w-[40px] inline-block">
+                        ${issueHtml || '<span class="text-gray-300 hover:text-blue-400">+ 추가</span>'}
+                      </button>
+                    </td>
+                  </tr>`;
+      });
+
+      html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    if (!html) {
+      html = '<div class="text-center py-10 text-gray-400">필터 조건에 맞는 항목이 없습니다.</div>';
+    }
+
+    document.getElementById('featureTable').innerHTML = html;
+    document.getElementById('filterCount').textContent =
+      totalShown > 0 ? `${totalShown}개 표시 중` : '';
+  }
+
+  // ────────────────────────────────────────
+  // 상태 순환
+  // ────────────────────────────────────────
+  function cycleStatus(catId, itemId, field) {
+    const cat  = qaData.categories.find(c => c.id === catId);
+    const item = cat?.items.find(i => i.id === itemId);
+    if (!item) return;
+    const cycle = CYCLES[field];
+    item[field] = cycle[(cycle.indexOf(item[field]) + 1) % cycle.length];
+    markDirty();
+    renderStats();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 카테고리 접기/펼치기
+  // ────────────────────────────────────────
+  function toggleCategory(catId) {
+    collapsed[catId] = !collapsed[catId];
+    const el    = document.getElementById(`cat-${catId}`);
+    const arrow = document.getElementById(`arrow-${catId}`);
+    if (collapsed[catId]) {
+      el.classList.add('hidden');
+      arrow.classList.remove('rotate-90');
+    } else {
+      el.classList.remove('hidden');
+      arrow.classList.add('rotate-90');
+    }
+  }
+
+  // ────────────────────────────────────────
+  // 필터
+  // ────────────────────────────────────────
+  function applyFilters() {
+    filters.category = document.getElementById('filterCategory').value;
+    filters.migrated = document.getElementById('filterMigrated').value;
+    filters.detail   = document.getElementById('filterDetail').value;
+    filters.qa       = document.getElementById('filterQa').value;
+    renderTable();
+  }
+
+  function resetFilters() {
+    filters = { category:'all', migrated:'all', detail:'all', qa:'all' };
+    ['filterCategory','filterMigrated','filterDetail','filterQa']
+      .forEach(id => { document.getElementById(id).value = 'all'; });
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 이슈 모달
+  // ────────────────────────────────────────
+  function openIssueModal(catId, itemId) {
+    const cat  = qaData.categories.find(c => c.id === catId);
+    const item = cat?.items.find(i => i.id === itemId);
+    if (!item) return;
+    editTarget = { catId, itemId };
+    document.getElementById('issueItemName').textContent = `[${item.id}] ${item.name}`;
+    document.getElementById('inputIssues').value = (item.issues||[]).join(', ');
+    document.getElementById('inputNotes').value  = item.notes || '';
+    document.getElementById('issueModal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('inputIssues').focus(), 50);
+  }
+
+  function closeIssueModal() {
+    document.getElementById('issueModal').classList.add('hidden');
+  }
+
+  function saveIssueEdit() {
+    const cat  = qaData.categories.find(c => c.id === editTarget.catId);
+    const item = cat?.items.find(i => i.id === editTarget.itemId);
+    if (!item) return;
+    const raw = document.getElementById('inputIssues').value;
+    item.issues = raw.split(',').map(s=>s.trim()).filter(Boolean);
+    item.notes  = document.getElementById('inputNotes').value.trim();
+    markDirty();
+    closeIssueModal();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 설정 모달
+  // ────────────────────────────────────────
+  function openSettings() {
+    document.getElementById('inputOwner').value  = getOwner();
+    document.getElementById('inputToken').value  = getToken();
+    document.getElementById('inputDevRepo').value = qaData?.config?.developerRepo || '';
+    updateRepoPreview();
+    document.getElementById('settingsModal').classList.remove('hidden');
+  }
+
+  function closeSettings() {
+    document.getElementById('settingsModal').classList.add('hidden');
+  }
+
+  function updateRepoPreview() {
+    const owner = document.getElementById('inputOwner').value.trim();
+    document.getElementById('repoPreview').textContent =
+      owner ? `github.com/${owner}/${REPO_NAME}` : '—';
+  }
+
+  function saveSettings() {
+    const owner  = document.getElementById('inputOwner').value.trim();
+    const token  = document.getElementById('inputToken').value.trim();
+    const devRepo = document.getElementById('inputDevRepo').value.trim();
+    if (owner)  localStorage.setItem('gh_owner', owner);
+    if (token)  localStorage.setItem('gh_token', token);
+    if (qaData) {
+      qaData.config.developerRepo = devRepo;
+    }
+    closeSettings();
+    loadData();
+  }
+
+  // ────────────────────────────────────────
+  // GitHub 저장
+  // ────────────────────────────────────────
+  async function saveToGitHub() {
+    const owner = getOwner();
+    const token = getToken();
+
+    if (!owner || !token) {
+      alert('GitHub 사용자명과 토큰이 필요합니다.');
+      openSettings();
+      return;
+    }
+    if (!fileSha) {
+      alert('파일 SHA 정보가 없습니다. 페이지를 새로고침 해주세요.');
+      return;
+    }
+
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = '저장 중...';
+    btn.disabled = true;
+
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      qaData.config.lastUpdated = today;
+
+      const jsonStr = JSON.stringify(qaData, null, 2);
+      const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+      const res = await fetch(
+        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `QA 현황 업데이트 (${today})`,
+            content: encoded,
+            sha: fileSha
+          })
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || `저장 실패 (${res.status})`);
+      }
+
+      const result = await res.json();
+      fileSha = result.content.sha;
+      isDirty = false;
+
+      document.getElementById('lastUpdated').textContent = `마지막 업데이트: ${today}`;
+      document.getElementById('dirtyDot').classList.add('hidden');
+      const saveStatus = document.getElementById('saveStatus');
+      saveStatus.classList.remove('hidden');
+      setTimeout(() => saveStatus.classList.add('hidden'), 3000);
+
+    } catch (e) {
+      alert(`저장 실패: ${e.message}`);
+    } finally {
+      btn.textContent = '💾 저장';
+      btn.disabled = false;
+    }
+  }
+
+  // ────────────────────────────────────────
+  // 유틸
+  // ────────────────────────────────────────
+  function markDirty() {
+    isDirty = true;
+    document.getElementById('dirtyDot').classList.remove('hidden');
+    document.getElementById('saveStatus').classList.add('hidden');
+  }
+
+  // 모달 바깥 클릭 → 닫기
+  ['settingsModal','issueModal'].forEach(id => {
+    document.getElementById(id).addEventListener('click', function(e) {
+      if (e.target === this) this.classList.add('hidden');
+    });
+  });
+
+  // ESC 키 → 모달 닫기
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeSettings();
+      closeIssueModal();
+    }
+  });
+
+  // 페이지 이탈 경고 (미저장 시)
+  window.addEventListener('beforeunload', e => {
+    if (isDirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  // ────────────────────────────────────────
+  // 시작
+  // ────────────────────────────────────────
+  loadData();
+  </script>
+</body>
+</html>
