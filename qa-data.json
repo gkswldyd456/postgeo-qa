@@ -1,1676 +1,263 @@
 {
   "config": {
     "project": "PostGeo 웹버전 QA",
-    "version": "1.0",
+    "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 14:38",
+    "lastUpdated": "2026-04-14",
+    "noteTypes": ["일반", "요청", "질문", "버그", "기타"],
     "statusCycles": {
-      "webMigrated": [
-        "unknown",
-        "yes",
-        "partial",
-        "no"
-      ],
-      "detail": [
-        "not-started",
-        "planned",
-        "in-progress",
-        "done"
-      ],
-      "qa": [
-        "not-tested",
-        "pass",
-        "fail",
-        "skip"
-      ]
+      "webMigrated": ["unknown", "yes", "partial", "no"],
+      "detail": ["not-started", "planned", "in-progress", "done"],
+      "qa": ["not-tested", "pass", "fail", "skip"]
     }
   },
+  "overallNotes": [],
   "categories": [
     {
       "id": "points",
       "name": "점 (Points)",
       "items": [
-        {
-          "id": "p-01",
-          "name": "자유점",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 2"
-        },
-        {
-          "id": "p-02",
-          "name": "선분 위의 점",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-03",
-          "name": "호 위의 점",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-04",
-          "name": "그래프 위의 점",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-05",
-          "name": "원의 중심",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-06",
-          "name": "수선의 발 (선분 선택)",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-07",
-          "name": "수선의 발 (두 점 선택)",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-08",
-          "name": "점 대칭점",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-09",
-          "name": "선 대칭점",
-          "webMigrated": "yes",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-10",
-          "name": "좌표 고정점 (X좌표점)",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-11",
-          "name": "좌표 고정점 (Y좌표점)",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-12",
-          "name": "두 점의 내분점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-13",
-          "name": "두 점의 외분점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-14",
-          "name": "두 점의 등분점 (n등분, n:2~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-15",
-          "name": "선분의 등분점 (n등분, n:2~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-16",
-          "name": "원호의 등분점 (n등분, n:2~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-17",
-          "name": "세 점의 무게중심",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-18",
-          "name": "세 점의 내심",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-19",
-          "name": "세 점의 외심",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-20",
-          "name": "세 점의 수심",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-21",
-          "name": "세 점의 방심",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-22",
-          "name": "교점 (두 직선)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-23",
-          "name": "교점 (직선과 원)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-24",
-          "name": "교점 (두 원)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-25",
-          "name": "교점 (직선과 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-26",
-          "name": "교점 (원과 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-27",
-          "name": "교점 (두 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "p-28",
-          "name": "극댓점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-29",
-          "name": "극솟점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-30",
-          "name": "변곡점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "자유도 0"
-        },
-        {
-          "id": "p-31",
-          "name": "불연속점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "p-01", "name": "자유점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 2" },
+        { "id": "p-02", "name": "선분 위의 점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-03", "name": "호 위의 점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-04", "name": "그래프 위의 점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-05", "name": "원의 중심", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-06", "name": "수선의 발 (선분 선택)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-07", "name": "수선의 발 (두 점 선택)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-08", "name": "점 대칭점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-09", "name": "선 대칭점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-10", "name": "좌표 고정점 (X좌표점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-11", "name": "좌표 고정점 (Y좌표점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-12", "name": "두 점의 내분점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-13", "name": "두 점의 외분점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-14", "name": "두 점의 등분점 (n등분, n:2~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-15", "name": "선분의 등분점 (n등분, n:2~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-16", "name": "원호의 등분점 (n등분, n:2~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-17", "name": "세 점의 무게중심", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-18", "name": "세 점의 내심", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-19", "name": "세 점의 외심", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-20", "name": "세 점의 수심", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-21", "name": "세 점의 방심", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-22", "name": "교점 (두 직선)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-23", "name": "교점 (직선과 원)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-24", "name": "교점 (두 원)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-25", "name": "교점 (직선과 그래프)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-26", "name": "교점 (원과 그래프)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-27", "name": "교점 (두 그래프)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "p-28", "name": "극댓점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-29", "name": "극솟점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-30", "name": "변곡점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "자유도 0" },
+        { "id": "p-31", "name": "불연속점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "lines",
       "name": "선/선분 (Lines)",
       "items": [
-        {
-          "id": "l-01",
-          "name": "두 점 선분",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-02",
-          "name": "두 점 반직선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-03",
-          "name": "두 점 직선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-04",
-          "name": "X축",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-05",
-          "name": "Y축",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-06",
-          "name": "각의 이등분선 (n등분, n:2~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-07",
-          "name": "수선 (점→직선 선택)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-08",
-          "name": "수선 (점→두 점 선택)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-09",
-          "name": "수직선 (직선→점 선택)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-10",
-          "name": "수직선 (두 점→점 선택)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-11",
-          "name": "중선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-12",
-          "name": "평행선 (직선, 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-13",
-          "name": "x축 평행선 (점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-14",
-          "name": "y축 평행선 (점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-15",
-          "name": "접선 (곡선 위의 점에서)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-16",
-          "name": "접선 (곡선 밖의 점에서)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-17",
-          "name": "원의 평행접선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-18",
-          "name": "두 원의 공통외접선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-19",
-          "name": "두 원의 공통내접선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-20",
-          "name": "두 원의 근축",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-21",
-          "name": "점근선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "l-22",
-          "name": "교각직선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "l-01", "name": "두 점 선분", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-02", "name": "두 점 반직선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-03", "name": "두 점 직선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-04", "name": "X축", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-05", "name": "Y축", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-06", "name": "각의 이등분선 (n등분, n:2~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-07", "name": "수선 (점→직선 선택)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-08", "name": "수선 (점→두 점 선택)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-09", "name": "수직선 (직선→점 선택)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-10", "name": "수직선 (두 점→점 선택)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-11", "name": "중선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-12", "name": "평행선 (직선, 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-13", "name": "x축 평행선 (점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-14", "name": "y축 평행선 (점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-15", "name": "접선 (곡선 위의 점에서)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-16", "name": "접선 (곡선 밖의 점에서)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-17", "name": "원의 평행접선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-18", "name": "두 원의 공통외접선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-19", "name": "두 원의 공통내접선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-20", "name": "두 원의 근축", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-21", "name": "점근선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "l-22", "name": "교각직선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "plane-figures",
       "name": "평면도형 (Plane Figures)",
       "items": [
-        {
-          "id": "pf-01",
-          "name": "원 (중심과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-02",
-          "name": "원 (중심과 반지름)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-03",
-          "name": "원 (지름)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-04",
-          "name": "부채꼴 (원호)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-05",
-          "name": "외접원",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-06",
-          "name": "내접원",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-07",
-          "name": "방접원",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-08",
-          "name": "원 (점, 점, 선)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-09",
-          "name": "원 (점, 선, 선)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-10",
-          "name": "두 점 정다각형 (꼭짓점만, n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-11",
-          "name": "두 점 정다각형 (n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-12",
-          "name": "한 변 정다각형 (꼭짓점만, n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-13",
-          "name": "한 변 정다각형 (n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-14",
-          "name": "원에 내접하는 정다각형 (꼭짓점만, n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-15",
-          "name": "원에 내접하는 정다각형 (n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-16",
-          "name": "두 점 정삼각형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-17",
-          "name": "특수 삼각형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-18",
-          "name": "높이 정삼각형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-19",
-          "name": "등변사다리꼴",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-20",
-          "name": "평행사변형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-21",
-          "name": "마름모",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-22",
-          "name": "대각마름모",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-23",
-          "name": "직사각형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-24",
-          "name": "두 점 정사각형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-25",
-          "name": "대각선 정사각형",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-26",
-          "name": "각 표시 — 둥근 각",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-27",
-          "name": "각 표시 — 직각",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-28",
-          "name": "길이점선 (3점형)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-29",
-          "name": "길이점선 (선분형)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-30",
-          "name": "길이점선 (원호형)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "pf-01", "name": "원 (중심과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-02", "name": "원 (중심과 반지름)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-03", "name": "원 (지름)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-04", "name": "부채꼴 (원호)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-05", "name": "외접원", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-06", "name": "내접원", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-07", "name": "방접원", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-08", "name": "원 (점, 점, 선)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-09", "name": "원 (점, 선, 선)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-10", "name": "두 점 정다각형 (꼭짓점만, n:3~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-11", "name": "두 점 정다각형 (n:3~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-12", "name": "한 변 정다각형 (꼭짓점만, n:3~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-13", "name": "한 변 정다각형 (n:3~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-14", "name": "원에 내접하는 정다각형 (꼭짓점만, n:3~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-15", "name": "원에 내접하는 정다각형 (n:3~15)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-16", "name": "두 점 정삼각형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-17", "name": "특수 삼각형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-18", "name": "높이 정삼각형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-19", "name": "등변사다리꼴", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-20", "name": "평행사변형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-21", "name": "마름모", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-22", "name": "대각마름모", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-23", "name": "직사각형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-24", "name": "두 점 정사각형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-25", "name": "대각선 정사각형", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-26", "name": "각 표시 — 둥근 각", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-27", "name": "각 표시 — 직각", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-28", "name": "길이점선 (3점형)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-29", "name": "길이점선 (선분형)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "pf-30", "name": "길이점선 (원호형)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "3d-figures",
       "name": "입체도형 (3D Figures)",
       "items": [
-        {
-          "id": "td-01",
-          "name": "원뿔 (직원뿔)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "td-02",
-          "name": "다각뿔 (n각뿔, n:3~10)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "td-03",
-          "name": "원기둥 (직원기둥)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "td-04",
-          "name": "다각기둥 (n각기둥, n:3~10)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "td-05",
-          "name": "구",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "td-06",
-          "name": "뿔/기둥 평행단면",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "td-01", "name": "원뿔 (직원뿔)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "td-02", "name": "다각뿔 (n각뿔, n:3~10)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "td-03", "name": "원기둥 (직원기둥)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "td-04", "name": "다각기둥 (n각기둥, n:3~10)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "td-05", "name": "구", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "td-06", "name": "뿔/기둥 평행단면", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "functions-point",
       "name": "점 기반 함수 (Point Functions)",
       "items": [
-        {
-          "id": "fp-01",
-          "name": "일차함수 (한 점과 기울기)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-02",
-          "name": "이차함수 (꼭짓점과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-03",
-          "name": "이차함수 (세 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-04",
-          "name": "삼차함수 (두 극점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-05",
-          "name": "삼차함수 (한 극점과 두 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-06",
-          "name": "삼차함수 (네 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-07",
-          "name": "사차함수 (세 극점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-08",
-          "name": "사차함수 — 대칭 (두 극점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-09",
-          "name": "사차함수 — 극점+변곡점 (미분계수 0)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-10",
-          "name": "사차함수 — 극점+변곡점+한점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-11",
-          "name": "사차함수 (다섯점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-12",
-          "name": "유리함수 (대칭점과 한점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-13",
-          "name": "무리함수 (꼭짓점과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-14",
-          "name": "지수함수 (점근선과 두 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-15",
-          "name": "로그함수 (점근선과 두 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-16",
-          "name": "삼각함수 sin (y=A·sin(px+q)+n)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-17",
-          "name": "삼각함수 cos (y=A·cos(px+q)+n)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-18",
-          "name": "삼각함수 tan",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-19",
-          "name": "정규분포곡선 (두 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-20",
-          "name": "포물선 (준선과 초점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-21",
-          "name": "포물선 (꼭짓점과 초점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-22",
-          "name": "포물선 (준선과 꼭짓점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-23",
-          "name": "타원 (두 초점과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-24",
-          "name": "타원 (장축 양 끝점과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-25",
-          "name": "타원 (두 꼭짓점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-26",
-          "name": "쌍곡선 (두 초점과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-27",
-          "name": "쌍곡선 (두 꼭짓점과 한 점)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-28",
-          "name": "자유곡선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-29",
-          "name": "스플라인 1",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-30",
-          "name": "스플라인 2",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fp-31",
-          "name": "그래프호",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "fp-01", "name": "일차함수 (한 점과 기울기)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-02", "name": "이차함수 (꼭짓점과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-03", "name": "이차함수 (세 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-04", "name": "삼차함수 (두 극점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-05", "name": "삼차함수 (한 극점과 두 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-06", "name": "삼차함수 (네 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-07", "name": "사차함수 (세 극점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-08", "name": "사차함수 — 대칭 (두 극점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-09", "name": "사차함수 — 극점+변곡점 (미분계수 0)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-10", "name": "사차함수 — 극점+변곡점+한점", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-11", "name": "사차함수 (다섯점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-12", "name": "유리함수 (대칭점과 한점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-13", "name": "무리함수 (꼭짓점과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-14", "name": "지수함수 (점근선과 두 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-15", "name": "로그함수 (점근선과 두 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-16", "name": "삼각함수 sin (y=A·sin(px+q)+n)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-17", "name": "삼각함수 cos (y=A·cos(px+q)+n)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-18", "name": "삼각함수 tan", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-19", "name": "정규분포곡선 (두 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-20", "name": "포물선 (준선과 초점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-21", "name": "포물선 (꼭짓점과 초점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-22", "name": "포물선 (준선과 꼭짓점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-23", "name": "타원 (두 초점과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-24", "name": "타원 (장축 양 끝점과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-25", "name": "타원 (두 꼭짓점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-26", "name": "쌍곡선 (두 초점과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-27", "name": "쌍곡선 (두 꼭짓점과 한 점)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-28", "name": "자유곡선", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-29", "name": "스플라인 1", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-30", "name": "스플라인 2", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fp-31", "name": "그래프호", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "functions-input",
       "name": "입력 기반 함수 (Input Functions)",
       "items": [
-        {
-          "id": "fi-01",
-          "name": "y=f(x) 입력",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-02",
-          "name": "x=g(y) 입력",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-03",
-          "name": "매개변수 함수 x=f(t), y=g(t)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-04",
-          "name": "다항함수 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-05",
-          "name": "이차곡선 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-06",
-          "name": "일차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-07",
-          "name": "이차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-08",
-          "name": "삼차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-09",
-          "name": "사차함수 일반형 (계수 입력)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fi-10",
-          "name": "미분 (도함수 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "미분1/2/3"
-        },
-        {
-          "id": "fi-11",
-          "name": "적분 (적분 그래프)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "적분1/2"
-        }
+        { "id": "fi-01", "name": "y=f(x) 입력", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-02", "name": "x=g(y) 입력", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-03", "name": "매개변수 함수 x=f(t), y=g(t)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-04", "name": "다항함수 (계수 입력)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-05", "name": "이차곡선 (계수 입력)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-06", "name": "일차함수 일반형 (계수 입력)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-07", "name": "이차함수 일반형 (계수 입력)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-08", "name": "삼차함수 일반형 (계수 입력)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-09", "name": "사차함수 일반형 (계수 입력)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fi-10", "name": "미분 (도함수 그래프)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "미분1/2/3" },
+        { "id": "fi-11", "name": "적분 (적분 그래프)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "적분1/2" }
       ]
     },
     {
       "id": "canvas-edit",
       "name": "캔버스/편집 기능 (Canvas & Edit)",
       "items": [
-        {
-          "id": "ce-01",
-          "name": "객체 선택",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-02",
-          "name": "객체 이동 (드래그)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-03",
-          "name": "객체 회전 (점, 텍스트, 이미지)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-04",
-          "name": "객체 크기 조절",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-05",
-          "name": "스타일 변경 — 색상",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-06",
-          "name": "스타일 변경 — 굵기",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-07",
-          "name": "스타일 변경 — 화살표",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-08",
-          "name": "영역 채우기",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-09",
-          "name": "실행 취소 (Undo)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-10",
-          "name": "다시 실행 (Redo)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-11",
-          "name": "잘라내기 (Cut)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-12",
-          "name": "복사 (Copy)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-13",
-          "name": "붙여넣기 (Paste)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-14",
-          "name": "객체 삭제",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ce-15",
-          "name": "항목 첨부 및 의존관계 변경",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "ce-01", "name": "객체 선택", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-02", "name": "객체 이동 (드래그)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-03", "name": "객체 회전 (점, 텍스트, 이미지)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-04", "name": "객체 크기 조절", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-05", "name": "스타일 변경 — 색상", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-06", "name": "스타일 변경 — 굵기", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-07", "name": "스타일 변경 — 화살표", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-08", "name": "영역 채우기", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-09", "name": "실행 취소 (Undo)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-10", "name": "다시 실행 (Redo)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-11", "name": "잘라내기 (Cut)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-12", "name": "복사 (Copy)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-13", "name": "붙여넣기 (Paste)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-14", "name": "객체 삭제", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ce-15", "name": "항목 첨부 및 의존관계 변경", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "canvas-settings",
       "name": "캔버스 설정 (Canvas Settings)",
       "items": [
-        {
-          "id": "cs-01",
-          "name": "격자 설정",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "cs-02",
-          "name": "축 표시 설정",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "cs-03",
-          "name": "좌표 범위 설정",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "cs-04",
-          "name": "확대/축소 (Zoom)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "cs-05",
-          "name": "배경 이미지 추가",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "cs-06",
-          "name": "배경 이미지 제거",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "cs-07",
-          "name": "자동 자르기 (Autocrop) ON/OFF",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "cs-01", "name": "격자 설정", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "cs-02", "name": "축 표시 설정", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "cs-03", "name": "좌표 범위 설정", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "cs-04", "name": "확대/축소 (Zoom)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "cs-05", "name": "배경 이미지 추가", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "cs-06", "name": "배경 이미지 제거", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "cs-07", "name": "자동 자르기 (Autocrop) ON/OFF", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "file-save",
       "name": "파일/저장 (File & Save)",
       "items": [
-        {
-          "id": "fs-01",
-          "name": "로컬 저장소에 저장",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fs-02",
-          "name": "로컬 저장소에서 불러오기",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fs-03",
-          "name": "파일로 내보내기",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fs-04",
-          "name": "파일에서 불러오기",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "fs-05",
-          "name": "레거시 .dfd 파일 가져오기",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "fs-01", "name": "로컬 저장소에 저장", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fs-02", "name": "로컬 저장소에서 불러오기", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fs-03", "name": "파일로 내보내기", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fs-04", "name": "파일에서 불러오기", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "fs-05", "name": "레거시 .dfd 파일 가져오기", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "text-image",
       "name": "텍스트/이미지 (Text & Image)",
       "items": [
-        {
-          "id": "ti-01",
-          "name": "텍스트 객체 생성",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ti-02",
-          "name": "이미지 객체 생성",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ti-03",
-          "name": "OCR 문자 삽입",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ti-04",
-          "name": "레이블 (LABEL_BITMAP)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "ti-05",
-          "name": "항목 순서 표시 (ITEM_ORDER)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "ti-01", "name": "텍스트 객체 생성", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ti-02", "name": "이미지 객체 생성", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ti-03", "name": "OCR 문자 삽입", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ti-04", "name": "레이블 (LABEL_BITMAP)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "ti-05", "name": "항목 순서 표시 (ITEM_ORDER)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     },
     {
       "id": "probability-tables",
       "name": "확률 탁자 순열 (Probability Tables)",
       "items": [
-        {
-          "id": "pt-01",
-          "name": "원 탁자 순열 (n=3~17, 15종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7201~0x720f"
-        },
-        {
-          "id": "pt-02",
-          "name": "정삼각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7331~0x7338"
-        },
-        {
-          "id": "pt-03",
-          "name": "정사각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7341~0x7348"
-        },
-        {
-          "id": "pt-04",
-          "name": "정오각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7351~0x7358"
-        },
-        {
-          "id": "pt-05",
-          "name": "정육각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7361~0x7368"
-        },
-        {
-          "id": "pt-06",
-          "name": "정칠각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7371~0x7378"
-        },
-        {
-          "id": "pt-07",
-          "name": "정팔각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7381~0x7388"
-        },
-        {
-          "id": "pt-08",
-          "name": "정구각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7391~0x7398"
-        },
-        {
-          "id": "pt-09",
-          "name": "정십각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x73a1~0x73a8"
-        },
-        {
-          "id": "pt-10",
-          "name": "직사각형 탁자 순열 (10종)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "0x7400, 0x7411~0x7444"
-        }
+        { "id": "pt-01", "name": "원 탁자 순열 (n=3~17, 15종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7201~0x720f" },
+        { "id": "pt-02", "name": "정삼각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7331~0x7338" },
+        { "id": "pt-03", "name": "정사각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7341~0x7348" },
+        { "id": "pt-04", "name": "정오각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7351~0x7358" },
+        { "id": "pt-05", "name": "정육각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7361~0x7368" },
+        { "id": "pt-06", "name": "정칠각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7371~0x7378" },
+        { "id": "pt-07", "name": "정팔각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7381~0x7388" },
+        { "id": "pt-08", "name": "정구각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7391~0x7398" },
+        { "id": "pt-09", "name": "정십각형 탁자 순열 (8종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x73a1~0x73a8" },
+        { "id": "pt-10", "name": "직사각형 탁자 순열 (10종)", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "0x7400, 0x7411~0x7444" }
       ]
     },
     {
       "id": "settings",
       "name": "설정 (Settings)",
       "items": [
-        {
-          "id": "st-01",
-          "name": "언어 옵션 설정",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "st-02",
-          "name": "단축키 설정",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        }
+        { "id": "st-01", "name": "언어 옵션 설정", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" },
+        { "id": "st-02", "name": "단축키 설정", "webMigrated": "unknown", "detail": "not-started", "qa": "not-tested", "issues": [], "notes": "" }
       ]
     }
   ]
