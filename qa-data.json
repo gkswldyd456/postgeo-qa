@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 16:06",
+    "lastUpdated": "2026-04-14 16:53",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -173,6 +173,15 @@
           "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
         },
         {
+          "id": "p-32",
+          "name": "원호의 등분점 (두 점 선택) (n등분, n:2~15)",
+          "webMigrated": "partial",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
+        },
+        {
           "id": "p-17",
           "name": "세 점의 무게중심",
           "webMigrated": "yes",
@@ -261,15 +270,6 @@
           "qa": "not-tested",
           "issues": [],
           "notes": ""
-        },
-        {
-          "id": "p-32",
-          "name": "원호의 등분점 (두 점 선택) (n등분, n:2~15)",
-          "webMigrated": "partial",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
         }
       ]
     },
