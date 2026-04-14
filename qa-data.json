@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 16:53",
+    "lastUpdated": "2026-04-14 17:10",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -229,7 +229,7 @@
         {
           "id": "p-22",
           "name": "교점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -238,7 +238,7 @@
         {
           "id": "p-28",
           "name": "극댓점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -247,7 +247,7 @@
         {
           "id": "p-29",
           "name": "극솟점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -256,20 +256,11 @@
         {
           "id": "p-30",
           "name": "변곡점",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "자유도 0"
-        },
-        {
-          "id": "p-31",
-          "name": "불연속점",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
         }
       ]
     },
