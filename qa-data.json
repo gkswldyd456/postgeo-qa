@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 17:25",
+    "lastUpdated": "2026-04-14 17:27",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -556,7 +556,7 @@
         {
           "id": "pf-10",
           "name": "두 점 정다각형 (꼭짓점만, n:3~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -565,16 +565,16 @@
         {
           "id": "pf-11",
           "name": "두 점 정다각형 (n:3~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "이건 수치 입력 방식은 아님."
         },
         {
           "id": "pf-12",
           "name": "한 변 정다각형 (꼭짓점만, n:3~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -583,7 +583,7 @@
         {
           "id": "pf-13",
           "name": "한 변 정다각형 (n:3~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -592,7 +592,7 @@
         {
           "id": "pf-14",
           "name": "원에 내접하는 정다각형 (꼭짓점만, n:3~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -601,16 +601,7 @@
         {
           "id": "pf-15",
           "name": "원에 내접하는 정다각형 (n:3~15)",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
-          "id": "pf-16",
-          "name": "두 점 정삼각형",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
