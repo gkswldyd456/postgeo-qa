@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 17:31",
+    "lastUpdated": "2026-04-14 17:36",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -673,16 +673,16 @@
         {
           "id": "pf-24",
           "name": "두 점 정사각형",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "이건 위에 두 점 정다각형과 동일 기능이라. 없어도 됨."
         },
         {
           "id": "pf-25",
           "name": "대각선 정사각형",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -691,16 +691,16 @@
         {
           "id": "pf-26",
           "name": "각 표시 — 둥근 각",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "오류발생"
         },
         {
           "id": "pf-27",
           "name": "각 표시 — 직각",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -709,7 +709,7 @@
         {
           "id": "pf-28",
           "name": "길이점선 (3점형)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -718,16 +718,16 @@
         {
           "id": "pf-29",
           "name": "길이점선 (선분형)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "오류발생"
         },
         {
           "id": "pf-30",
           "name": "길이점선 (원호형)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
