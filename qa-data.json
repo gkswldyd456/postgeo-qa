@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 15:55",
+    "lastUpdated": "2026-04-14 15:58",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -170,7 +170,7 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
         },
         {
           "id": "p-17",
@@ -184,7 +184,7 @@
         {
           "id": "p-18",
           "name": "세 점의 내심",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -193,7 +193,7 @@
         {
           "id": "p-19",
           "name": "세 점의 외심",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -202,7 +202,7 @@
         {
           "id": "p-20",
           "name": "세 점의 수심",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -211,7 +211,7 @@
         {
           "id": "p-21",
           "name": "세 점의 방심",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -309,12 +309,12 @@
         },
         {
           "id": "p-32",
-          "name": "원호의 등분점 (두 점 선택) (n등분, n=2~15)",
+          "name": "원호의 등분점 (두 점 선택) (n등분, n:2~15)",
           "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
         }
       ]
     },
