@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 18:51",
+    "lastUpdated": "2026-04-14 18:52",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1459,7 +1459,7 @@
         {
           "id": "pt-01",
           "name": "원 탁자 순열 (n=3~17, 15종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1468,7 +1468,7 @@
         {
           "id": "pt-02",
           "name": "정삼각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1477,7 +1477,7 @@
         {
           "id": "pt-03",
           "name": "정사각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1486,7 +1486,7 @@
         {
           "id": "pt-04",
           "name": "정오각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1495,7 +1495,7 @@
         {
           "id": "pt-05",
           "name": "정육각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1504,7 +1504,7 @@
         {
           "id": "pt-06",
           "name": "정칠각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1513,7 +1513,7 @@
         {
           "id": "pt-07",
           "name": "정팔각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1522,7 +1522,7 @@
         {
           "id": "pt-08",
           "name": "정구각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1531,7 +1531,7 @@
         {
           "id": "pt-09",
           "name": "정십각형 탁자 순열 (8종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -1540,7 +1540,7 @@
         {
           "id": "pt-10",
           "name": "직사각형 탁자 순열 (10종)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
