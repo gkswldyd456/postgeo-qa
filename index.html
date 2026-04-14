@@ -33,6 +33,12 @@
       transition: background .15s, color .15s; flex-shrink: 0;
     }
     .guide-icon:hover { background: #3b82f6; color: white; }
+    tr.drag-over td { background: rgba(59,130,246,0.10) !important; outline: 2px dashed #93c5fd; outline-offset: -2px; }
+    tr.drag-src { opacity: 0.4; }
+    tr.insert-row td { padding: 0; border: none; height: 0; }
+    tr.insert-row .insert-btn { height: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .15s; cursor: pointer; color: #3b82f6; font-size: 11px; }
+    tr.insert-row:hover .insert-btn,
+    tr.insert-row .insert-btn:hover { opacity: 1; background: #eff6ff; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen">
@@ -301,6 +307,8 @@
   let isDirty   = false;
   let isEditMode = false;
   let editTarget = { catId: null, itemId: null };
+  let _dragSrc = { catId: null, itemId: null };
+  let _addItemInsertIdx = null;
   let filters   = { category:'all', migrated:'all', detail:'all', qa:'all' };
   let collapsed = {};
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
@@ -486,10 +494,27 @@
 
         const hasIssues = (item.issues||[]).length > 0;
         const hasNotes  = !!item.notes;
+        const catItemIdx = cat.items.indexOf(item);
+        const colSpan = isEditMode ? 7 : 6;
+
+        // 첫 행 앞에 삽입 버튼
+        if (isEditMode && i === 0) {
+          html += `<tr class="insert-row"><td colspan="${colSpan}">
+            <div class="insert-btn" onclick="openAddItemModal('${cat.id}',${catItemIdx})">＋ 여기에 추가</div>
+          </td></tr>`;
+        }
 
         html += `
-                  <tr class="${rowBg} hover:bg-blue-50/40 border-b border-gray-100 last:border-0 transition-colors">
-                    ${isEditMode ? `<td class="px-2 py-2 text-center overflow-hidden">
+                  <tr class="${rowBg} hover:bg-blue-50/40 border-b border-gray-100 last:border-0 transition-colors ${isEditMode ? 'cursor-grab' : ''}"
+                    ${isEditMode ? `draggable="true"
+                      ondragstart="dragStart(event,'${cat.id}','${item.id}')"
+                      ondragover="dragOver(event)"
+                      ondragenter="dragEnter(event,'${cat.id}','${item.id}')"
+                      ondragleave="dragLeave(event)"
+                      ondragend="dragEnd(event)"
+                      ondrop="drop(event,'${cat.id}','${item.id}')"` : ''}>
+                    ${isEditMode ? `<td class="px-2 py-2 text-center overflow-hidden select-none">
+                      <span class="text-gray-300 cursor-grab text-sm mr-1" title="드래그로 순서 변경">⠿</span>
                       <button onclick="openEditItemModal('${cat.id}','${item.id}')" title="이름 수정"
                         class="text-gray-400 hover:text-blue-600 px-1 py-0.5 rounded hover:bg-blue-50 text-base leading-none">✏</button>
                       <button onclick="deleteItem('${cat.id}','${item.id}')" title="삭제"
@@ -526,18 +551,19 @@
                       </div>
                     </td>
                   </tr>`;
+
+        // 각 행 뒤에 삽입 버튼
+        if (isEditMode) {
+          html += `<tr class="insert-row"><td colspan="${colSpan}">
+            <div class="insert-btn" onclick="openAddItemModal('${cat.id}',${catItemIdx + 1})">＋ 여기에 추가</div>
+          </td></tr>`;
+        }
       });
 
       html += `
                 </tbody>
               </table>
             </div>
-            ${isEditMode ? `<div class="mt-2 ml-1">
-              <button onclick="openAddItemModal('${cat.id}')"
-                class="text-sm text-blue-600 hover:text-blue-800 px-3 py-1.5 rounded-lg border border-dashed border-blue-300 hover:bg-blue-50 transition-colors">
-                + 항목 추가
-              </button>
-            </div>` : ''}
           </div>
         </div>`;
     }
@@ -862,10 +888,11 @@
     const next = nums.length > 0 ? Math.max(...nums) + 1 : 1;
     return prefix + String(next).padStart(2,'0');
   }
-  function openAddItemModal(catId) {
+  function openAddItemModal(catId, insertIdx) {
     const cat = qaData.categories.find(c => c.id === catId);
     if (!cat) return;
     _addItemCatId = catId;
+    _addItemInsertIdx = (insertIdx !== undefined && insertIdx !== null) ? insertIdx : null;
     document.getElementById('addItemCatName').textContent = cat.name;
     document.getElementById('inputAddName').value = '';
     document.getElementById('addItemIdPreview').textContent = '자동 ID: ' + genItemId(cat);
@@ -881,9 +908,54 @@
     const name = document.getElementById('inputAddName').value.trim();
     if (!name) return;
     const newId = genItemId(cat);
-    cat.items.push({ id: newId, name, webMigrated:'unknown', detail:'not-started', qa:'not-tested', issues:[], notes:'' });
+    const newItem = { id: newId, name, webMigrated:'unknown', detail:'not-started', qa:'not-tested', issues:[], notes:'' };
+    if (_addItemInsertIdx !== null && _addItemInsertIdx >= 0 && _addItemInsertIdx <= cat.items.length) {
+      cat.items.splice(_addItemInsertIdx, 0, newItem);
+    } else {
+      cat.items.push(newItem);
+    }
+    _addItemInsertIdx = null;
     markDirty();
     closeAddItemModal();
+    renderTable();
+  }
+
+  // 드래그앤드롭 순서 변경
+  function dragStart(e, catId, itemId) {
+    _dragSrc = { catId, itemId };
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', itemId);
+    setTimeout(() => e.currentTarget.classList.add('drag-src'), 0);
+  }
+  function dragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+  function dragEnter(e, catId, itemId) {
+    if (_dragSrc.catId === catId && _dragSrc.itemId !== itemId) {
+      e.currentTarget.classList.add('drag-over');
+    }
+  }
+  function dragLeave(e) {
+    e.currentTarget.classList.remove('drag-over');
+  }
+  function dragEnd(e) {
+    e.currentTarget.classList.remove('drag-src');
+    _dragSrc = { catId: null, itemId: null };
+  }
+  function drop(e, catId, itemId) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
+    if (!_dragSrc.catId || _dragSrc.catId !== catId || _dragSrc.itemId === itemId) return;
+    const cat = qaData.categories.find(c => c.id === catId);
+    if (!cat) return;
+    const fromIdx = cat.items.findIndex(i => i.id === _dragSrc.itemId);
+    const toIdx   = cat.items.findIndex(i => i.id === itemId);
+    if (fromIdx < 0 || toIdx < 0) return;
+    const [moved] = cat.items.splice(fromIdx, 1);
+    cat.items.splice(toIdx, 0, moved);
+    _dragSrc = { catId: null, itemId: null };
+    markDirty();
     renderTable();
   }
 
