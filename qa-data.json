@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 17:27",
+    "lastUpdated": "2026-04-14 17:31",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -610,25 +610,25 @@
         {
           "id": "pf-17",
           "name": "특수 삼각형",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "특수삼각형 안에 sss~rha 기능이 합쳐진건데, \n지금 이름만 특수삼각형으로 되어있고 아무 기능 안한 삼각형이 표출되어있음.\n각 기능별 버튼도 따로 있음."
         },
         {
           "id": "pf-18",
           "name": "높이 정삼각형",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "점 하나 클릭하면 그냥 정삼각형이 생김. 높이를 선택하는 개념이 아님."
         },
         {
           "id": "pf-19",
           "name": "등변사다리꼴",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -637,7 +637,7 @@
         {
           "id": "pf-20",
           "name": "평행사변형",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -646,7 +646,7 @@
         {
           "id": "pf-21",
           "name": "마름모",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -655,20 +655,20 @@
         {
           "id": "pf-22",
           "name": "대각마름모",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "대각마름모가 아님. 평행사변형이 나옴."
         },
         {
           "id": "pf-23",
           "name": "직사각형",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "직사각형이 아님. 평행사변형이 나옴."
         },
         {
           "id": "pf-24",
