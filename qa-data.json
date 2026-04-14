@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 15:45",
+    "lastUpdated": "2026-04-14 15:46",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1672,5 +1672,12 @@
       ]
     }
   ],
-  "overallNotes": []
+  "overallNotes": [
+    {
+      "id": "note-1776149210839",
+      "date": "2026-04-14 15:46",
+      "type": "일반",
+      "content": "점 클릭 현재 컨트롤 클릭만 됨. Shift+클릭으로 격자점에 찍을 수 있는 것 추가 필요."
+    }
+  ]
 }
