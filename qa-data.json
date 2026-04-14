@@ -547,7 +547,7 @@
         {
           "id": "pf-31",
           "name": "원 (점, 점, 원)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
