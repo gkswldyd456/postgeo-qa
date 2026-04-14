@@ -449,15 +449,6 @@
           "notes": ""
         },
         {
-          "id": "l-21",
-          "name": "점근선",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
           "id": "l-22",
           "name": "교각직선",
           "webMigrated": "unknown",
