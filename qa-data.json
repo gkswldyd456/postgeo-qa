@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "",
-    "lastUpdated": "2026-04-14 17:10",
+    "lastUpdated": "2026-04-14 17:19",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -271,7 +271,7 @@
         {
           "id": "l-01",
           "name": "두 점 선분",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -280,7 +280,7 @@
         {
           "id": "l-02",
           "name": "두 점 반직선",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -289,7 +289,7 @@
         {
           "id": "l-03",
           "name": "두 점 직선",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -298,7 +298,7 @@
         {
           "id": "l-04",
           "name": "X축",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -307,7 +307,7 @@
         {
           "id": "l-05",
           "name": "Y축",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -316,16 +316,16 @@
         {
           "id": "l-06",
           "name": "각의 이등분선 (n등분, n:2~15)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "202604141710 기준\n각의 이등분선만 있음. 조절점 없음."
         },
         {
           "id": "l-07",
           "name": "수선 (점→직선 선택)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -334,7 +334,7 @@
         {
           "id": "l-08",
           "name": "수선 (점→두 점 선택)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -343,16 +343,16 @@
         {
           "id": "l-09",
           "name": "수직선 (직선→점 선택)",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "수직선이 아니라 수선으로 되어있음."
         },
         {
           "id": "l-10",
           "name": "수직선 (두 점→점 선택)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -361,7 +361,7 @@
         {
           "id": "l-11",
           "name": "중선",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -370,7 +370,7 @@
         {
           "id": "l-12",
           "name": "평행선 (직선, 점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -379,7 +379,7 @@
         {
           "id": "l-13",
           "name": "x축 평행선 (점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -388,7 +388,7 @@
         {
           "id": "l-14",
           "name": "y축 평행선 (점)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -397,7 +397,7 @@
         {
           "id": "l-15",
           "name": "접선 (곡선 위의 점에서)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -406,7 +406,7 @@
         {
           "id": "l-16",
           "name": "접선 (곡선 밖의 점에서)",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -415,16 +415,16 @@
         {
           "id": "l-17",
           "name": "원의 평행접선",
-          "webMigrated": "unknown",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "기능실행시 화면 없어짐 및 오류 발생"
         },
         {
           "id": "l-18",
           "name": "두 원의 공통외접선",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -433,7 +433,7 @@
         {
           "id": "l-19",
           "name": "두 원의 공통내접선",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
@@ -442,7 +442,7 @@
         {
           "id": "l-20",
           "name": "두 원의 근축",
-          "webMigrated": "unknown",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
