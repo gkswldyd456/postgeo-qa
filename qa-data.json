@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 14:43",
+    "lastUpdated": "2026-04-15 14:45",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -895,16 +895,6 @@
           "_modified": "2026-04-15T05:14:32.729Z"
         },
         {
-          "id": "pf-35",
-          "name": "아폴로니우스의 원",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T05:14:34.281Z"
-        },
-        {
           "id": "pf-34",
           "name": "원(중심, 접그래프)",
           "webMigrated": "no",
@@ -913,6 +903,16 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:35.199Z"
+        },
+        {
+          "id": "pf-35",
+          "name": "아폴로니우스의 원",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:34.281Z"
         }
       ]
     },
