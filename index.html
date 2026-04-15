@@ -845,12 +845,19 @@
           result.push(remoteNote);
         } else if (localNoteMap.has(id)) {
           // 기존 항목 → 로컬에서 수정했으면 로컬 우선
-          const localNote = localNoteMap.get(id);
-          const baseNote  = baseNoteMap.get(id);
+          const localNote  = localNoteMap.get(id);
+          const baseNote   = baseNoteMap.get(id);
+          // issues: 3-way merge (items와 동일 방식)
+          const baseIssueSet   = new Set(baseNote.issues   || []);
+          const localIssueSet  = new Set(localNote.issues  || []);
+          const remoteIssueSet = new Set(remoteNote.issues || []);
+          const finalIssues = new Set(remoteIssueSet);
+          for (const i of localIssueSet)  { if (!baseIssueSet.has(i)) finalIssues.add(i); }
+          for (const i of baseIssueSet)   { if (!localIssueSet.has(i)) finalIssues.delete(i); }
           if (localNote.content !== baseNote.content || localNote.type !== baseNote.type) {
-            result.push(localNote);
+            result.push({ ...localNote,  issues: [...finalIssues] });
           } else {
-            result.push(remoteNote);
+            result.push({ ...remoteNote, issues: [...finalIssues] });
           }
         }
         // baseNoteMap에 있고 localNoteMap에 없으면 → 로컬에서 삭제 → result에 추가 안 함
@@ -1183,13 +1190,15 @@
   // 전반적 코멘트 탭
   // ────────────────────────────────────────
   function getNoteTypes() {
-    return qaData?.config?.noteTypes || ['일반','요청','질문','버그','기타'];
+    return qaData?.config?.noteTypes || ['버그','미구현','요청','일반','질문','기타'];
   }
   function escapeHtml(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   const _NOTE_COLORS = ['blue','green','purple','red','orange','teal','pink','yellow'];
+  const _SEMANTIC_NOTE_COLORS = {'버그':'red','미구현':'orange','요청':'purple','일반':'blue','질문':'teal','기타':'gray'};
   function noteTypeColor(t) {
+    if (_SEMANTIC_NOTE_COLORS[t]) return _SEMANTIC_NOTE_COLORS[t];
     const types = getNoteTypes();
     const i = types.indexOf(t);
     return i >= 0 ? _NOTE_COLORS[i % _NOTE_COLORS.length] : 'gray';
@@ -1231,9 +1240,17 @@
     if (shown.length === 0) {
       html += '<div class="text-center py-16 text-gray-400"><div class="text-4xl mb-3">📝</div><p class="text-sm">코멘트가 없습니다. <b class="text-gray-600">+ 새 코멘트</b>를 눌러 추가하세요.</p></div>';
     } else {
+      const devRepo = qaData?.config?.developerRepo || '';
       html += '<div class="space-y-3">';
       for (const note of shown) {
         const c = noteTypeColor(note.type);
+        const noteIssues = note.issues || [];
+        const issuesBadgesHtml = noteIssues.map(n => {
+          const linkContent = devRepo
+            ? `<a href="https://github.com/${escapeHtml(devRepo)}/issues/${escapeHtml(n)}" target="_blank" class="hover:text-blue-700">#${escapeHtml(n)}</a>`
+            : `#${escapeHtml(n)}`;
+          return `<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-blue-50 border border-blue-200 rounded text-xs text-blue-600">${linkContent}<button onclick="removeIssueFromNote('${note.id}','${escapeHtml(n)}')" class="text-blue-300 hover:text-red-400 leading-none ml-0.5 font-bold" title="연결 해제">×</button></span>`;
+        }).join('');
         html += `
           <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
             <div class="flex items-center gap-2 mb-2">
@@ -1245,6 +1262,16 @@
               </div>
             </div>
             <div id="note-view-${note.id}" class="text-sm text-gray-700 whitespace-pre-wrap">${escapeHtml(note.content)}</div>
+            <div class="mt-2 pt-2 border-t border-gray-100 flex flex-wrap items-center gap-1.5 min-h-[26px]">
+              ${issuesBadgesHtml}
+              <span id="note-issue-input-wrap-${note.id}" class="hidden inline-flex items-center gap-1">
+                <input type="text" id="note-issue-val-${note.id}" placeholder="#번호 (쉼표로 여러 개)"
+                  class="w-40 text-xs border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                  onkeydown="if(event.key==='Enter')addIssueToNote('${note.id}')">
+                <button onclick="addIssueToNote('${note.id}')" class="text-xs bg-blue-600 text-white rounded px-2 py-0.5 hover:bg-blue-700">추가</button>
+              </span>
+              <button onclick="showNoteIssueInput('${note.id}')" class="text-xs text-gray-400 hover:text-blue-600 border border-dashed border-gray-300 hover:border-blue-400 rounded px-1.5 py-0.5 transition-colors">+ 이슈</button>
+            </div>
             <div id="note-edit-${note.id}" class="hidden mt-2">
               <select id="edit-type-${note.id}" class="text-sm border border-gray-300 rounded-lg px-2 py-1 bg-white mb-2">
                 ${types.map(t=>`<option value="${escapeHtml(t)}"${t===note.type?' selected':''}>${escapeHtml(t)}</option>`).join('')}
@@ -1277,7 +1304,7 @@
     if (!qaData.overallNotes) qaData.overallNotes = [];
     const _now = new Date(), _p = n => String(n).padStart(2,'0');
     const date = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
-    qaData.overallNotes.push({ id: 'note-' + Date.now(), date, type, content });
+    qaData.overallNotes.push({ id: 'note-' + Date.now(), date, type, content, issues: [] });
     markDirty();
     renderNotes();
   }
@@ -1304,6 +1331,31 @@
     markDirty();
     renderNotes();
   }
+  function showNoteIssueInput(id) {
+    const wrap = document.getElementById(`note-issue-input-wrap-${id}`);
+    if (!wrap) return;
+    wrap.classList.remove('hidden');
+    document.getElementById(`note-issue-val-${id}`)?.focus();
+  }
+  function addIssueToNote(id) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === id);
+    if (!note) return;
+    const input = document.getElementById(`note-issue-val-${id}`);
+    const val = (input?.value || '').trim();
+    if (!val) return;
+    if (!note.issues) note.issues = [];
+    const nums = val.split(/[,\s]+/).map(s => s.replace(/^#/,'')).filter(s => /^\d+$/.test(s));
+    for (const n of nums) { if (!note.issues.includes(n)) note.issues.push(n); }
+    markDirty();
+    renderNotes();
+  }
+  function removeIssueFromNote(noteId, issueNum) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
+    if (!note || !note.issues) return;
+    note.issues = note.issues.filter(n => n !== issueNum);
+    markDirty();
+    renderNotes();
+  }
 
   // ────────────────────────────────────────
   // 코멘트 유형 관리 (설정 모달)
@@ -1322,7 +1374,7 @@
     const input = document.getElementById('inputNewNoteType');
     const val = input?.value.trim();
     if (!val) return;
-    if (!qaData.config.noteTypes) qaData.config.noteTypes = ['일반','요청','질문','버그','기타'];
+    if (!qaData.config.noteTypes) qaData.config.noteTypes = ['버그','미구현','요청','일반','질문','기타'];
     if (!qaData.config.noteTypes.includes(val)) {
       qaData.config.noteTypes.push(val);
       markDirty();
