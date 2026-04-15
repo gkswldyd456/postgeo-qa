@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 15:03",
+    "lastUpdated": "2026-04-15 15:06",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -885,16 +885,6 @@
           "_modified": "2026-04-15T05:14:31.207Z"
         },
         {
-          "id": "pf-34",
-          "name": "원(중심, 접그래프)",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T05:14:35.199Z"
-        },
-        {
           "id": "pf-33",
           "name": "원(중심, 접원)",
           "webMigrated": "no",
@@ -903,6 +893,16 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:32.729Z"
+        },
+        {
+          "id": "pf-34",
+          "name": "원(중심, 접그래프)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:35.199Z"
         },
         {
           "id": "pf-35",
