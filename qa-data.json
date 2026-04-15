@@ -1562,47 +1562,52 @@
         {
           "id": "ce-23",
           "name": "객체 원점 대칭 섀도우복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:16:50.849Z"
         },
         {
           "id": "ce-24",
           "name": "객체 X축 대칭 섀도우복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:16:51.876Z"
         },
         {
           "id": "ce-25",
           "name": "객체 Y축 대칭 섀도우복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:16:52.679Z"
         },
         {
           "id": "ce-26",
           "name": "객체 직선 y=x 대칭 섀도우복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:16:53.758Z"
         },
         {
           "id": "ce-27",
           "name": "객체 점 대칭 섀도우복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:16:55.108Z"
         },
         {
           "id": "ce-05",
