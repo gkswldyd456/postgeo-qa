@@ -2,8 +2,8 @@
   "config": {
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
-    "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 12:22",
+    "developerRepo": "",
+    "lastUpdated": "2026-04-14 19:16",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -25,10 +25,11 @@
       ]
     },
     "noteTypes": [
-      "일반",
-      "요청",
-      "질문",
       "버그",
+      "미구현",
+      "요청",
+      "일반",
+      "질문",
       "기타"
     ]
   },
@@ -53,8 +54,7 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T03:22:37.745Z"
+          "notes": ""
         },
         {
           "id": "p-03",
@@ -63,8 +63,7 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T03:22:31.468Z"
+          "notes": ""
         },
         {
           "id": "p-04",
@@ -1269,11 +1268,8 @@
           "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
-          "issues": [
-            "62"
-          ],
-          "notes": "",
-          "_modified": "2026-04-15T02:14:35.655Z"
+          "issues": [],
+          "notes": ""
         },
         {
           "id": "ce-15",
