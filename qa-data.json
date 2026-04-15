@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 16:16",
+    "lastUpdated": "2026-04-15 16:19",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1300,6 +1300,56 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "fp-36",
+          "name": "자유곡선 조절점 모두 켜기",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T07:19:44.307Z"
+        },
+        {
+          "id": "fp-37",
+          "name": "자유곡선 조절점 모두 끄기",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T07:19:45.201Z"
+        },
+        {
+          "id": "fp-38",
+          "name": "자유곡선 두 조절점 대칭설정1",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T07:19:46.226Z"
+        },
+        {
+          "id": "fp-39",
+          "name": "자유곡선 두 조절점 대칭설정2",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T07:19:47.048Z"
+        },
+        {
+          "id": "fp-40",
+          "name": "자유곡선 두 조절점 대칭설정3",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T07:19:47.961Z"
         },
         {
           "id": "fp-29",
