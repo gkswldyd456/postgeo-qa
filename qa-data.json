@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 14:47",
+    "lastUpdated": "2026-04-15 14:48",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -622,16 +622,6 @@
           "memos": []
         },
         {
-          "id": "pf-32",
-          "name": "원(중심, 접선)",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T05:14:31.207Z"
-        },
-        {
           "id": "pf-10",
           "name": "두 점 정다각형 (꼭짓점만, n:3~15)",
           "webMigrated": "no",
@@ -885,6 +875,16 @@
           ]
         },
         {
+          "id": "pf-32",
+          "name": "원(중심, 접선)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:31.207Z"
+        },
+        {
           "id": "pf-33",
           "name": "원(중심, 접원)",
           "webMigrated": "no",
@@ -903,6 +903,15 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:35.199Z"
+        },
+        {
+          "id": "pf-36",
+          "name": "중간삽입테스트",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         },
         {
           "id": "pf-35",
