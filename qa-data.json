@@ -2,8 +2,8 @@
   "config": {
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
-    "developerRepo": "",
-    "lastUpdated": "2026-04-14 19:16",
+    "developerRepo": "Post-Math/PostGeoWeb",
+    "lastUpdated": "2026-04-15 13:10",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -45,7 +45,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 2"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:31.159Z"
         },
         {
           "id": "p-02",
@@ -135,7 +136,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 0"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:27.748Z"
         },
         {
           "id": "p-13",
@@ -144,7 +146,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 0"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:25.563Z"
         },
         {
           "id": "p-14",
@@ -234,7 +237,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 0"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:23.228Z"
         },
         {
           "id": "p-28",
@@ -243,7 +247,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 0"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:21.196Z"
         },
         {
           "id": "p-29",
@@ -252,7 +257,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 0"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:18.027Z"
         },
         {
           "id": "p-30",
@@ -261,7 +267,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "자유도 0"
+          "notes": "",
+          "_modified": "2026-04-15T04:10:16.067Z"
         }
       ]
     },
@@ -714,7 +721,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "실행안됨.",
+          "_modified": "2026-04-15T04:09:36.285Z"
         },
         {
           "id": "pf-29",
@@ -723,7 +731,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "오류발생"
+          "notes": "오류발생, 실행안됨.",
+          "_modified": "2026-04-15T04:09:39.824Z"
         },
         {
           "id": "pf-30",
@@ -732,7 +741,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "실행안됨.",
+          "_modified": "2026-04-15T04:09:41.396Z"
         }
       ]
     },
@@ -1128,7 +1138,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "미분1/2/3"
+          "notes": "",
+          "_modified": "2026-04-15T04:09:07.771Z"
         },
         {
           "id": "fi-11",
@@ -1137,7 +1148,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "적분1/2"
+          "notes": "",
+          "_modified": "2026-04-15T04:09:05.388Z"
         }
       ]
     },
@@ -1464,7 +1476,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7201~0x720f"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:53.749Z"
         },
         {
           "id": "pt-02",
@@ -1473,7 +1486,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7331~0x7338"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:52.091Z"
         },
         {
           "id": "pt-03",
@@ -1482,7 +1496,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7341~0x7348"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:50.011Z"
         },
         {
           "id": "pt-04",
@@ -1491,7 +1506,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7351~0x7358"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:48.131Z"
         },
         {
           "id": "pt-05",
@@ -1500,7 +1516,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7361~0x7368"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:46.026Z"
         },
         {
           "id": "pt-06",
@@ -1509,7 +1526,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7371~0x7378"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:43.925Z"
         },
         {
           "id": "pt-07",
@@ -1518,7 +1536,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7381~0x7388"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:41.419Z"
         },
         {
           "id": "pt-08",
@@ -1527,7 +1546,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7391~0x7398"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:38.795Z"
         },
         {
           "id": "pt-09",
@@ -1536,7 +1556,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x73a1~0x73a8"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:35.667Z"
         },
         {
           "id": "pt-10",
@@ -1545,7 +1566,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "0x7400, 0x7411~0x7444"
+          "notes": "",
+          "_modified": "2026-04-15T04:08:32.467Z"
         }
       ]
     },
@@ -1579,25 +1601,29 @@
       "id": "note-1776149210839",
       "date": "2026-04-14 15:46",
       "type": "일반",
-      "content": "점 클릭 현재 컨트롤 클릭만 됨. Shift+클릭으로 격자점에 찍을 수 있는 것 추가 필요."
+      "content": "점 클릭 현재 컨트롤 클릭만 됨. Shift+클릭으로 격자점에 찍을 수 있는 것 추가 필요.",
+      "issues": []
     },
     {
       "id": "note-1776156122921",
       "date": "2026-04-14 17:42",
       "type": "일반",
-      "content": "선 토글에 대해 무선으로 바뀌는 개념이 없음."
+      "content": "선 토글에 대해 무선으로 바뀌는 개념이 없음.",
+      "issues": []
     },
     {
       "id": "note-1776156155057",
       "date": "2026-04-14 17:42",
       "type": "일반",
-      "content": "점 토글에 대해 빈점이 없고, 빈점이라는 점 모양이 없음. + 점 크기 0이 없음."
+      "content": "점 토글에 대해 빈점이 없고, 빈점이라는 점 모양이 없음. + 점 크기 0이 없음.",
+      "issues": []
     },
     {
       "id": "note-1776156361525",
       "date": "2026-04-14 17:46",
       "type": "일반",
-      "content": "점근선 - 함수에 딸려있는 기능으로 생각되어야함. 토글 느낌."
+      "content": "점근선 - 함수에 딸려있는 기능으로 생각되어야함. 토글 느낌.",
+      "issues": []
     }
   ]
 }
