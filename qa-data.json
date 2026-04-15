@@ -895,15 +895,6 @@
           "_modified": "2026-04-15T05:14:35.199Z"
         },
         {
-          "id": "pf-36",
-          "name": "중간삽입테스트",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
           "id": "pf-33",
           "name": "원(중심, 접원)",
           "webMigrated": "no",
