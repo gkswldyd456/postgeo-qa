@@ -526,7 +526,8 @@
         if (filters.qa      !== 'all' && item.qa          !== filters.qa)       return false;
         return true;
       });
-      if (items.length === 0) continue;
+      // 필터링으로 0개가 된 경우만 건너뜀 (진짜 빈 카테고리는 표시)
+      if (items.length === 0 && cat.items.length > 0) continue;
       totalShown += items.length;
 
       const isCollapsed = collapsed[cat.id];
@@ -666,6 +667,19 @@
           </td></tr>`;
         }
       });
+
+      // 빈 카테고리 placeholder
+      if (cat.items.length === 0) {
+        const colSpan = isEditMode ? 7 : 6;
+        if (isEditMode) {
+          html += `<tr class="insert-row"><td colspan="${colSpan}">
+            <div class="insert-btn" onclick="openAddItemModal('${cat.id}',0)">＋ 여기에 추가</div>
+          </td></tr>`;
+        }
+        html += `<tr><td colspan="${colSpan}" class="px-3 py-4 text-center text-xs text-gray-300">
+          ${isEditMode ? '항목을 추가하거나 다른 카테고리에서 드래그해서 옮기세요.' : '항목 없음'}
+        </td></tr>`;
+      }
 
       html += `
                 </tbody>
