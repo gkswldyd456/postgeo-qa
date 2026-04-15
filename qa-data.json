@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 15:10",
+    "lastUpdated": "2026-04-15 15:14",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -913,6 +913,15 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:34.281Z"
+        },
+        {
+          "id": "pf-36",
+          "name": "중간삽입테스트",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     },
@@ -1299,6 +1308,33 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "fp-32",
+          "name": "화살표1",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "fp-33",
+          "name": "화살표2",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "fp-34",
+          "name": "회전축 화살표",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     },
