@@ -368,6 +368,14 @@
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
     { id:56, name:220, migrated:88, detail:88, qa:88, issue:200 };
 
+  // ── 개인 UI 상태 (localStorage — 데이터와 독립, 브라우저 재시작 후에도 유지) ──
+  const UI_KEY_COLLAPSED = 'uiCollapsed';
+  const UI_KEY_FILTERS   = 'uiFilters';
+  (function restoreUiState() {
+    try { const c = localStorage.getItem(UI_KEY_COLLAPSED); if (c) collapsed = JSON.parse(c); } catch {}
+    try { const f = localStorage.getItem(UI_KEY_FILTERS);   if (f) Object.assign(filters, JSON.parse(f)); } catch {}
+  })();
+
   // ────────────────────────────────────────
   // URL fragment 토큰 자동 추출 (비개발자 공유 링크용)
   // 사용법: URL에 #ghowner=xxx&ghtoken=yyy 추가
@@ -456,6 +464,10 @@
     renderTable();
     document.getElementById('lastUpdated').textContent =
       `마지막 업데이트: ${qaData.config.lastUpdated || '—'}`;
+    // 필터 select UI를 filters 객체에 동기화 (localStorage 복원값 반영)
+    document.getElementById('filterMigrated').value = filters.migrated;
+    document.getElementById('filterDetail').value   = filters.detail;
+    document.getElementById('filterQa').value       = filters.qa;
   }
 
   // ────────────────────────────────────────
@@ -497,7 +509,7 @@
   // ────────────────────────────────────────
   function renderCategoryFilter() {
     const sel = document.getElementById('filterCategory');
-    const cur = sel.value;
+    const cur = filters.category;
     sel.innerHTML = '<option value="all">전체 카테고리</option>';
     for (const cat of qaData.categories) {
       const o = document.createElement('option');
@@ -770,6 +782,7 @@
   // ────────────────────────────────────────
   function toggleCategory(catId) {
     collapsed[catId] = !collapsed[catId];
+    localStorage.setItem(UI_KEY_COLLAPSED, JSON.stringify(collapsed));
     const el    = document.getElementById(`cat-${catId}`);
     const arrow = document.getElementById(`arrow-${catId}`);
     if (collapsed[catId]) {
@@ -790,6 +803,7 @@
     filters.detail   = document.getElementById('filterDetail').value;
     filters.qa       = document.getElementById('filterQa').value;
     renderTable();
+    localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
   }
 
   function resetFilters() {
@@ -797,6 +811,7 @@
     ['filterCategory','filterMigrated','filterDetail','filterQa']
       .forEach(id => { document.getElementById(id).value = 'all'; });
     renderTable();
+    localStorage.removeItem(UI_KEY_FILTERS);
   }
 
   // ────────────────────────────────────────
@@ -1808,9 +1823,11 @@
 
   async function reloadData() {
     if (isDirty && !confirm('미저장 변경사항이 있습니다. 새로고침하면 사라집니다. 계속할까요?')) return;
+    const scrollY = window.scrollY;
     isDirty = false;
     hideSyncBanner();
     await loadData();
+    requestAnimationFrame(() => window.scrollTo({ top: scrollY, behavior: 'instant' }));
   }
 
   // 20초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
