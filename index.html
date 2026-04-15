@@ -794,11 +794,18 @@
           mergedItem._modified   = localItem._modified;
         }
 
-        // 이슈 번호: 양쪽 합집합
-        mergedItem.issues = [...new Set([
-          ...(mergedItem.issues || []),
-          ...(localItem.issues  || [])
-        ])];
+        // 이슈 번호: 3-way merge (로컬 삭제 반영 + 원격 추가 보존)
+        {
+          const baseSet   = new Set(baseItem?.issues || []);
+          const localSet  = new Set(localItem.issues || []);
+          const remoteSet = new Set(mergedItem.issues || []);
+          const final = new Set(remoteSet);
+          // 로컬에서 새로 추가한 것 → merged에 추가
+          for (const i of localSet) { if (!baseSet.has(i)) final.add(i); }
+          // 로컬에서 의도적으로 삭제한 것 → merged에서도 제거
+          for (const i of baseSet)  { if (!localSet.has(i)) final.delete(i); }
+          mergedItem.issues = [...final];
+        }
 
         // 메모: 로컬에서 변경됐으면 로컬 우선, 아니면 원격 유지
         const baseNotes = baseItem?.notes || '';
@@ -866,6 +873,9 @@
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
+        if (res.status === 409) {
+          throw new Error('다른 사람이 동시에 저장했습니다. 페이지를 새로고침한 후 다시 저장해 주세요.');
+        }
         throw new Error(err.message || `저장 실패 (${res.status})`);
       }
 
