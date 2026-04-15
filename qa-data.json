@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 15:49",
+    "lastUpdated": "2026-04-15 15:51",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -930,6 +930,16 @@
       "name": "입체도형 (3D Figures)",
       "items": [
         {
+          "id": "td-07",
+          "name": "원뿔",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:36:19.267Z"
+        },
+        {
           "id": "td-01",
           "name": "원뿔 (직원뿔)",
           "webMigrated": "no",
@@ -946,6 +956,16 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "td-08",
+          "name": "원기둥",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:36:16.800Z"
         },
         {
           "id": "td-03",
@@ -982,26 +1002,6 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
-        },
-        {
-          "id": "td-07",
-          "name": "원뿔",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T05:36:19.267Z"
-        },
-        {
-          "id": "td-08",
-          "name": "원기둥",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "",
-          "_modified": "2026-04-15T05:36:16.800Z"
         }
       ]
     },
@@ -1039,11 +1039,12 @@
         {
           "id": "fp-35",
           "name": "이차함수(꼭짓점과 이차항계수)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T06:50:56.243Z"
         },
         {
           "id": "fp-04",
@@ -1491,11 +1492,12 @@
         {
           "id": "ce-16",
           "name": "객체 복사",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T06:50:40.808Z"
         },
         {
           "id": "ce-05",
