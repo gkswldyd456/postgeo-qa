@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 16:10",
+    "lastUpdated": "2026-04-15 16:12",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1502,6 +1502,24 @@
         {
           "id": "ce-17",
           "name": "평행이동 섀도우 복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-18",
+          "name": "객체 원점 대칭 복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-19",
+          "name": "객체 X축 대칭 복제",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
