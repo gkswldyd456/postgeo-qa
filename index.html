@@ -340,8 +340,9 @@
     } catch(e) {}
   })();
 
-  const getOwner = () => localStorage.getItem('gh_owner') || '';
-  const getToken = () => localStorage.getItem('gh_token') || '';
+  const getOwner  = () => localStorage.getItem('gh_owner')  || '';
+  const getToken  = () => localStorage.getItem('gh_token')  || '';
+  const getDevRepo = () => localStorage.getItem('gh_devrepo') || qaData?.config?.developerRepo || '';
 
   // ────────────────────────────────────────
   // 데이터 로드
@@ -356,6 +357,8 @@
       if (!qaData.overallNotes) qaData.overallNotes = [];
       if (!qaData.config.noteTypes) qaData.config.noteTypes = ['일반','요청','질문','버그','기타'];
       baseSnapshot = JSON.parse(JSON.stringify(qaData)); // 병합 기준점 스냅샷
+      const savedDevRepo = localStorage.getItem('gh_devrepo');
+      if (savedDevRepo) qaData.config.developerRepo = savedDevRepo;
       renderAll();
     } catch (e) {
       showError(e.message);
@@ -750,16 +753,15 @@
   }
 
   function saveSettings() {
-    const owner  = document.getElementById('inputOwner').value.trim();
-    const token  = document.getElementById('inputToken').value.trim();
+    const owner   = document.getElementById('inputOwner').value.trim();
+    const token   = document.getElementById('inputToken').value.trim();
     const devRepo = document.getElementById('inputDevRepo').value.trim();
-    if (owner)  localStorage.setItem('gh_owner', owner);
-    if (token)  localStorage.setItem('gh_token', token);
-    if (qaData) {
-      qaData.config.developerRepo = devRepo;
-    }
+    if (owner)  localStorage.setItem('gh_owner',   owner);
+    if (token)  localStorage.setItem('gh_token',   token);
+    localStorage.setItem('gh_devrepo', devRepo);
+    if (qaData) qaData.config.developerRepo = devRepo;
     closeSettings();
-    loadData();
+    renderAll();
   }
 
   // ────────────────────────────────────────
