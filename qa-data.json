@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 14:51",
+    "lastUpdated": "2026-04-15 14:58",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -895,6 +895,15 @@
           "_modified": "2026-04-15T05:14:35.199Z"
         },
         {
+          "id": "pf-36",
+          "name": "중간삽입테스트",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
           "id": "pf-33",
           "name": "원(중심, 접원)",
           "webMigrated": "no",
@@ -913,15 +922,6 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:34.281Z"
-        },
-        {
-          "id": "pf-36",
-          "name": "중간삽입테스트",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
         }
       ]
     },
