@@ -1502,56 +1502,62 @@
         {
           "id": "ce-17",
           "name": "평행이동 섀도우 복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:13:23.236Z"
         },
         {
           "id": "ce-18",
           "name": "객체 원점 대칭 복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:13:24.120Z"
         },
         {
           "id": "ce-19",
           "name": "객체 X축 대칭 복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:13:24.982Z"
         },
         {
           "id": "ce-20",
           "name": "객체 Y축 대칭 복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:13:26.025Z"
         },
         {
           "id": "ce-21",
           "name": "객체 y=x 대칭 복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:13:27.090Z"
         },
         {
           "id": "ce-22",
           "name": "객체 점 대칭 복제",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-15T07:13:28.252Z"
         },
         {
           "id": "ce-05",
