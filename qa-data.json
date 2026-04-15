@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 15:06",
+    "lastUpdated": "2026-04-15 15:10",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -913,15 +913,6 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:34.281Z"
-        },
-        {
-          "id": "pf-36",
-          "name": "중간삽입테스트",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
         }
       ]
     },
