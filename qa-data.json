@@ -46,7 +46,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:31.159Z"
+          "_modified": "2026-04-15T04:10:31.159Z",
+          "memos": []
         },
         {
           "id": "p-02",
@@ -55,7 +56,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-03",
@@ -64,7 +66,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-04",
@@ -73,7 +76,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-05",
@@ -82,7 +86,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-06",
@@ -91,7 +96,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-07",
@@ -100,7 +106,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-08",
@@ -109,7 +116,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-09",
@@ -118,7 +126,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-10",
@@ -127,7 +136,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-12",
@@ -137,7 +147,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:27.748Z"
+          "_modified": "2026-04-15T04:10:27.748Z",
+          "memos": []
         },
         {
           "id": "p-13",
@@ -147,7 +158,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:25.563Z"
+          "_modified": "2026-04-15T04:10:25.563Z",
+          "memos": []
         },
         {
           "id": "p-14",
@@ -156,7 +168,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-15",
@@ -165,7 +178,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-16",
@@ -174,7 +188,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)",
+          "memos": [
+            {
+              "id": "m-1776226396006-rmq",
+              "text": "실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "p-32",
@@ -183,7 +205,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)"
+          "notes": "2026.04.14 15:54 현재 실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)",
+          "memos": [
+            {
+              "id": "m-1776226396006-ioz",
+              "text": "실행 후 원 클릭 시 오류남. (좌하단 이슈표시) + 2등분점으로만 있음. 다른 등분점처럼 입력으로 변경되면 좋음.)",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "p-17",
@@ -192,7 +222,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-18",
@@ -201,7 +232,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-19",
@@ -210,7 +242,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-20",
@@ -219,7 +252,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-21",
@@ -228,7 +262,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "p-22",
@@ -238,7 +273,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:23.228Z"
+          "_modified": "2026-04-15T04:10:23.228Z",
+          "memos": []
         },
         {
           "id": "p-28",
@@ -248,7 +284,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:21.196Z"
+          "_modified": "2026-04-15T04:10:21.196Z",
+          "memos": []
         },
         {
           "id": "p-29",
@@ -258,7 +295,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:18.027Z"
+          "_modified": "2026-04-15T04:10:18.027Z",
+          "memos": []
         },
         {
           "id": "p-30",
@@ -268,7 +306,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:10:16.067Z"
+          "_modified": "2026-04-15T04:10:16.067Z",
+          "memos": []
         }
       ]
     },
@@ -283,7 +322,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-02",
@@ -292,7 +332,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-03",
@@ -301,7 +342,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-04",
@@ -310,7 +352,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-05",
@@ -319,7 +362,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-06",
@@ -328,7 +372,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "202604141710 기준\n각의 이등분선만 있음. 조절점 없음."
+          "notes": "202604141710 기준\n각의 이등분선만 있음. 조절점 없음.",
+          "memos": [
+            {
+              "id": "m-1776226396006-mwy",
+              "text": "각의 이등분선만 있음. 조절점 없음.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "l-07",
@@ -337,7 +389,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-08",
@@ -346,7 +399,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-09",
@@ -355,7 +409,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "수직선이 아니라 수선으로 되어있음."
+          "notes": "수직선이 아니라 수선으로 되어있음.",
+          "memos": [
+            {
+              "id": "m-1776226396006-6vo",
+              "text": "수직선이 아니라 수선으로 되어있음.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "l-10",
@@ -364,7 +426,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-11",
@@ -373,7 +436,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-12",
@@ -382,7 +446,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-13",
@@ -391,7 +456,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-14",
@@ -400,7 +466,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-15",
@@ -409,7 +476,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-16",
@@ -418,7 +486,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-17",
@@ -427,7 +496,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "기능실행시 화면 없어짐 및 오류 발생"
+          "notes": "기능실행시 화면 없어짐 및 오류 발생",
+          "memos": [
+            {
+              "id": "m-1776226396006-r6u",
+              "text": "기능실행시 화면 없어짐 및 오류 발생",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "l-18",
@@ -436,7 +513,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-19",
@@ -445,7 +523,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-20",
@@ -454,7 +533,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "l-22",
@@ -463,7 +543,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "실행하면 선분 선택되게는 되는데, 아무런 변화가 없음."
+          "notes": "실행하면 선분 선택되게는 되는데, 아무런 변화가 없음.",
+          "memos": [
+            {
+              "id": "m-1776226396006-gg0",
+              "text": "실행하면 선분 선택되게는 되는데, 아무런 변화가 없음.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         }
       ]
     },
@@ -478,7 +566,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-02",
@@ -487,7 +576,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-03",
@@ -496,7 +586,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-04",
@@ -505,7 +596,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-05",
@@ -514,7 +606,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-06",
@@ -523,7 +616,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-07",
@@ -532,7 +626,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-08",
@@ -541,7 +636,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-09",
@@ -550,7 +646,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-31",
@@ -559,7 +656,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-10",
@@ -568,7 +666,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-11",
@@ -577,7 +676,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "이건 수치 입력 방식은 아님."
+          "notes": "이건 수치 입력 방식은 아님.",
+          "memos": [
+            {
+              "id": "m-1776226396006-1po",
+              "text": "이건 수치 입력 방식은 아님.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-12",
@@ -586,7 +693,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-13",
@@ -595,7 +703,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-14",
@@ -604,7 +713,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-15",
@@ -613,7 +723,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-17",
@@ -622,7 +733,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "특수삼각형 안에 sss~rha 기능이 합쳐진건데, \n지금 이름만 특수삼각형으로 되어있고 아무 기능 안한 삼각형이 표출되어있음.\n각 기능별 버튼도 따로 있음."
+          "notes": "특수삼각형 안에 sss~rha 기능이 합쳐진건데, \n지금 이름만 특수삼각형으로 되어있고 아무 기능 안한 삼각형이 표출되어있음.\n각 기능별 버튼도 따로 있음.",
+          "memos": [
+            {
+              "id": "m-1776226396006-qvk",
+              "text": "특수삼각형 안에 sss~rha 기능이 합쳐진건데, \n지금 이름만 특수삼각형으로 되어있고 아무 기능 안한 삼각형이 표출되어있음.\n각 기능별 버튼도 따로 있음.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-18",
@@ -631,7 +750,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "점 하나 클릭하면 그냥 정삼각형이 생김. 높이를 선택하는 개념이 아님."
+          "notes": "점 하나 클릭하면 그냥 정삼각형이 생김. 높이를 선택하는 개념이 아님.",
+          "memos": [
+            {
+              "id": "m-1776226396006-x71",
+              "text": "점 하나 클릭하면 그냥 정삼각형이 생김. 높이를 선택하는 개념이 아님.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-19",
@@ -640,7 +767,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-20",
@@ -649,7 +777,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-21",
@@ -658,7 +787,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-22",
@@ -667,7 +797,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "대각마름모가 아님. 평행사변형이 나옴."
+          "notes": "대각마름모가 아님. 평행사변형이 나옴.",
+          "memos": [
+            {
+              "id": "m-1776226396006-vfr",
+              "text": "대각마름모가 아님. 평행사변형이 나옴.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-23",
@@ -676,7 +814,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "직사각형이 아님. 평행사변형이 나옴."
+          "notes": "직사각형이 아님. 평행사변형이 나옴.",
+          "memos": [
+            {
+              "id": "m-1776226396006-257",
+              "text": "직사각형이 아님. 평행사변형이 나옴.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-24",
@@ -685,7 +831,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "이건 위에 두 점 정다각형과 동일 기능이라. 없어도 됨."
+          "notes": "이건 위에 두 점 정다각형과 동일 기능이라. 없어도 됨.",
+          "memos": [
+            {
+              "id": "m-1776226396006-xva",
+              "text": "이건 위에 두 점 정다각형과 동일 기능이라. 없어도 됨.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-25",
@@ -694,7 +848,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-26",
@@ -703,7 +858,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "오류발생"
+          "notes": "오류발생",
+          "memos": [
+            {
+              "id": "m-1776226396006-tnk",
+              "text": "오류발생",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-27",
@@ -712,7 +875,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "pf-28",
@@ -722,7 +886,15 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "실행안됨.",
-          "_modified": "2026-04-15T04:09:36.285Z"
+          "_modified": "2026-04-15T04:09:36.285Z",
+          "memos": [
+            {
+              "id": "m-1776226396006-9l5",
+              "text": "실행안됨.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-29",
@@ -732,7 +904,15 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "오류발생, 실행안됨.",
-          "_modified": "2026-04-15T04:09:39.824Z"
+          "_modified": "2026-04-15T04:09:39.824Z",
+          "memos": [
+            {
+              "id": "m-1776226396006-fj6",
+              "text": "오류발생, 실행안됨.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "pf-30",
@@ -742,7 +922,15 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "실행안됨.",
-          "_modified": "2026-04-15T04:09:41.396Z"
+          "_modified": "2026-04-15T04:09:41.396Z",
+          "memos": [
+            {
+              "id": "m-1776226396006-6cd",
+              "text": "실행안됨.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         }
       ]
     },
@@ -757,7 +945,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "td-02",
@@ -766,7 +955,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "td-03",
@@ -775,7 +965,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "td-04",
@@ -784,7 +975,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "td-05",
@@ -793,7 +985,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "td-06",
@@ -802,7 +995,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     },
@@ -817,7 +1011,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-02",
@@ -826,7 +1021,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-03",
@@ -835,7 +1031,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-04",
@@ -844,7 +1041,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-05",
@@ -853,7 +1051,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-06",
@@ -862,7 +1061,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-07",
@@ -871,7 +1071,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-08",
@@ -880,7 +1081,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-09",
@@ -889,7 +1091,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-10",
@@ -898,7 +1101,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-11",
@@ -907,7 +1111,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-12",
@@ -916,7 +1121,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "점근선 생기는데 가로 점근선 안생김"
+          "notes": "점근선 생기는데 가로 점근선 안생김",
+          "memos": [
+            {
+              "id": "m-1776226396006-noy",
+              "text": "점근선 생기는데 가로 점근선 안생김",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "fp-13",
@@ -925,7 +1138,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-14",
@@ -934,7 +1148,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-15",
@@ -943,7 +1158,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-16",
@@ -952,7 +1168,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-17",
@@ -961,7 +1178,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-18",
@@ -970,7 +1188,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-19",
@@ -979,7 +1198,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-20",
@@ -988,7 +1208,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "준선 선택이 아님."
+          "notes": "준선 선택이 아님.",
+          "memos": [
+            {
+              "id": "m-1776226396006-zi2",
+              "text": "준선 선택이 아님.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "fp-21",
@@ -997,7 +1225,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-22",
@@ -1006,7 +1235,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "준선 선택이 아님."
+          "notes": "준선 선택이 아님.",
+          "memos": [
+            {
+              "id": "m-1776226396006-ocd",
+              "text": "준선 선택이 아님.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "fp-23",
@@ -1015,7 +1252,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-24",
@@ -1024,7 +1262,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-25",
@@ -1033,7 +1272,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-26",
@@ -1042,7 +1282,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-27",
@@ -1051,7 +1292,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-28",
@@ -1060,7 +1302,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-29",
@@ -1069,7 +1312,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fp-30",
@@ -1078,7 +1322,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     },
@@ -1093,7 +1338,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fi-02",
@@ -1102,7 +1348,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fi-03",
@@ -1111,7 +1358,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fi-04",
@@ -1120,7 +1368,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fi-05",
@@ -1129,7 +1378,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fi-10",
@@ -1139,7 +1389,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:09:07.771Z"
+          "_modified": "2026-04-15T04:09:07.771Z",
+          "memos": []
         },
         {
           "id": "fi-11",
@@ -1149,7 +1400,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:09:05.388Z"
+          "_modified": "2026-04-15T04:09:05.388Z",
+          "memos": []
         }
       ]
     },
@@ -1164,7 +1416,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "하나의 객체 선택만 가능.\n다중선택은 아직 X"
+          "notes": "하나의 객체 선택만 가능.\n다중선택은 아직 X",
+          "memos": [
+            {
+              "id": "m-1776226396006-jhc",
+              "text": "하나의 객체 선택만 가능.\n다중선택은 아직 X",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "ce-02",
@@ -1173,7 +1433,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "점, 선분 정도만 이동되고 나머지는 대부분 안됨."
+          "notes": "점, 선분 정도만 이동되고 나머지는 대부분 안됨.",
+          "memos": [
+            {
+              "id": "m-1776226396006-pw7",
+              "text": "점, 선분 정도만 이동되고 나머지는 대부분 안됨.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "ce-03",
@@ -1182,7 +1450,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-04",
@@ -1191,7 +1460,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "점 크기 조정은 됨."
+          "notes": "점 크기 조정은 됨.",
+          "memos": [
+            {
+              "id": "m-1776226396006-z7f",
+              "text": "점 크기 조정은 됨.",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "ce-05",
@@ -1200,7 +1477,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-06",
@@ -1209,7 +1487,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-07",
@@ -1218,7 +1497,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-08",
@@ -1227,7 +1507,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-09",
@@ -1236,7 +1517,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-10",
@@ -1245,7 +1527,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-11",
@@ -1254,7 +1537,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-12",
@@ -1263,7 +1547,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-13",
@@ -1272,7 +1557,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-14",
@@ -1281,7 +1567,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ce-15",
@@ -1290,7 +1577,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     },
@@ -1305,7 +1593,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "cs-02",
@@ -1314,7 +1603,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "cs-03",
@@ -1323,7 +1613,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "cs-04",
@@ -1332,7 +1623,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "cs-05",
@@ -1341,7 +1633,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "cs-06",
@@ -1350,7 +1643,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": "배경이미지 표시 클릭"
+          "notes": "배경이미지 표시 클릭",
+          "memos": [
+            {
+              "id": "m-1776226396006-403",
+              "text": "배경이미지 표시 클릭",
+              "issue": null,
+              "resolved": false
+            }
+          ]
         },
         {
           "id": "cs-07",
@@ -1359,7 +1660,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     },
@@ -1374,7 +1676,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fs-02",
@@ -1383,7 +1686,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fs-03",
@@ -1392,7 +1696,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fs-04",
@@ -1401,7 +1706,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "fs-05",
@@ -1410,7 +1716,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     },
@@ -1425,7 +1732,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ti-02",
@@ -1434,7 +1742,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ti-03",
@@ -1443,7 +1752,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ti-04",
@@ -1452,7 +1762,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "ti-05",
@@ -1461,7 +1772,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     },
@@ -1477,7 +1789,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:53.749Z"
+          "_modified": "2026-04-15T04:08:53.749Z",
+          "memos": []
         },
         {
           "id": "pt-02",
@@ -1487,7 +1800,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:52.091Z"
+          "_modified": "2026-04-15T04:08:52.091Z",
+          "memos": []
         },
         {
           "id": "pt-03",
@@ -1497,7 +1811,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:50.011Z"
+          "_modified": "2026-04-15T04:08:50.011Z",
+          "memos": []
         },
         {
           "id": "pt-04",
@@ -1507,7 +1822,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:48.131Z"
+          "_modified": "2026-04-15T04:08:48.131Z",
+          "memos": []
         },
         {
           "id": "pt-05",
@@ -1517,7 +1833,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:46.026Z"
+          "_modified": "2026-04-15T04:08:46.026Z",
+          "memos": []
         },
         {
           "id": "pt-06",
@@ -1527,7 +1844,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:43.925Z"
+          "_modified": "2026-04-15T04:08:43.925Z",
+          "memos": []
         },
         {
           "id": "pt-07",
@@ -1537,7 +1855,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:41.419Z"
+          "_modified": "2026-04-15T04:08:41.419Z",
+          "memos": []
         },
         {
           "id": "pt-08",
@@ -1547,7 +1866,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:38.795Z"
+          "_modified": "2026-04-15T04:08:38.795Z",
+          "memos": []
         },
         {
           "id": "pt-09",
@@ -1557,7 +1877,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:35.667Z"
+          "_modified": "2026-04-15T04:08:35.667Z",
+          "memos": []
         },
         {
           "id": "pt-10",
@@ -1567,7 +1888,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T04:08:32.467Z"
+          "_modified": "2026-04-15T04:08:32.467Z",
+          "memos": []
         }
       ]
     },
@@ -1582,7 +1904,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         },
         {
           "id": "st-02",
@@ -1591,7 +1914,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "memos": []
         }
       ]
     }
