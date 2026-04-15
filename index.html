@@ -468,6 +468,9 @@
     document.getElementById('filterMigrated').value = filters.migrated;
     document.getElementById('filterDetail').value   = filters.detail;
     document.getElementById('filterQa').value       = filters.qa;
+    // 스크롤 위치 복원 (sessionStorage — 동일 탭 새로고침만 유지, 탭 닫으면 초기화)
+    const _sy = sessionStorage.getItem('uiScrollY');
+    if (_sy) requestAnimationFrame(() => window.scrollTo({ top: +_sy, behavior: 'instant' }));
   }
 
   // ────────────────────────────────────────
@@ -1823,11 +1826,9 @@
 
   async function reloadData() {
     if (isDirty && !confirm('미저장 변경사항이 있습니다. 새로고침하면 사라집니다. 계속할까요?')) return;
-    const scrollY = window.scrollY;
     isDirty = false;
     hideSyncBanner();
     await loadData();
-    requestAnimationFrame(() => window.scrollTo({ top: scrollY, behavior: 'instant' }));
   }
 
   // 20초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
@@ -1846,6 +1847,13 @@
       }
     } catch(e) {}
   }, 20000);
+
+  // 스크롤 위치 sessionStorage 저장 (200ms 디바운스 — 동일 탭 새로고침 후 복원용)
+  let _scrollSaveTimer;
+  window.addEventListener('scroll', () => {
+    clearTimeout(_scrollSaveTimer);
+    _scrollSaveTimer = setTimeout(() => sessionStorage.setItem('uiScrollY', window.scrollY), 200);
+  });
 
   // ────────────────────────────────────────
   // 시작
