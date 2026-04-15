@@ -1265,15 +1265,6 @@
           "memos": []
         },
         {
-          "id": "fp-31",
-          "name": "테스트",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
-        },
-        {
           "id": "fp-28",
           "name": "자유곡선",
           "webMigrated": "no",
