@@ -349,11 +349,23 @@
   // ────────────────────────────────────────
   async function loadData() {
     try {
-      // 공개 저장소이므로 인증 없이 raw URL로 직접 로드 (누구나 볼 수 있음)
-      // ?_= 타임스탬프로 CDN 캐시 우회 (raw.githubusercontent.com은 최대 5분 캐시됨)
-      const res = await fetch(`https://raw.githubusercontent.com/gkswldyd456/postgeo-qa/main/qa-data.json?_=${Date.now()}`);
-      if (!res.ok) throw new Error(`데이터 로드 실패 (${res.status})`);
-      qaData = await res.json();
+      // GitHub Contents API 사용 (raw URL CDN 우회 — PUT 커밋 직후에도 즉시 최신 반영)
+      // 공개 저장소라 토큰 없이도 동작 (60 req/hr 제한, 토큰 있으면 5000 req/hr)
+      const _o = getOwner() || 'gkswldyd456';
+      const _t = getToken();
+      const _headers = { 'User-Agent': 'PostGeoQA' };
+      if (_t) _headers['Authorization'] = `Bearer ${_t}`;
+
+      // sha + content 한 번에 조회 → 폴링 즉시 활성화
+      const metaRes = await fetch(
+        `${GH_API}/repos/${_o}/${REPO_NAME}/contents/${DATA_PATH}`,
+        { headers: _headers }
+      );
+      if (!metaRes.ok) throw new Error(`데이터 로드 실패 (${metaRes.status})`);
+      const meta = await metaRes.json();
+      fileSha = meta.sha;
+      qaData = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g,'')))));
+
       // 이전 버전 호환: 없는 필드 초기화
       if (!qaData.overallNotes) qaData.overallNotes = [];
       if (!qaData.config.noteTypes) qaData.config.noteTypes = ['일반','요청','질문','버그','기타'];
@@ -361,15 +373,6 @@
       const savedDevRepo = localStorage.getItem('gh_devrepo');
       if (savedDevRepo) qaData.config.developerRepo = savedDevRepo;
       renderAll();
-      // 토큰 있으면 SHA 초기화 → 폴링 즉시 활성화 (백그라운드)
-      const _o = getOwner(), _t = getToken();
-      if (_o && _t && !fileSha) {
-        fetch(`${GH_API}/repos/${_o}/${REPO_NAME}/contents/${DATA_PATH}`,
-          { headers: { Authorization: `Bearer ${_t}`, 'User-Agent': 'PostGeoQA' } })
-          .then(r => r.ok ? r.json() : null)
-          .then(d => { if (d?.sha) fileSha = d.sha; })
-          .catch(() => {});
-      }
     } catch (e) {
       showError(e.message);
     }
@@ -935,15 +938,31 @@
         });
       }
 
-      // 로컬 순서 적용 (드래그앤드롭 반영 — 원격에만 있는 신규 항목은 뒤에 추가)
+      // 로컬 순서 적용 + 원격 신규 항목 상대 위치 보존
+      // - 로컬에 있는 항목: 로컬 순서 우선 (드래그앤드롭 반영)
+      // - 원격에만 있는 항목(다른 사용자가 추가): 원격 기준 앞 이웃 위치에 삽입
       {
-        const localOrder  = localCat.items.map(i => i.id);
-        const mergedById  = new Map(mergedCat.items.map(i => [i.id, i]));
-        const remoteOnly  = mergedCat.items.filter(i => !localOrder.includes(i.id));
-        mergedCat.items   = [
-          ...localOrder.map(id => mergedById.get(id)).filter(Boolean),
-          ...remoteOnly
-        ];
+        const localOrder    = localCat.items.map(i => i.id);
+        const mergedById    = new Map(mergedCat.items.map(i => [i.id, i]));
+        const remoteIds     = mergedCat.items.map(i => i.id); // 삭제 처리 후 원격 순서
+        const remoteOnlySet = new Set(remoteIds.filter(id => !localOrder.includes(id)));
+
+        // 로컬에 있는 항목을 로컬 순서로 배치
+        const result = localOrder.map(id => mergedById.get(id)).filter(Boolean);
+
+        // 원격에만 있는 항목: 원격 순서 기준 앞 이웃을 result에서 찾아 그 위치에 삽입
+        for (const newId of remoteIds) {
+          if (!remoteOnlySet.has(newId)) continue;
+          const rIdx = remoteIds.indexOf(newId);
+          let insertAfter = -1;
+          for (let i = rIdx - 1; i >= 0; i--) {
+            const pos = result.findIndex(r => r.id === remoteIds[i]);
+            if (pos >= 0) { insertAfter = pos; break; }
+          }
+          result.splice(insertAfter + 1, 0, mergedById.get(newId));
+        }
+
+        mergedCat.items = result;
       }
     }
 
