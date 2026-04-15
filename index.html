@@ -898,25 +898,31 @@
 
         // memos[]: 3-way merge by id (overallNotes와 동일 방식)
         if (localItem.memos !== undefined || mergedItem.memos !== undefined) {
-          const bMemoMap = new Map((baseItem?.memos||[]).map(m=>[m.id,m]));
-          const lMemoMap = new Map((localItem.memos||[]).map(m=>[m.id,m]));
-          const rMemoMap = new Map((mergedItem.memos||[]).map(m=>[m.id,m]));
-          const memoRes = [];
-          for (const [id, rMemo] of rMemoMap) {
-            if (!bMemoMap.has(id)) {
-              memoRes.push(rMemo);
-            } else if (lMemoMap.has(id)) {
-              const lMemo = lMemoMap.get(id), bMemo = bMemoMap.get(id);
-              const changed = lMemo.text !== bMemo.text || lMemo.issue !== bMemo.issue || lMemo.resolved !== bMemo.resolved;
-              memoRes.push(changed ? lMemo : rMemo);
+          if (localItem.memos === undefined) {
+            // 로컬이 memos 미지원 구버전 → 원격 memos/issues 그대로 유지 (이미 merged에 설정됨)
+          } else {
+            const bMemoMap = new Map((baseItem?.memos||[]).map(m=>[m.id,m]));
+            const lMemoMap = new Map((localItem.memos||[]).map(m=>[m.id,m]));
+            const rMemoMap = new Map((mergedItem.memos||[]).map(m=>[m.id,m]));
+            const memoRes = [];
+            for (const [id, rMemo] of rMemoMap) {
+              if (!bMemoMap.has(id)) {
+                // 원격에서 새로 추가 → 보존
+                memoRes.push(rMemo);
+              } else if (lMemoMap.has(id)) {
+                // 베이스·로컬 모두 존재 → 로컬 변경 여부 비교
+                const lMemo = lMemoMap.get(id), bMemo = bMemoMap.get(id);
+                const changed = lMemo.text !== bMemo.text || lMemo.issue !== bMemo.issue || lMemo.resolved !== bMemo.resolved;
+                memoRes.push(changed ? lMemo : rMemo);
+              }
+              // 베이스에 있고 로컬에 없음 → 로컬에서 삭제 → 추가 안 함
             }
-            // 베이스에 있고 로컬에 없음 → 로컬에서 삭제 → 추가 안 함
+            for (const [id, lMemo] of lMemoMap) {
+              if (!rMemoMap.has(id)) memoRes.push(lMemo); // 로컬에서 새로 추가
+            }
+            mergedItem.memos  = memoRes;
+            mergedItem.issues = memoRes.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
           }
-          for (const [id, lMemo] of lMemoMap) {
-            if (!rMemoMap.has(id)) memoRes.push(lMemo);
-          }
-          mergedItem.memos  = memoRes;
-          mergedItem.issues = memoRes.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
         }
       }
 
