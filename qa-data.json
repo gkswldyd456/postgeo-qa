@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 14:14",
+    "lastUpdated": "2026-04-15 14:36",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -973,6 +973,24 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "td-07",
+          "name": "원뿔",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "td-08",
+          "name": "원기둥",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     },
