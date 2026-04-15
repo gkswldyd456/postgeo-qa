@@ -934,6 +934,17 @@
           return !(wasInBase && !localIds.has(item.id));
         });
       }
+
+      // 로컬 순서 적용 (드래그앤드롭 반영 — 원격에만 있는 신규 항목은 뒤에 추가)
+      {
+        const localOrder  = localCat.items.map(i => i.id);
+        const mergedById  = new Map(mergedCat.items.map(i => [i.id, i]));
+        const remoteOnly  = mergedCat.items.filter(i => !localOrder.includes(i.id));
+        mergedCat.items   = [
+          ...localOrder.map(id => mergedById.get(id)).filter(Boolean),
+          ...remoteOnly
+        ];
+      }
     }
 
     // overallNotes: 3-way merge (로컬 삭제/수정 반영 + 원격 추가 보존)
