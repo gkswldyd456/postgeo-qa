@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 16:12",
+    "lastUpdated": "2026-04-15 16:13",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1520,6 +1520,33 @@
         {
           "id": "ce-19",
           "name": "객체 X축 대칭 복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-20",
+          "name": "객체 Y축 대칭 복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-21",
+          "name": "객체 y=x 대칭 복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-22",
+          "name": "객체 점 대칭 복제",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
