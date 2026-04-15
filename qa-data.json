@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 13:10",
+    "lastUpdated": "2026-04-15 14:14",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -873,6 +873,46 @@
               "resolved": false
             }
           ]
+        },
+        {
+          "id": "pf-32",
+          "name": "원(중심, 접선)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:31.207Z"
+        },
+        {
+          "id": "pf-33",
+          "name": "원(중심, 접원)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:32.729Z"
+        },
+        {
+          "id": "pf-35",
+          "name": "아폴로니우스의 원",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:34.281Z"
+        },
+        {
+          "id": "pf-34",
+          "name": "원(중심, 접그래프)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-15T05:14:35.199Z"
         }
       ]
     },
@@ -1808,6 +1848,13 @@
       "date": "2026-04-14 17:46",
       "type": "일반",
       "content": "점근선 - 함수에 딸려있는 기능으로 생각되어야함. 토글 느낌.",
+      "issues": []
+    },
+    {
+      "id": "note-1776229483089",
+      "date": "2026-04-15 14:04",
+      "type": "기타",
+      "content": "선 메뉴 중에 X축, Y축은 각각 축으로의 수선을 뜻하는 건가요?",
       "issues": []
     }
   ]
