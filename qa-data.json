@@ -913,15 +913,6 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T05:14:34.281Z"
-        },
-        {
-          "id": "pf-36",
-          "name": "중간삽입테스트",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
         }
       ]
     },
@@ -1108,15 +1099,6 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
-        },
-        {
-          "id": "fp-31",
-          "name": "중간삽입테스트2222",
-          "webMigrated": "unknown",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": ""
         },
         {
           "id": "fp-11",
