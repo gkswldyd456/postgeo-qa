@@ -63,6 +63,15 @@
     </div>
   </header>
 
+  <!-- ── 동기화 알림 배너 ── -->
+  <div id="syncBanner" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-center justify-between gap-3">
+    <span class="text-sm text-amber-800">🔄 다른 편집자가 저장했습니다. 새로고침하면 최신 내용을 볼 수 있습니다.</span>
+    <div class="flex gap-2 shrink-0">
+      <button onclick="reloadData()" class="px-3 py-1 text-xs bg-amber-600 text-white rounded-lg hover:bg-amber-700">새로고침</button>
+      <button onclick="hideSyncBanner()" class="px-3 py-1 text-xs border border-amber-400 text-amber-700 rounded-lg hover:bg-amber-100">닫기</button>
+    </div>
+  </div>
+
   <!-- ── Tab Nav ── -->
   <div class="bg-white border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 flex">
@@ -311,6 +320,7 @@
   let _addItemInsertIdx = null;
   let filters   = { category:'all', migrated:'all', detail:'all', qa:'all' };
   let collapsed = {};
+  let baseSnapshot = null; // 로드·저장 직후 스냅샷 — 병합 기준점
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
     { id:56, name:220, migrated:88, detail:88, qa:88, issue:200 };
 
@@ -345,6 +355,7 @@
       // 이전 버전 호환: 없는 필드 초기화
       if (!qaData.overallNotes) qaData.overallNotes = [];
       if (!qaData.config.noteTypes) qaData.config.noteTypes = ['일반','요청','질문','버그','기타'];
+      baseSnapshot = JSON.parse(JSON.stringify(qaData)); // 병합 기준점 스냅샷
       renderAll();
     } catch (e) {
       showError(e.message);
@@ -644,6 +655,7 @@
     if (!item) return;
     const cycle = CYCLES[field];
     item[field] = cycle[(cycle.indexOf(item[field]) + 1) % cycle.length];
+    item._modified = new Date().toISOString();
     markDirty();
     renderStats();
     renderTable();
@@ -709,6 +721,7 @@
     const raw = document.getElementById('inputIssues').value;
     item.issues = raw.split(',').map(s=>s.trim()).filter(Boolean);
     item.notes  = document.getElementById('inputNotes').value.trim();
+    item._modified = new Date().toISOString();
     markDirty();
     closeIssueModal();
     renderTable();
@@ -750,7 +763,60 @@
   }
 
   // ────────────────────────────────────────
-  // GitHub 저장
+  // 항목 단위 병합 (동시 작업 충돌 방지)
+  // ────────────────────────────────────────
+  function mergeQaData(base, local, remote) {
+    const merged = JSON.parse(JSON.stringify(remote));
+
+    for (const localCat of local.categories) {
+      const mergedCat = merged.categories.find(c => c.id === localCat.id);
+      if (!mergedCat) continue;
+      const baseCat = base?.categories?.find(c => c.id === localCat.id);
+
+      for (const localItem of localCat.items) {
+        const mergedItem = mergedCat.items.find(i => i.id === localItem.id);
+        if (!mergedItem) {
+          // 로컬에서 새로 추가한 항목 → 그대로 삽입
+          mergedCat.items.push(JSON.parse(JSON.stringify(localItem)));
+          continue;
+        }
+        const baseItem = baseCat?.items?.find(i => i.id === localItem.id);
+
+        // 상태 필드: _modified 타임스탬프 최신값 우선
+        const localMod  = localItem._modified  || '1970-01-01T00:00:00.000Z';
+        const mergedMod = mergedItem._modified || '1970-01-01T00:00:00.000Z';
+        if (localMod > mergedMod) {
+          mergedItem.webMigrated = localItem.webMigrated;
+          mergedItem.detail      = localItem.detail;
+          mergedItem.qa          = localItem.qa;
+          mergedItem._modified   = localItem._modified;
+        }
+
+        // 이슈 번호: 양쪽 합집합
+        mergedItem.issues = [...new Set([
+          ...(mergedItem.issues || []),
+          ...(localItem.issues  || [])
+        ])];
+
+        // 메모: 로컬에서 변경됐으면 로컬 우선, 아니면 원격 유지
+        const baseNotes = baseItem?.notes || '';
+        if (localItem.notes !== baseNotes) mergedItem.notes = localItem.notes;
+      }
+    }
+
+    // overallNotes: id 기준 합집합 (신규 추가 보존)
+    const remoteIds = new Set((merged.overallNotes || []).map(n => n.id));
+    const localOnly = (local.overallNotes || []).filter(n => !remoteIds.has(n.id));
+    merged.overallNotes = [...(merged.overallNotes || []), ...localOnly];
+
+    // config: 로컬 기준
+    merged.config = { ...merged.config, ...local.config };
+
+    return merged;
+  }
+
+  // ────────────────────────────────────────
+  // GitHub 저장 (병합 저장)
   // ────────────────────────────────────────
   async function saveToGitHub() {
     const owner = getOwner();
@@ -769,31 +835,30 @@
       const _now = new Date();
       const _p = n => String(n).padStart(2,'0');
       const today = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
-      qaData.config.lastUpdated = today;
 
-      const jsonStr = JSON.stringify(qaData, null, 2);
-      const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-
-      // 저장 직전 최신 SHA 조회 (raw URL 로드 시 SHA 정보가 없으므로)
+      // 1. 원격 최신 데이터 + SHA 조회
       const shaRes = await fetch(
         `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
         { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
       );
-      if (shaRes.ok) fileSha = (await shaRes.json()).sha;
+      if (!shaRes.ok) throw new Error(`원격 데이터 조회 실패 (${shaRes.status})`);
+      const shaData = await shaRes.json();
+      fileSha = shaData.sha;
+      const remoteData = JSON.parse(decodeURIComponent(escape(atob(shaData.content.replace(/\n/g,'')))));
 
+      // 2. 로컬 변경사항과 원격 병합
+      const merged = mergeQaData(baseSnapshot, qaData, remoteData);
+      merged.config.lastUpdated = today;
+
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
+
+      // 3. 병합 결과 PUT
       const res = await fetch(
         `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
         {
           method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: `QA 현황 업데이트 (${today})`,
-            content: encoded,
-            sha: fileSha
-          })
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `QA 현황 업데이트 (${today})`, content: encoded, sha: fileSha })
         }
       );
 
@@ -804,7 +869,10 @@
 
       const result = await res.json();
       fileSha = result.content.sha;
+      qaData = merged;
+      baseSnapshot = JSON.parse(JSON.stringify(merged)); // 스냅샷 갱신
       isDirty = false;
+      hideSyncBanner();
 
       document.getElementById('lastUpdated').textContent = `마지막 업데이트: ${today}`;
       document.getElementById('dirtyDot').classList.add('hidden');
@@ -1212,6 +1280,37 @@
     renderNoteTypesList();
     markDirty();
   }
+
+  // ────────────────────────────────────────
+  // 동기화 배너 & 폴링
+  // ────────────────────────────────────────
+  function hideSyncBanner() {
+    document.getElementById('syncBanner').classList.add('hidden');
+  }
+
+  async function reloadData() {
+    if (isDirty && !confirm('미저장 변경사항이 있습니다. 새로고침하면 사라집니다. 계속할까요?')) return;
+    isDirty = false;
+    hideSyncBanner();
+    await loadData();
+  }
+
+  // 60초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
+  setInterval(async () => {
+    const owner = getOwner();
+    const token = getToken();
+    if (!owner || !token || !fileSha) return;
+    try {
+      const res = await fetch(
+        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+        { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
+      );
+      if (res.ok) {
+        const { sha } = await res.json();
+        if (sha !== fileSha) document.getElementById('syncBanner').classList.remove('hidden');
+      }
+    } catch(e) {}
+  }, 60000);
 
   // ────────────────────────────────────────
   // 시작
