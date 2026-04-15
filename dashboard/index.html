@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostGeo QA Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .badge { @apply px-2 py-0.5 rounded-full border text-xs font-medium cursor-pointer transition-opacity hover:opacity-75; }
+    th { position: relative; overflow: visible !important; }
+    .resize-handle {
+      position: absolute; right: -2px; top: 0; bottom: 0;
+      width: 5px; cursor: col-resize; z-index: 2;
+      transition: background 0.15s;
+    }
+    .resize-handle:hover, .resize-handle.dragging { background: rgba(59,130,246,0.35); border-radius: 2px; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .guide-popover {
+      position: absolute; z-index: 200; background: white;
+      border: 1px solid #e5e7eb; border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.13); padding: 10px 14px;
+      min-width: 240px; max-width: 320px;
+    }
+    .guide-popover .guide-title { font-size: .75rem; font-weight: 600; color: #374151; margin-bottom: 6px; }
+    .guide-popover .guide-table { width: 100%; border-collapse: collapse; font-size: .72rem; }
+    .guide-popover .guide-key { color: #1d4ed8; font-weight: 500; padding: 2px 8px 2px 0; white-space: nowrap; vertical-align: top; }
+    .guide-popover .guide-val { color: #4b5563; padding: 2px 0; }
+    .guide-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 14px; height: 14px; border-radius: 50%; background: #e5e7eb;
+      color: #6b7280; font-size: 9px; font-weight: 700; cursor: pointer;
+      margin-left: 3px; vertical-align: middle; line-height: 1;
+      transition: background .15s, color .15s; flex-shrink: 0;
+    }
+    .guide-icon:hover { background: #3b82f6; color: white; }
+    tr.drag-over td { background: rgba(59,130,246,0.10) !important; outline: 2px dashed #93c5fd; outline-offset: -2px; }
+    tr.drag-src { opacity: 0.4; }
+    tr.insert-row { line-height: 0; }
+    tr.insert-row td { padding: 0; border: none; height: 0; position: relative; }
+    tr.insert-row .insert-btn { position: absolute; left: 0; right: 0; top: -10px; z-index: 5; height: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .15s; cursor: pointer; color: #3b82f6; font-size: 11px; line-height: 1; }
+    tr.insert-row:hover .insert-btn,
+    tr.insert-row .insert-btn:hover { opacity: 1; background: #eff6ff; }
+    .cat-drag-over { outline: 2px dashed #93c5fd; outline-offset: -2px; border-radius: 12px; background: rgba(59,130,246,0.04) !important; }
+    .cat-drag-src { opacity: 0.4; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+  <!-- ── Header + 동기화 배너 묶음 (sticky) ── -->
+  <div class="sticky top-0 z-20">
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <div class="min-w-0">
+          <h1 class="text-lg font-bold text-gray-900 truncate">PostGeo QA Dashboard</h1>
+          <p id="lastUpdated" class="text-xs text-gray-400">마지막 업데이트: —</p>
+        </div>
+        <div class="flex gap-2 items-center shrink-0">
+          <span id="saveStatus" class="text-xs text-green-600 font-medium hidden">✓ 저장됨</span>
+          <span id="dirtyDot" class="text-xs text-amber-500 font-medium hidden">● 미저장</span>
+          <button id="editModeBtn" onclick="toggleEditMode()"
+            class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">✏ 편집</button>
+          <button onclick="openSettings()"
+            class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">⚙ 설정</button>
+          <button id="saveBtn" onclick="saveToGitHub()"
+            class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">💾 저장</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── 동기화 알림 배너 ── -->
+    <div id="syncBanner" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-center justify-between gap-3">
+      <span class="text-sm text-amber-800">🔄 다른 편집자가 저장했습니다. 새로고침하면 최신 내용을 볼 수 있습니다.</span>
+      <div class="flex gap-2 shrink-0">
+        <button onclick="reloadData()" class="px-3 py-1 text-xs bg-amber-600 text-white rounded-lg hover:bg-amber-700">새로고침</button>
+        <button onclick="hideSyncBanner()" class="px-3 py-1 text-xs border border-amber-400 text-amber-700 rounded-lg hover:bg-amber-100">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Tab Nav ── -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 flex">
+      <button id="tab-btn-checklist" onclick="switchTab('checklist')"
+        class="px-5 py-3 text-sm font-medium border-b-2 border-blue-600 text-blue-600 transition-colors">
+        기능 체크리스트
+      </button>
+      <button id="tab-btn-notes" onclick="switchTab('notes')"
+        class="px-5 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors">
+        전반적 코멘트
+      </button>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-4">
+
+    <!-- ── Panel: 기능 체크리스트 ── -->
+    <div id="panel-checklist">
+
+    <!-- ── Stats Bar ── -->
+    <div id="statsBar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4"></div>
+
+    <!-- ── Filter Bar ── -->
+    <div class="flex flex-wrap gap-2 mb-4 items-center">
+      <select id="filterCategory" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">전체 카테고리</option>
+      </select>
+      <select id="filterMigrated" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">웹이식: 전체</option>
+        <option value="yes">✓ 완료</option>
+        <option value="partial">△ 부분</option>
+        <option value="no">✗ 미이식</option>
+        <option value="unknown">? 미확인</option>
+      </select>
+      <select id="filterDetail" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">구현: 전체</option>
+        <option value="done">완료</option>
+        <option value="in-progress">진행중</option>
+        <option value="planned">계획</option>
+        <option value="not-started">미시작</option>
+      </select>
+      <select id="filterQa" onchange="applyFilters()"
+        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+        <option value="all">QA: 전체</option>
+        <option value="pass">통과</option>
+        <option value="fail">실패</option>
+        <option value="skip">건너뜀</option>
+        <option value="not-tested">미테스트</option>
+      </select>
+      <button onclick="resetFilters()" class="text-xs text-gray-400 hover:text-gray-700 px-2 py-1">↺ 초기화</button>
+      <span id="filterCount" class="text-xs text-gray-400 ml-auto"></span>
+    </div>
+
+    <!-- ── Feature Table ── -->
+    <div id="featureTable">
+      <div class="text-center py-16 text-gray-400">
+        <div class="text-4xl mb-3 animate-pulse">⏳</div>
+        <p>데이터 로딩 중...</p>
+      </div>
+    </div>
+
+    </div><!-- /panel-checklist -->
+
+    <!-- ── Panel: 전반적 코멘트 ── -->
+    <div id="panel-notes" class="hidden">
+      <div id="notesContent"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════
+       설정 모달
+  ══════════════════════════════════════ -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4">
+      <h2 class="text-lg font-bold mb-4">⚙ 설정</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            내 GitHub 사용자명 <span class="text-red-500">*</span>
+          </label>
+          <input id="inputOwner" type="text" placeholder="예: myusername"
+            oninput="updateRepoPreview()"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-xs text-gray-400 mt-1">저장소: <code id="repoPreview" class="text-blue-600">—</code></p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            GitHub Personal Access Token <span class="text-red-500">*</span>
+          </label>
+          <input id="inputToken" type="password" placeholder="ghp_xxxxxxxxxxxx"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-xs text-gray-400 mt-1">
+            브라우저 localStorage에만 저장 · 외부 전송 없음 ·
+            <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=PostGeoQA"
+               target="_blank" class="text-blue-500 hover:underline">토큰 발급 →</a>
+          </p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            개발자 GitHub 저장소 (이슈 링크용)
+          </label>
+          <input id="inputDevRepo" type="text" placeholder="예: devuser/postgeo-web"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p class="text-xs text-gray-400 mt-1">입력 시 이슈 번호가 클릭 가능한 링크로 표시됩니다</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">코멘트 유형 관리</label>
+          <div id="noteTypesList" class="flex flex-wrap gap-1.5 mb-2 min-h-[28px]"></div>
+          <div class="flex gap-2">
+            <input id="inputNewNoteType" type="text" placeholder="새 유형 이름 입력"
+              onkeydown="if(event.key==='Enter')addNoteType()"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button onclick="addNoteType()"
+              class="px-3 py-1.5 text-sm bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200">추가</button>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">※ '기타'는 삭제 불가</p>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-6 justify-end">
+        <button onclick="closeSettings()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveSettings()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">저장 후 새로고침</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       이슈/메모 편집 모달
+  ══════════════════════════════════════ -->
+  <div id="issueModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl w-full mx-4 flex flex-col" style="max-width:480px;max-height:82vh">
+      <div class="flex items-start justify-between px-5 pt-5 pb-3 border-b border-gray-100 shrink-0">
+        <div class="min-w-0 mr-3">
+          <h2 class="text-sm font-bold text-gray-800">메모 관리</h2>
+          <p id="issueItemName" class="text-xs text-gray-400 truncate mt-0.5" style="max-width:320px"></p>
+        </div>
+        <button onclick="closeIssueModal()" class="text-gray-300 hover:text-gray-500 text-xl leading-none shrink-0">✕</button>
+      </div>
+      <div class="px-5 pt-2 pb-0 shrink-0">
+        <div class="text-xs text-gray-400 font-medium grid gap-1" style="grid-template-columns:1fr 68px 54px 22px;padding:0 2px">
+          <span>메모 내용</span><span class="text-center">이슈</span><span class="text-center">해결</span><span></span>
+        </div>
+      </div>
+      <div id="memoList" class="flex-1 overflow-y-auto px-5 py-2 space-y-2 min-h-[80px]"></div>
+      <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100 shrink-0">
+        <button onclick="addMemoRow()" class="text-xs text-blue-600 hover:text-blue-700 font-medium">+ 메모 추가</button>
+        <div class="flex gap-2">
+          <button onclick="closeIssueModal()" class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+          <button onclick="saveMemos()" class="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700">확인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       항목 이름 편집 모달
+  ══════════════════════════════════════ -->
+  <div id="editItemModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4">
+      <h2 class="text-base font-bold mb-1">항목 이름 수정</h2>
+      <p id="editItemId" class="text-xs text-gray-400 mb-3 font-mono"></p>
+      <input id="inputEditName" type="text" placeholder="기능명 입력"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+      <div class="flex gap-2 justify-end">
+        <button onclick="closeEditItemModal()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveEditItem()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       항목 추가 모달
+  ══════════════════════════════════════ -->
+  <div id="addItemModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4">
+      <h2 class="text-base font-bold mb-1">항목 추가</h2>
+      <p id="addItemCatName" class="text-sm text-gray-500 mb-3"></p>
+      <label class="block text-xs font-medium text-gray-600 mb-1">기능명 <span class="text-red-500">*</span></label>
+      <input id="inputAddName" type="text" placeholder="기능명 입력"
+        onkeydown="if(event.key==='Enter')saveAddItem()"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-1">
+      <p id="addItemIdPreview" class="text-xs text-gray-400 mb-4"></p>
+      <div class="flex gap-2 justify-end">
+        <button onclick="closeAddItemModal()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveAddItem()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">추가</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       카테고리 이름 수정 모달
+  ══════════════════════════════════════ -->
+  <div id="editCatModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4">
+      <h2 class="text-base font-bold mb-1">카테고리 이름 수정</h2>
+      <p id="editCatId" class="text-xs text-gray-400 mb-3 font-mono"></p>
+      <input id="inputEditCatName" type="text" placeholder="카테고리 이름 입력"
+        onkeydown="if(event.key==='Enter')saveEditCat()"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+      <div class="flex gap-2 justify-end">
+        <button onclick="closeEditCatModal()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveEditCat()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       카테고리 추가 모달
+  ══════════════════════════════════════ -->
+  <div id="addCatModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4">
+      <h2 class="text-base font-bold mb-1">카테고리 추가</h2>
+      <label class="block text-xs font-medium text-gray-600 mb-1">카테고리 이름 <span class="text-red-500">*</span></label>
+      <input id="inputAddCatName" type="text" placeholder="카테고리 이름 입력"
+        onkeydown="if(event.key==='Enter')saveAddCat()"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-1">
+      <p id="addCatIdPreview" class="text-xs text-gray-400 mb-4"></p>
+      <div class="flex gap-2 justify-end">
+        <button onclick="closeAddCatModal()"
+          class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+        <button onclick="saveAddCat()"
+          class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">추가</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       JavaScript
+  ══════════════════════════════════════ -->
+  <script>
+  // ────────────────────────────────────────
+  // 상수
+  // ────────────────────────────────────────
+  const REPO_NAME    = 'postgeo-qa';
+  const DATA_PATH    = 'qa-data.json';
+  const GH_API       = 'https://api.github.com';
+
+  const CYCLES = {
+    webMigrated: ['unknown','yes','partial','no'],
+    detail:      ['not-started','planned','in-progress','done'],
+    qa:          ['not-tested','pass','fail','skip']
+  };
+
+  const DISPLAY = {
+    webMigrated: {
+      yes:     { label:'✓ 완료',   cls:'bg-green-100 text-green-800 border-green-300' },
+      partial: { label:'△ 부분',   cls:'bg-amber-100 text-amber-800 border-amber-300' },
+      no:      { label:'✗ 미이식', cls:'bg-red-100 text-red-700 border-red-300' },
+      unknown: { label:'? 미확인', cls:'bg-gray-100 text-gray-500 border-gray-300' }
+    },
+    detail: {
+      done:          { label:'완료',   cls:'bg-green-100 text-green-800 border-green-300' },
+      'in-progress': { label:'진행중', cls:'bg-blue-100 text-blue-800 border-blue-300' },
+      planned:       { label:'계획',   cls:'bg-amber-100 text-amber-800 border-amber-300' },
+      'not-started': { label:'미시작', cls:'bg-gray-100 text-gray-500 border-gray-300' }
+    },
+    qa: {
+      pass:        { label:'통과',    cls:'bg-green-100 text-green-800 border-green-300' },
+      fail:        { label:'실패',    cls:'bg-red-100 text-red-700 border-red-300' },
+      skip:        { label:'건너뜀', cls:'bg-orange-100 text-orange-800 border-orange-300' },
+      'not-tested':{ label:'미테스트',cls:'bg-gray-100 text-gray-500 border-gray-300' }
+    }
+  };
+
+  // ────────────────────────────────────────
+  // 상태
+  // ────────────────────────────────────────
+  let qaData    = null;
+  let fileSha   = '';
+  let isDirty   = false;
+  let isEditMode = false;
+  let editTarget = { catId: null, itemId: null };
+  let _dragSrc = { catId: null, itemId: null };
+  let _addItemInsertIdx = null;
+  let filters   = { category:'all', migrated:'all', detail:'all', qa:'all' };
+  let collapsed = {};
+  let baseSnapshot = null; // 로드·저장 직후 스냅샷 — 병합 기준점
+  let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
+    { id:56, name:220, migrated:88, detail:88, qa:88, issue:200 };
+
+  // ────────────────────────────────────────
+  // URL fragment 토큰 자동 추출 (비개발자 공유 링크용)
+  // 사용법: URL에 #ghowner=xxx&ghtoken=yyy 추가
+  // 최초 1회만 필요 — localStorage에 저장 후 URL 정리됨
+  // ────────────────────────────────────────
+  (function() {
+    try {
+      const params = new URLSearchParams(location.hash.slice(1));
+      const t = params.get('ghtoken');
+      const o = params.get('ghowner');
+      if (t) localStorage.setItem('gh_token', t);
+      if (o) localStorage.setItem('gh_owner', o);
+      if (t || o) history.replaceState(null, '', location.pathname + location.search);
+    } catch(e) {}
+  })();
+
+  const getOwner  = () => localStorage.getItem('gh_owner')  || '';
+  const getToken  = () => localStorage.getItem('gh_token')  || '';
+  const getDevRepo = () => localStorage.getItem('gh_devrepo') || qaData?.config?.developerRepo || '';
+
+  // ────────────────────────────────────────
+  // 데이터 로드
+  // ────────────────────────────────────────
+  async function loadData() {
+    try {
+      // GitHub Contents API 사용 (raw URL CDN 우회 — PUT 커밋 직후에도 즉시 최신 반영)
+      // 공개 저장소라 토큰 없이도 동작 (60 req/hr 제한, 토큰 있으면 5000 req/hr)
+      const _o = getOwner() || 'gkswldyd456';
+      const _t = getToken();
+      const _headers = { 'User-Agent': 'PostGeoQA' };
+      if (_t) _headers['Authorization'] = `Bearer ${_t}`;
+
+      // sha + content 한 번에 조회 → 폴링 즉시 활성화
+      const metaRes = await fetch(
+        `${GH_API}/repos/${_o}/${REPO_NAME}/contents/${DATA_PATH}`,
+        { headers: _headers }
+      );
+      if (!metaRes.ok) throw new Error(`데이터 로드 실패 (${metaRes.status})`);
+      const meta = await metaRes.json();
+      fileSha = meta.sha;
+      qaData = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g,'')))));
+
+      // 이전 버전 호환: 없는 필드 초기화
+      if (!qaData.overallNotes) qaData.overallNotes = [];
+      if (!qaData.config.noteTypes) qaData.config.noteTypes = ['일반','요청','질문','버그','기타'];
+      baseSnapshot = JSON.parse(JSON.stringify(qaData)); // 병합 기준점 스냅샷
+      const savedDevRepo = localStorage.getItem('gh_devrepo');
+      if (savedDevRepo) qaData.config.developerRepo = savedDevRepo;
+      renderAll();
+    } catch (e) {
+      showError(e.message);
+    }
+  }
+
+  function showSetupPrompt() {
+    document.getElementById('featureTable').innerHTML = `
+      <div class="text-center py-20 text-gray-400">
+        <div class="text-5xl mb-4">📋</div>
+        <p class="text-lg font-semibold text-gray-600 mb-2">처음 사용하시나요?</p>
+        <p class="text-sm mb-6">GitHub 사용자명과 Personal Access Token을 설정해주세요.</p>
+        <button onclick="openSettings()"
+          class="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">⚙ 설정 열기</button>
+      </div>`;
+  }
+
+  function showError(msg) {
+    document.getElementById('featureTable').innerHTML = `
+      <div class="text-center py-16 text-gray-400">
+        <div class="text-4xl mb-3">⚠️</div>
+        <p class="font-medium text-gray-700 mb-1">로드 실패</p>
+        <p class="text-sm text-red-500 mb-4">${msg}</p>
+        <button onclick="loadData()"
+          class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300 mr-2">↺ 다시 시도</button>
+        <button onclick="openSettings()"
+          class="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:bg-gray-100">⚙ 설정</button>
+      </div>`;
+  }
+
+  // ────────────────────────────────────────
+  // 전체 렌더
+  // ────────────────────────────────────────
+  function renderAll() {
+    if (!qaData) return;
+    renderStats();
+    renderCategoryFilter();
+    renderTable();
+    document.getElementById('lastUpdated').textContent =
+      `마지막 업데이트: ${qaData.config.lastUpdated || '—'}`;
+  }
+
+  // ────────────────────────────────────────
+  // 통계
+  // ────────────────────────────────────────
+  function renderStats() {
+    let total=0, migrated=0, passN=0, failN=0, notTested=0;
+    for (const cat of qaData.categories) {
+      for (const item of cat.items) {
+        total++;
+        if (item.webMigrated==='yes') migrated++;
+        if (item.qa==='pass')         passN++;
+        if (item.qa==='fail')         failN++;
+        if (item.qa==='not-tested')   notTested++;
+      }
+    }
+    const pct = total ? Math.round(migrated/total*100) : 0;
+    document.getElementById('statsBar').innerHTML = `
+      <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <div class="text-3xl font-bold text-gray-800">${total}</div>
+        <div class="text-xs text-gray-500 mt-1">전체 기능</div>
+      </div>
+      <div class="bg-white rounded-xl border border-green-200 p-4 text-center">
+        <div class="text-3xl font-bold text-green-600">${migrated}</div>
+        <div class="text-xs text-gray-500 mt-1">웹 이식 완료 <span class="text-gray-400">(${pct}%)</span></div>
+      </div>
+      <div class="bg-white rounded-xl border border-green-200 p-4 text-center">
+        <div class="text-3xl font-bold text-green-600">${passN}</div>
+        <div class="text-xs text-gray-500 mt-1">QA 통과</div>
+      </div>
+      <div class="bg-white rounded-xl border border-red-200 p-4 text-center">
+        <div class="text-3xl font-bold text-red-500">${failN}</div>
+        <div class="text-xs text-gray-500 mt-1">QA 실패 <span class="text-gray-400">(미테스트 ${notTested})</span></div>
+      </div>`;
+  }
+
+  // ────────────────────────────────────────
+  // 카테고리 필터 드롭다운
+  // ────────────────────────────────────────
+  function renderCategoryFilter() {
+    const sel = document.getElementById('filterCategory');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="all">전체 카테고리</option>';
+    for (const cat of qaData.categories) {
+      const o = document.createElement('option');
+      o.value = cat.id;
+      o.textContent = cat.name;
+      sel.appendChild(o);
+    }
+    sel.value = cur;
+  }
+
+  // ────────────────────────────────────────
+  // 테이블 렌더
+  // ────────────────────────────────────────
+  function renderTable() {
+    const savedScrollY = window.scrollY;
+    const devRepo = qaData.config.developerRepo || '';
+    let html = '';
+    let totalShown = 0;
+
+    for (const cat of qaData.categories) {
+      if (filters.category !== 'all' && filters.category !== cat.id) continue;
+
+      const items = cat.items.filter(item => {
+        if (filters.migrated !== 'all' && item.webMigrated !== filters.migrated) return false;
+        if (filters.detail  !== 'all' && item.detail      !== filters.detail)   return false;
+        if (filters.qa      !== 'all' && item.qa          !== filters.qa)       return false;
+        return true;
+      });
+      if (items.length === 0) continue;
+      totalShown += items.length;
+
+      const isCollapsed = collapsed[cat.id];
+      html += `
+        <div class="mb-5" id="catblock-${cat.id}"
+          ${isEditMode ? `ondragover="catDragOver(event)" ondragenter="catDragEnter(event,'${cat.id}')" ondragleave="catDragLeave(event)" ondrop="catDrop(event,'${cat.id}')"` : ''}>
+          <div class="flex items-center gap-2 w-full mb-2">
+            ${isEditMode ? `<span class="text-gray-300 cursor-grab text-sm select-none shrink-0" title="드래그로 카테고리 순서 변경" draggable="true" ondragstart="catDragStart(event,'${cat.id}')" ondragend="catDragEnd(event,'${cat.id}')">⠿</span>` : ''}
+            <button class="flex items-center gap-2 flex-1 min-w-0 text-left group"
+              onclick="toggleCategory('${cat.id}')">
+              <span class="text-gray-400 text-sm group-hover:text-gray-600 transition-transform ${isCollapsed?'':'rotate-90'}"
+                id="arrow-${cat.id}">▶</span>
+              <span class="font-semibold text-gray-700 group-hover:text-gray-900 truncate">${cat.name}</span>
+              <span class="text-xs text-gray-400 font-normal shrink-0">${items.length}개</span>
+            </button>
+            ${isEditMode ? `
+              <button onclick="openEditCatModal('${cat.id}')" title="카테고리 이름 수정"
+                class="text-gray-400 hover:text-blue-600 px-1.5 py-0.5 rounded hover:bg-blue-50 text-sm leading-none shrink-0">✏</button>
+              <button onclick="deleteCat('${cat.id}')" title="카테고리 삭제"
+                class="text-gray-400 hover:text-red-500 px-1.5 py-0.5 rounded hover:bg-red-50 text-sm leading-none shrink-0">🗑</button>` : ''}
+          </div>
+          <div id="cat-${cat.id}" class="${isCollapsed?'hidden':''}">
+            <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto shadow-sm">
+              <table class="text-sm" style="table-layout:fixed;width:100%;min-width:580px">
+                <colgroup>
+                  ${isEditMode ? '<col style="width:80px">' : ''}
+                  <col style="width:${colWidths.id}px">
+                  <col style="width:${colWidths.name}px">
+                  <col style="width:${colWidths.migrated}px">
+                  <col style="width:${colWidths.detail}px">
+                  <col style="width:${colWidths.qa}px">
+                  <col style="width:${colWidths.issue}px">
+                </colgroup>
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200 text-left">
+                    ${isEditMode ? '<th class="px-2 py-2 text-xs font-semibold text-gray-400 text-center">편집</th>' : ''}
+                    <th data-col="id" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">ID<div class="resize-handle"></div></th>
+                    <th data-col="name" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">기능명<div class="resize-handle"></div></th>
+                    <th data-col="migrated" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">웹이식<span class="guide-icon" onclick="showGuide('migrated',event)">i</span><div class="resize-handle"></div></th>
+                    <th data-col="detail" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">구현상태<span class="guide-icon" onclick="showGuide('detail',event)">i</span><div class="resize-handle"></div></th>
+                    <th data-col="qa" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">QA<span class="guide-icon" onclick="showGuide('qa',event)">i</span><div class="resize-handle"></div></th>
+                    <th data-col="issue" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">이슈/메모<span class="guide-icon" onclick="showGuide('issue',event)">i</span></th>
+                  </tr>
+                </thead>
+                <tbody ondragover="itemBodyDragOver(event,'${cat.id}')" ondrop="itemBodyDrop(event,'${cat.id}')">`;
+
+      items.forEach((item, i) => {
+        const wm = DISPLAY.webMigrated[item.webMigrated] || DISPLAY.webMigrated.unknown;
+        const dt = DISPLAY.detail[item.detail]           || DISPLAY.detail['not-started'];
+        const qa = DISPLAY.qa[item.qa]                   || DISPLAY.qa['not-tested'];
+        const rowBg = i % 2 ? 'bg-gray-50/40' : '';
+
+        // 이슈/메모 셀 - memos[] 기반 (notes 폴백 지원)
+        const _memos = item.memos || (item.notes ? [{ id:'leg', text:item.notes, issue:null, resolved:false }] : []);
+        const _issued = _memos.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue));
+        const _resolved = _memos.filter(m => m.resolved).length;
+        const _first = _memos[0];
+        let cellHtml = '';
+        if (_memos.length === 0) {
+          cellHtml = '<span class="text-gray-300 text-xs hover:text-blue-400">+ 추가</span>';
+        } else {
+          if (_first?.text) {
+            const _prev = _first.text.length > 26 ? _first.text.slice(0,26) + '…' : _first.text;
+            cellHtml += `<div class="text-xs text-gray-500 line-clamp-1 leading-snug">${escapeHtml(_prev)}</div>`;
+          }
+          const _parts = [];
+          if (_memos.length > 1) _parts.push(`<span class="text-gray-300 text-xs">+${_memos.length-1}</span>`);
+          for (const m of _issued) {
+            _parts.push(devRepo
+              ? `<a href="https://github.com/${devRepo}/issues/${m.issue}" target="_blank" onclick="event.stopPropagation()" class="text-blue-500 hover:underline font-mono text-xs">#${m.issue}</a>`
+              : `<span class="text-gray-500 font-mono text-xs">#${m.issue}</span>`);
+          }
+          if (_resolved > 0) _parts.push(`<span class="text-green-500 text-xs font-medium">✓${_resolved}</span>`);
+          if (_parts.length) cellHtml += `<div class="flex flex-wrap items-center gap-0.5 mt-0.5">${_parts.join('')}</div>`;
+        }
+
+        const catItemIdx = cat.items.indexOf(item);
+        const colSpan = isEditMode ? 7 : 6;
+
+        // 첫 행 앞에 삽입 버튼
+        if (isEditMode && i === 0) {
+          html += `<tr class="insert-row"><td colspan="${colSpan}">
+            <div class="insert-btn" onclick="openAddItemModal('${cat.id}',${catItemIdx})">＋ 여기에 추가</div>
+          </td></tr>`;
+        }
+
+        html += `
+                  <tr class="${rowBg} hover:bg-blue-50/40 border-b border-gray-100 last:border-0 transition-colors ${isEditMode ? 'cursor-grab' : ''}"
+                    ${isEditMode ? `draggable="true"
+                      ondragstart="dragStart(event,'${cat.id}','${item.id}')"
+                      ondragover="dragOver(event)"
+                      ondragenter="dragEnter(event,'${cat.id}','${item.id}')"
+                      ondragleave="dragLeave(event)"
+                      ondragend="dragEnd(event)"
+                      ondrop="drop(event,'${cat.id}','${item.id}')"` : ''}>
+                    ${isEditMode ? `<td class="px-2 py-2.5 text-center overflow-hidden select-none">
+                      <span class="text-gray-300 cursor-grab text-sm mr-1" title="드래그로 순서 변경">⠿</span>
+                      <button onclick="openEditItemModal('${cat.id}','${item.id}')" title="이름 수정"
+                        class="text-gray-400 hover:text-blue-600 px-1 py-0.5 rounded hover:bg-blue-50 text-sm leading-none">✏</button>
+                      <button onclick="deleteItem('${cat.id}','${item.id}')" title="삭제"
+                        class="text-gray-400 hover:text-red-500 px-1 py-0.5 rounded hover:bg-red-50 text-sm leading-none ml-0.5">🗑</button>
+                    </td>` : ''}
+                    <td class="px-3 py-2.5 text-xs text-gray-400 font-mono overflow-hidden">${item.id}</td>
+                    <td class="px-3 py-2.5 text-gray-800 overflow-hidden">
+                      <div class="truncate" title="${item.name}">${item.name}</div>
+                    </td>
+                    <td class="px-3 py-2.5 text-center overflow-hidden">
+                      <button onclick="cycleStatus('${cat.id}','${item.id}','webMigrated')"
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${wm.cls}">
+                        ${wm.label}
+                      </button>
+                    </td>
+                    <td class="px-3 py-2.5 text-center overflow-hidden">
+                      <button onclick="cycleStatus('${cat.id}','${item.id}','detail')"
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${dt.cls}">
+                        ${dt.label}
+                      </button>
+                    </td>
+                    <td class="px-3 py-2.5 text-center overflow-hidden">
+                      <button onclick="cycleStatus('${cat.id}','${item.id}','qa')"
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${qa.cls}">
+                        ${qa.label}
+                      </button>
+                    </td>
+                    <td class="px-2 py-1.5 overflow-hidden">
+                      <div onclick="openIssueModal('${cat.id}','${item.id}')"
+                        class="cursor-pointer hover:bg-blue-50 rounded px-1 py-1 min-h-[28px] transition-colors">
+                        ${cellHtml}
+                      </div>
+                    </td>
+                  </tr>`;
+
+        // 각 행 뒤에 삽입 버튼
+        if (isEditMode) {
+          html += `<tr class="insert-row"><td colspan="${colSpan}">
+            <div class="insert-btn" onclick="openAddItemModal('${cat.id}',${catItemIdx + 1})">＋ 여기에 추가</div>
+          </td></tr>`;
+        }
+      });
+
+      html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    if (isEditMode) {
+      html += `<div class="mt-3">
+        <button onclick="openAddCatModal()"
+          class="w-full py-2.5 text-sm text-blue-600 border-2 border-dashed border-blue-200 rounded-xl hover:bg-blue-50 hover:border-blue-400 transition-colors">
+          ＋ 카테고리 추가
+        </button>
+      </div>`;
+    }
+
+    if (totalShown === 0 && !isEditMode) {
+      html = '<div class="text-center py-10 text-gray-400">필터 조건에 맞는 항목이 없습니다.</div>';
+    }
+
+    document.getElementById('featureTable').innerHTML = html;
+    document.getElementById('filterCount').textContent =
+      totalShown > 0 ? `${totalShown}개 표시 중` : '';
+    attachResizeHandles();
+    requestAnimationFrame(() => window.scrollTo({ top: savedScrollY, behavior: 'instant' }));
+  }
+
+  // ────────────────────────────────────────
+  // 컬럼 드래그 리사이즈
+  // ────────────────────────────────────────
+  function attachResizeHandles() {
+    document.querySelectorAll('.resize-handle').forEach(handle => {
+      const th  = handle.parentElement;
+      const col = th.dataset.col;
+      if (!col) return;
+
+      handle.addEventListener('mousedown', e => {
+        e.preventDefault();
+        handle.classList.add('dragging');
+        const startX = e.pageX;
+        const startW = th.offsetWidth;
+
+        function onMove(e) {
+          const newW = Math.max(40, startW + e.pageX - startX);
+          colWidths[col] = newW;
+          // 같은 data-col을 가진 모든 테이블의 col 요소 업데이트
+          document.querySelectorAll(`th[data-col="${col}"]`).forEach(targetTh => {
+            const table = targetTh.closest('table');
+            if (!table) return;
+            const thIndex = Array.from(targetTh.parentElement.children).indexOf(targetTh);
+            const cols = table.querySelectorAll('col');
+            if (cols[thIndex]) cols[thIndex].style.width = newW + 'px';
+          });
+        }
+
+        function onUp() {
+          handle.classList.remove('dragging');
+          localStorage.setItem('colWidths', JSON.stringify(colWidths));
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        }
+
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+    });
+  }
+
+  // ────────────────────────────────────────
+  // 상태 순환
+  // ────────────────────────────────────────
+  function cycleStatus(catId, itemId, field) {
+    const cat  = qaData.categories.find(c => c.id === catId);
+    const item = cat?.items.find(i => i.id === itemId);
+    if (!item) return;
+    const cycle = CYCLES[field];
+    item[field] = cycle[(cycle.indexOf(item[field]) + 1) % cycle.length];
+    item._modified = new Date().toISOString();
+    markDirty();
+    renderStats();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 카테고리 접기/펼치기
+  // ────────────────────────────────────────
+  function toggleCategory(catId) {
+    collapsed[catId] = !collapsed[catId];
+    const el    = document.getElementById(`cat-${catId}`);
+    const arrow = document.getElementById(`arrow-${catId}`);
+    if (collapsed[catId]) {
+      el.classList.add('hidden');
+      arrow.classList.remove('rotate-90');
+    } else {
+      el.classList.remove('hidden');
+      arrow.classList.add('rotate-90');
+    }
+  }
+
+  // ────────────────────────────────────────
+  // 필터
+  // ────────────────────────────────────────
+  function applyFilters() {
+    filters.category = document.getElementById('filterCategory').value;
+    filters.migrated = document.getElementById('filterMigrated').value;
+    filters.detail   = document.getElementById('filterDetail').value;
+    filters.qa       = document.getElementById('filterQa').value;
+    renderTable();
+  }
+
+  function resetFilters() {
+    filters = { category:'all', migrated:'all', detail:'all', qa:'all' };
+    ['filterCategory','filterMigrated','filterDetail','filterQa']
+      .forEach(id => { document.getElementById(id).value = 'all'; });
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 이슈/메모 모달 (다중 메모 관리)
+  // ────────────────────────────────────────
+  let _editMemos = [];
+
+  function _migrateItemMemos(item) {
+    if (!item.memos) {
+      item.memos = item.notes
+        ? [{ id: 'm-' + Date.now() + Math.random().toString(36).slice(2,5), text: item.notes, issue: null, resolved: false }]
+        : [];
+    }
+  }
+
+  function openIssueModal(catId, itemId) {
+    const cat  = qaData.categories.find(c => c.id === catId);
+    const item = cat?.items.find(i => i.id === itemId);
+    if (!item) return;
+    editTarget = { catId, itemId };
+    _migrateItemMemos(item);
+    _editMemos = JSON.parse(JSON.stringify(item.memos));
+    document.getElementById('issueItemName').textContent = `[${item.id}] ${item.name}`;
+    document.getElementById('issueModal').classList.remove('hidden');
+    renderMemoList();
+  }
+
+  function closeIssueModal() {
+    document.getElementById('issueModal').classList.add('hidden');
+    _editMemos = [];
+  }
+
+  function renderMemoList() {
+    if (_editMemos.length === 0) {
+      document.getElementById('memoList').innerHTML =
+        '<div class="text-center py-6 text-gray-300 text-xs">메모가 없습니다. <b>+ 메모 추가</b>를 눌러 추가하세요.</div>';
+      return;
+    }
+    document.getElementById('memoList').innerHTML = _editMemos.map((m, i) => {
+      const issueVal = m.issue || '';
+      const resolvedCls = m.resolved
+        ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+        : 'bg-gray-50 text-gray-400 border-gray-200 hover:bg-gray-100';
+      return `<div class="grid items-start gap-1" style="grid-template-columns:1fr 68px 54px 22px">
+        <textarea id="mt-${i}" rows="2"
+          class="text-xs border border-gray-200 rounded px-2 py-1 resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 w-full"
+          placeholder="메모 내용...">${escapeHtml(m.text)}</textarea>
+        <input id="mi-${i}" type="text" value="${escapeHtml(issueVal)}" placeholder="번호 or X"
+          class="text-xs border border-gray-200 rounded px-1.5 py-1 text-center focus:outline-none focus:ring-1 focus:ring-blue-400 w-full">
+        <button onclick="toggleMemoResolved(${i})"
+          class="text-xs border rounded px-1 py-1 transition-colors leading-tight ${resolvedCls}">
+          ${m.resolved ? '✓해결' : '─미결'}
+        </button>
+        <button onclick="deleteMemoRow(${i})" class="text-gray-200 hover:text-red-400 text-sm leading-none mt-1 text-center">✕</button>
+      </div>`;
+    }).join('');
+  }
+
+  function _syncMemoForm() {
+    _editMemos.forEach((m, i) => {
+      const t = document.getElementById(`mt-${i}`);
+      const v = document.getElementById(`mi-${i}`);
+      if (t) m.text  = t.value.trim();
+      if (v) m.issue = v.value.trim().replace(/^#/,'') || null;
+    });
+  }
+
+  function addMemoRow() {
+    _syncMemoForm();
+    _editMemos.push({ id: 'm-' + Date.now() + Math.random().toString(36).slice(2,5), text: '', issue: null, resolved: false });
+    renderMemoList();
+    setTimeout(() => { const els = document.querySelectorAll('#memoList textarea'); if (els.length) els[els.length-1].focus(); }, 30);
+  }
+
+  function deleteMemoRow(index) {
+    _syncMemoForm();
+    _editMemos.splice(index, 1);
+    renderMemoList();
+  }
+
+  function toggleMemoResolved(index) {
+    _syncMemoForm();
+    _editMemos[index].resolved = !_editMemos[index].resolved;
+    renderMemoList();
+  }
+
+  function saveMemos() {
+    _syncMemoForm();
+    const cat  = qaData.categories.find(c => c.id === editTarget.catId);
+    const item = cat?.items.find(i => i.id === editTarget.itemId);
+    if (!item) return;
+    item.memos  = _editMemos.filter(m => m.text || (m.issue && m.issue !== 'X'));
+    item.issues = item.memos.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
+    item._modified = new Date().toISOString();
+    markDirty();
+    closeIssueModal();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 설정 모달
+  // ────────────────────────────────────────
+  function openSettings() {
+    document.getElementById('inputOwner').value  = getOwner();
+    document.getElementById('inputToken').value  = getToken();
+    document.getElementById('inputDevRepo').value = qaData?.config?.developerRepo || '';
+    updateRepoPreview();
+    renderNoteTypesList();
+    document.getElementById('settingsModal').classList.remove('hidden');
+  }
+
+  function closeSettings() {
+    document.getElementById('settingsModal').classList.add('hidden');
+  }
+
+  function updateRepoPreview() {
+    const owner = document.getElementById('inputOwner').value.trim();
+    document.getElementById('repoPreview').textContent =
+      owner ? `github.com/${owner}/${REPO_NAME}` : '—';
+  }
+
+  function saveSettings() {
+    const owner   = document.getElementById('inputOwner').value.trim();
+    const token   = document.getElementById('inputToken').value.trim();
+    const devRepo = document.getElementById('inputDevRepo').value.trim();
+    if (owner)  localStorage.setItem('gh_owner',   owner);
+    if (token)  localStorage.setItem('gh_token',   token);
+    localStorage.setItem('gh_devrepo', devRepo);
+    if (qaData) qaData.config.developerRepo = devRepo;
+    closeSettings();
+    renderAll();
+  }
+
+  // ────────────────────────────────────────
+  // 항목 단위 병합 (동시 작업 충돌 방지)
+  // ────────────────────────────────────────
+  function mergeQaData(base, local, remote) {
+    const merged = JSON.parse(JSON.stringify(remote));
+
+    // ── 카테고리 레벨 3-way merge ──
+    const baseCatMap  = new Map((base?.categories || []).map(c => [c.id, c]));
+    const localCatMap = new Map(local.categories.map(c => [c.id, c]));
+    const initMergedIds = new Set(merged.categories.map(c => c.id));
+
+    // 로컬에서 새로 추가한 카테고리 → merged에 삽입
+    for (const [catId, localCat] of localCatMap) {
+      if (!initMergedIds.has(catId) && !baseCatMap.has(catId)) {
+        merged.categories.push(JSON.parse(JSON.stringify(localCat)));
+      }
+    }
+
+    // 로컬에서 삭제한 카테고리 → merged에서 제거
+    merged.categories = merged.categories.filter(mCat =>
+      !(baseCatMap.has(mCat.id) && !localCatMap.has(mCat.id))
+    );
+
+    for (const [, localCat] of localCatMap) {
+      const mergedCat = merged.categories.find(c => c.id === localCat.id);
+      if (!mergedCat) continue; // 원격에서 삭제한 카테고리 → 원격 삭제 우선
+      const baseCat = baseCatMap.get(localCat.id);
+
+      // 카테고리 이름: 로컬에서 변경됐으면 로컬 우선
+      if (baseCat && localCat.name !== baseCat.name) mergedCat.name = localCat.name;
+
+      for (const localItem of localCat.items) {
+        const mergedItem = mergedCat.items.find(i => i.id === localItem.id);
+        if (!mergedItem) {
+          // 로컬에서 새로 추가한 항목 → 그대로 삽입
+          mergedCat.items.push(JSON.parse(JSON.stringify(localItem)));
+          continue;
+        }
+        const baseItem = baseCat?.items?.find(i => i.id === localItem.id);
+
+        // 상태 필드: _modified 타임스탬프 최신값 우선
+        const localMod  = localItem._modified  || '1970-01-01T00:00:00.000Z';
+        const mergedMod = mergedItem._modified || '1970-01-01T00:00:00.000Z';
+        if (localMod > mergedMod) {
+          mergedItem.webMigrated = localItem.webMigrated;
+          mergedItem.detail      = localItem.detail;
+          mergedItem.qa          = localItem.qa;
+          mergedItem._modified   = localItem._modified;
+        }
+
+        // 이슈 번호: 3-way merge (로컬 삭제 반영 + 원격 추가 보존)
+        {
+          const baseSet   = new Set(baseItem?.issues || []);
+          const localSet  = new Set(localItem.issues || []);
+          const remoteSet = new Set(mergedItem.issues || []);
+          const final = new Set(remoteSet);
+          // 로컬에서 새로 추가한 것 → merged에 추가
+          for (const i of localSet) { if (!baseSet.has(i)) final.add(i); }
+          // 로컬에서 의도적으로 삭제한 것 → merged에서도 제거
+          for (const i of baseSet)  { if (!localSet.has(i)) final.delete(i); }
+          mergedItem.issues = [...final];
+        }
+
+        // 메모(레거시): 로컬에서 변경됐으면 로컬 우선, 아니면 원격 유지
+        const baseNotes = baseItem?.notes || '';
+        if (localItem.notes !== baseNotes) mergedItem.notes = localItem.notes;
+
+        // memos[]: 3-way merge by id (overallNotes와 동일 방식)
+        if (localItem.memos !== undefined || mergedItem.memos !== undefined) {
+          if (localItem.memos === undefined) {
+            // 로컬이 memos 미지원 구버전 → 원격 memos/issues 그대로 유지 (이미 merged에 설정됨)
+          } else {
+            const bMemoMap = new Map((baseItem?.memos||[]).map(m=>[m.id,m]));
+            const lMemoMap = new Map((localItem.memos||[]).map(m=>[m.id,m]));
+            const rMemoMap = new Map((mergedItem.memos||[]).map(m=>[m.id,m]));
+            const memoRes = [];
+            for (const [id, rMemo] of rMemoMap) {
+              if (!bMemoMap.has(id)) {
+                // 원격에서 새로 추가 → 보존
+                memoRes.push(rMemo);
+              } else if (lMemoMap.has(id)) {
+                // 베이스·로컬 모두 존재 → 로컬 변경 여부 비교
+                const lMemo = lMemoMap.get(id), bMemo = bMemoMap.get(id);
+                const changed = lMemo.text !== bMemo.text || lMemo.issue !== bMemo.issue || lMemo.resolved !== bMemo.resolved;
+                memoRes.push(changed ? lMemo : rMemo);
+              }
+              // 베이스에 있고 로컬에 없음 → 로컬에서 삭제 → 추가 안 함
+            }
+            for (const [id, lMemo] of lMemoMap) {
+              if (!rMemoMap.has(id)) memoRes.push(lMemo); // 로컬에서 새로 추가
+            }
+            mergedItem.memos  = memoRes;
+            mergedItem.issues = memoRes.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
+          }
+        }
+      }
+
+      // 로컬에서 삭제된 항목 제거 (베이스에 있었지만 로컬에 없는 것)
+      if (baseCat) {
+        const localIds = new Set(localCat.items.map(i => i.id));
+        mergedCat.items = mergedCat.items.filter(item => {
+          const wasInBase = baseCat.items.some(i => i.id === item.id);
+          return !(wasInBase && !localIds.has(item.id));
+        });
+      }
+
+      // 로컬 순서 적용 + 원격 신규 항목 상대 위치 보존
+      // - 로컬에 있는 항목: 로컬 순서 우선 (드래그앤드롭 반영)
+      // - 원격에만 있는 항목(다른 사용자가 추가): 원격 기준 앞 이웃 위치에 삽입
+      {
+        const localOrder    = localCat.items.map(i => i.id);
+        const mergedById    = new Map(mergedCat.items.map(i => [i.id, i]));
+        const remoteIds     = mergedCat.items.map(i => i.id); // 삭제 처리 후 원격 순서
+        const remoteOnlySet = new Set(remoteIds.filter(id => !localOrder.includes(id)));
+
+        // 로컬에 있는 항목을 로컬 순서로 배치
+        const result = localOrder.map(id => mergedById.get(id)).filter(Boolean);
+
+        // 원격에만 있는 항목: 원격 순서 기준 앞 이웃을 result에서 찾아 그 위치에 삽입
+        for (const newId of remoteIds) {
+          if (!remoteOnlySet.has(newId)) continue;
+          const rIdx = remoteIds.indexOf(newId);
+          let insertAfter = -1;
+          for (let i = rIdx - 1; i >= 0; i--) {
+            const pos = result.findIndex(r => r.id === remoteIds[i]);
+            if (pos >= 0) { insertAfter = pos; break; }
+          }
+          result.splice(insertAfter + 1, 0, mergedById.get(newId));
+        }
+
+        mergedCat.items = result;
+      }
+    }
+
+    // ── 카테고리 순서: 로컬 우선 + 원격 신규 카테고리 상대 위치 보존 ──
+    {
+      const localCatOrder  = local.categories.map(c => c.id);
+      const mergedCatById  = new Map(merged.categories.map(c => [c.id, c]));
+      const remoteCatIds   = merged.categories.map(c => c.id);
+      const remoteOnlyCats = new Set(remoteCatIds.filter(id => !localCatOrder.includes(id)));
+
+      const catResult = localCatOrder.map(id => mergedCatById.get(id)).filter(Boolean);
+
+      for (const newId of remoteCatIds) {
+        if (!remoteOnlyCats.has(newId)) continue;
+        const rIdx = remoteCatIds.indexOf(newId);
+        let insertAfter = -1;
+        for (let i = rIdx - 1; i >= 0; i--) {
+          const pos = catResult.findIndex(r => r.id === remoteCatIds[i]);
+          if (pos >= 0) { insertAfter = pos; break; }
+        }
+        catResult.splice(insertAfter + 1, 0, mergedCatById.get(newId));
+      }
+
+      merged.categories = catResult.filter(Boolean);
+    }
+
+    // overallNotes: 3-way merge (로컬 삭제/수정 반영 + 원격 추가 보존)
+    {
+      const baseNoteMap   = new Map((base?.overallNotes || []).map(n => [n.id, n]));
+      const localNoteMap  = new Map((local.overallNotes || []).map(n => [n.id, n]));
+      const remoteNoteMap = new Map((merged.overallNotes || []).map(n => [n.id, n]));
+      const result = [];
+      // 원격 노트 처리
+      for (const [id, remoteNote] of remoteNoteMap) {
+        if (!baseNoteMap.has(id)) {
+          // 원격에서 새로 추가된 것 → 유지
+          result.push(remoteNote);
+        } else if (localNoteMap.has(id)) {
+          // 기존 항목 → 로컬에서 수정했으면 로컬 우선
+          const localNote  = localNoteMap.get(id);
+          const baseNote   = baseNoteMap.get(id);
+          // issues: 3-way merge (items와 동일 방식)
+          const baseIssueSet   = new Set(baseNote.issues   || []);
+          const localIssueSet  = new Set(localNote.issues  || []);
+          const remoteIssueSet = new Set(remoteNote.issues || []);
+          const finalIssues = new Set(remoteIssueSet);
+          for (const i of localIssueSet)  { if (!baseIssueSet.has(i)) finalIssues.add(i); }
+          for (const i of baseIssueSet)   { if (!localIssueSet.has(i)) finalIssues.delete(i); }
+          if (localNote.content !== baseNote.content || localNote.type !== baseNote.type) {
+            result.push({ ...localNote,  issues: [...finalIssues] });
+          } else {
+            result.push({ ...remoteNote, issues: [...finalIssues] });
+          }
+        }
+        // baseNoteMap에 있고 localNoteMap에 없으면 → 로컬에서 삭제 → result에 추가 안 함
+      }
+      // 로컬에서 새로 추가한 것 (원격에도 없고 베이스에도 없는 것)
+      for (const [id, localNote] of localNoteMap) {
+        if (!remoteNoteMap.has(id)) result.push(localNote);
+      }
+      merged.overallNotes = result;
+    }
+
+    // config: 로컬 기준
+    merged.config = { ...merged.config, ...local.config };
+
+    return merged;
+  }
+
+  // ────────────────────────────────────────
+  // GitHub 저장 (병합 저장)
+  // ────────────────────────────────────────
+  async function saveToGitHub() {
+    const owner = getOwner();
+    const token = getToken();
+
+    if (!owner || !token) {
+      alert('GitHub 사용자명과 토큰이 필요합니다.');
+      openSettings();
+      return;
+    }
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = '저장 중...';
+    btn.disabled = true;
+
+    try {
+      const _now = new Date();
+      const _p = n => String(n).padStart(2,'0');
+      const today = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
+
+      // 1. 원격 최신 데이터 + SHA 조회
+      const shaRes = await fetch(
+        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+        { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
+      );
+      if (!shaRes.ok) throw new Error(`원격 데이터 조회 실패 (${shaRes.status})`);
+      const shaData = await shaRes.json();
+      fileSha = shaData.sha;
+      const remoteData = JSON.parse(decodeURIComponent(escape(atob(shaData.content.replace(/\n/g,'')))));
+
+      // 2. 로컬 변경사항과 원격 병합
+      const merged = mergeQaData(baseSnapshot, qaData, remoteData);
+      merged.config.lastUpdated = today;
+
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
+
+      // 3. 병합 결과 PUT
+      const res = await fetch(
+        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+        {
+          method: 'PUT',
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `QA 현황 업데이트 (${today})`, content: encoded, sha: fileSha })
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        if (res.status === 409) {
+          throw new Error('다른 사람이 동시에 저장했습니다. 페이지를 새로고침한 후 다시 저장해 주세요.');
+        }
+        throw new Error(err.message || `저장 실패 (${res.status})`);
+      }
+
+      const result = await res.json();
+      fileSha = result.content.sha;
+      qaData = merged;
+      baseSnapshot = JSON.parse(JSON.stringify(merged)); // 스냅샷 갱신
+      isDirty = false;
+      hideSyncBanner();
+
+      document.getElementById('lastUpdated').textContent = `마지막 업데이트: ${today}`;
+      document.getElementById('dirtyDot').classList.add('hidden');
+      const saveStatus = document.getElementById('saveStatus');
+      saveStatus.classList.remove('hidden');
+      setTimeout(() => saveStatus.classList.add('hidden'), 3000);
+
+    } catch (e) {
+      alert(`저장 실패: ${e.message}`);
+    } finally {
+      btn.textContent = '💾 저장';
+      btn.disabled = false;
+    }
+  }
+
+  // ────────────────────────────────────────
+  // 유틸
+  // ────────────────────────────────────────
+  function markDirty() {
+    isDirty = true;
+    document.getElementById('dirtyDot').classList.remove('hidden');
+    document.getElementById('saveStatus').classList.add('hidden');
+  }
+
+  // 모달 바깥 클릭 → 닫기
+  ['settingsModal','issueModal','editItemModal','addItemModal','editCatModal','addCatModal'].forEach(id => {
+    document.getElementById(id).addEventListener('click', function(e) {
+      if (e.target === this) this.classList.add('hidden');
+    });
+  });
+
+  // ESC 키 → 모달 닫기
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeSettings();
+      closeIssueModal();
+      closeEditItemModal();
+      closeAddItemModal();
+      closeEditCatModal();
+      closeAddCatModal();
+    }
+  });
+
+  // 페이지 이탈 경고 (미저장 시)
+  window.addEventListener('beforeunload', e => {
+    if (isDirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  // ────────────────────────────────────────
+  // 편집 모드
+  // ────────────────────────────────────────
+  function toggleEditMode() {
+    isEditMode = !isEditMode;
+    const btn = document.getElementById('editModeBtn');
+    if (isEditMode) {
+      btn.textContent = '✏ 편집 중';
+      btn.classList.add('bg-amber-100','border-amber-400','text-amber-700');
+      btn.classList.remove('hover:bg-gray-100');
+    } else {
+      btn.textContent = '✏ 편집';
+      btn.classList.remove('bg-amber-100','border-amber-400','text-amber-700');
+      btn.classList.add('hover:bg-gray-100');
+    }
+    renderTable();
+  }
+
+  // 항목 이름 수정
+  let _editItemTarget = { catId: null, itemId: null };
+  function openEditItemModal(catId, itemId) {
+    const cat  = qaData.categories.find(c => c.id === catId);
+    const item = cat?.items.find(i => i.id === itemId);
+    if (!item) return;
+    _editItemTarget = { catId, itemId };
+    document.getElementById('editItemId').textContent = item.id;
+    document.getElementById('inputEditName').value = item.name;
+    document.getElementById('editItemModal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('inputEditName').focus(), 50);
+  }
+  function closeEditItemModal() {
+    document.getElementById('editItemModal').classList.add('hidden');
+  }
+  function saveEditItem() {
+    const cat  = qaData.categories.find(c => c.id === _editItemTarget.catId);
+    const item = cat?.items.find(i => i.id === _editItemTarget.itemId);
+    if (!item) return;
+    const newName = document.getElementById('inputEditName').value.trim();
+    if (!newName) return;
+    item.name = newName;
+    markDirty();
+    closeEditItemModal();
+    renderTable();
+  }
+
+  // 항목 추가
+  let _addItemCatId = null;
+  function genItemId(cat) {
+    const prefix = (cat.items[0]?.id || '').match(/^[a-z]+-/)?.[0] || 'x-';
+    const nums = cat.items.map(i => parseInt(i.id.replace(/\D/g,''))).filter(n => !isNaN(n));
+    const next = nums.length > 0 ? Math.max(...nums) + 1 : 1;
+    return prefix + String(next).padStart(2,'0');
+  }
+  function openAddItemModal(catId, insertIdx) {
+    const cat = qaData.categories.find(c => c.id === catId);
+    if (!cat) return;
+    _addItemCatId = catId;
+    _addItemInsertIdx = (insertIdx !== undefined && insertIdx !== null) ? insertIdx : null;
+    document.getElementById('addItemCatName').textContent = cat.name;
+    document.getElementById('inputAddName').value = '';
+    document.getElementById('addItemIdPreview').textContent = '자동 ID: ' + genItemId(cat);
+    document.getElementById('addItemModal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('inputAddName').focus(), 50);
+  }
+  function closeAddItemModal() {
+    document.getElementById('addItemModal').classList.add('hidden');
+  }
+  function saveAddItem() {
+    const cat = qaData.categories.find(c => c.id === _addItemCatId);
+    if (!cat) return;
+    const name = document.getElementById('inputAddName').value.trim();
+    if (!name) return;
+    const newId = genItemId(cat);
+    const newItem = { id: newId, name, webMigrated:'unknown', detail:'not-started', qa:'not-tested', issues:[], notes:'' };
+    if (_addItemInsertIdx !== null && _addItemInsertIdx >= 0 && _addItemInsertIdx <= cat.items.length) {
+      cat.items.splice(_addItemInsertIdx, 0, newItem);
+    } else {
+      cat.items.push(newItem);
+    }
+    _addItemInsertIdx = null;
+    markDirty();
+    closeAddItemModal();
+    renderTable();
+  }
+
+  // 드래그앤드롭 순서 변경
+  function dragStart(e, catId, itemId) {
+    _dragSrc = { catId, itemId };
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', itemId);
+    setTimeout(() => e.currentTarget.classList.add('drag-src'), 0);
+  }
+  function dragOver(e) {
+    if (_catDragSrc) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+  function dragEnter(e, catId, itemId) {
+    if (_catDragSrc || !_dragSrc.catId || _dragSrc.itemId === itemId) return;
+    e.currentTarget.classList.add('drag-over');
+  }
+  function dragLeave(e) {
+    e.currentTarget.classList.remove('drag-over');
+  }
+  function dragEnd(e) {
+    e.currentTarget.classList.remove('drag-src');
+    _dragSrc = { catId: null, itemId: null };
+  }
+  function drop(e, catId, itemId) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
+    if (_catDragSrc || !_dragSrc.catId || _dragSrc.itemId === itemId) return;
+
+    const srcCat = qaData.categories.find(c => c.id === _dragSrc.catId);
+    const dstCat = qaData.categories.find(c => c.id === catId);
+    if (!srcCat || !dstCat) return;
+
+    const fromIdx = srcCat.items.findIndex(i => i.id === _dragSrc.itemId);
+    const toIdx   = dstCat.items.findIndex(i => i.id === itemId);
+    if (fromIdx < 0 || toIdx < 0) return;
+
+    const [moved] = srcCat.items.splice(fromIdx, 1);
+    if (_dragSrc.catId === catId) {
+      // 같은 카테고리 내 이동
+      dstCat.items.splice(toIdx, 0, moved);
+    } else {
+      // 다른 카테고리로 이동 → ID 자동 변경
+      moved.id = genItemId(dstCat);
+      moved._modified = new Date().toISOString();
+      dstCat.items.splice(toIdx, 0, moved);
+    }
+
+    _dragSrc = { catId: null, itemId: null };
+    markDirty();
+    renderTable();
+  }
+
+  // 항목 삭제
+  function deleteItem(catId, itemId) {
+    const cat  = qaData.categories.find(c => c.id === catId);
+    const item = cat?.items.find(i => i.id === itemId);
+    if (!item) return;
+    if (!confirm(`"${item.name}" 항목을 삭제하시겠습니까?\nID(${itemId})는 재사용되지 않습니다.`)) return;
+    cat.items = cat.items.filter(i => i.id !== itemId);
+    markDirty();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 카테고리 CRUD
+  // ────────────────────────────────────────
+  function genCatId() {
+    const existing = new Set(qaData.categories.map(c => c.id));
+    let n = 1;
+    while (existing.has('cat-' + n)) n++;
+    return 'cat-' + n;
+  }
+
+  let _editCatTarget = null;
+  function openEditCatModal(catId) {
+    const cat = qaData.categories.find(c => c.id === catId);
+    if (!cat) return;
+    _editCatTarget = catId;
+    document.getElementById('editCatId').textContent = cat.id;
+    document.getElementById('inputEditCatName').value = cat.name;
+    document.getElementById('editCatModal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('inputEditCatName').focus(), 50);
+  }
+  function closeEditCatModal() {
+    document.getElementById('editCatModal').classList.add('hidden');
+  }
+  function saveEditCat() {
+    const cat = qaData.categories.find(c => c.id === _editCatTarget);
+    if (!cat) return;
+    const newName = document.getElementById('inputEditCatName').value.trim();
+    if (!newName) return;
+    cat.name = newName;
+    markDirty();
+    closeEditCatModal();
+    renderCategoryFilter();
+    renderTable();
+  }
+
+  function openAddCatModal() {
+    document.getElementById('inputAddCatName').value = '';
+    document.getElementById('addCatIdPreview').textContent = '자동 ID: ' + genCatId();
+    document.getElementById('addCatModal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('inputAddCatName').focus(), 50);
+  }
+  function closeAddCatModal() {
+    document.getElementById('addCatModal').classList.add('hidden');
+  }
+  function saveAddCat() {
+    const name = document.getElementById('inputAddCatName').value.trim();
+    if (!name) return;
+    const newCat = { id: genCatId(), name, items: [] };
+    qaData.categories.push(newCat);
+    markDirty();
+    closeAddCatModal();
+    renderCategoryFilter();
+    renderTable();
+  }
+
+  function deleteCat(catId) {
+    const cat = qaData.categories.find(c => c.id === catId);
+    if (!cat) return;
+    const count = cat.items.length;
+    const msg = count > 0
+      ? `"${cat.name}" 카테고리를 삭제하시겠습니까?\n\n⚠️ 이 카테고리 안의 항목 ${count}개가 모두 삭제됩니다.\n이 작업은 되돌릴 수 없습니다.`
+      : `"${cat.name}" 카테고리를 삭제하시겠습니까?`;
+    if (!confirm(msg)) return;
+    qaData.categories = qaData.categories.filter(c => c.id !== catId);
+    markDirty();
+    renderCategoryFilter();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 카테고리 드래그앤드롭 (순서 변경)
+  // ────────────────────────────────────────
+  let _catDragSrc = null;
+
+  function catDragStart(e, catId) {
+    if (_dragSrc.catId) { e.preventDefault(); return; }
+    _catDragSrc = catId;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', 'cat:' + catId);
+    setTimeout(() => document.getElementById('catblock-' + catId)?.classList.add('cat-drag-src'), 0);
+  }
+  function catDragOver(e) {
+    if (!_catDragSrc) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+  function catDragEnter(e, catId) {
+    if (!_catDragSrc || _catDragSrc === catId) return;
+    e.stopPropagation();
+    document.getElementById('catblock-' + catId)?.classList.add('cat-drag-over');
+  }
+  function catDragLeave(e) {
+    const catblock = e.currentTarget;
+    if (catblock.contains(e.relatedTarget)) return;
+    catblock.classList.remove('cat-drag-over');
+  }
+  function catDragEnd(e, catId) {
+    _catDragSrc = null;
+    document.getElementById('catblock-' + catId)?.classList.remove('cat-drag-src');
+    document.querySelectorAll('.cat-drag-over').forEach(el => el.classList.remove('cat-drag-over'));
+  }
+  function catDrop(e, targetCatId) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('catblock-' + targetCatId)?.classList.remove('cat-drag-over');
+    if (!_catDragSrc || _catDragSrc === targetCatId) return;
+    const fromIdx = qaData.categories.findIndex(c => c.id === _catDragSrc);
+    const toIdx   = qaData.categories.findIndex(c => c.id === targetCatId);
+    if (fromIdx < 0 || toIdx < 0) return;
+    const [moved] = qaData.categories.splice(fromIdx, 1);
+    qaData.categories.splice(toIdx, 0, moved);
+    _catDragSrc = null;
+    markDirty();
+    renderCategoryFilter();
+    renderTable();
+  }
+
+  // 빈 카테고리 tbody 드롭존 (다른 카테고리에서 항목 드롭)
+  function itemBodyDragOver(e, catId) {
+    if (_catDragSrc || !_dragSrc.catId || _dragSrc.catId === catId) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+  function itemBodyDrop(e, catId) {
+    if (_catDragSrc || !_dragSrc.catId || _dragSrc.catId === catId) return;
+    e.preventDefault();
+    const srcCat = qaData.categories.find(c => c.id === _dragSrc.catId);
+    const dstCat = qaData.categories.find(c => c.id === catId);
+    if (!srcCat || !dstCat) return;
+    const fromIdx = srcCat.items.findIndex(i => i.id === _dragSrc.itemId);
+    if (fromIdx < 0) return;
+    const [moved] = srcCat.items.splice(fromIdx, 1);
+    moved.id = genItemId(dstCat);
+    moved._modified = new Date().toISOString();
+    dstCat.items.push(moved);
+    _dragSrc = { catId: null, itemId: null };
+    markDirty();
+    renderTable();
+  }
+
+  // ────────────────────────────────────────
+  // 탭 전환
+  // ────────────────────────────────────────
+  function switchTab(name) {
+    ['checklist','notes'].forEach(t => {
+      document.getElementById(`panel-${t}`).classList.toggle('hidden', t !== name);
+      const btn = document.getElementById(`tab-btn-${t}`);
+      if (t === name) {
+        btn.classList.add('border-blue-600','text-blue-600');
+        btn.classList.remove('border-transparent','text-gray-500');
+      } else {
+        btn.classList.remove('border-blue-600','text-blue-600');
+        btn.classList.add('border-transparent','text-gray-500');
+      }
+    });
+    if (name === 'notes') renderNotes();
+  }
+
+  // ────────────────────────────────────────
+  // 컬럼 가이드 팝오버
+  // ────────────────────────────────────────
+  const GUIDE = {
+    migrated: { title: '웹이식 체크 기준', rows: [
+      ['? 미확인', '아직 확인 안 함 (기본값)'],
+      ['✓ 완료',  '클릭/실행 시 반응이 있음'],
+      ['△ 부분',  '버튼은 있으나 일부만 동작 / 데스크톱과 다름'],
+      ['✗ 미이식','메뉴/버튼 자체가 없거나 찾을 수 없음'],
+    ]},
+    detail: { title: '구현상태 체크 기준', rows: [
+      ['미시작',  '아직 이 항목 확인 안 함'],
+      ['계획',    '개발자 작업 예정으로 확인됨'],
+      ['진행중',  '기능 있으나 동작이 불완전함'],
+      ['완료',    '의도한 대로 잘 작동함'],
+    ]},
+    qa: { title: 'QA 판정 기준', rows: [
+      ['미테스트', '아직 테스트 안 함'],
+      ['통과',    '정확히 작동, 이상 없음'],
+      ['실패',    '오류 / 의도치 않은 동작 → 이슈 등록'],
+      ['건너뜀',  '미이식이거나 선행 기능 의존 등'],
+    ]},
+    issue: { title: '이슈/메모 사용법', rows: [
+      ['이슈 번호','개발자 보고용 버그. Claude에게 설명하면 BDD 형식으로 자동 등록됨.'],
+      ['메모',    '참고사항, 의문점, 나중에 확인할 것 등 자유 기록'],
+    ]},
+  };
+
+  let _guideEl = null;
+  function showGuide(col, e) {
+    e.stopPropagation();
+    hideGuide();
+    const g = GUIDE[col];
+    if (!g) return;
+    const el = document.createElement('div');
+    el.className = 'guide-popover';
+    el.innerHTML = `<div class="guide-title">${g.title}</div>
+      <table class="guide-table">${g.rows.map(([k,v])=>
+        `<tr><td class="guide-key">${k}</td><td class="guide-val">${v}</td></tr>`
+      ).join('')}</table>`;
+    document.body.appendChild(el);
+    const rect = e.currentTarget.getBoundingClientRect();
+    el.style.top  = (rect.bottom + window.scrollY + 4) + 'px';
+    el.style.left = Math.max(8, Math.min(rect.left, window.innerWidth - 330)) + 'px';
+    _guideEl = el;
+    setTimeout(() => document.addEventListener('click', hideGuide, {once:true}), 0);
+  }
+  function hideGuide() {
+    if (_guideEl) { _guideEl.remove(); _guideEl = null; }
+  }
+
+  // ────────────────────────────────────────
+  // 전반적 코멘트 탭
+  // ────────────────────────────────────────
+  function getNoteTypes() {
+    return qaData?.config?.noteTypes || ['버그','미구현','요청','일반','질문','기타'];
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  const _NOTE_COLORS = ['blue','green','purple','red','orange','teal','pink','yellow'];
+  const _SEMANTIC_NOTE_COLORS = {'버그':'red','미구현':'orange','요청':'purple','일반':'blue','질문':'teal','기타':'gray'};
+  function noteTypeColor(t) {
+    if (_SEMANTIC_NOTE_COLORS[t]) return _SEMANTIC_NOTE_COLORS[t];
+    const types = getNoteTypes();
+    const i = types.indexOf(t);
+    return i >= 0 ? _NOTE_COLORS[i % _NOTE_COLORS.length] : 'gray';
+  }
+
+  function renderNotes() {
+    if (!qaData) return;
+    const notes = qaData.overallNotes || [];
+    const types = getNoteTypes();
+    const filterEl = document.getElementById('noteTypeFilter');
+    const filterType = filterEl ? filterEl.value : 'all';
+    const shown = (filterType === 'all' ? notes : notes.filter(n => n.type === filterType)).slice().reverse();
+
+    let html = `
+      <div class="flex flex-wrap gap-2 mb-4 items-center">
+        <select id="noteTypeFilter" onchange="renderNotes()"
+          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+          <option value="all"${filterType==='all'?' selected':''}>전체 유형</option>
+          ${types.map(t=>`<option value="${escapeHtml(t)}"${t===filterType?' selected':''}>${escapeHtml(t)}</option>`).join('')}
+        </select>
+        <button onclick="startAddNote()"
+          class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">+ 새 코멘트</button>
+        <span class="text-xs text-gray-400 ml-auto">${shown.length}개</span>
+      </div>
+      <div id="addNoteForm" class="hidden mb-4 bg-white rounded-xl border border-blue-200 p-4 shadow-sm">
+        <div class="mb-2">
+          <select id="newNoteType" class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+            ${types.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('')}
+          </select>
+        </div>
+        <textarea id="newNoteContent" rows="3" placeholder="내용을 입력하세요..."
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"></textarea>
+        <div class="flex gap-2 justify-end">
+          <button onclick="cancelAddNote()" class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+          <button onclick="saveNewNote()" class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">추가</button>
+        </div>
+      </div>`;
+
+    if (shown.length === 0) {
+      html += '<div class="text-center py-16 text-gray-400"><div class="text-4xl mb-3">📝</div><p class="text-sm">코멘트가 없습니다. <b class="text-gray-600">+ 새 코멘트</b>를 눌러 추가하세요.</p></div>';
+    } else {
+      const devRepo = qaData?.config?.developerRepo || '';
+      html += '<div class="space-y-3">';
+      for (const note of shown) {
+        const c = noteTypeColor(note.type);
+        const noteIssues = note.issues || [];
+        const issuesBadgesHtml = noteIssues.map(n => {
+          const linkContent = devRepo
+            ? `<a href="https://github.com/${escapeHtml(devRepo)}/issues/${escapeHtml(n)}" target="_blank" class="hover:text-blue-700">#${escapeHtml(n)}</a>`
+            : `#${escapeHtml(n)}`;
+          return `<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-blue-50 border border-blue-200 rounded text-xs text-blue-600">${linkContent}<button onclick="removeIssueFromNote('${note.id}','${escapeHtml(n)}')" class="text-blue-300 hover:text-red-400 leading-none ml-0.5 font-bold" title="연결 해제">×</button></span>`;
+        }).join('');
+        html += `
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-${c}-100 text-${c}-700 border border-${c}-200 shrink-0">${escapeHtml(note.type)}</span>
+              <span class="text-xs text-gray-400">${note.date}</span>
+              <div class="ml-auto flex gap-1">
+                <button onclick="startEditNote('${note.id}')" class="text-xs text-gray-400 hover:text-blue-600 px-2 py-1 rounded hover:bg-blue-50">편집</button>
+                <button onclick="deleteNote('${note.id}')" class="text-xs text-gray-400 hover:text-red-500 px-2 py-1 rounded hover:bg-red-50">삭제</button>
+              </div>
+            </div>
+            <div id="note-view-${note.id}" class="text-sm text-gray-700 whitespace-pre-wrap">${escapeHtml(note.content)}</div>
+            <div class="mt-2 pt-2 border-t border-gray-100 flex flex-wrap items-center gap-1.5 min-h-[26px]">
+              ${issuesBadgesHtml}
+              <span id="note-issue-input-wrap-${note.id}" class="hidden inline-flex items-center gap-1">
+                <input type="text" id="note-issue-val-${note.id}" placeholder="#번호 (쉼표로 여러 개)"
+                  class="w-40 text-xs border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                  onkeydown="if(event.key==='Enter')addIssueToNote('${note.id}')">
+                <button onclick="addIssueToNote('${note.id}')" class="text-xs bg-blue-600 text-white rounded px-2 py-0.5 hover:bg-blue-700">추가</button>
+              </span>
+              <button onclick="showNoteIssueInput('${note.id}')" class="text-xs text-gray-400 hover:text-blue-600 border border-dashed border-gray-300 hover:border-blue-400 rounded px-1.5 py-0.5 transition-colors">+ 이슈</button>
+            </div>
+            <div id="note-edit-${note.id}" class="hidden mt-2">
+              <select id="edit-type-${note.id}" class="text-sm border border-gray-300 rounded-lg px-2 py-1 bg-white mb-2">
+                ${types.map(t=>`<option value="${escapeHtml(t)}"${t===note.type?' selected':''}>${escapeHtml(t)}</option>`).join('')}
+              </select>
+              <textarea id="edit-content-${note.id}" rows="3"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2">${escapeHtml(note.content)}</textarea>
+              <div class="flex gap-2 justify-end">
+                <button onclick="cancelEditNote('${note.id}')" class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-100">취소</button>
+                <button onclick="saveEditNote('${note.id}')" class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">저장</button>
+              </div>
+            </div>
+          </div>`;
+      }
+      html += '</div>';
+    }
+    document.getElementById('notesContent').innerHTML = html;
+  }
+
+  function startAddNote() {
+    const f = document.getElementById('addNoteForm');
+    if (f) { f.classList.remove('hidden'); document.getElementById('newNoteContent')?.focus(); }
+  }
+  function cancelAddNote() {
+    document.getElementById('addNoteForm')?.classList.add('hidden');
+  }
+  function saveNewNote() {
+    const type    = document.getElementById('newNoteType')?.value || '기타';
+    const content = (document.getElementById('newNoteContent')?.value || '').trim();
+    if (!content) return;
+    if (!qaData.overallNotes) qaData.overallNotes = [];
+    const _now = new Date(), _p = n => String(n).padStart(2,'0');
+    const date = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
+    qaData.overallNotes.push({ id: 'note-' + Date.now(), date, type, content, issues: [] });
+    markDirty();
+    renderNotes();
+  }
+  function startEditNote(id) {
+    document.getElementById(`note-view-${id}`)?.classList.add('hidden');
+    document.getElementById(`note-edit-${id}`)?.classList.remove('hidden');
+    document.getElementById(`edit-content-${id}`)?.focus();
+  }
+  function cancelEditNote(id) {
+    document.getElementById(`note-view-${id}`)?.classList.remove('hidden');
+    document.getElementById(`note-edit-${id}`)?.classList.add('hidden');
+  }
+  function saveEditNote(id) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === id);
+    if (!note) return;
+    note.type    = document.getElementById(`edit-type-${id}`)?.value || note.type;
+    note.content = (document.getElementById(`edit-content-${id}`)?.value || '').trim() || note.content;
+    markDirty();
+    renderNotes();
+  }
+  function deleteNote(id) {
+    if (!confirm('이 코멘트를 삭제하시겠습니까?')) return;
+    qaData.overallNotes = (qaData.overallNotes||[]).filter(n => n.id !== id);
+    markDirty();
+    renderNotes();
+  }
+  function showNoteIssueInput(id) {
+    const wrap = document.getElementById(`note-issue-input-wrap-${id}`);
+    if (!wrap) return;
+    wrap.classList.remove('hidden');
+    document.getElementById(`note-issue-val-${id}`)?.focus();
+  }
+  function addIssueToNote(id) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === id);
+    if (!note) return;
+    const input = document.getElementById(`note-issue-val-${id}`);
+    const val = (input?.value || '').trim();
+    if (!val) return;
+    if (!note.issues) note.issues = [];
+    const nums = val.split(/[,\s]+/).map(s => s.replace(/^#/,'')).filter(s => /^\d+$/.test(s));
+    for (const n of nums) { if (!note.issues.includes(n)) note.issues.push(n); }
+    markDirty();
+    renderNotes();
+  }
+  function removeIssueFromNote(noteId, issueNum) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
+    if (!note || !note.issues) return;
+    note.issues = note.issues.filter(n => n !== issueNum);
+    markDirty();
+    renderNotes();
+  }
+
+  // ────────────────────────────────────────
+  // 코멘트 유형 관리 (설정 모달)
+  // ────────────────────────────────────────
+  function renderNoteTypesList() {
+    const el = document.getElementById('noteTypesList');
+    if (!el) return;
+    const types = getNoteTypes();
+    el.innerHTML = types.map(t => `
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-xs text-gray-700 border border-gray-200">
+        ${escapeHtml(t)}
+        ${t !== '기타' ? `<button onclick="removeNoteType('${escapeHtml(t)}')" class="text-gray-400 hover:text-red-500 font-bold leading-none ml-0.5">×</button>` : ''}
+      </span>`).join('');
+  }
+  function addNoteType() {
+    const input = document.getElementById('inputNewNoteType');
+    const val = input?.value.trim();
+    if (!val) return;
+    if (!qaData.config.noteTypes) qaData.config.noteTypes = ['버그','미구현','요청','일반','질문','기타'];
+    if (!qaData.config.noteTypes.includes(val)) {
+      qaData.config.noteTypes.push(val);
+      markDirty();
+    }
+    if (input) input.value = '';
+    renderNoteTypesList();
+  }
+  function removeNoteType(t) {
+    if (t === '기타' || !qaData?.config?.noteTypes) return;
+    qaData.config.noteTypes = qaData.config.noteTypes.filter(x => x !== t);
+    renderNoteTypesList();
+    markDirty();
+  }
+
+  // ────────────────────────────────────────
+  // 동기화 배너 & 폴링
+  // ────────────────────────────────────────
+  function hideSyncBanner() {
+    document.getElementById('syncBanner').classList.add('hidden');
+  }
+
+  async function reloadData() {
+    if (isDirty && !confirm('미저장 변경사항이 있습니다. 새로고침하면 사라집니다. 계속할까요?')) return;
+    isDirty = false;
+    hideSyncBanner();
+    await loadData();
+  }
+
+  // 20초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
+  setInterval(async () => {
+    const owner = getOwner();
+    const token = getToken();
+    if (!owner || !token || !fileSha) return;
+    try {
+      const res = await fetch(
+        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+        { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
+      );
+      if (res.ok) {
+        const { sha } = await res.json();
+        if (sha !== fileSha) document.getElementById('syncBanner').classList.remove('hidden');
+      }
+    } catch(e) {}
+  }, 20000);
+
+  // ────────────────────────────────────────
+  // 시작
+  // ────────────────────────────────────────
+  loadData();
+  </script>
+</body>
+</html>
