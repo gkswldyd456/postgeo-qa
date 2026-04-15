@@ -350,7 +350,8 @@
   async function loadData() {
     try {
       // 공개 저장소이므로 인증 없이 raw URL로 직접 로드 (누구나 볼 수 있음)
-      const res = await fetch('https://raw.githubusercontent.com/gkswldyd456/postgeo-qa/main/qa-data.json');
+      // ?_= 타임스탬프로 CDN 캐시 우회 (raw.githubusercontent.com은 최대 5분 캐시됨)
+      const res = await fetch(`https://raw.githubusercontent.com/gkswldyd456/postgeo-qa/main/qa-data.json?_=${Date.now()}`);
       if (!res.ok) throw new Error(`데이터 로드 실패 (${res.status})`);
       qaData = await res.json();
       // 이전 버전 호환: 없는 필드 초기화
