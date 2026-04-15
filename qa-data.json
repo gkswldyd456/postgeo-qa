@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 15:51",
+    "lastUpdated": "2026-04-15 16:10",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1498,6 +1498,15 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T06:50:40.808Z"
+        },
+        {
+          "id": "ce-17",
+          "name": "평행이동 섀도우 복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         },
         {
           "id": "ce-05",
