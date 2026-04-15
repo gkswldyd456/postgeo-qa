@@ -314,6 +314,22 @@
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
     { id:56, name:220, migrated:88, detail:88, qa:88, issue:200 };
 
+  // ────────────────────────────────────────
+  // URL fragment 토큰 자동 추출 (비개발자 공유 링크용)
+  // 사용법: URL에 #ghowner=xxx&ghtoken=yyy 추가
+  // 최초 1회만 필요 — localStorage에 저장 후 URL 정리됨
+  // ────────────────────────────────────────
+  (function() {
+    try {
+      const params = new URLSearchParams(location.hash.slice(1));
+      const t = params.get('ghtoken');
+      const o = params.get('ghowner');
+      if (t) localStorage.setItem('gh_token', t);
+      if (o) localStorage.setItem('gh_owner', o);
+      if (t || o) history.replaceState(null, '', location.pathname + location.search);
+    } catch(e) {}
+  })();
+
   const getOwner = () => localStorage.getItem('gh_owner') || '';
   const getToken = () => localStorage.getItem('gh_token') || '';
 
