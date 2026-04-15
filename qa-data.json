@@ -2,8 +2,8 @@
   "config": {
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
-    "developerRepo": "",
-    "lastUpdated": "2026-04-15 11:09",
+    "developerRepo": "Post-Math/PostGeoWeb",
+    "lastUpdated": "2026-04-15 11:19",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1267,8 +1267,11 @@
           "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
-          "issues": [],
-          "notes": ""
+          "issues": [
+            "62"
+          ],
+          "notes": "",
+          "_modified": "2026-04-15T02:14:35.655Z"
         },
         {
           "id": "ce-15",
