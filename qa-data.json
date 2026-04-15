@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 12:03",
+    "lastUpdated": "2026-04-15 12:04",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -54,7 +54,7 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "ㅋㅋ",
-          "_modified": "2026-04-15T03:03:47.351Z"
+          "_modified": "2026-04-15T03:03:59.351Z"
         },
         {
           "id": "p-03",
