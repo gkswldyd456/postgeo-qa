@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 16:13",
+    "lastUpdated": "2026-04-15 16:14",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1558,6 +1558,33 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-15T07:13:28.252Z"
+        },
+        {
+          "id": "ce-23",
+          "name": "객체 원점 대칭 섀도우복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-24",
+          "name": "객체 X축 대칭 섀도우복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-25",
+          "name": "객체 Y축 대칭 섀도우복제",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         },
         {
           "id": "ce-05",
