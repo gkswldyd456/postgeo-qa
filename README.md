@@ -16,30 +16,30 @@ https://gkswldyd456.github.io/postgeo-qa/
 
 | 항목 | 수치 |
 |------|------|
-| 전체 기능 항목 | 163개 (12개 카테고리) |
-| 웹 이식 완료 | 101개 (62%) |
-| 부분 이식 | 20개 (12%) |
-| 미이식 | 42개 (26%) |
-| QA 테스트 진행률 | 0% (웹이식 확인 단계) |
+| 전체 기능 항목 | 175개 (12개 카테고리) |
+| 웹 이식 완료 | 101개 (58%) |
+| 부분 이식 | 20개 (11%) |
+| 미이식 | 42개 (24%) |
+| QA 테스트 진행률 | 진행 중 |
 
 ---
 
 ## 카테고리 구성
 
-| 카테고리 | 항목 수 | 이식 완료 |
-|----------|:-------:|:--------:|
-| 점 (Points) | 25 | 23 |
-| 선/선분 (Lines) | 21 | 17 |
-| 평면도형 (Plane Figures) | 30 | 16 |
-| 입체도형 (3D Figures) | 6 | 0 |
-| 점 기반 함수 (Point Functions) | 30 | 24 |
-| 입력 기반 함수 (Input Functions) | 7 | 7 |
-| 캔버스/편집 기능 (Canvas & Edit) | 15 | 6 |
-| 캔버스 설정 (Canvas Settings) | 7 | 6 |
-| 파일/저장 (File & Save) | 5 | 0 |
-| 텍스트/이미지 (Text & Image) | 5 | 0 |
-| 확률 탁자 순열 (Probability Tables) | 10 | 0 |
-| 설정 (Settings) | 2 | 2 |
+| 카테고리 | 항목 수 |
+|----------|:-------:|
+| 점 (Points) | 25 |
+| 선/선분 (Lines) | 21 |
+| 평면도형 (Plane Figures) | 30 |
+| 입체도형 (3D Figures) | 6 |
+| 점 기반 함수 (Point Functions) | 30 |
+| 입력 기반 함수 (Input Functions) | 7 |
+| 캔버스/편집 기능 (Canvas & Edit) | 15 |
+| 캔버스 설정 (Canvas Settings) | 7 |
+| 파일/저장 (File & Save) | 5 |
+| 텍스트/이미지 (Text & Image) | 5 |
+| 확률 탁자 순열 (Probability Tables) | 10 |
+| 설정 (Settings) | 14 |
 
 ---
 
@@ -48,9 +48,10 @@ https://gkswldyd456.github.io/postgeo-qa/
 | 기능 | 설명 |
 |------|------|
 | 상태 뱃지 클릭 | 웹이식 / QA 상태 순환 변경 |
-| 💾 저장 | GitHub에 변경사항 저장 (토큰 필요) |
+| 💾 저장 | GitHub에 변경사항 저장 (병합 저장 — 동시 작업 안전) |
+| 🔄 변경 감지 배너 | 다른 편집자가 저장하면 60초 내 알림 |
 | 필터 | 카테고리 · 웹이식 · 구현상태 · QA 상태별 필터링 |
-| 컬럼 리사이즈 | 헤더 경계 드래그로 너비 조정 (localStorage 저장) |
+| 컬럼 리사이즈 | 헤더 경계 드래그로 너비 조정 |
 | 컬럼 가이드 ⓘ | 각 컬럼 헤더 클릭 시 체크 기준 팝오버 |
 | 편집 모드 ✏ | 항목 이름 수정 / 삭제 / 순서 변경 (드래그앤드롭) |
 | 인라인 삽입 | 편집 모드에서 행 사이 hover → ＋ 위치 추가 |
@@ -70,20 +71,30 @@ https://gkswldyd456.github.io/postgeo-qa/
 
 ---
 
-## GitHub Pages 설정 (최초 1회)
+## 편집 권한 설정
 
-1. 저장소 **Settings** → **Pages**
-2. Source: **Deploy from a branch** → `main` / `/ (root)` → **Save**
-3. 1~2분 후 URL 활성화
+### 토큰 보유자 (직접 설정)
+1. 대시보드 **⚙ 설정** → GitHub 사용자명 + Personal Access Token 입력
+2. Fine-grained PAT 권장: `Contents: Read and write` 권한만 부여
 
-## Personal Access Token 발급
+### 비개발자 편집자 (공유 링크 방식)
+GitHub 계정 없어도 아래 형식의 URL을 한 번 열면 자동으로 편집 권한 설정:
 
-저장 기능 사용 시 필요합니다.
+```
+https://gkswldyd456.github.io/postgeo-qa/#ghowner=gkswldyd456&ghtoken=토큰값
+```
 
-1. GitHub 프로필 → **Settings** → **Developer settings**
-2. **Personal access tokens** → **Tokens (classic)**
-3. **Generate new token (classic)** → Scopes: `public_repo` 체크 → 생성
-4. 대시보드 **⚙ 설정**에 토큰 입력
+최초 1회만 이 URL로 접속 → 이후엔 일반 URL로 접속해도 편집 가능.
+
+---
+
+## 동시 작업 안내
+
+여러 명이 동시에 편집해도 자동으로 병합 저장됩니다.
+
+- **서로 다른 항목** 편집 → 저장 시 자동 병합, 데이터 유실 없음
+- **같은 항목** 편집 → 더 늦게 수정한 내용이 반영됨
+- **변경 감지** → 다른 편집자가 저장하면 60초 내 상단 배너로 알림
 
 ---
 
