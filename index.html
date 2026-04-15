@@ -360,6 +360,15 @@
       const savedDevRepo = localStorage.getItem('gh_devrepo');
       if (savedDevRepo) qaData.config.developerRepo = savedDevRepo;
       renderAll();
+      // 토큰 있으면 SHA 초기화 → 폴링 즉시 활성화 (백그라운드)
+      const _o = getOwner(), _t = getToken();
+      if (_o && _t && !fileSha) {
+        fetch(`${GH_API}/repos/${_o}/${REPO_NAME}/contents/${DATA_PATH}`,
+          { headers: { Authorization: `Bearer ${_t}`, 'User-Agent': 'PostGeoQA' } })
+          .then(r => r.ok ? r.json() : null)
+          .then(d => { if (d?.sha) fileSha = d.sha; })
+          .catch(() => {});
+      }
     } catch (e) {
       showError(e.message);
     }
@@ -811,12 +820,46 @@
         const baseNotes = baseItem?.notes || '';
         if (localItem.notes !== baseNotes) mergedItem.notes = localItem.notes;
       }
+
+      // 로컬에서 삭제된 항목 제거 (베이스에 있었지만 로컬에 없는 것)
+      if (baseCat) {
+        const localIds = new Set(localCat.items.map(i => i.id));
+        mergedCat.items = mergedCat.items.filter(item => {
+          const wasInBase = baseCat.items.some(i => i.id === item.id);
+          return !(wasInBase && !localIds.has(item.id));
+        });
+      }
     }
 
-    // overallNotes: id 기준 합집합 (신규 추가 보존)
-    const remoteIds = new Set((merged.overallNotes || []).map(n => n.id));
-    const localOnly = (local.overallNotes || []).filter(n => !remoteIds.has(n.id));
-    merged.overallNotes = [...(merged.overallNotes || []), ...localOnly];
+    // overallNotes: 3-way merge (로컬 삭제/수정 반영 + 원격 추가 보존)
+    {
+      const baseNoteMap   = new Map((base?.overallNotes || []).map(n => [n.id, n]));
+      const localNoteMap  = new Map((local.overallNotes || []).map(n => [n.id, n]));
+      const remoteNoteMap = new Map((merged.overallNotes || []).map(n => [n.id, n]));
+      const result = [];
+      // 원격 노트 처리
+      for (const [id, remoteNote] of remoteNoteMap) {
+        if (!baseNoteMap.has(id)) {
+          // 원격에서 새로 추가된 것 → 유지
+          result.push(remoteNote);
+        } else if (localNoteMap.has(id)) {
+          // 기존 항목 → 로컬에서 수정했으면 로컬 우선
+          const localNote = localNoteMap.get(id);
+          const baseNote  = baseNoteMap.get(id);
+          if (localNote.content !== baseNote.content || localNote.type !== baseNote.type) {
+            result.push(localNote);
+          } else {
+            result.push(remoteNote);
+          }
+        }
+        // baseNoteMap에 있고 localNoteMap에 없으면 → 로컬에서 삭제 → result에 추가 안 함
+      }
+      // 로컬에서 새로 추가한 것 (원격에도 없고 베이스에도 없는 것)
+      for (const [id, localNote] of localNoteMap) {
+        if (!remoteNoteMap.has(id)) result.push(localNote);
+      }
+      merged.overallNotes = result;
+    }
 
     // config: 로컬 기준
     merged.config = { ...merged.config, ...local.config };
@@ -1307,7 +1350,7 @@
     await loadData();
   }
 
-  // 60초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
+  // 20초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
   setInterval(async () => {
     const owner = getOwner();
     const token = getToken();
@@ -1322,7 +1365,7 @@
         if (sha !== fileSha) document.getElementById('syncBanner').classList.remove('hidden');
       }
     } catch(e) {}
-  }, 60000);
+  }, 20000);
 
   // ────────────────────────────────────────
   // 시작
