@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 15:48",
+    "lastUpdated": "2026-04-15 15:49",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1487,6 +1487,15 @@
               "resolved": false
             }
           ]
+        },
+        {
+          "id": "ce-16",
+          "name": "객체 복사",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         },
         {
           "id": "ce-05",
