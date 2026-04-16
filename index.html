@@ -489,7 +489,7 @@
 
       const metaRes = await fetch(
         `${GH_API}/repos/${_o}/${REPO_NAME}/contents/${DATA_PATH}`,
-        { headers: _headers }
+        { headers: _headers, cache: 'no-store' }
       );
       if (!metaRes.ok) throw new Error(`데이터 로드 실패 (${metaRes.status})`);
       const meta = await metaRes.json();
@@ -1270,8 +1270,13 @@
         }
         const baseItem = baseCat?.items?.find(i => i.id === localItem.id);
 
-        // 항목 이름: 로컬에서 변경됐으면 로컬 우선 (버그 수정 — 이름 변경 후 저장해도 되돌아가던 문제)
-        if (baseItem && localItem.name !== baseItem.name) mergedItem.name = localItem.name;
+        // 항목 이름: 3-way merge — 로컬이 base에서 변경됐으면 로컬 우선
+        // baseItem이 없는 경우(신규 카테고리 등)는 로컬↔원격 비교로 fallback
+        if (!baseItem) {
+          if (localItem.name !== mergedItem.name) mergedItem.name = localItem.name;
+        } else if (localItem.name !== baseItem.name) {
+          mergedItem.name = localItem.name;
+        }
 
         const localMod  = localItem._modified  || '1970-01-01T00:00:00.000Z';
         const mergedMod = mergedItem._modified || '1970-01-01T00:00:00.000Z';
@@ -1464,45 +1469,56 @@
     const btn = document.getElementById('saveBtn');
     btn.textContent = '저장 중...'; btn.disabled = true;
     try {
-      const _now = new Date(), _p = n => String(n).padStart(2,'0');
-      const today = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
-      const shaRes = await fetch(
-        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
-        { headers: { Authorization:`Bearer ${token}`, 'User-Agent':'PostGeoQA' } }
-      );
-      if (!shaRes.ok) throw new Error(`원격 데이터 조회 실패 (${shaRes.status})`);
-      const shaData = await shaRes.json();
-      fileSha = shaData.sha;
-      const remoteData = JSON.parse(decodeURIComponent(escape(atob(shaData.content.replace(/\n/g,'')))));
-      const merged = mergeQaData(baseSnapshot, qaData, remoteData);
-      merged.config.lastUpdated = today;
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
-      const res = await fetch(
-        `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
-        { method:'PUT', headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json' },
-          body: JSON.stringify({ message:`QA 현황 업데이트 (${today})`, content:encoded, sha:fileSha }) }
-      );
-      if (!res.ok) {
-        const err = await res.json().catch(()=>({}));
-        if (res.status === 409) throw new Error('다른 사람이 동시에 저장했습니다. 새로고침 후 다시 저장해 주세요.');
-        throw new Error(err.message || `저장 실패 (${res.status})`);
-      }
-      const result = await res.json();
-      fileSha = result.content.sha;
-      qaData = merged;
-      baseSnapshot = JSON.parse(JSON.stringify(merged));
-      isDirty = false;
-      hideSyncBanner();
-      document.getElementById('lastUpdated').textContent = `마지막 업데이트: ${today}`;
-      document.getElementById('dirtyDot').classList.add('hidden');
-      const saveStatus = document.getElementById('saveStatus');
-      saveStatus.classList.remove('hidden');
-      setTimeout(() => saveStatus.classList.add('hidden'), 3000);
+      await _attemptSave(owner, token, 0);
     } catch(e) {
       alert(`저장 실패: ${e.message}`);
     } finally {
       btn.textContent = '💾 저장'; btn.disabled = false;
     }
+  }
+
+  async function _attemptSave(owner, token, attempt) {
+    const _now = new Date(), _p = n => String(n).padStart(2,'0');
+    const today = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
+    // 캐시 무효화: GitHub API가 브라우저에 60s 캐시할 수 있어 stale 데이터 방지
+    const shaRes = await fetch(
+      `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+      { headers: { Authorization:`Bearer ${token}`, 'User-Agent':'PostGeoQA' }, cache: 'no-store' }
+    );
+    if (!shaRes.ok) throw new Error(`원격 데이터 조회 실패 (${shaRes.status})`);
+    const shaData = await shaRes.json();
+    fileSha = shaData.sha;
+    const remoteData = JSON.parse(decodeURIComponent(escape(atob(shaData.content.replace(/\n/g,'')))));
+    const merged = mergeQaData(baseSnapshot, qaData, remoteData);
+    merged.config.lastUpdated = today;
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
+    const res = await fetch(
+      `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
+      { method:'PUT', headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json' },
+        body: JSON.stringify({ message:`QA 현황 업데이트 (${today})`, content:encoded, sha:fileSha }) }
+    );
+    if (!res.ok) {
+      const err = await res.json().catch(()=>({}));
+      // 409 충돌: 동시 저장 경쟁 → 최대 3회 자동 재시도 (재fetch → 재병합 → 재PUT)
+      if (res.status === 409 && attempt < 3) {
+        return await _attemptSave(owner, token, attempt + 1);
+      }
+      if (res.status === 409) throw new Error('저장 충돌이 계속 발생합니다. 잠시 후 다시 시도해 주세요.');
+      throw new Error(err.message || `저장 실패 (${res.status})`);
+    }
+    const result = await res.json();
+    fileSha = result.content.sha;
+    qaData = merged;
+    baseSnapshot = JSON.parse(JSON.stringify(merged));
+    isDirty = false;
+    hideSyncBanner();
+    document.getElementById('lastUpdated').textContent = `마지막 업데이트: ${today}`;
+    document.getElementById('dirtyDot').classList.add('hidden');
+    const saveStatus = document.getElementById('saveStatus');
+    saveStatus.classList.remove('hidden');
+    setTimeout(() => saveStatus.classList.add('hidden'), 3000);
+    // 저장 후 DOM 재렌더: merged가 remote 변경사항을 흡수했을 수 있으므로 UI 동기화
+    renderAll();
   }
 
   // ────────────────────────────────────────
