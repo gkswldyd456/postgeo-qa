@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 11:08",
+    "lastUpdated": "2026-04-16 11:23",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1707,6 +1707,24 @@
           "memos": []
         },
         {
+          "id": "ce-33",
+          "name": "영역 채우기 색상 선택",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-34",
+          "name": "영역 채우기 무늬 선택",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
           "id": "ce-09",
           "name": "실행 취소 (Undo)",
           "webMigrated": "yes",
@@ -1898,11 +1916,12 @@
         {
           "id": "cs-08",
           "name": "O, X, Y 자동넣기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-16T02:23:32.753Z"
         }
       ]
     },
@@ -2281,6 +2300,31 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-16T02:08:14.365Z"
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "경로찾기",
+      "items": [
+        {
+          "id": "x-01",
+          "name": "직사각형 모양 경로 찾기",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T02:14:07.420Z"
+        },
+        {
+          "id": "x-02",
+          "name": "평행사변형 모양 경로 찾기",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     }
