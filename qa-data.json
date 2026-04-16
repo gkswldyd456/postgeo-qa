@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 12:59",
+    "lastUpdated": "2026-04-16 13:10",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1716,6 +1716,15 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "ce-38",
+          "name": "스타일 변경 - 점 모양 변경 (25종)",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         },
         {
           "id": "ce-35",
