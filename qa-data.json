@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 15:48",
+    "lastUpdated": "2026-04-16 15:52",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -483,7 +483,7 @@
           "name": "두 점 선분",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
@@ -493,7 +493,7 @@
               "resolved": false
             }
           ],
-          "_modified": "2026-04-16T06:46:28.906Z"
+          "_modified": "2026-04-16T06:50:25.961Z"
         },
         {
           "id": "l-02",
@@ -502,7 +502,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-16T06:51:03.521Z"
         },
         {
           "id": "l-03",
