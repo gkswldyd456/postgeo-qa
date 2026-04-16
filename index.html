@@ -1260,7 +1260,11 @@
       if (!mergedCat) continue;
       const baseCat = baseCatMap.get(localCat.id);
 
-      if (baseCat && localCat.name !== baseCat.name) mergedCat.name = localCat.name;
+      if (!baseCat) {
+        if (localCat.name !== mergedCat.name) mergedCat.name = localCat.name;
+      } else if (localCat.name !== baseCat.name) {
+        mergedCat.name = localCat.name;
+      }
 
       for (const localItem of localCat.items) {
         const mergedItem = mergedCat.items.find(i => i.id === localItem.id);
