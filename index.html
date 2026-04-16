@@ -1102,7 +1102,9 @@
         ? `<span class="text-xs text-gray-300">${formatAt(m.devStatusAt)}</span>` : '';
 
       const bddBtnHtml = (() => {
-        if (!m.bdd) return '';
+        if (!m.bdd) {
+          return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-gray-100 text-gray-300 border-gray-200 hover:bg-gray-200 hover:text-gray-400" title="BDD 없음 — Claude에게 변환 요청하세요">BDD</button>`;
+        }
         if (m.bdd.status === 'ready') {
           const editedMark = m.bdd.editedByHuman ? ' ✎' : '';
           return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-violet-100 text-violet-700 border-violet-300 hover:bg-violet-200">BDD${editedMark}</button>`;
@@ -1110,7 +1112,7 @@
         if (m.bdd.status === 'needs_more_info') {
           return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-amber-100 text-amber-700 border-amber-300 hover:bg-amber-200">BDD?</button>`;
         }
-        return '';
+        return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-gray-100 text-gray-300 border-gray-200 hover:bg-gray-200" title="BDD 없음">BDD</button>`;
       })();
 
       return `<div class="bg-gray-50 rounded-xl border border-gray-200 p-3 space-y-2">
