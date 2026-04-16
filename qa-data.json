@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 15:24",
+    "lastUpdated": "2026-04-16 06:30",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -61,7 +61,15 @@
               "text": "선분 위의 점이 만들어진 선분 위에서만 이동되고 그 밖으로 움직이지 못하는 상태.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "needs_more_info",
+                "note": "선분 위에서만 이동되는 것이 의도된 구속 동작인지, 아니면 자유 이동이 가능해야 하는데 막혀있는 버그인지 확인이 필요합니다.",
+                "content": "",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T01:31:05.765Z"
@@ -129,7 +137,14 @@
               "text": "기능 실행은 되나, 작동 방식의 순서가 다름. 데스크톱은 대칭 기준을 먼저 선택 > 대칭시킬 것 선택인데 이건 반대.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 점 대칭점 기능을 실행한 상태에서\nWhen 조작 순서에 따라 객체를 선택하면\nThen 데스크톱과 동일하게 대칭 기준(점/선)을 먼저 선택한 후 대칭시킬 객체를 선택하는 순서로 동작해야 한다\n\nBut 현재 순서가 반대로 동작함 (대칭시킬 객체 먼저 → 대칭 기준 선택)",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T03:23:28.610Z"
@@ -147,7 +162,14 @@
               "text": "기능 실행은 되나, 작동 방식의 순서가 다름. 데스크톱은 대칭 기준을 먼저 선택 > 대칭시킬 것 선택인데 이건 반대.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 선 대칭점 기능을 실행한 상태에서\nWhen 조작 순서에 따라 객체를 선택하면\nThen 데스크톱과 동일하게 대칭 기준(선)을 먼저 선택한 후 대칭시킬 객체를 선택하는 순서로 동작해야 한다\n\nBut 현재 순서가 반대로 동작함 (대칭시킬 객체 먼저 → 대칭 기준 선택)",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T03:23:31.632Z"
@@ -165,7 +187,14 @@
               "text": "점 생성은 되고 움직이지는 않는데, 좌표를 수정할 수 있는 UI가 없는 상태.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 좌표 고정점을 생성한 상태에서\nWhen 해당 점의 좌표를 변경하려 하면\nThen 좌표값을 직접 입력하거나 수정할 수 있는 UI(입력 필드 또는 속성 패널)가 제공되어야 한다\n\nBut 현재 좌표 수정 UI가 없어 생성 후 좌표를 바꿀 수 없음",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T04:18:09.148Z"
@@ -184,7 +213,14 @@
               "text": "동작은 하는데 생성시 수치 입력이 소수점으로 비율값 입력하는 방식. m:n입력으로 변경 필요, 수정할 수 있는 UI가 없는 상태.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 두 점의 내분점 기능을 실행한 상태에서\nWhen 내분 비율을 입력하면\nThen m:n 형식(예: 2:3)으로 정수 비율을 입력할 수 있어야 한다\n\nBut 현재 소수점 방식(예: 0.4)으로만 입력 가능하여 데스크톱 방식과 다름",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ]
         },
@@ -202,7 +238,14 @@
               "text": "동작은 하는데 생성시 수치 입력이 소수점으로 비율값 입력하는 방식. m:n입력으로 변경 필요",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 두 점의 외분점 기능을 실행한 상태에서\nWhen 외분 비율을 입력하면\nThen m:n 형식(예: 2:3)으로 정수 비율을 입력할 수 있어야 한다\n\nBut 현재 소수점 방식으로만 입력 가능하여 데스크톱 방식과 다름",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ]
         },
@@ -219,7 +262,14 @@
               "text": "n 입력값으로 실행 잘 되나, 입력쪽에 비워졌을 때 3이 고정값으로 나와서 수정 시도시 헷갈리는 상태. 지워질 수 있게되고 빈 값 입력시 오류가 더 맞을듯. 수정할 수 있는 UI가 없음",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 두 점의 등분점 기능 실행 후 n 입력 필드가 비어있는 상태에서\nWhen 입력 필드를 클릭하여 값을 수정하려 하면\nThen 기본값(3)이 placeholder로 표시되거나, 입력 전 필드가 비어있어 사용자가 직접 값을 입력할 수 있어야 한다\n\nBut 현재 3이 고정값으로 표시되어 수정 시도 시 혼란을 줌",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T04:21:08.588Z"
@@ -237,7 +287,14 @@
               "text": "n 입력값으로 실행 잘 되나, 입력쪽에 비워졌을 때 3이 고정값으로 나와서 수정 시도시 헷갈리는 상태. 지워질 수 있게되고 빈 값 입력시 오류가 더 맞을듯. 수정할 수 있는 UI가 없음, 수정할 수 있는 UI가 없는 상태.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "content": "Given 선분의 등분점 기능 실행 후 n 입력 필드가 비어있는 상태에서\nWhen 입력 필드를 클릭하여 값을 수정하려 하면\nThen 기본값(3)이 placeholder로 표시되거나, 입력 전 필드가 비어있어 사용자가 직접 값을 입력할 수 있어야 한다\n\nBut 현재 3이 고정값으로 표시되어 수정 시도 시 혼란을 줌",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T04:22:04.492Z"
@@ -256,7 +313,14 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "status": "ready",
+                "content": "Given 원호의 등분점 기능을 실행한 상태에서\nWhen 캔버스의 원(호)을 클릭하면\nThen 지정한 n등분점이 원호 위에 생성되어야 한다\n\nBut 원 클릭 시 오류가 발생하며 좌하단에 에러 메시지가 표시됨",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             },
             {
               "id": "m-1776226703858-p16bnc",
@@ -264,7 +328,14 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "status": "ready",
+                "content": "Given 원호의 등분점 기능을 실행한 상태에서\nWhen n값을 3 이상으로 설정하고 원호를 선택하면\nThen n등분된 점들이 원호 위에 생성되어야 한다\n\nBut 현재 2등분점만 구현되어 있으며, 다른 등분점처럼 수치 입력 방식(n 직접 입력)으로의 변경이 필요함",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T06:16:46.210Z"
@@ -283,7 +354,14 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "status": "ready",
+                "content": "Given 원호의 등분점(두 점 선택) 기능을 실행한 상태에서\nWhen 캔버스의 원(호)을 클릭하면\nThen 두 점 사이 원호 구간에 n등분점이 생성되어야 한다\n\nBut 원 클릭 시 오류가 발생하며 좌하단에 에러 메시지가 표시됨",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             },
             {
               "id": "m-1776226703858-p32b45",
@@ -291,7 +369,14 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "status": "ready",
+                "content": "Given 원호의 등분점(두 점 선택) 기능을 실행한 상태에서\nWhen n값을 3 이상으로 설정하고 두 점을 선택하면\nThen 두 점 사이 원호 구간에 n등분된 점들이 생성되어야 한다\n\nBut 현재 2등분점만 구현되어 있으며 수치 입력 방식으로의 변경이 필요함",
+                "source": "ai",
+                "editedByHuman": false,
+                "at": "2026-04-16T06:30:47.982Z"
+              }
             }
           ],
           "_modified": "2026-04-16T06:16:49.732Z"
