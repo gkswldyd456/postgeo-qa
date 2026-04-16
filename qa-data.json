@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 12:21",
+    "lastUpdated": "2026-04-16 12:23",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -120,9 +120,17 @@
           "name": "점 대칭점",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776309716296t7g",
+              "text": "기능 실행은 되나, 작동 방식의 순서가 다름. 데스크톱은 대칭 기준 점을 먼저 선택 > 대칭시킬 점 선택인데 이건 반대.",
+              "issue": null,
+              "resolved": false
+            }
+          ],
+          "_modified": "2026-04-16T03:23:04.854Z"
         },
         {
           "id": "p-09",
