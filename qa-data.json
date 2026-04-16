@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-15 16:28",
+    "lastUpdated": "2026-04-16 09:43",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1099,6 +1099,16 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "fp-41",
+          "name": "사차함수- 두 변곡점+한 점",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T00:43:34.854Z"
         },
         {
           "id": "fp-11",
