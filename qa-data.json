@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 09:43",
+    "lastUpdated": "2026-04-16 10:23",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1461,6 +1461,15 @@
           "issues": [],
           "_modified": "2026-04-15T04:09:05.388Z",
           "memos": []
+        },
+        {
+          "id": "fi-12",
+          "name": "극방정식",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     },
