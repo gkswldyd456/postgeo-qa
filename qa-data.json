@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 15:52",
+    "lastUpdated": "2026-04-16 16:11",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -437,9 +437,9 @@
           "name": "교점",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "_modified": "2026-04-15T04:10:23.228Z",
+          "_modified": "2026-04-16T07:11:20.286Z",
           "memos": []
         },
         {
@@ -447,9 +447,9 @@
           "name": "극댓점",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "_modified": "2026-04-15T04:10:21.196Z",
+          "_modified": "2026-04-16T07:11:20.897Z",
           "memos": []
         },
         {
@@ -457,9 +457,9 @@
           "name": "극솟점",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "_modified": "2026-04-15T04:10:18.027Z",
+          "_modified": "2026-04-16T07:11:21.234Z",
           "memos": []
         },
         {
@@ -467,9 +467,9 @@
           "name": "변곡점",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "_modified": "2026-04-15T04:10:16.067Z",
+          "_modified": "2026-04-16T07:11:22.033Z",
           "memos": []
         }
       ]
@@ -490,7 +490,8 @@
               "id": "m-1776321884353arh",
               "text": "예를들어, x축 평행선을 그린 후에 양 끝점에 이어서 두 점 선분을 그리려고 하면 양 끝점을 클릭할수가 없음.",
               "issue": null,
-              "resolved": false
+              "resolved": false,
+              "comments": []
             }
           ],
           "_modified": "2026-04-16T06:50:25.961Z"
@@ -517,7 +518,8 @@
               "id": "m-1776322022844uvo",
               "text": "조절점을 직선 바깥점으로 움직일때 직선의 길이의 변화가 없음. 즉, 처음 두 점 직선으로 그린 선분의 길이가 유지됨.",
               "issue": null,
-              "resolved": false
+              "resolved": false,
+              "comments": []
             }
           ],
           "_modified": "2026-04-16T06:48:32.290Z"
