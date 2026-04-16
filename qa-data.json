@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 13:23",
+    "lastUpdated": "2026-04-16 13:25",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1352,6 +1352,16 @@
           "memos": []
         },
         {
+          "id": "fp-42",
+          "name": "이심률 원뿔곡선",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T04:23:57.289Z"
+        },
+        {
           "id": "fp-28",
           "name": "자유곡선",
           "webMigrated": "no",
@@ -1944,16 +1954,6 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-16T01:27:18.517Z"
-        },
-        {
-          "id": "ce-32",
-          "name": "이심률 원뿔곡선",
-          "webMigrated": "no",
-          "detail": "not-started",
-          "qa": "not-tested",
-          "issues": [],
-          "notes": "",
-          "_modified": "2026-04-16T01:27:32.318Z"
         }
       ]
     },
