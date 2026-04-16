@@ -42,12 +42,15 @@
     tr.insert-row .insert-btn:hover { opacity: 1; background: #eff6ff; }
     .cat-drag-over { outline: 2px dashed #93c5fd; outline-offset: -2px; border-radius: 12px; background: rgba(59,130,246,0.04) !important; }
     .cat-drag-src { opacity: 0.4; }
+    .comment-item:hover .comment-del { opacity: 1; }
+    .comment-del { opacity: 0; transition: opacity .15s; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen">
 
-  <!-- ── Header + 동기화 배너 묶음 (sticky) ── -->
+  <!-- ── Header + 배너 묶음 (sticky) ── -->
   <div class="sticky top-0 z-20">
+
     <header class="bg-white border-b border-gray-200 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <div class="min-w-0">
@@ -97,32 +100,69 @@
     <div id="panel-checklist">
 
     <!-- ── Stats Bar ── -->
-    <div id="statsBar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4"></div>
+    <div id="statsBar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3"></div>
+
+    <!-- ── Dev Progress Bar ── -->
+    <div id="devProgressBar" class="mb-4"></div>
 
     <!-- ── Filter Bar ── -->
-    <div class="flex flex-wrap gap-2 mb-4 items-center">
-      <select id="filterCategory" onchange="applyFilters()"
-        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-        <option value="all">전체 카테고리</option>
-      </select>
-      <select id="filterMigrated" onchange="applyFilters()"
-        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-        <option value="all">웹이식: 전체</option>
-        <option value="yes">✓ 완료</option>
-        <option value="partial">△ 부분</option>
-        <option value="no">✗ 미이식</option>
-        <option value="unknown">? 미확인</option>
-      </select>
-      <select id="filterQa" onchange="applyFilters()"
-        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-        <option value="all">QA: 전체</option>
-        <option value="pass">통과</option>
-        <option value="fail">실패</option>
-        <option value="skip">건너뜀</option>
-        <option value="not-tested">미테스트</option>
-      </select>
-      <button onclick="resetFilters()" class="text-xs text-gray-400 hover:text-gray-700 px-2 py-1">↺ 초기화</button>
-      <span id="filterCount" class="text-xs text-gray-400 ml-auto"></span>
+    <div class="space-y-2 mb-4">
+      <!-- Row 1: 기존 필터 -->
+      <div class="flex flex-wrap gap-2 items-center">
+        <select id="filterCategory" onchange="applyFilters()"
+          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+          <option value="all">전체 카테고리</option>
+        </select>
+        <select id="filterMigrated" onchange="applyFilters()"
+          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+          <option value="all">웹이식: 전체</option>
+          <option value="yes">✓ 완료</option>
+          <option value="partial">△ 부분</option>
+          <option value="no">✗ 미이식</option>
+          <option value="unknown">? 미확인</option>
+        </select>
+        <select id="filterQa" onchange="applyFilters()"
+          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+          <option value="all">QA: 전체</option>
+          <option value="pass">통과</option>
+          <option value="fail">실패</option>
+          <option value="skip">건너뜀</option>
+          <option value="not-tested">미테스트</option>
+        </select>
+        <button onclick="resetFilters()" class="text-xs text-gray-400 hover:text-gray-700 px-2 py-1">↺ 초기화</button>
+        <span id="filterCount" class="text-xs text-gray-400 ml-auto"></span>
+      </div>
+      <!-- Row 2: 개발자 협업 필터 -->
+      <div class="flex flex-wrap gap-2 items-center">
+        <select id="filterDevStatus" onchange="applyFilters()"
+          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
+          <option value="all">개발상태: 전체</option>
+          <option value="null">미확인</option>
+          <option value="pending">보류</option>
+          <option value="in-progress">수정중</option>
+          <option value="done">수정완료</option>
+          <option value="hold">홀드</option>
+          <option value="not-issue">이슈아님</option>
+        </select>
+        <div class="flex items-center gap-1.5 border border-gray-200 rounded-lg px-2 py-1 bg-white">
+          <span class="text-xs text-gray-400">이슈</span>
+          <input id="filterIssueSearch" type="text" placeholder="#번호" oninput="applyFilters()"
+            class="w-16 text-xs border-0 bg-transparent focus:outline-none focus:ring-0 text-blue-600 font-mono">
+        </div>
+        <div class="flex items-center gap-1.5 border border-gray-200 rounded-lg px-2 py-1 bg-white">
+          <span class="text-xs text-gray-400">PR</span>
+          <input id="filterPrSearch" type="text" placeholder="#번호" oninput="applyFilters()"
+            class="w-16 text-xs border-0 bg-transparent focus:outline-none focus:ring-0 text-purple-600 font-mono">
+        </div>
+        <button id="btnDevUnreviewed" onclick="toggleDevUnreviewed()"
+          class="px-3 py-1.5 text-xs rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100">
+          🔔 개발자 미확인
+        </button>
+        <button id="btnQaRecheck" onclick="toggleQaRecheck()"
+          class="px-3 py-1.5 text-xs rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100">
+          ✅ QA 재확인 필요
+        </button>
+      </div>
     </div>
 
     <!-- ── Feature Table ── -->
@@ -172,11 +212,26 @@
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            개발자 GitHub 저장소 (이슈 링크용)
+            개발자 GitHub 저장소 (이슈/PR 링크용)
           </label>
           <input id="inputDevRepo" type="text" placeholder="예: devuser/postgeo-web"
             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <p class="text-xs text-gray-400 mt-1">입력 시 이슈 번호가 클릭 가능한 링크로 표시됩니다</p>
+          <p class="text-xs text-gray-400 mt-1">이슈·PR 번호 클릭 시 해당 GitHub 페이지로 이동</p>
+        </div>
+        <!-- ── 내 역할 (DEV 전용) ── -->
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+          <label class="block text-sm font-medium text-gray-700 mb-2">내 역할 (댓글 기본값)</label>
+          <div class="flex gap-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="myRole" id="roleQa" value="qa" class="accent-green-600">
+              <span class="text-sm text-gray-700">🟩 QA 테스터</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="myRole" id="roleDev" value="dev" class="accent-blue-600">
+              <span class="text-sm text-gray-700">🟦 개발자</span>
+            </label>
+          </div>
+          <p class="text-xs text-gray-400 mt-1.5">댓글 작성 시 기본 역할로 표시됩니다</p>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">코멘트 유형 관리</label>
@@ -201,23 +256,18 @@
   </div>
 
   <!-- ══════════════════════════════════════
-       이슈/메모 편집 모달
+       이슈/메모 편집 모달 (DEV 버전 — 카드형)
   ══════════════════════════════════════ -->
   <div id="issueModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
-    <div class="bg-white rounded-2xl shadow-2xl w-full mx-4 flex flex-col" style="max-width:480px;max-height:82vh">
+    <div class="bg-white rounded-2xl shadow-2xl w-full mx-4 flex flex-col" style="max-width:580px;max-height:88vh">
       <div class="flex items-start justify-between px-5 pt-5 pb-3 border-b border-gray-100 shrink-0">
         <div class="min-w-0 mr-3">
           <h2 class="text-sm font-bold text-gray-800">메모 관리</h2>
-          <p id="issueItemName" class="text-xs text-gray-400 truncate mt-0.5" style="max-width:320px"></p>
+          <p id="issueItemName" class="text-xs text-gray-400 truncate mt-0.5" style="max-width:380px"></p>
         </div>
         <button onclick="closeIssueModal()" class="text-gray-300 hover:text-gray-500 text-xl leading-none shrink-0">✕</button>
       </div>
-      <div class="px-5 pt-2 pb-0 shrink-0">
-        <div class="text-xs text-gray-400 font-medium grid gap-1" style="grid-template-columns:1fr 68px 54px 22px;padding:0 2px">
-          <span>메모 내용</span><span class="text-center">이슈</span><span class="text-center">해결</span><span></span>
-        </div>
-      </div>
-      <div id="memoList" class="flex-1 overflow-y-auto px-5 py-2 space-y-2 min-h-[80px]"></div>
+      <div id="memoList" class="flex-1 overflow-y-auto px-5 py-3 space-y-3 min-h-[80px]"></div>
       <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100 shrink-0">
         <button onclick="addMemoRow()" class="text-xs text-blue-600 hover:text-blue-700 font-medium">+ 메모 추가</button>
         <div class="flex gap-2">
@@ -314,13 +364,12 @@
   // ────────────────────────────────────────
   // 상수
   // ────────────────────────────────────────
-  const REPO_NAME    = 'postgeo-qa';
-  const DATA_PATH    = 'qa-data.json';
-  const GH_API       = 'https://api.github.com';
+  const REPO_NAME = 'postgeo-qa';
+  const DATA_PATH = 'qa-data.json';
+  const GH_API    = 'https://api.github.com';
 
   const CYCLES = {
     webMigrated: ['unknown','yes','partial','no'],
-    detail:      ['not-started','planned','in-progress','done'],
     qa:          ['not-tested','pass','fail','skip']
   };
 
@@ -331,12 +380,6 @@
       no:      { label:'✗ 미이식', cls:'bg-red-100 text-red-700 border-red-300' },
       unknown: { label:'? 미확인', cls:'bg-gray-100 text-gray-500 border-gray-300' }
     },
-    detail: {
-      done:          { label:'완료',   cls:'bg-green-100 text-green-800 border-green-300' },
-      'in-progress': { label:'진행중', cls:'bg-blue-100 text-blue-800 border-blue-300' },
-      planned:       { label:'계획',   cls:'bg-amber-100 text-amber-800 border-amber-300' },
-      'not-started': { label:'미시작', cls:'bg-gray-100 text-gray-500 border-gray-300' }
-    },
     qa: {
       pass:        { label:'통과',    cls:'bg-green-100 text-green-800 border-green-300' },
       fail:        { label:'실패',    cls:'bg-red-100 text-red-700 border-red-300' },
@@ -344,6 +387,45 @@
       'not-tested':{ label:'미테스트',cls:'bg-gray-100 text-gray-500 border-gray-300' }
     }
   };
+
+  // 개발자 진행상태 표시 정의
+  const DEV_STATUS_DISPLAY = {
+    'pending':     { label:'보류',     cls:'bg-amber-100 text-amber-700 border-amber-300' },
+    'in-progress': { label:'수정중',   cls:'bg-blue-100 text-blue-700 border-blue-300' },
+    'done':        { label:'수정완료', cls:'bg-green-100 text-green-700 border-green-300' },
+    'hold':        { label:'홀드',     cls:'bg-orange-100 text-orange-700 border-orange-300' },
+    'not-issue':   { label:'이슈아님', cls:'bg-purple-100 text-purple-700 border-purple-300' },
+  };
+  // devStatus 우선순위 (낮을수록 더 긴급/미완료)
+  const DEV_STATUS_PRIORITY = { null: 0, undefined: 0, 'pending': 1, 'in-progress': 2, 'hold': 3, 'not-issue': 4, 'done': 5 };
+
+  function getDevStatusDisplay(status) {
+    return DEV_STATUS_DISPLAY[status] || { label:'미확인', cls:'bg-gray-100 text-gray-400 border-gray-200' };
+  }
+
+  function worstDevStatus(memos) {
+    if (!memos || memos.length === 0) return undefined;
+    let worst = 'done';
+    let hasAny = false;
+    for (const m of memos) {
+      if (!m.text) continue;
+      hasAny = true;
+      const ms = m.devStatus ?? null;
+      if ((DEV_STATUS_PRIORITY[ms] ?? 0) < (DEV_STATUS_PRIORITY[worst] ?? 5)) {
+        worst = ms;
+      }
+    }
+    return hasAny ? worst : undefined;
+  }
+
+  function formatAt(iso) {
+    if (!iso) return '';
+    try {
+      const d = new Date(iso);
+      const p = n => String(n).padStart(2,'0');
+      return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+    } catch { return String(iso); }
+  }
 
   // ────────────────────────────────────────
   // 상태
@@ -355,25 +437,31 @@
   let editTarget = { catId: null, itemId: null };
   let _dragSrc = { catId: null, itemId: null };
   let _addItemInsertIdx = null;
-  let filters   = { category:'all', migrated:'all', qa:'all' };
+  let filters   = { category:'all', migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false };
   let collapsed = {};
-  let baseSnapshot = null; // 로드·저장 직후 스냅샷 — 병합 기준점
+  let baseSnapshot = null;
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
-    { id:48, name:220, migrated:72, qa:72, issue:200 };
+    { id:48, name:220, migrated:72, qa:72, issue:280 };
 
-  // ── 개인 UI 상태 (localStorage — 데이터와 독립, 브라우저 재시작 후에도 유지) ──
   const UI_KEY_COLLAPSED = 'uiCollapsed';
   const UI_KEY_FILTERS   = 'uiFilters';
+
+  const getMyRole = () => localStorage.getItem('my_role') || 'qa';
+
   (function restoreUiState() {
     try { const c = localStorage.getItem(UI_KEY_COLLAPSED); if (c) collapsed = JSON.parse(c); } catch {}
     try { const f = localStorage.getItem(UI_KEY_FILTERS);   if (f) Object.assign(filters, JSON.parse(f)); } catch {}
   })();
 
-  // ────────────────────────────────────────
-  // URL fragment 토큰 자동 추출 (비개발자 공유 링크용)
-  // 사용법: URL에 #ghowner=xxx&ghtoken=yyy 추가
-  // 최초 1회만 필요 — localStorage에 저장 후 URL 정리됨
-  // ────────────────────────────────────────
+  // URL ?view=dev → 개발자 미확인 필터 자동 활성
+  (function() {
+    try {
+      const params = new URLSearchParams(location.search);
+      if (params.get('view') === 'dev') filters.devUnreviewed = true;
+    } catch {}
+  })();
+
+  // URL fragment 토큰 자동 추출
   (function() {
     try {
       const params = new URLSearchParams(location.hash.slice(1));
@@ -382,11 +470,11 @@
       if (t) localStorage.setItem('gh_token', t);
       if (o) localStorage.setItem('gh_owner', o);
       if (t || o) history.replaceState(null, '', location.pathname + location.search);
-    } catch(e) {}
+    } catch {}
   })();
 
-  const getOwner  = () => localStorage.getItem('gh_owner')  || '';
-  const getToken  = () => localStorage.getItem('gh_token')  || '';
+  const getOwner   = () => localStorage.getItem('gh_owner')  || '';
+  const getToken   = () => localStorage.getItem('gh_token')  || '';
   const getDevRepo = () => localStorage.getItem('gh_devrepo') || qaData?.config?.developerRepo || '';
 
   // ────────────────────────────────────────
@@ -394,14 +482,11 @@
   // ────────────────────────────────────────
   async function loadData() {
     try {
-      // GitHub Contents API 사용 (raw URL CDN 우회 — PUT 커밋 직후에도 즉시 최신 반영)
-      // 공개 저장소라 토큰 없이도 동작 (60 req/hr 제한, 토큰 있으면 5000 req/hr)
       const _o = getOwner() || 'gkswldyd456';
       const _t = getToken();
       const _headers = { 'User-Agent': 'PostGeoQA' };
       if (_t) _headers['Authorization'] = `Bearer ${_t}`;
 
-      // sha + content 한 번에 조회 → 폴링 즉시 활성화
       const metaRes = await fetch(
         `${GH_API}/repos/${_o}/${REPO_NAME}/contents/${DATA_PATH}`,
         { headers: _headers }
@@ -411,27 +496,15 @@
       fileSha = meta.sha;
       qaData = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g,'')))));
 
-      // 이전 버전 호환: 없는 필드 초기화
       if (!qaData.overallNotes) qaData.overallNotes = [];
       if (!qaData.config.noteTypes) qaData.config.noteTypes = ['일반','요청','질문','버그','기타'];
-      baseSnapshot = JSON.parse(JSON.stringify(qaData)); // 병합 기준점 스냅샷
+      baseSnapshot = JSON.parse(JSON.stringify(qaData));
       const savedDevRepo = localStorage.getItem('gh_devrepo');
       if (savedDevRepo) qaData.config.developerRepo = savedDevRepo;
       renderAll();
     } catch (e) {
       showError(e.message);
     }
-  }
-
-  function showSetupPrompt() {
-    document.getElementById('featureTable').innerHTML = `
-      <div class="text-center py-20 text-gray-400">
-        <div class="text-5xl mb-4">📋</div>
-        <p class="text-lg font-semibold text-gray-600 mb-2">처음 사용하시나요?</p>
-        <p class="text-sm mb-6">GitHub 사용자명과 Personal Access Token을 설정해주세요.</p>
-        <button onclick="openSettings()"
-          class="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">⚙ 설정 열기</button>
-      </div>`;
   }
 
   function showError(msg) {
@@ -453,14 +526,19 @@
   function renderAll() {
     if (!qaData) return;
     renderStats();
+    renderDevProgressBar();
     renderCategoryFilter();
     renderTable();
     document.getElementById('lastUpdated').textContent =
       `마지막 업데이트: ${qaData.config.lastUpdated || '—'}`;
-    // 필터 select UI를 filters 객체에 동기화 (localStorage 복원값 반영)
-    document.getElementById('filterMigrated').value = filters.migrated;
-    document.getElementById('filterQa').value       = filters.qa;
-    // 스크롤 위치 복원 (sessionStorage — 동일 탭 새로고침만 유지, 탭 닫으면 초기화)
+    document.getElementById('filterMigrated').value  = filters.migrated;
+    document.getElementById('filterQa').value        = filters.qa;
+    document.getElementById('filterDevStatus').value = filters.devStatus;
+    const iss = document.getElementById('filterIssueSearch');
+    const prs = document.getElementById('filterPrSearch');
+    if (iss) iss.value = filters.issueSearch || '';
+    if (prs) prs.value = filters.prSearch    || '';
+    updateFilterBtnStyles();
     const _sy = sessionStorage.getItem('uiScrollY');
     if (_sy) requestAnimationFrame(() => window.scrollTo({ top: +_sy, behavior: 'instant' }));
   }
@@ -499,6 +577,44 @@
       </div>`;
   }
 
+  // ── 개발자 검토 진행 바 ──
+  function renderDevProgressBar() {
+    const bar = document.getElementById('devProgressBar');
+    if (!bar || !qaData) return;
+    const allMemos = [];
+    for (const cat of qaData.categories) {
+      for (const item of cat.items) {
+        for (const m of (item.memos || [])) {
+          if (m.text) allMemos.push(m);
+        }
+      }
+    }
+    const total    = allMemos.length;
+    const reviewed = allMemos.filter(m => m.devStatus !== null && m.devStatus !== undefined).length;
+    const done     = allMemos.filter(m => m.devStatus === 'done').length;
+    const inProg   = allMemos.filter(m => m.devStatus === 'in-progress').length;
+    const pending  = allMemos.filter(m => m.devStatus === 'pending').length;
+    if (total === 0) { bar.innerHTML = ''; return; }
+    const pct = Math.round(reviewed / total * 100);
+    bar.innerHTML = `
+      <div class="bg-white rounded-xl border border-gray-200 p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-gray-600">개발자 검토 진행률</span>
+          <div class="flex gap-3 text-xs text-gray-400">
+            <span class="text-green-600 font-medium">수정완료 ${done}</span>
+            <span class="text-blue-600">수정중 ${inProg}</span>
+            <span class="text-amber-600">보류 ${pending}</span>
+            <span>미확인 ${total - reviewed}</span>
+            <span class="text-gray-500">/ 전체 ${total}</span>
+          </div>
+        </div>
+        <div class="bg-gray-100 rounded-full h-2 overflow-hidden">
+          <div class="h-2 rounded-full bg-blue-500 transition-all duration-500" style="width:${pct}%"></div>
+        </div>
+        <div class="text-xs text-gray-400 mt-1 text-right">${pct}% 검토됨</div>
+      </div>`;
+  }
+
   // ────────────────────────────────────────
   // 카테고리 필터 드롭다운
   // ────────────────────────────────────────
@@ -529,10 +645,37 @@
 
       const items = cat.items.filter(item => {
         if (filters.migrated !== 'all' && item.webMigrated !== filters.migrated) return false;
-        if (filters.qa      !== 'all' && item.qa          !== filters.qa)       return false;
+        if (filters.qa       !== 'all' && item.qa          !== filters.qa)       return false;
+        // devStatus 필터
+        if (filters.devStatus !== 'all') {
+          const memos = item.memos || [];
+          if (filters.devStatus === 'null') {
+            if (!memos.some(m => m.text && (m.devStatus === null || m.devStatus === undefined))) return false;
+          } else {
+            if (!memos.some(m => m.devStatus === filters.devStatus)) return false;
+          }
+        }
+        // 이슈번호 검색
+        if (filters.issueSearch) {
+          const q = filters.issueSearch.replace(/^#/,'').trim();
+          if (q && !(item.memos||[]).some(m => m.issue === q)) return false;
+        }
+        // PR번호 검색
+        if (filters.prSearch) {
+          const q = filters.prSearch.replace(/^#/,'').trim();
+          if (q && !(item.memos||[]).some(m => m.pr === q)) return false;
+        }
+        // 미확인 토글
+        if (filters.devUnreviewed) {
+          if (!(item.memos||[]).some(m => m.text && (m.devStatus === null || m.devStatus === undefined))) return false;
+        }
+        // QA 재확인 토글 (수정완료지만 resolved=false)
+        if (filters.qaRecheck) {
+          if (!(item.memos||[]).some(m => m.devStatus === 'done' && !m.resolved)) return false;
+        }
         return true;
       });
-      // 필터링으로 0개가 된 경우만 건너뜀 (진짜 빈 카테고리는 표시)
+
       if (items.length === 0 && cat.items.length > 0) continue;
       totalShown += items.length;
 
@@ -583,34 +726,56 @@
         const qa = DISPLAY.qa[item.qa]                   || DISPLAY.qa['not-tested'];
         const rowBg = i % 2 ? 'bg-gray-50/40' : '';
 
-        // 이슈/메모 셀 - memos[] 기반 (notes 폴백 지원)
         const _memos = item.memos || (item.notes ? [{ id:'leg', text:item.notes, issue:null, resolved:false }] : []);
         const _issued = _memos.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue));
-        const _resolved = _memos.filter(m => m.resolved).length;
-        const _first = _memos[0];
+        const _prs    = _memos.filter(m => m.pr && /^\d+$/.test(String(m.pr)));
+        const _totalComments = _memos.reduce((n, m) => n + (m.comments?.length || 0), 0);
+        const _hasUnreviewed = _memos.some(m => m.text && (m.devStatus === null || m.devStatus === undefined));
+        const _wStatus = worstDevStatus(_memos);
+
         let cellHtml = '';
         if (_memos.length === 0) {
           cellHtml = '<span class="text-gray-300 text-xs hover:text-blue-400">+ 추가</span>';
         } else {
+          const _first = _memos[0];
           if (_first?.text) {
-            const _prev = _first.text.length > 26 ? _first.text.slice(0,26) + '…' : _first.text;
+            const _prev = _first.text.length > 28 ? _first.text.slice(0,28) + '…' : _first.text;
             cellHtml += `<div class="text-xs text-gray-500 line-clamp-1 leading-snug">${escapeHtml(_prev)}</div>`;
           }
           const _parts = [];
           if (_memos.length > 1) _parts.push(`<span class="text-gray-300 text-xs">+${_memos.length-1}</span>`);
+
+          // 이슈 뱃지 (파란색)
           for (const m of _issued) {
             _parts.push(devRepo
               ? `<a href="https://github.com/${devRepo}/issues/${m.issue}" target="_blank" onclick="event.stopPropagation()" class="text-blue-500 hover:underline font-mono text-xs">#${m.issue}</a>`
               : `<span class="text-gray-500 font-mono text-xs">#${m.issue}</span>`);
           }
-          if (_resolved > 0) _parts.push(`<span class="text-green-500 text-xs font-medium">✓${_resolved}</span>`);
+          // PR 뱃지 (보라색)
+          for (const m of _prs) {
+            _parts.push(devRepo
+              ? `<a href="https://github.com/${devRepo}/pull/${m.pr}" target="_blank" onclick="event.stopPropagation()" class="text-purple-500 hover:underline font-mono text-xs">PR#${m.pr}</a>`
+              : `<span class="text-purple-400 font-mono text-xs">PR#${m.pr}</span>`);
+          }
+          // devStatus 뱃지 (가장 우선순위 높은 것)
+          if (_wStatus !== undefined) {
+            const dsd = getDevStatusDisplay(_wStatus);
+            _parts.push(`<span class="px-1.5 py-0.5 rounded border text-xs ${dsd.cls} whitespace-nowrap">${dsd.label}</span>`);
+          }
+          // 댓글 수
+          if (_totalComments > 0) {
+            _parts.push(`<span class="text-gray-400 text-xs">💬${_totalComments}</span>`);
+          }
+          // 미확인 알림
+          if (_hasUnreviewed) {
+            _parts.push(`<span class="text-amber-500 text-xs" title="개발자 미확인 메모">🔔</span>`);
+          }
           if (_parts.length) cellHtml += `<div class="flex flex-wrap items-center gap-0.5 mt-0.5">${_parts.join('')}</div>`;
         }
 
         const catItemIdx = cat.items.indexOf(item);
         const colSpan = isEditMode ? 6 : 5;
 
-        // 첫 행 앞에 삽입 버튼
         if (isEditMode && i === 0) {
           html += `<tr class="insert-row"><td colspan="${colSpan}">
             <div class="insert-btn" onclick="openAddItemModal('${cat.id}',${catItemIdx})">＋ 여기에 추가</div>
@@ -657,7 +822,6 @@
                     </td>
                   </tr>`;
 
-        // 각 행 뒤에 삽입 버튼
         if (isEditMode) {
           html += `<tr class="insert-row"><td colspan="${colSpan}">
             <div class="insert-btn" onclick="openAddItemModal('${cat.id}',${catItemIdx + 1})">＋ 여기에 추가</div>
@@ -665,7 +829,6 @@
         }
       });
 
-      // 빈 카테고리 placeholder
       if (cat.items.length === 0) {
         const colSpan = isEditMode ? 6 : 5;
         if (isEditMode) {
@@ -678,12 +841,7 @@
         </td></tr>`;
       }
 
-      html += `
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>`;
+      html += `</tbody></table></div></div></div>`;
     }
 
     if (isEditMode) {
@@ -714,17 +872,13 @@
       const th  = handle.parentElement;
       const col = th.dataset.col;
       if (!col) return;
-
       handle.addEventListener('mousedown', e => {
         e.preventDefault();
         handle.classList.add('dragging');
-        const startX = e.pageX;
-        const startW = th.offsetWidth;
-
+        const startX = e.pageX, startW = th.offsetWidth;
         function onMove(e) {
           const newW = Math.max(40, startW + e.pageX - startX);
           colWidths[col] = newW;
-          // 같은 data-col을 가진 모든 테이블의 col 요소 업데이트
           document.querySelectorAll(`th[data-col="${col}"]`).forEach(targetTh => {
             const table = targetTh.closest('table');
             if (!table) return;
@@ -733,14 +887,12 @@
             if (cols[thIndex]) cols[thIndex].style.width = newW + 'px';
           });
         }
-
         function onUp() {
           handle.classList.remove('dragging');
           localStorage.setItem('colWidths', JSON.stringify(colWidths));
           document.removeEventListener('mousemove', onMove);
           document.removeEventListener('mouseup', onUp);
         }
-
         document.addEventListener('mousemove', onMove);
         document.addEventListener('mouseup', onUp);
       });
@@ -759,6 +911,7 @@
     item._modified = new Date().toISOString();
     markDirty();
     renderStats();
+    renderDevProgressBar();
     renderTable();
   }
 
@@ -770,44 +923,84 @@
     localStorage.setItem(UI_KEY_COLLAPSED, JSON.stringify(collapsed));
     const el    = document.getElementById(`cat-${catId}`);
     const arrow = document.getElementById(`arrow-${catId}`);
-    if (collapsed[catId]) {
-      el.classList.add('hidden');
-      arrow.classList.remove('rotate-90');
-    } else {
-      el.classList.remove('hidden');
-      arrow.classList.add('rotate-90');
-    }
+    if (collapsed[catId]) { el.classList.add('hidden'); arrow.classList.remove('rotate-90'); }
+    else                  { el.classList.remove('hidden'); arrow.classList.add('rotate-90'); }
   }
 
   // ────────────────────────────────────────
   // 필터
   // ────────────────────────────────────────
   function applyFilters() {
-    filters.category = document.getElementById('filterCategory').value;
-    filters.migrated = document.getElementById('filterMigrated').value;
-    filters.qa       = document.getElementById('filterQa').value;
+    filters.category   = document.getElementById('filterCategory').value;
+    filters.migrated   = document.getElementById('filterMigrated').value;
+    filters.qa         = document.getElementById('filterQa').value;
+    filters.devStatus  = document.getElementById('filterDevStatus').value;
+    filters.issueSearch = (document.getElementById('filterIssueSearch')?.value || '').trim().replace(/^#/,'');
+    filters.prSearch    = (document.getElementById('filterPrSearch')?.value    || '').trim().replace(/^#/,'');
     renderTable();
     localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
   }
 
+  function toggleDevUnreviewed() {
+    filters.devUnreviewed = !filters.devUnreviewed;
+    updateFilterBtnStyles();
+    renderTable();
+    localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
+  }
+
+  function toggleQaRecheck() {
+    filters.qaRecheck = !filters.qaRecheck;
+    updateFilterBtnStyles();
+    renderTable();
+    localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
+  }
+
+  function updateFilterBtnStyles() {
+    const unreviewedBtn = document.getElementById('btnDevUnreviewed');
+    const recheckBtn    = document.getElementById('btnQaRecheck');
+    if (unreviewedBtn) {
+      unreviewedBtn.className = filters.devUnreviewed
+        ? 'px-3 py-1.5 text-xs rounded-lg border font-medium bg-amber-100 border-amber-400 text-amber-700'
+        : 'px-3 py-1.5 text-xs rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100';
+    }
+    if (recheckBtn) {
+      recheckBtn.className = filters.qaRecheck
+        ? 'px-3 py-1.5 text-xs rounded-lg border font-medium bg-green-100 border-green-400 text-green-700'
+        : 'px-3 py-1.5 text-xs rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100';
+    }
+  }
+
   function resetFilters() {
-    filters = { category:'all', migrated:'all', qa:'all' };
-    ['filterCategory','filterMigrated','filterQa']
-      .forEach(id => { document.getElementById(id).value = 'all'; });
+    filters = { category:'all', migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false };
+    ['filterCategory','filterMigrated','filterQa','filterDevStatus'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.value = 'all';
+    });
+    const iss = document.getElementById('filterIssueSearch');
+    const prs = document.getElementById('filterPrSearch');
+    if (iss) iss.value = '';
+    if (prs) prs.value = '';
+    updateFilterBtnStyles();
     renderTable();
     localStorage.removeItem(UI_KEY_FILTERS);
   }
 
   // ────────────────────────────────────────
-  // 이슈/메모 모달 (다중 메모 관리)
+  // 이슈/메모 모달 (DEV 버전 — 카드형 + 댓글)
   // ────────────────────────────────────────
   let _editMemos = [];
 
   function _migrateItemMemos(item) {
     if (!item.memos) {
       item.memos = item.notes
-        ? [{ id: 'm-' + Date.now() + Math.random().toString(36).slice(2,5), text: item.notes, issue: null, resolved: false }]
+        ? [{ id:'m-'+Date.now()+Math.random().toString(36).slice(2,5), text:item.notes, issue:null, pr:null, resolved:false, devStatus:null, devStatusAt:null, comments:[] }]
         : [];
+    }
+    // 기존 메모에 새 필드 없으면 초기화
+    for (const m of item.memos) {
+      if (m.pr        === undefined) m.pr        = null;
+      if (m.devStatus === undefined) m.devStatus = null;
+      if (m.devStatusAt === undefined) m.devStatusAt = null;
+      if (!Array.isArray(m.comments)) m.comments = [];
     }
   }
 
@@ -829,27 +1022,88 @@
   }
 
   function renderMemoList() {
+    const myRole = getMyRole();
     if (_editMemos.length === 0) {
       document.getElementById('memoList').innerHTML =
         '<div class="text-center py-6 text-gray-300 text-xs">메모가 없습니다. <b>+ 메모 추가</b>를 눌러 추가하세요.</div>';
       return;
     }
+
     document.getElementById('memoList').innerHTML = _editMemos.map((m, i) => {
-      const issueVal = m.issue || '';
+      const dsd = getDevStatusDisplay(m.devStatus);
+      const comments = m.comments || [];
+
+      const commentsHtml = comments.length > 0 ? `
+        <div class="border-t border-gray-200 mt-2 pt-2 space-y-0">
+          ${comments.map((c, ci) => {
+            const roleCls = c.role === 'dev'
+              ? 'bg-blue-100 text-blue-700'
+              : 'bg-green-100 text-green-700';
+            return `<div class="comment-item flex gap-2 items-start py-1.5 border-b border-gray-50 last:border-0">
+              <span class="shrink-0 px-1.5 py-0.5 rounded text-xs font-medium ${roleCls}">${escapeHtml(c.role)}</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs text-gray-700 whitespace-pre-wrap break-words">${escapeHtml(c.text)}</div>
+                <div class="text-xs text-gray-300 mt-0.5">${formatAt(c.at)}</div>
+              </div>
+              <button onclick="deleteMemoComment(${i},${ci})" class="comment-del text-gray-200 hover:text-red-400 text-sm leading-none px-1 mt-0.5">✕</button>
+            </div>`;
+          }).join('')}
+        </div>` : '';
+
       const resolvedCls = m.resolved
-        ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+        ? 'bg-green-50 text-green-700 border-green-300 hover:bg-green-100'
         : 'bg-gray-50 text-gray-400 border-gray-200 hover:bg-gray-100';
-      return `<div class="grid items-start gap-1" style="grid-template-columns:1fr 68px 54px 22px">
+
+      const statusAtHtml = m.devStatusAt
+        ? `<span class="text-xs text-gray-300">${formatAt(m.devStatusAt)}</span>` : '';
+
+      return `<div class="bg-gray-50 rounded-xl border border-gray-200 p-3 space-y-2">
         <textarea id="mt-${i}" rows="2"
-          class="text-xs border border-gray-200 rounded px-2 py-1 resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 w-full"
+          class="w-full text-xs border border-gray-200 rounded-lg px-2 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white"
           placeholder="메모 내용...">${escapeHtml(m.text)}</textarea>
-        <input id="mi-${i}" type="text" value="${escapeHtml(issueVal)}" placeholder="번호 or X"
-          class="text-xs border border-gray-200 rounded px-1.5 py-1 text-center focus:outline-none focus:ring-1 focus:ring-blue-400 w-full">
-        <button onclick="toggleMemoResolved(${i})"
-          class="text-xs border rounded px-1 py-1 transition-colors leading-tight ${resolvedCls}">
-          ${m.resolved ? '✓해결' : '─미결'}
-        </button>
-        <button onclick="deleteMemoRow(${i})" class="text-gray-200 hover:text-red-400 text-sm leading-none mt-1 text-center">✕</button>
+
+        <div class="flex flex-wrap gap-2 items-center">
+          <div class="flex items-center gap-1">
+            <span class="text-xs text-gray-400 shrink-0">이슈</span>
+            <input id="mi-${i}" type="text" value="${escapeHtml(m.issue || '')}" placeholder="번호 or X"
+              class="w-20 text-xs border border-blue-200 rounded px-1.5 py-1 text-center focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white font-mono">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-xs text-gray-400 shrink-0">PR</span>
+            <input id="mp-${i}" type="text" value="${escapeHtml(m.pr || '')}" placeholder="번호"
+              class="w-20 text-xs border border-purple-200 rounded px-1.5 py-1 text-center focus:outline-none focus:ring-1 focus:ring-purple-400 bg-white font-mono">
+          </div>
+          <select id="ms-${i}" class="text-xs border border-gray-200 rounded px-1.5 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-400">
+            <option value="">미확인</option>
+            <option value="pending"     ${m.devStatus==='pending'     ?'selected':''}>보류</option>
+            <option value="in-progress" ${m.devStatus==='in-progress' ?'selected':''}>수정중</option>
+            <option value="done"        ${m.devStatus==='done'        ?'selected':''}>수정완료</option>
+            <option value="hold"        ${m.devStatus==='hold'        ?'selected':''}>홀드</option>
+            <option value="not-issue"   ${m.devStatus==='not-issue'   ?'selected':''}>이슈아님</option>
+          </select>
+          ${statusAtHtml}
+          <div class="ml-auto flex gap-1 shrink-0">
+            <button onclick="toggleMemoResolved(${i})"
+              class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap ${resolvedCls}">
+              ${m.resolved ? '✓ 해결됨' : '─ 미결'}
+            </button>
+            <button onclick="deleteMemoRow(${i})" class="text-gray-300 hover:text-red-400 text-base leading-none px-1">✕</button>
+          </div>
+        </div>
+
+        ${commentsHtml}
+
+        <div class="flex gap-2 items-center pt-1 border-t border-gray-100">
+          <select id="mc-role-${i}" class="text-xs border border-gray-200 rounded px-1.5 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 shrink-0">
+            <option value="qa"  ${myRole==='qa' ?'selected':''}>QA</option>
+            <option value="dev" ${myRole==='dev'?'selected':''}>Dev</option>
+          </select>
+          <input id="mc-text-${i}" type="text" placeholder="댓글 추가..."
+            class="flex-1 text-xs border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white"
+            onkeydown="if(event.key==='Enter'){event.preventDefault();addMemoComment(${i})}">
+          <button onclick="addMemoComment(${i})"
+            class="shrink-0 text-xs bg-gray-100 border border-gray-200 rounded px-2 py-1 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700">전송</button>
+        </div>
       </div>`;
     }).join('');
   }
@@ -858,16 +1112,33 @@
     _editMemos.forEach((m, i) => {
       const t = document.getElementById(`mt-${i}`);
       const v = document.getElementById(`mi-${i}`);
+      const p = document.getElementById(`mp-${i}`);
+      const s = document.getElementById(`ms-${i}`);
       if (t) m.text  = t.value.trim();
       if (v) m.issue = v.value.trim().replace(/^#/,'') || null;
+      if (p) m.pr    = p.value.trim().replace(/^#/,'') || null;
+      if (s) {
+        const newStatus = s.value || null;
+        if (newStatus !== m.devStatus) {
+          m.devStatus   = newStatus;
+          m.devStatusAt = newStatus ? new Date().toISOString() : null;
+        }
+      }
     });
   }
 
   function addMemoRow() {
     _syncMemoForm();
-    _editMemos.push({ id: 'm-' + Date.now() + Math.random().toString(36).slice(2,5), text: '', issue: null, resolved: false });
+    _editMemos.push({
+      id: 'm-' + Date.now() + Math.random().toString(36).slice(2,5),
+      text: '', issue: null, pr: null, resolved: false,
+      devStatus: null, devStatusAt: null, comments: []
+    });
     renderMemoList();
-    setTimeout(() => { const els = document.querySelectorAll('#memoList textarea'); if (els.length) els[els.length-1].focus(); }, 30);
+    setTimeout(() => {
+      const els = document.querySelectorAll('#memoList textarea');
+      if (els.length) els[els.length-1].focus();
+    }, 30);
   }
 
   function deleteMemoRow(index) {
@@ -882,16 +1153,47 @@
     renderMemoList();
   }
 
+  function addMemoComment(memoIdx) {
+    _syncMemoForm();
+    const roleEl = document.getElementById(`mc-role-${memoIdx}`);
+    const textEl = document.getElementById(`mc-text-${memoIdx}`);
+    const role = roleEl?.value || getMyRole();
+    const text = textEl?.value.trim();
+    if (!text) return;
+    if (!_editMemos[memoIdx].comments) _editMemos[memoIdx].comments = [];
+    _editMemos[memoIdx].comments.push({
+      id: 'c-' + Date.now() + Math.random().toString(36).slice(2,5),
+      role,
+      text,
+      at: new Date().toISOString()
+    });
+    renderMemoList();
+    // 스크롤: 해당 카드 하단으로
+    setTimeout(() => {
+      const cards = document.querySelectorAll('#memoList > div');
+      if (cards[memoIdx]) cards[memoIdx].scrollIntoView({ behavior:'smooth', block:'nearest' });
+    }, 50);
+  }
+
+  function deleteMemoComment(memoIdx, commentIdx) {
+    _syncMemoForm();
+    if (_editMemos[memoIdx]?.comments) {
+      _editMemos[memoIdx].comments.splice(commentIdx, 1);
+    }
+    renderMemoList();
+  }
+
   function saveMemos() {
     _syncMemoForm();
     const cat  = qaData.categories.find(c => c.id === editTarget.catId);
     const item = cat?.items.find(i => i.id === editTarget.itemId);
     if (!item) return;
-    item.memos  = _editMemos.filter(m => m.text || (m.issue && m.issue !== 'X'));
+    item.memos  = _editMemos.filter(m => m.text || (m.issue && m.issue !== 'X') || m.pr || (m.comments && m.comments.length > 0));
     item.issues = item.memos.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
     item._modified = new Date().toISOString();
     markDirty();
     closeIssueModal();
+    renderDevProgressBar();
     renderTable();
   }
 
@@ -899,11 +1201,14 @@
   // 설정 모달
   // ────────────────────────────────────────
   function openSettings() {
-    document.getElementById('inputOwner').value  = getOwner();
-    document.getElementById('inputToken').value  = getToken();
+    document.getElementById('inputOwner').value   = getOwner();
+    document.getElementById('inputToken').value   = getToken();
     document.getElementById('inputDevRepo').value = qaData?.config?.developerRepo || '';
     updateRepoPreview();
     renderNoteTypesList();
+    const role = getMyRole();
+    document.getElementById('roleQa').checked  = role !== 'dev';
+    document.getElementById('roleDev').checked = role === 'dev';
     document.getElementById('settingsModal').classList.remove('hidden');
   }
 
@@ -921,9 +1226,11 @@
     const owner   = document.getElementById('inputOwner').value.trim();
     const token   = document.getElementById('inputToken').value.trim();
     const devRepo = document.getElementById('inputDevRepo').value.trim();
+    const role    = document.querySelector('input[name="myRole"]:checked')?.value || 'qa';
     if (owner)  localStorage.setItem('gh_owner',   owner);
     if (token)  localStorage.setItem('gh_token',   token);
     localStorage.setItem('gh_devrepo', devRepo);
+    localStorage.setItem('my_role',    role);
     if (qaData) qaData.config.developerRepo = devRepo;
     closeSettings();
     renderAll();
@@ -935,90 +1242,110 @@
   function mergeQaData(base, local, remote) {
     const merged = JSON.parse(JSON.stringify(remote));
 
-    // ── 카테고리 레벨 3-way merge ──
     const baseCatMap  = new Map((base?.categories || []).map(c => [c.id, c]));
     const localCatMap = new Map(local.categories.map(c => [c.id, c]));
     const initMergedIds = new Set(merged.categories.map(c => c.id));
 
-    // 로컬에서 새로 추가한 카테고리 → merged에 삽입
     for (const [catId, localCat] of localCatMap) {
       if (!initMergedIds.has(catId) && !baseCatMap.has(catId)) {
         merged.categories.push(JSON.parse(JSON.stringify(localCat)));
       }
     }
-
-    // 로컬에서 삭제한 카테고리 → merged에서 제거
     merged.categories = merged.categories.filter(mCat =>
       !(baseCatMap.has(mCat.id) && !localCatMap.has(mCat.id))
     );
 
     for (const [, localCat] of localCatMap) {
       const mergedCat = merged.categories.find(c => c.id === localCat.id);
-      if (!mergedCat) continue; // 원격에서 삭제한 카테고리 → 원격 삭제 우선
+      if (!mergedCat) continue;
       const baseCat = baseCatMap.get(localCat.id);
 
-      // 카테고리 이름: 로컬에서 변경됐으면 로컬 우선
       if (baseCat && localCat.name !== baseCat.name) mergedCat.name = localCat.name;
 
       for (const localItem of localCat.items) {
         const mergedItem = mergedCat.items.find(i => i.id === localItem.id);
         if (!mergedItem) {
-          // 로컬에서 새로 추가한 항목 → 그대로 삽입
           mergedCat.items.push(JSON.parse(JSON.stringify(localItem)));
           continue;
         }
         const baseItem = baseCat?.items?.find(i => i.id === localItem.id);
 
-        // 상태 필드: _modified 타임스탬프 최신값 우선
+        // 항목 이름: 로컬에서 변경됐으면 로컬 우선 (버그 수정 — 이름 변경 후 저장해도 되돌아가던 문제)
+        if (baseItem && localItem.name !== baseItem.name) mergedItem.name = localItem.name;
+
         const localMod  = localItem._modified  || '1970-01-01T00:00:00.000Z';
         const mergedMod = mergedItem._modified || '1970-01-01T00:00:00.000Z';
         if (localMod > mergedMod) {
           mergedItem.webMigrated = localItem.webMigrated;
-          mergedItem.detail      = localItem.detail;
           mergedItem.qa          = localItem.qa;
           mergedItem._modified   = localItem._modified;
         }
 
-        // 이슈 번호: 3-way merge (로컬 삭제 반영 + 원격 추가 보존)
+        // 이슈 번호: 3-way merge
         {
           const baseSet   = new Set(baseItem?.issues || []);
           const localSet  = new Set(localItem.issues || []);
           const remoteSet = new Set(mergedItem.issues || []);
           const final = new Set(remoteSet);
-          // 로컬에서 새로 추가한 것 → merged에 추가
-          for (const i of localSet) { if (!baseSet.has(i)) final.add(i); }
-          // 로컬에서 의도적으로 삭제한 것 → merged에서도 제거
-          for (const i of baseSet)  { if (!localSet.has(i)) final.delete(i); }
+          for (const i of localSet)  { if (!baseSet.has(i)) final.add(i); }
+          for (const i of baseSet)   { if (!localSet.has(i)) final.delete(i); }
           mergedItem.issues = [...final];
         }
 
-        // 메모(레거시): 로컬에서 변경됐으면 로컬 우선, 아니면 원격 유지
-        const baseNotes = baseItem?.notes || '';
-        if (localItem.notes !== baseNotes) mergedItem.notes = localItem.notes;
-
-        // memos[]: 3-way merge by id (overallNotes와 동일 방식)
+        // memos[]: 3-way merge — DEV 버전은 pr, devStatus, comments[] 포함
         if (localItem.memos !== undefined || mergedItem.memos !== undefined) {
-          if (localItem.memos === undefined) {
-            // 로컬이 memos 미지원 구버전 → 원격 memos/issues 그대로 유지 (이미 merged에 설정됨)
-          } else {
+          if (localItem.memos !== undefined) {
             const bMemoMap = new Map((baseItem?.memos||[]).map(m=>[m.id,m]));
             const lMemoMap = new Map((localItem.memos||[]).map(m=>[m.id,m]));
             const rMemoMap = new Map((mergedItem.memos||[]).map(m=>[m.id,m]));
             const memoRes = [];
+
             for (const [id, rMemo] of rMemoMap) {
               if (!bMemoMap.has(id)) {
-                // 원격에서 새로 추가 → 보존
-                memoRes.push(rMemo);
+                memoRes.push(rMemo); // 원격 새로 추가
               } else if (lMemoMap.has(id)) {
-                // 베이스·로컬 모두 존재 → 로컬 변경 여부 비교
                 const lMemo = lMemoMap.get(id), bMemo = bMemoMap.get(id);
-                const changed = lMemo.text !== bMemo.text || lMemo.issue !== bMemo.issue || lMemo.resolved !== bMemo.resolved;
-                memoRes.push(changed ? lMemo : rMemo);
+
+                // 텍스트/이슈/PR/해결 여부: 로컬 변경 시 로컬 우선
+                const textChanged = lMemo.text !== bMemo.text
+                  || lMemo.issue !== bMemo.issue
+                  || lMemo.pr    !== bMemo.pr
+                  || lMemo.resolved !== bMemo.resolved;
+
+                // devStatus: devStatusAt 최신 타임스탬프 우선
+                const lAt = lMemo.devStatusAt || '1970';
+                const rAt = rMemo.devStatusAt || '1970';
+                const winDevStatus   = lAt > rAt ? lMemo.devStatus   : rMemo.devStatus;
+                const winDevStatusAt = lAt > rAt ? lMemo.devStatusAt : rMemo.devStatusAt;
+
+                // comments[]: id 기준 합집합, 로컬 삭제 반영
+                const bCommentIds = new Set((bMemo.comments||[]).map(c=>c.id));
+                const lCommentMap = new Map((lMemo.comments||[]).map(c=>[c.id,c]));
+                const rCommentMap = new Map((rMemo.comments||[]).map(c=>[c.id,c]));
+                const finalComments = [];
+                for (const [, rc] of rCommentMap) {
+                  if (!bCommentIds.has(rc.id)) {
+                    finalComments.push(rc); // 원격 신규 댓글
+                  } else if (lCommentMap.has(rc.id)) {
+                    finalComments.push(rc); // 베이스에 있고 로컬에도 있으면 원격 유지
+                  }
+                  // 베이스에 있고 로컬에 없으면 → 로컬 삭제 → 추가 안 함
+                }
+                for (const [cid, lc] of lCommentMap) {
+                  if (!rCommentMap.has(cid)) finalComments.push(lc); // 로컬 신규 댓글
+                }
+                finalComments.sort((a,b) => (a.at||'').localeCompare(b.at||''));
+
+                const merged = textChanged ? { ...lMemo } : { ...rMemo };
+                merged.devStatus   = winDevStatus;
+                merged.devStatusAt = winDevStatusAt;
+                merged.comments    = finalComments;
+                memoRes.push(merged);
               }
-              // 베이스에 있고 로컬에 없음 → 로컬에서 삭제 → 추가 안 함
+              // 베이스에 있고 로컬에 없으면 → 로컬 삭제 → 추가 안 함
             }
             for (const [id, lMemo] of lMemoMap) {
-              if (!rMemoMap.has(id)) memoRes.push(lMemo); // 로컬에서 새로 추가
+              if (!rMemoMap.has(id)) memoRes.push(lMemo); // 로컬 신규 메모
             }
             mergedItem.memos  = memoRes;
             mergedItem.issues = memoRes.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
@@ -1026,7 +1353,6 @@
         }
       }
 
-      // 로컬에서 삭제된 항목 제거 (베이스에 있었지만 로컬에 없는 것)
       if (baseCat) {
         const localIds = new Set(localCat.items.map(i => i.id));
         mergedCat.items = mergedCat.items.filter(item => {
@@ -1035,19 +1361,13 @@
         });
       }
 
-      // 로컬 순서 적용 + 원격 신규 항목 상대 위치 보존
-      // - 로컬에 있는 항목: 로컬 순서 우선 (드래그앤드롭 반영)
-      // - 원격에만 있는 항목(다른 사용자가 추가): 원격 기준 앞 이웃 위치에 삽입
+      // 순서: 로컬 우선 + 원격 신규 상대 위치 보존
       {
         const localOrder    = localCat.items.map(i => i.id);
         const mergedById    = new Map(mergedCat.items.map(i => [i.id, i]));
-        const remoteIds     = mergedCat.items.map(i => i.id); // 삭제 처리 후 원격 순서
+        const remoteIds     = mergedCat.items.map(i => i.id);
         const remoteOnlySet = new Set(remoteIds.filter(id => !localOrder.includes(id)));
-
-        // 로컬에 있는 항목을 로컬 순서로 배치
         const result = localOrder.map(id => mergedById.get(id)).filter(Boolean);
-
-        // 원격에만 있는 항목: 원격 순서 기준 앞 이웃을 result에서 찾아 그 위치에 삽입
         for (const newId of remoteIds) {
           if (!remoteOnlySet.has(newId)) continue;
           const rIdx = remoteIds.indexOf(newId);
@@ -1058,20 +1378,17 @@
           }
           result.splice(insertAfter + 1, 0, mergedById.get(newId));
         }
-
         mergedCat.items = result;
       }
     }
 
-    // ── 카테고리 순서: 로컬 우선 + 원격 신규 카테고리 상대 위치 보존 ──
+    // 카테고리 순서: 로컬 우선
     {
       const localCatOrder  = local.categories.map(c => c.id);
       const mergedCatById  = new Map(merged.categories.map(c => [c.id, c]));
       const remoteCatIds   = merged.categories.map(c => c.id);
       const remoteOnlyCats = new Set(remoteCatIds.filter(id => !localCatOrder.includes(id)));
-
       const catResult = localCatOrder.map(id => mergedCatById.get(id)).filter(Boolean);
-
       for (const newId of remoteCatIds) {
         if (!remoteOnlyCats.has(newId)) continue;
         const rIdx = remoteCatIds.indexOf(newId);
@@ -1082,50 +1399,59 @@
         }
         catResult.splice(insertAfter + 1, 0, mergedCatById.get(newId));
       }
-
       merged.categories = catResult.filter(Boolean);
     }
 
-    // overallNotes: 3-way merge (로컬 삭제/수정 반영 + 원격 추가 보존)
+    // overallNotes: 3-way merge — DEV 버전은 pr, devStatus, comments[] 포함
     {
       const baseNoteMap   = new Map((base?.overallNotes || []).map(n => [n.id, n]));
       const localNoteMap  = new Map((local.overallNotes || []).map(n => [n.id, n]));
       const remoteNoteMap = new Map((merged.overallNotes || []).map(n => [n.id, n]));
       const result = [];
-      // 원격 노트 처리
       for (const [id, remoteNote] of remoteNoteMap) {
         if (!baseNoteMap.has(id)) {
-          // 원격에서 새로 추가된 것 → 유지
           result.push(remoteNote);
         } else if (localNoteMap.has(id)) {
-          // 기존 항목 → 로컬에서 수정했으면 로컬 우선
-          const localNote  = localNoteMap.get(id);
-          const baseNote   = baseNoteMap.get(id);
-          // issues: 3-way merge (items와 동일 방식)
+          const localNote = localNoteMap.get(id), baseNote = baseNoteMap.get(id);
           const baseIssueSet   = new Set(baseNote.issues   || []);
           const localIssueSet  = new Set(localNote.issues  || []);
           const remoteIssueSet = new Set(remoteNote.issues || []);
           const finalIssues = new Set(remoteIssueSet);
           for (const i of localIssueSet)  { if (!baseIssueSet.has(i)) finalIssues.add(i); }
           for (const i of baseIssueSet)   { if (!localIssueSet.has(i)) finalIssues.delete(i); }
+
+          // devStatus: devStatusAt 최신 우선
+          const lAt = localNote.devStatusAt || '1970';
+          const rAt = remoteNote.devStatusAt || '1970';
+          const winNote = lAt > rAt ? { ...localNote } : { ...remoteNote };
+
+          // comments[]: id 기준 합집합
+          const bCIds = new Set((baseNote.comments||[]).map(c=>c.id));
+          const lCMap = new Map((localNote.comments||[]).map(c=>[c.id,c]));
+          const rCMap = new Map((remoteNote.comments||[]).map(c=>[c.id,c]));
+          const finalComments = [];
+          for (const [,rc] of rCMap) {
+            if (!bCIds.has(rc.id) || lCMap.has(rc.id)) finalComments.push(rc);
+          }
+          for (const [cid,lc] of lCMap) {
+            if (!rCMap.has(cid)) finalComments.push(lc);
+          }
+          finalComments.sort((a,b) => (a.at||'').localeCompare(b.at||''));
+
           if (localNote.content !== baseNote.content || localNote.type !== baseNote.type) {
-            result.push({ ...localNote,  issues: [...finalIssues] });
+            result.push({ ...localNote, issues:[...finalIssues], devStatus:winNote.devStatus, devStatusAt:winNote.devStatusAt, comments:finalComments });
           } else {
-            result.push({ ...remoteNote, issues: [...finalIssues] });
+            result.push({ ...remoteNote, issues:[...finalIssues], devStatus:winNote.devStatus, devStatusAt:winNote.devStatusAt, comments:finalComments });
           }
         }
-        // baseNoteMap에 있고 localNoteMap에 없으면 → 로컬에서 삭제 → result에 추가 안 함
       }
-      // 로컬에서 새로 추가한 것 (원격에도 없고 베이스에도 없는 것)
       for (const [id, localNote] of localNoteMap) {
         if (!remoteNoteMap.has(id)) result.push(localNote);
       }
       merged.overallNotes = result;
     }
 
-    // config: 로컬 기준
     merged.config = { ...merged.config, ...local.config };
-
     return merged;
   }
 
@@ -1133,75 +1459,49 @@
   // GitHub 저장 (병합 저장)
   // ────────────────────────────────────────
   async function saveToGitHub() {
-    const owner = getOwner();
-    const token = getToken();
-
-    if (!owner || !token) {
-      alert('GitHub 사용자명과 토큰이 필요합니다.');
-      openSettings();
-      return;
-    }
+    const owner = getOwner(), token = getToken();
+    if (!owner || !token) { alert('GitHub 사용자명과 토큰이 필요합니다.'); openSettings(); return; }
     const btn = document.getElementById('saveBtn');
-    btn.textContent = '저장 중...';
-    btn.disabled = true;
-
+    btn.textContent = '저장 중...'; btn.disabled = true;
     try {
-      const _now = new Date();
-      const _p = n => String(n).padStart(2,'0');
+      const _now = new Date(), _p = n => String(n).padStart(2,'0');
       const today = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
-
-      // 1. 원격 최신 데이터 + SHA 조회
       const shaRes = await fetch(
         `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
-        { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
+        { headers: { Authorization:`Bearer ${token}`, 'User-Agent':'PostGeoQA' } }
       );
       if (!shaRes.ok) throw new Error(`원격 데이터 조회 실패 (${shaRes.status})`);
       const shaData = await shaRes.json();
       fileSha = shaData.sha;
       const remoteData = JSON.parse(decodeURIComponent(escape(atob(shaData.content.replace(/\n/g,'')))));
-
-      // 2. 로컬 변경사항과 원격 병합
       const merged = mergeQaData(baseSnapshot, qaData, remoteData);
       merged.config.lastUpdated = today;
-
       const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
-
-      // 3. 병합 결과 PUT
       const res = await fetch(
         `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
-        {
-          method: 'PUT',
-          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: `QA 현황 업데이트 (${today})`, content: encoded, sha: fileSha })
-        }
+        { method:'PUT', headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({ message:`QA 현황 업데이트 (${today})`, content:encoded, sha:fileSha }) }
       );
-
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        if (res.status === 409) {
-          throw new Error('다른 사람이 동시에 저장했습니다. 페이지를 새로고침한 후 다시 저장해 주세요.');
-        }
+        const err = await res.json().catch(()=>({}));
+        if (res.status === 409) throw new Error('다른 사람이 동시에 저장했습니다. 새로고침 후 다시 저장해 주세요.');
         throw new Error(err.message || `저장 실패 (${res.status})`);
       }
-
       const result = await res.json();
       fileSha = result.content.sha;
       qaData = merged;
-      baseSnapshot = JSON.parse(JSON.stringify(merged)); // 스냅샷 갱신
+      baseSnapshot = JSON.parse(JSON.stringify(merged));
       isDirty = false;
       hideSyncBanner();
-
       document.getElementById('lastUpdated').textContent = `마지막 업데이트: ${today}`;
       document.getElementById('dirtyDot').classList.add('hidden');
       const saveStatus = document.getElementById('saveStatus');
       saveStatus.classList.remove('hidden');
       setTimeout(() => saveStatus.classList.add('hidden'), 3000);
-
-    } catch (e) {
+    } catch(e) {
       alert(`저장 실패: ${e.message}`);
     } finally {
-      btn.textContent = '💾 저장';
-      btn.disabled = false;
+      btn.textContent = '💾 저장'; btn.disabled = false;
     }
   }
 
@@ -1214,6 +1514,10 @@
     document.getElementById('saveStatus').classList.add('hidden');
   }
 
+  function escapeHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   // 모달 바깥 클릭 → 닫기
   ['settingsModal','issueModal','editItemModal','addItemModal','editCatModal','addCatModal'].forEach(id => {
     document.getElementById(id).addEventListener('click', function(e) {
@@ -1221,19 +1525,13 @@
     });
   });
 
-  // ESC 키 → 모달 닫기
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      closeSettings();
-      closeIssueModal();
-      closeEditItemModal();
-      closeAddItemModal();
-      closeEditCatModal();
-      closeAddCatModal();
+      closeSettings(); closeIssueModal(); closeEditItemModal();
+      closeAddItemModal(); closeEditCatModal(); closeAddCatModal();
     }
   });
 
-  // 페이지 이탈 경고 (미저장 시)
   window.addEventListener('beforeunload', e => {
     if (isDirty) { e.preventDefault(); e.returnValue = ''; }
   });
@@ -1256,7 +1554,6 @@
     renderTable();
   }
 
-  // 항목 이름 수정
   let _editItemTarget = { catId: null, itemId: null };
   function openEditItemModal(catId, itemId) {
     const cat  = qaData.categories.find(c => c.id === catId);
@@ -1268,9 +1565,7 @@
     document.getElementById('editItemModal').classList.remove('hidden');
     setTimeout(() => document.getElementById('inputEditName').focus(), 50);
   }
-  function closeEditItemModal() {
-    document.getElementById('editItemModal').classList.add('hidden');
-  }
+  function closeEditItemModal() { document.getElementById('editItemModal').classList.add('hidden'); }
   function saveEditItem() {
     const cat  = qaData.categories.find(c => c.id === _editItemTarget.catId);
     const item = cat?.items.find(i => i.id === _editItemTarget.itemId);
@@ -1278,12 +1573,10 @@
     const newName = document.getElementById('inputEditName').value.trim();
     if (!newName) return;
     item.name = newName;
-    markDirty();
-    closeEditItemModal();
-    renderTable();
+    item._modified = new Date().toISOString(); // 이름 변경도 _modified 갱신 (merge 기준점)
+    markDirty(); closeEditItemModal(); renderTable();
   }
 
-  // 항목 추가
   let _addItemCatId = null;
   function genItemId(cat) {
     const prefix = (cat.items[0]?.id || '').match(/^[a-z]+-/)?.[0] || 'x-';
@@ -1302,88 +1595,65 @@
     document.getElementById('addItemModal').classList.remove('hidden');
     setTimeout(() => document.getElementById('inputAddName').focus(), 50);
   }
-  function closeAddItemModal() {
-    document.getElementById('addItemModal').classList.add('hidden');
-  }
+  function closeAddItemModal() { document.getElementById('addItemModal').classList.add('hidden'); }
   function saveAddItem() {
     const cat = qaData.categories.find(c => c.id === _addItemCatId);
     if (!cat) return;
     const name = document.getElementById('inputAddName').value.trim();
     if (!name) return;
     const newId = genItemId(cat);
-    const newItem = { id: newId, name, webMigrated:'unknown', detail:'not-started', qa:'not-tested', issues:[], notes:'' };
+    // DEV 버전: detail 필드 없음
+    const newItem = { id:newId, name, webMigrated:'unknown', qa:'not-tested', issues:[], memos:[] };
     if (_addItemInsertIdx !== null && _addItemInsertIdx >= 0 && _addItemInsertIdx <= cat.items.length) {
       cat.items.splice(_addItemInsertIdx, 0, newItem);
     } else {
       cat.items.push(newItem);
     }
     _addItemInsertIdx = null;
-    markDirty();
-    closeAddItemModal();
-    renderTable();
+    markDirty(); closeAddItemModal(); renderTable();
   }
 
-  // 드래그앤드롭 순서 변경
+  // 드래그앤드롭
   function dragStart(e, catId, itemId) {
     _dragSrc = { catId, itemId };
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/plain', itemId);
     setTimeout(() => e.currentTarget.classList.add('drag-src'), 0);
   }
-  function dragOver(e) {
-    if (_catDragSrc) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-  }
+  function dragOver(e) { if (_catDragSrc) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
   function dragEnter(e, catId, itemId) {
     if (_catDragSrc || !_dragSrc.catId || _dragSrc.itemId === itemId) return;
     e.currentTarget.classList.add('drag-over');
   }
-  function dragLeave(e) {
-    e.currentTarget.classList.remove('drag-over');
-  }
-  function dragEnd(e) {
-    e.currentTarget.classList.remove('drag-src');
-    _dragSrc = { catId: null, itemId: null };
-  }
+  function dragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+  function dragEnd(e)   { e.currentTarget.classList.remove('drag-src'); _dragSrc = { catId:null, itemId:null }; }
   function drop(e, catId, itemId) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('drag-over');
+    e.preventDefault(); e.currentTarget.classList.remove('drag-over');
     if (_catDragSrc || !_dragSrc.catId || _dragSrc.itemId === itemId) return;
-
     const srcCat = qaData.categories.find(c => c.id === _dragSrc.catId);
     const dstCat = qaData.categories.find(c => c.id === catId);
     if (!srcCat || !dstCat) return;
-
     const fromIdx = srcCat.items.findIndex(i => i.id === _dragSrc.itemId);
     const toIdx   = dstCat.items.findIndex(i => i.id === itemId);
     if (fromIdx < 0 || toIdx < 0) return;
-
     const [moved] = srcCat.items.splice(fromIdx, 1);
     if (_dragSrc.catId === catId) {
-      // 같은 카테고리 내 이동
       dstCat.items.splice(toIdx, 0, moved);
     } else {
-      // 다른 카테고리로 이동 → ID 자동 변경
       moved.id = genItemId(dstCat);
       moved._modified = new Date().toISOString();
       dstCat.items.splice(toIdx, 0, moved);
     }
-
-    _dragSrc = { catId: null, itemId: null };
-    markDirty();
-    renderTable();
+    _dragSrc = { catId:null, itemId:null }; markDirty(); renderTable();
   }
 
-  // 항목 삭제
   function deleteItem(catId, itemId) {
     const cat  = qaData.categories.find(c => c.id === catId);
     const item = cat?.items.find(i => i.id === itemId);
     if (!item) return;
-    if (!confirm(`"${item.name}" 항목을 삭제하시겠습니까?\nID(${itemId})는 재사용되지 않습니다.`)) return;
+    if (!confirm(`"${item.name}" 항목을 삭제하시겠습니까?`)) return;
     cat.items = cat.items.filter(i => i.id !== itemId);
-    markDirty();
-    renderTable();
+    markDirty(); renderTable();
   }
 
   // ────────────────────────────────────────
@@ -1395,7 +1665,6 @@
     while (existing.has('cat-' + n)) n++;
     return 'cat-' + n;
   }
-
   let _editCatTarget = null;
   function openEditCatModal(catId) {
     const cat = qaData.categories.find(c => c.id === catId);
@@ -1406,60 +1675,41 @@
     document.getElementById('editCatModal').classList.remove('hidden');
     setTimeout(() => document.getElementById('inputEditCatName').focus(), 50);
   }
-  function closeEditCatModal() {
-    document.getElementById('editCatModal').classList.add('hidden');
-  }
+  function closeEditCatModal() { document.getElementById('editCatModal').classList.add('hidden'); }
   function saveEditCat() {
     const cat = qaData.categories.find(c => c.id === _editCatTarget);
     if (!cat) return;
     const newName = document.getElementById('inputEditCatName').value.trim();
     if (!newName) return;
-    cat.name = newName;
-    markDirty();
-    closeEditCatModal();
-    renderCategoryFilter();
-    renderTable();
+    cat.name = newName; markDirty(); closeEditCatModal(); renderCategoryFilter(); renderTable();
   }
-
   function openAddCatModal() {
     document.getElementById('inputAddCatName').value = '';
     document.getElementById('addCatIdPreview').textContent = '자동 ID: ' + genCatId();
     document.getElementById('addCatModal').classList.remove('hidden');
     setTimeout(() => document.getElementById('inputAddCatName').focus(), 50);
   }
-  function closeAddCatModal() {
-    document.getElementById('addCatModal').classList.add('hidden');
-  }
+  function closeAddCatModal() { document.getElementById('addCatModal').classList.add('hidden'); }
   function saveAddCat() {
     const name = document.getElementById('inputAddCatName').value.trim();
     if (!name) return;
-    const newCat = { id: genCatId(), name, items: [] };
-    qaData.categories.push(newCat);
-    markDirty();
-    closeAddCatModal();
-    renderCategoryFilter();
-    renderTable();
+    qaData.categories.push({ id:genCatId(), name, items:[] });
+    markDirty(); closeAddCatModal(); renderCategoryFilter(); renderTable();
   }
-
   function deleteCat(catId) {
     const cat = qaData.categories.find(c => c.id === catId);
     if (!cat) return;
     const count = cat.items.length;
     const msg = count > 0
-      ? `"${cat.name}" 카테고리를 삭제하시겠습니까?\n\n⚠️ 이 카테고리 안의 항목 ${count}개가 모두 삭제됩니다.\n이 작업은 되돌릴 수 없습니다.`
+      ? `"${cat.name}" 카테고리를 삭제하시겠습니까?\n\n⚠️ 이 카테고리 안의 항목 ${count}개가 모두 삭제됩니다.`
       : `"${cat.name}" 카테고리를 삭제하시겠습니까?`;
     if (!confirm(msg)) return;
     qaData.categories = qaData.categories.filter(c => c.id !== catId);
-    markDirty();
-    renderCategoryFilter();
-    renderTable();
+    markDirty(); renderCategoryFilter(); renderTable();
   }
 
-  // ────────────────────────────────────────
-  // 카테고리 드래그앤드롭 (순서 변경)
-  // ────────────────────────────────────────
+  // 카테고리 드래그앤드롭
   let _catDragSrc = null;
-
   function catDragStart(e, catId) {
     if (_dragSrc.catId) { e.preventDefault(); return; }
     _catDragSrc = catId;
@@ -1467,11 +1717,7 @@
     e.dataTransfer.setData('text/plain', 'cat:' + catId);
     setTimeout(() => document.getElementById('catblock-' + catId)?.classList.add('cat-drag-src'), 0);
   }
-  function catDragOver(e) {
-    if (!_catDragSrc) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-  }
+  function catDragOver(e) { if (!_catDragSrc) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
   function catDragEnter(e, catId) {
     if (!_catDragSrc || _catDragSrc === catId) return;
     e.stopPropagation();
@@ -1488,8 +1734,7 @@
     document.querySelectorAll('.cat-drag-over').forEach(el => el.classList.remove('cat-drag-over'));
   }
   function catDrop(e, targetCatId) {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     document.getElementById('catblock-' + targetCatId)?.classList.remove('cat-drag-over');
     if (!_catDragSrc || _catDragSrc === targetCatId) return;
     const fromIdx = qaData.categories.findIndex(c => c.id === _catDragSrc);
@@ -1497,17 +1742,11 @@
     if (fromIdx < 0 || toIdx < 0) return;
     const [moved] = qaData.categories.splice(fromIdx, 1);
     qaData.categories.splice(toIdx, 0, moved);
-    _catDragSrc = null;
-    markDirty();
-    renderCategoryFilter();
-    renderTable();
+    _catDragSrc = null; markDirty(); renderCategoryFilter(); renderTable();
   }
-
-  // 빈 카테고리 tbody 드롭존 (다른 카테고리에서 항목 드롭)
   function itemBodyDragOver(e, catId) {
     if (_catDragSrc || !_dragSrc.catId || _dragSrc.catId === catId) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
+    e.preventDefault(); e.dataTransfer.dropEffect = 'move';
   }
   function itemBodyDrop(e, catId) {
     if (_catDragSrc || !_dragSrc.catId || _dragSrc.catId === catId) return;
@@ -1518,12 +1757,9 @@
     const fromIdx = srcCat.items.findIndex(i => i.id === _dragSrc.itemId);
     if (fromIdx < 0) return;
     const [moved] = srcCat.items.splice(fromIdx, 1);
-    moved.id = genItemId(dstCat);
-    moved._modified = new Date().toISOString();
+    moved.id = genItemId(dstCat); moved._modified = new Date().toISOString();
     dstCat.items.push(moved);
-    _dragSrc = { catId: null, itemId: null };
-    markDirty();
-    renderTable();
+    _dragSrc = { catId:null, itemId:null }; markDirty(); renderTable();
   }
 
   // ────────────────────────────────────────
@@ -1551,33 +1787,26 @@
     migrated: { title: '웹이식 체크 기준', rows: [
       ['? 미확인', '아직 확인 안 함 (기본값)'],
       ['✓ 완료',  '클릭/실행 시 반응이 있음'],
-      ['△ 부분',  '버튼은 있으나 일부만 동작 / 데스크톱과 다름'],
+      ['△ 부분',  '버튼은 있으나 일부만 동작'],
       ['✗ 미이식','메뉴/버튼 자체가 없거나 찾을 수 없음'],
-    ]},
-    detail: { title: '구현상태 체크 기준', rows: [
-      ['미시작',  '아직 이 항목 확인 안 함'],
-      ['계획',    '개발자 작업 예정으로 확인됨'],
-      ['진행중',  '기능 있으나 동작이 불완전함'],
-      ['완료',    '의도한 대로 잘 작동함'],
     ]},
     qa: { title: 'QA 판정 기준', rows: [
       ['미테스트', '아직 테스트 안 함'],
       ['통과',    '정확히 작동, 이상 없음'],
-      ['실패',    '오류 / 의도치 않은 동작 → 이슈 등록'],
+      ['실패',    '오류/의도치 않은 동작 → 이슈 등록'],
       ['건너뜀',  '미이식이거나 선행 기능 의존 등'],
     ]},
-    issue: { title: '이슈/메모 사용법', rows: [
-      ['이슈 번호','개발자 보고용 버그. Claude에게 설명하면 BDD 형식으로 자동 등록됨.'],
-      ['메모',    '참고사항, 의문점, 나중에 확인할 것 등 자유 기록'],
+    issue: { title: '이슈/메모 (DEV 버전)', rows: [
+      ['이슈#',    'QA팀 작성 메모에 연결된 GitHub 이슈 번호'],
+      ['PR#',      '수정한 Pull Request 번호 (개발자 입력)'],
+      ['진행상태', '미확인/보류/수정중/수정완료/홀드/이슈아님'],
+      ['댓글',     'QA↔Dev 양방향 코멘트 스레드'],
     ]},
   };
-
   let _guideEl = null;
   function showGuide(col, e) {
-    e.stopPropagation();
-    hideGuide();
-    const g = GUIDE[col];
-    if (!g) return;
+    e.stopPropagation(); hideGuide();
+    const g = GUIDE[col]; if (!g) return;
     const el = document.createElement('div');
     el.className = 'guide-popover';
     el.innerHTML = `<div class="guide-title">${g.title}</div>
@@ -1591,18 +1820,13 @@
     _guideEl = el;
     setTimeout(() => document.addEventListener('click', hideGuide, {once:true}), 0);
   }
-  function hideGuide() {
-    if (_guideEl) { _guideEl.remove(); _guideEl = null; }
-  }
+  function hideGuide() { if (_guideEl) { _guideEl.remove(); _guideEl = null; } }
 
   // ────────────────────────────────────────
-  // 전반적 코멘트 탭
+  // 전반적 코멘트 탭 (DEV 버전 — devStatus + PR + comments)
   // ────────────────────────────────────────
   function getNoteTypes() {
     return qaData?.config?.noteTypes || ['버그','미구현','요청','일반','질문','기타'];
-  }
-  function escapeHtml(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   const _NOTE_COLORS = ['blue','green','purple','red','orange','teal','pink','yellow'];
   const _SEMANTIC_NOTE_COLORS = {'버그':'red','미구현':'orange','요청':'purple','일반':'blue','질문':'teal','기타':'gray'};
@@ -1615,8 +1839,10 @@
 
   function renderNotes() {
     if (!qaData) return;
-    const notes = qaData.overallNotes || [];
-    const types = getNoteTypes();
+    const myRole   = getMyRole();
+    const devRepo  = qaData?.config?.developerRepo || '';
+    const notes    = qaData.overallNotes || [];
+    const types    = getNoteTypes();
     const filterEl = document.getElementById('noteTypeFilter');
     const filterType = filterEl ? filterEl.value : 'all';
     const shown = (filterType === 'all' ? notes : notes.filter(n => n.type === filterType)).slice().reverse();
@@ -1647,40 +1873,112 @@
       </div>`;
 
     if (shown.length === 0) {
-      html += '<div class="text-center py-16 text-gray-400"><div class="text-4xl mb-3">📝</div><p class="text-sm">코멘트가 없습니다. <b class="text-gray-600">+ 새 코멘트</b>를 눌러 추가하세요.</p></div>';
+      html += '<div class="text-center py-16 text-gray-400"><div class="text-4xl mb-3">📝</div><p class="text-sm">코멘트가 없습니다.</p></div>';
     } else {
-      const devRepo = qaData?.config?.developerRepo || '';
       html += '<div class="space-y-3">';
       for (const note of shown) {
         const c = noteTypeColor(note.type);
         const noteIssues = note.issues || [];
+        const notePr     = note.pr || null;
+        const noteDevStatus = note.devStatus || null;
+        const dsd = getDevStatusDisplay(noteDevStatus);
+        const noteComments = note.comments || [];
+
         const issuesBadgesHtml = noteIssues.map(n => {
           const linkContent = devRepo
             ? `<a href="https://github.com/${escapeHtml(devRepo)}/issues/${escapeHtml(n)}" target="_blank" class="hover:text-blue-700">#${escapeHtml(n)}</a>`
             : `#${escapeHtml(n)}`;
-          return `<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-blue-50 border border-blue-200 rounded text-xs text-blue-600">${linkContent}<button onclick="removeIssueFromNote('${note.id}','${escapeHtml(n)}')" class="text-blue-300 hover:text-red-400 leading-none ml-0.5 font-bold" title="연결 해제">×</button></span>`;
+          return `<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-blue-50 border border-blue-200 rounded text-xs text-blue-600">${linkContent}<button onclick="removeIssueFromNote('${note.id}','${escapeHtml(n)}')" class="text-blue-300 hover:text-red-400 leading-none ml-0.5 font-bold">×</button></span>`;
         }).join('');
+
+        const prBadgeHtml = notePr
+          ? `<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-purple-50 border border-purple-200 rounded text-xs text-purple-600">
+              ${devRepo
+                ? `<a href="https://github.com/${escapeHtml(devRepo)}/pull/${escapeHtml(notePr)}" target="_blank" class="hover:text-purple-800">PR#${escapeHtml(notePr)}</a>`
+                : `PR#${escapeHtml(notePr)}`}
+              <button onclick="removeNoteField('${note.id}','pr')" class="text-purple-300 hover:text-red-400 leading-none ml-0.5 font-bold">×</button>
+            </span>` : '';
+
+        const devStatusBadgeHtml = noteDevStatus
+          ? `<span class="px-1.5 py-0.5 rounded border text-xs ${dsd.cls}">${dsd.label}</span>` : '';
+
+        const commentsHtml = noteComments.length > 0 ? `
+          <div class="border-t border-gray-100 mt-3 pt-3 space-y-0">
+            ${noteComments.map((cm, ci) => {
+              const roleCls = cm.role === 'dev' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700';
+              return `<div class="comment-item flex gap-2 items-start py-1.5 border-b border-gray-50 last:border-0">
+                <span class="shrink-0 px-1.5 py-0.5 rounded text-xs font-medium ${roleCls}">${escapeHtml(cm.role)}</span>
+                <div class="flex-1 min-w-0">
+                  <div class="text-xs text-gray-700 whitespace-pre-wrap break-words">${escapeHtml(cm.text)}</div>
+                  <div class="text-xs text-gray-300 mt-0.5">${formatAt(cm.at)}</div>
+                </div>
+                <button onclick="deleteNoteComment('${note.id}',${ci})" class="comment-del text-gray-200 hover:text-red-400 text-sm leading-none px-1 mt-0.5">✕</button>
+              </div>`;
+            }).join('')}
+          </div>` : '';
+
         html += `
           <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
-            <div class="flex items-center gap-2 mb-2">
+            <div class="flex items-start gap-2 mb-2">
               <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-${c}-100 text-${c}-700 border border-${c}-200 shrink-0">${escapeHtml(note.type)}</span>
               <span class="text-xs text-gray-400">${note.date}</span>
-              <div class="ml-auto flex gap-1">
+              <div class="ml-auto flex gap-1 shrink-0">
                 <button onclick="startEditNote('${note.id}')" class="text-xs text-gray-400 hover:text-blue-600 px-2 py-1 rounded hover:bg-blue-50">편집</button>
                 <button onclick="deleteNote('${note.id}')" class="text-xs text-gray-400 hover:text-red-500 px-2 py-1 rounded hover:bg-red-50">삭제</button>
               </div>
             </div>
             <div id="note-view-${note.id}" class="text-sm text-gray-700 whitespace-pre-wrap">${escapeHtml(note.content)}</div>
+
+            <!-- 이슈/PR/devStatus 뱃지 행 -->
             <div class="mt-2 pt-2 border-t border-gray-100 flex flex-wrap items-center gap-1.5 min-h-[26px]">
               ${issuesBadgesHtml}
+              ${prBadgeHtml}
+              ${devStatusBadgeHtml ? `<span class="text-xs text-gray-300 shrink-0">개발상태:</span>${devStatusBadgeHtml}` : ''}
+              <!-- 이슈 추가 -->
               <span id="note-issue-input-wrap-${note.id}" class="hidden inline-flex items-center gap-1">
-                <input type="text" id="note-issue-val-${note.id}" placeholder="#번호 (쉼표로 여러 개)"
-                  class="w-40 text-xs border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                <input type="text" id="note-issue-val-${note.id}" placeholder="#번호"
+                  class="w-20 text-xs border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:ring-1 focus:ring-blue-400 font-mono"
                   onkeydown="if(event.key==='Enter')addIssueToNote('${note.id}')">
                 <button onclick="addIssueToNote('${note.id}')" class="text-xs bg-blue-600 text-white rounded px-2 py-0.5 hover:bg-blue-700">추가</button>
               </span>
-              <button onclick="showNoteIssueInput('${note.id}')" class="text-xs text-gray-400 hover:text-blue-600 border border-dashed border-gray-300 hover:border-blue-400 rounded px-1.5 py-0.5 transition-colors">+ 이슈</button>
+              <button onclick="showNoteIssueInput('${note.id}')" class="text-xs text-gray-400 hover:text-blue-600 border border-dashed border-gray-300 hover:border-blue-400 rounded px-1.5 py-0.5">+ 이슈</button>
+              <!-- PR 추가 -->
+              <span id="note-pr-input-wrap-${note.id}" class="hidden inline-flex items-center gap-1">
+                <input type="text" id="note-pr-val-${note.id}" placeholder="PR번호"
+                  class="w-20 text-xs border border-purple-200 rounded px-2 py-0.5 focus:outline-none focus:ring-1 focus:ring-purple-400 font-mono"
+                  onkeydown="if(event.key==='Enter')addPrToNote('${note.id}')">
+                <button onclick="addPrToNote('${note.id}')" class="text-xs bg-purple-600 text-white rounded px-2 py-0.5 hover:bg-purple-700">추가</button>
+              </span>
+              <button onclick="showNotePrInput('${note.id}')" class="text-xs text-gray-400 hover:text-purple-600 border border-dashed border-gray-300 hover:border-purple-400 rounded px-1.5 py-0.5">+ PR</button>
+              <!-- devStatus 선택 -->
+              <select onchange="updateNoteDevStatus('${note.id}',this.value)"
+                class="text-xs border border-gray-200 rounded px-1.5 py-0.5 bg-white focus:outline-none focus:ring-1 focus:ring-blue-400">
+                <option value="" ${!noteDevStatus?'selected':''}>개발상태 선택</option>
+                <option value="pending"     ${noteDevStatus==='pending'    ?'selected':''}>보류</option>
+                <option value="in-progress" ${noteDevStatus==='in-progress'?'selected':''}>수정중</option>
+                <option value="done"        ${noteDevStatus==='done'       ?'selected':''}>수정완료</option>
+                <option value="hold"        ${noteDevStatus==='hold'       ?'selected':''}>홀드</option>
+                <option value="not-issue"   ${noteDevStatus==='not-issue'  ?'selected':''}>이슈아님</option>
+              </select>
             </div>
+
+            ${commentsHtml}
+
+            <!-- 댓글 입력 -->
+            <div class="flex gap-2 items-center mt-2 pt-2 border-t border-gray-100">
+              <select id="note-comment-role-${note.id}"
+                class="text-xs border border-gray-200 rounded px-1.5 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 shrink-0">
+                <option value="qa"  ${myRole==='qa' ?'selected':''}>QA</option>
+                <option value="dev" ${myRole==='dev'?'selected':''}>Dev</option>
+              </select>
+              <input id="note-comment-text-${note.id}" type="text" placeholder="댓글 추가..."
+                class="flex-1 text-xs border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white"
+                onkeydown="if(event.key==='Enter'){event.preventDefault();addNoteComment('${note.id}')}">
+              <button onclick="addNoteComment('${note.id}')"
+                class="shrink-0 text-xs bg-gray-100 border border-gray-200 rounded px-2 py-1 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700">전송</button>
+            </div>
+
+            <!-- 편집 폼 -->
             <div id="note-edit-${note.id}" class="hidden mt-2">
               <select id="edit-type-${note.id}" class="text-sm border border-gray-300 rounded-lg px-2 py-1 bg-white mb-2">
                 ${types.map(t=>`<option value="${escapeHtml(t)}"${t===note.type?' selected':''}>${escapeHtml(t)}</option>`).join('')}
@@ -1703,9 +2001,7 @@
     const f = document.getElementById('addNoteForm');
     if (f) { f.classList.remove('hidden'); document.getElementById('newNoteContent')?.focus(); }
   }
-  function cancelAddNote() {
-    document.getElementById('addNoteForm')?.classList.add('hidden');
-  }
+  function cancelAddNote() { document.getElementById('addNoteForm')?.classList.add('hidden'); }
   function saveNewNote() {
     const type    = document.getElementById('newNoteType')?.value || '기타';
     const content = (document.getElementById('newNoteContent')?.value || '').trim();
@@ -1713,9 +2009,11 @@
     if (!qaData.overallNotes) qaData.overallNotes = [];
     const _now = new Date(), _p = n => String(n).padStart(2,'0');
     const date = `${_now.getFullYear()}-${_p(_now.getMonth()+1)}-${_p(_now.getDate())} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
-    qaData.overallNotes.push({ id: 'note-' + Date.now(), date, type, content, issues: [] });
-    markDirty();
-    renderNotes();
+    qaData.overallNotes.push({
+      id:'note-'+Date.now(), date, type, content,
+      issues:[], pr:null, devStatus:null, devStatusAt:null, comments:[]
+    });
+    markDirty(); renderNotes();
   }
   function startEditNote(id) {
     document.getElementById(`note-view-${id}`)?.classList.add('hidden');
@@ -1731,14 +2029,12 @@
     if (!note) return;
     note.type    = document.getElementById(`edit-type-${id}`)?.value || note.type;
     note.content = (document.getElementById(`edit-content-${id}`)?.value || '').trim() || note.content;
-    markDirty();
-    renderNotes();
+    markDirty(); renderNotes();
   }
   function deleteNote(id) {
     if (!confirm('이 코멘트를 삭제하시겠습니까?')) return;
     qaData.overallNotes = (qaData.overallNotes||[]).filter(n => n.id !== id);
-    markDirty();
-    renderNotes();
+    markDirty(); renderNotes();
   }
   function showNoteIssueInput(id) {
     const wrap = document.getElementById(`note-issue-input-wrap-${id}`);
@@ -1755,23 +2051,70 @@
     if (!note.issues) note.issues = [];
     const nums = val.split(/[,\s]+/).map(s => s.replace(/^#/,'')).filter(s => /^\d+$/.test(s));
     for (const n of nums) { if (!note.issues.includes(n)) note.issues.push(n); }
-    markDirty();
-    renderNotes();
+    markDirty(); renderNotes();
   }
   function removeIssueFromNote(noteId, issueNum) {
     const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
     if (!note || !note.issues) return;
     note.issues = note.issues.filter(n => n !== issueNum);
-    markDirty();
-    renderNotes();
+    markDirty(); renderNotes();
+  }
+  function showNotePrInput(id) {
+    const wrap = document.getElementById(`note-pr-input-wrap-${id}`);
+    if (!wrap) return;
+    wrap.classList.remove('hidden');
+    document.getElementById(`note-pr-val-${id}`)?.focus();
+  }
+  function addPrToNote(id) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === id);
+    if (!note) return;
+    const input = document.getElementById(`note-pr-val-${id}`);
+    const val = (input?.value || '').trim().replace(/^#/,'');
+    if (!val || !/^\d+$/.test(val)) return;
+    note.pr = val;
+    markDirty(); renderNotes();
+  }
+  function removeNoteField(noteId, field) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
+    if (!note) return;
+    note[field] = null;
+    if (field === 'devStatus') note.devStatusAt = null;
+    markDirty(); renderNotes();
+  }
+  function updateNoteDevStatus(noteId, value) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
+    if (!note) return;
+    note.devStatus   = value || null;
+    note.devStatusAt = value ? new Date().toISOString() : null;
+    markDirty(); renderNotes();
+  }
+  function addNoteComment(noteId) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
+    if (!note) return;
+    const roleEl = document.getElementById(`note-comment-role-${noteId}`);
+    const textEl = document.getElementById(`note-comment-text-${noteId}`);
+    const role = roleEl?.value || getMyRole();
+    const text = textEl?.value.trim();
+    if (!text) return;
+    if (!note.comments) note.comments = [];
+    note.comments.push({
+      id: 'c-' + Date.now() + Math.random().toString(36).slice(2,5),
+      role, text, at: new Date().toISOString()
+    });
+    markDirty(); renderNotes();
+  }
+  function deleteNoteComment(noteId, commentIdx) {
+    const note = (qaData.overallNotes||[]).find(n => n.id === noteId);
+    if (!note || !note.comments) return;
+    note.comments.splice(commentIdx, 1);
+    markDirty(); renderNotes();
   }
 
   // ────────────────────────────────────────
   // 코멘트 유형 관리 (설정 모달)
   // ────────────────────────────────────────
   function renderNoteTypesList() {
-    const el = document.getElementById('noteTypesList');
-    if (!el) return;
+    const el = document.getElementById('noteTypesList'); if (!el) return;
     const types = getNoteTypes();
     el.innerHTML = types.map(t => `
       <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-xs text-gray-700 border border-gray-200">
@@ -1781,55 +2124,43 @@
   }
   function addNoteType() {
     const input = document.getElementById('inputNewNoteType');
-    const val = input?.value.trim();
-    if (!val) return;
+    const val = input?.value.trim(); if (!val) return;
     if (!qaData.config.noteTypes) qaData.config.noteTypes = ['버그','미구현','요청','일반','질문','기타'];
-    if (!qaData.config.noteTypes.includes(val)) {
-      qaData.config.noteTypes.push(val);
-      markDirty();
-    }
+    if (!qaData.config.noteTypes.includes(val)) { qaData.config.noteTypes.push(val); markDirty(); }
     if (input) input.value = '';
     renderNoteTypesList();
   }
   function removeNoteType(t) {
     if (t === '기타' || !qaData?.config?.noteTypes) return;
     qaData.config.noteTypes = qaData.config.noteTypes.filter(x => x !== t);
-    renderNoteTypesList();
-    markDirty();
+    renderNoteTypesList(); markDirty();
   }
 
   // ────────────────────────────────────────
   // 동기화 배너 & 폴링
   // ────────────────────────────────────────
-  function hideSyncBanner() {
-    document.getElementById('syncBanner').classList.add('hidden');
-  }
+  function hideSyncBanner() { document.getElementById('syncBanner').classList.add('hidden'); }
 
   async function reloadData() {
     if (isDirty && !confirm('미저장 변경사항이 있습니다. 새로고침하면 사라집니다. 계속할까요?')) return;
-    isDirty = false;
-    hideSyncBanner();
-    await loadData();
+    isDirty = false; hideSyncBanner(); await loadData();
   }
 
-  // 20초마다 원격 SHA 확인 → 변경 감지 시 배너 표시
   setInterval(async () => {
-    const owner = getOwner();
-    const token = getToken();
+    const owner = getOwner(), token = getToken();
     if (!owner || !token || !fileSha) return;
     try {
       const res = await fetch(
         `${GH_API}/repos/${owner}/${REPO_NAME}/contents/${DATA_PATH}`,
-        { headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'PostGeoQA' } }
+        { headers: { Authorization:`Bearer ${token}`, 'User-Agent':'PostGeoQA' } }
       );
       if (res.ok) {
         const { sha } = await res.json();
         if (sha !== fileSha) document.getElementById('syncBanner').classList.remove('hidden');
       }
-    } catch(e) {}
+    } catch {}
   }, 20000);
 
-  // 스크롤 위치 sessionStorage 저장 (200ms 디바운스 — 동일 탭 새로고침 후 복원용)
   let _scrollSaveTimer;
   window.addEventListener('scroll', () => {
     clearTimeout(_scrollSaveTimer);
