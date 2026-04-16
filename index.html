@@ -279,6 +279,42 @@
   </div>
 
   <!-- ══════════════════════════════════════
+       BDD 뷰어/편집 모달
+  ══════════════════════════════════════ -->
+  <div id="bddModal" class="fixed inset-0 bg-black/50 z-[60] hidden items-center justify-center flex">
+    <div class="bg-white rounded-2xl shadow-2xl w-full mx-4 flex flex-col" style="max-width:520px;max-height:85vh">
+      <div class="flex items-start justify-between px-5 pt-5 pb-3 border-b border-gray-100 shrink-0">
+        <div class="min-w-0 mr-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h2 class="text-sm font-bold text-gray-800">BDD 형식</h2>
+            <span id="bddAiBadge" class="hidden px-1.5 py-0.5 rounded text-xs bg-violet-100 text-violet-700 border border-violet-200">AI 생성</span>
+            <span id="bddEditedBadge" class="hidden px-1.5 py-0.5 rounded text-xs bg-amber-100 text-amber-700 border border-amber-200">수정됨</span>
+          </div>
+          <p id="bddMemoPreview" class="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed"></p>
+        </div>
+        <button onclick="closeBddModal()" class="text-gray-300 hover:text-gray-500 text-xl leading-none shrink-0 ml-2">✕</button>
+      </div>
+      <div class="flex-1 overflow-y-auto px-5 py-4 min-h-0">
+        <div id="bddNeedsInfo" class="hidden mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+          <div class="text-xs font-medium text-amber-700 mb-1">⚠️ 추가 정보 필요</div>
+          <div id="bddNoteText" class="text-xs text-amber-600 whitespace-pre-wrap"></div>
+        </div>
+        <textarea id="bddContentArea" rows="10"
+          class="w-full text-xs border border-gray-200 rounded-lg px-3 py-2.5 resize-none focus:outline-none focus:ring-1 focus:ring-violet-400 bg-white font-mono leading-relaxed"
+          placeholder="BDD 내용이 없습니다. Claude에게 변환을 요청하세요."></textarea>
+      </div>
+      <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100 shrink-0">
+        <div id="bddAt" class="text-xs text-gray-300"></div>
+        <div class="flex gap-2">
+          <button onclick="copyBddContent(event)" class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg hover:bg-gray-100">📋 복사</button>
+          <button onclick="saveBddEdit()" class="px-3 py-1.5 text-xs bg-violet-600 text-white rounded-lg hover:bg-violet-700">저장</button>
+          <button onclick="closeBddModal()" class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg hover:bg-gray-100">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
        항목 이름 편집 모달
   ══════════════════════════════════════ -->
   <div id="editItemModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center flex">
@@ -770,6 +806,14 @@
           if (_hasUnreviewed) {
             _parts.push(`<span class="text-amber-500 text-xs" title="개발자 미확인 메모">🔔</span>`);
           }
+          // BDD 배지
+          const _bddReady = _memos.some(m => m.bdd?.status === 'ready');
+          const _bddPending = !_bddReady && _memos.some(m => m.bdd?.status === 'needs_more_info');
+          if (_bddReady) {
+            _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-violet-100 text-violet-600 border-violet-200 whitespace-nowrap">BDD</span>`);
+          } else if (_bddPending) {
+            _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-amber-100 text-amber-600 border-amber-200 whitespace-nowrap">BDD?</span>`);
+          }
           if (_parts.length) cellHtml += `<div class="flex flex-wrap items-center gap-0.5 mt-0.5">${_parts.join('')}</div>`;
         }
 
@@ -1057,6 +1101,18 @@
       const statusAtHtml = m.devStatusAt
         ? `<span class="text-xs text-gray-300">${formatAt(m.devStatusAt)}</span>` : '';
 
+      const bddBtnHtml = (() => {
+        if (!m.bdd) return '';
+        if (m.bdd.status === 'ready') {
+          const editedMark = m.bdd.editedByHuman ? ' ✎' : '';
+          return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-violet-100 text-violet-700 border-violet-300 hover:bg-violet-200">BDD${editedMark}</button>`;
+        }
+        if (m.bdd.status === 'needs_more_info') {
+          return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-amber-100 text-amber-700 border-amber-300 hover:bg-amber-200">BDD?</button>`;
+        }
+        return '';
+      })();
+
       return `<div class="bg-gray-50 rounded-xl border border-gray-200 p-3 space-y-2">
         <textarea id="mt-${i}" rows="2"
           class="w-full text-xs border border-gray-200 rounded-lg px-2 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white"
@@ -1082,6 +1138,7 @@
             <option value="not-issue"   ${m.devStatus==='not-issue'   ?'selected':''}>이슈아님</option>
           </select>
           ${statusAtHtml}
+          ${bddBtnHtml}
           <div class="ml-auto flex gap-1 shrink-0">
             <button onclick="toggleMemoResolved(${i})"
               class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap ${resolvedCls}">
@@ -1181,6 +1238,70 @@
       _editMemos[memoIdx].comments.splice(commentIdx, 1);
     }
     renderMemoList();
+  }
+
+  // ────────────────────────────────────────
+  // BDD 뷰어/편집 모달
+  // ────────────────────────────────────────
+  let _bddMemoIdx = null;
+
+  function openBddModal(memoIdx) {
+    _syncMemoForm();
+    _bddMemoIdx = memoIdx;
+    const m   = _editMemos[memoIdx];
+    const bdd = m.bdd || {};
+
+    document.getElementById('bddMemoPreview').textContent = m.text || '';
+    document.getElementById('bddContentArea').value = bdd.content || '';
+
+    // 배지
+    document.getElementById('bddAiBadge').classList.toggle('hidden', !bdd.at);
+    document.getElementById('bddEditedBadge').classList.toggle('hidden', !bdd.editedByHuman);
+
+    // needs_more_info 경고
+    const needsInfoEl = document.getElementById('bddNeedsInfo');
+    if (bdd.status === 'needs_more_info') {
+      needsInfoEl.classList.remove('hidden');
+      document.getElementById('bddNoteText').textContent = bdd.note || '';
+    } else {
+      needsInfoEl.classList.add('hidden');
+    }
+
+    document.getElementById('bddAt').textContent = bdd.at ? formatAt(bdd.at) : '';
+    document.getElementById('bddModal').classList.remove('hidden');
+  }
+
+  function closeBddModal() {
+    document.getElementById('bddModal').classList.add('hidden');
+    _bddMemoIdx = null;
+  }
+
+  function saveBddEdit() {
+    if (_bddMemoIdx === null) return;
+    const m       = _editMemos[_bddMemoIdx];
+    const content = document.getElementById('bddContentArea').value.trim();
+    const existing = m.bdd || {};
+    const wasEdited = !!(existing.content && content !== existing.content);
+    m.bdd = {
+      ...existing,
+      content,
+      status: existing.status === 'needs_more_info' ? 'needs_more_info' : (content ? 'ready' : existing.status),
+      editedByHuman: wasEdited || !!existing.editedByHuman,
+      at: existing.at || new Date().toISOString()
+    };
+    closeBddModal();
+    renderMemoList();
+  }
+
+  function copyBddContent(event) {
+    const content = document.getElementById('bddContentArea').value;
+    if (!content) return;
+    navigator.clipboard.writeText(content).then(() => {
+      const btn = event.currentTarget;
+      const orig = btn.textContent;
+      btn.textContent = '✓ 복사됨';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    });
   }
 
   function saveMemos() {
