@@ -1256,9 +1256,10 @@
     document.getElementById('bddMemoPreview').textContent = m.text || '';
     document.getElementById('bddContentArea').value = bdd.content || '';
 
-    // 배지
-    document.getElementById('bddAiBadge').classList.toggle('hidden', !bdd.at);
-    document.getElementById('bddEditedBadge').classList.toggle('hidden', !bdd.editedByHuman);
+    // 배지: source=ai일 때만 "AI 생성" 표시, 그 위에 사람이 수정했으면 "수정됨" 추가
+    const isAi = bdd.source === 'ai';
+    document.getElementById('bddAiBadge').classList.toggle('hidden', !isAi);
+    document.getElementById('bddEditedBadge').classList.toggle('hidden', !(isAi && bdd.editedByHuman));
 
     // needs_more_info 경고
     const needsInfoEl = document.getElementById('bddNeedsInfo');
@@ -1280,15 +1281,29 @@
 
   function saveBddEdit() {
     if (_bddMemoIdx === null) return;
-    const m       = _editMemos[_bddMemoIdx];
-    const content = document.getElementById('bddContentArea').value.trim();
+    const m        = _editMemos[_bddMemoIdx];
+    const content  = document.getElementById('bddContentArea').value.trim();
     const existing = m.bdd || {};
-    const wasEdited = !!(existing.content && content !== existing.content);
+
+    // 내용이 없으면 bdd 자체를 제거 (없는 것과 동일)
+    if (!content) {
+      m.bdd = null;
+      closeBddModal();
+      renderMemoList();
+      return;
+    }
+
+    const isAiOrigin   = existing.source === 'ai';
+    const contentChanged = !!(existing.content && content !== existing.content);
+
     m.bdd = {
       ...existing,
       content,
-      status: existing.status === 'needs_more_info' ? 'needs_more_info' : (content ? 'ready' : existing.status),
-      editedByHuman: wasEdited || !!existing.editedByHuman,
+      // 기존 source가 ai이면 유지, 아니면(없거나 human) human으로
+      source: isAiOrigin ? 'ai' : 'human',
+      // ai 생성물을 사람이 고쳤을 때만 true
+      editedByHuman: isAiOrigin ? (contentChanged || !!existing.editedByHuman) : false,
+      status: existing.status === 'needs_more_info' ? 'needs_more_info' : 'ready',
       at: existing.at || new Date().toISOString()
     };
     closeBddModal();
