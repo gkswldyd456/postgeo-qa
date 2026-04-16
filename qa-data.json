@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 10:32",
+    "lastUpdated": "2026-04-16 10:44",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2100,7 +2100,7 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "_modified": "2026-04-15T04:08:32.467Z",
+          "_modified": "2026-04-16T01:36:43.049Z",
           "memos": []
         }
       ]
@@ -2126,6 +2126,72 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        }
+      ]
+    },
+    {
+      "id": "cat-1",
+      "name": "일괄조정",
+      "items": [
+        {
+          "id": "x-01",
+          "name": "둥근점 크기 일괄 조정(0~20)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T01:43:53.795Z"
+        },
+        {
+          "id": "x-02",
+          "name": "모양점 크기 일괄 조정(0~20)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T01:43:56.077Z"
+        },
+        {
+          "id": "x-03",
+          "name": "실선 굵기 일괄 조정(1~14)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T01:43:56.928Z"
+        },
+        {
+          "id": "x-04",
+          "name": "점선 굵기 일괄 조정(1~14)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T01:43:57.775Z"
+        },
+        {
+          "id": "x-05",
+          "name": "직각 표시 일괄 조정(4~20)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T01:43:58.730Z"
+        },
+        {
+          "id": "x-06",
+          "name": "설밀도 일괄 조정(1,2,5,10,20,50,99)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T01:43:59.724Z"
         }
       ]
     }
