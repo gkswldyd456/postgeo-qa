@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 13:10",
+    "lastUpdated": "2026-04-16 13:17",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1720,6 +1720,16 @@
         {
           "id": "ce-38",
           "name": "스타일 변경 - 점 모양 변경 (25종)",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T04:16:03.760Z"
+        },
+        {
+          "id": "ce-39",
+          "name": "점 회전각 변경 (+10도, -10도, +90도, -90도)",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
