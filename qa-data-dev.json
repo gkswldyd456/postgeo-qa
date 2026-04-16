@@ -3,8 +3,15 @@
     "project": "PostGeo 웹버전 QA — 개발자 협업 미리보기",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 14:00",
-    "noteTypes": ["버그", "미구현", "요청", "일반", "질문", "기타"]
+    "lastUpdated": "2026-04-16 07:00",
+    "noteTypes": [
+      "버그",
+      "미구현",
+      "요청",
+      "일반",
+      "질문",
+      "기타"
+    ]
   },
   "categories": [
     {
@@ -25,7 +32,9 @@
           "name": "선분 위의 점",
           "webMigrated": "yes",
           "qa": "fail",
-          "issues": ["63"],
+          "issues": [
+            "63"
+          ],
           "_modified": "2026-04-15T10:00:00.000Z",
           "memos": [
             {
@@ -49,7 +58,15 @@
                   "text": "내일 오후 재테스트 예정입니다.",
                   "at": "2026-04-15T16:00:00.000Z"
                 }
-              ]
+              ],
+              "bdd": {
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "content": "Given 선분 위의 점 기능을 실행하고 선분 위에 점을 생성한 상태에서\nWhen 모바일 환경에서 해당 점을 생성하기 위해 선분을 탭하면\nThen 한 번의 탭으로 선분 위에 점이 생성되어야 한다\n\nBut 현재 웹버전에서는 2번 탭해야 점이 생성되며 데스크톱(1번 클릭)과 동작이 다름",
+                "at": "2026-04-16T07:00:00.000Z"
+              }
             }
           ]
         },
@@ -58,7 +75,9 @@
           "name": "교점",
           "webMigrated": "partial",
           "qa": "fail",
-          "issues": ["61"],
+          "issues": [
+            "61"
+          ],
           "_modified": "2026-04-15T10:00:00.000Z",
           "memos": [
             {
@@ -76,7 +95,15 @@
                   "text": "부동소수점 계산 오차 이슈 확인 중. 수정에 시간이 다소 걸릴 것 같습니다.",
                   "at": "2026-04-16T09:00:00.000Z"
                 }
-              ]
+              ],
+              "bdd": {
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": true,
+                "note": null,
+                "content": "Given 캔버스에 두 선분이 교차하도록 그려진 상태에서\nWhen 교점 기능을 실행하여 두 선분의 교점을 생성하면\nThen 교점이 두 선분이 실제로 만나는 정확한 위치에 생성되어야 한다\n\nBut 끝점 근처에서 부동소수점 오차로 인해 교점 위치가 미세하게 어긋남\n(재현: 선분 끝점 5px 이내 교차 시 오차 두드러짐 — QA 추가)",
+                "at": "2026-04-16T07:00:00.000Z"
+              }
             }
           ]
         },
@@ -120,7 +147,9 @@
           "name": "무한 직선",
           "webMigrated": "no",
           "qa": "skip",
-          "issues": ["58"],
+          "issues": [
+            "58"
+          ],
           "_modified": "2026-04-15T10:00:00.000Z",
           "memos": [
             {
@@ -138,7 +167,15 @@
                   "text": "다음 스프린트에서 구현 예정입니다.",
                   "at": "2026-04-16T10:00:00.000Z"
                 }
-              ]
+              ],
+              "bdd": {
+                "status": "needs_more_info",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "어떤 조건에서 무한 직선이 잘못 표시되는지 재현 단계가 불명확합니다. 구체적인 조작 순서나 발생 화면을 추가해주세요.",
+                "content": "",
+                "at": "2026-04-16T07:00:00.000Z"
+              }
             }
           ]
         },
@@ -158,7 +195,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "status": "ready",
+                "source": "human",
+                "editedByHuman": false,
+                "note": null,
+                "content": "Given 두 점을 선택하여 수직이등분선을 생성하는 기능을 실행한 상태에서\nWhen 기준이 되는 선분의 두 끝점을 순서대로 클릭하면\nThen 두 점의 중점을 지나며 선분에 수직인 무한 직선이 생성되어야 한다\n\nBut 두 점 중 하나가 원 위의 점인 경우 수직이등분선이 생성되지 않고 오류 발생",
+                "at": "2026-04-16T07:00:00.000Z"
+              }
             },
             {
               "id": "m-demo-6",
@@ -181,7 +226,8 @@
                   "text": "설정에서 조절 가능한지 몰랐네요! 확인했습니다. 감사합니다.",
                   "at": "2026-04-16T11:30:00.000Z"
                 }
-              ]
+              ],
+              "bdd": null
             }
           ]
         },
