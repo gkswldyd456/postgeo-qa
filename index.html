@@ -807,11 +807,14 @@
             _parts.push(`<span class="text-amber-500 text-xs" title="개발자 미확인 메모">🔔</span>`);
           }
           // BDD 배지
-          const _bddReady = _memos.some(m => m.bdd?.status === 'ready');
-          const _bddPending = !_bddReady && _memos.some(m => m.bdd?.status === 'needs_more_info');
-          if (_bddReady) {
-            _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-violet-100 text-violet-600 border-violet-200 whitespace-nowrap">BDD</span>`);
-          } else if (_bddPending) {
+          const _bddAi     = _memos.some(m => m.bdd?.content && m.bdd?.source === 'ai');
+          const _bddHuman  = !_bddAi && _memos.some(m => m.bdd?.content && m.bdd?.source !== 'ai');
+          const _bddNeeds  = !_bddAi && !_bddHuman && _memos.some(m => m.bdd?.status === 'needs_more_info');
+          if (_bddAi) {
+            _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-violet-100 text-violet-600 border-violet-200 whitespace-nowrap">✦ BDD</span>`);
+          } else if (_bddHuman) {
+            _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-teal-100 text-teal-600 border-teal-200 whitespace-nowrap">BDD</span>`);
+          } else if (_bddNeeds) {
             _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-amber-100 text-amber-600 border-amber-200 whitespace-nowrap">BDD?</span>`);
           }
           if (_parts.length) cellHtml += `<div class="flex flex-wrap items-center gap-0.5 mt-0.5">${_parts.join('')}</div>`;
@@ -1102,17 +1105,21 @@
         ? `<span class="text-xs text-gray-300">${formatAt(m.devStatusAt)}</span>` : '';
 
       const bddBtnHtml = (() => {
-        if (!m.bdd) {
+        if (!m.bdd || !m.bdd.content) {
+          // BDD 없음 — 회색
           return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-gray-100 text-gray-300 border-gray-200 hover:bg-gray-200 hover:text-gray-400" title="BDD 없음 — Claude에게 변환 요청하세요">BDD</button>`;
         }
-        if (m.bdd.status === 'ready') {
+        if (m.bdd.source === 'ai') {
+          // AI 생성 — 보라 + ✦ 아이콘
           const editedMark = m.bdd.editedByHuman ? ' ✎' : '';
-          return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-violet-100 text-violet-700 border-violet-300 hover:bg-violet-200">BDD${editedMark}</button>`;
+          return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-violet-100 text-violet-700 border-violet-300 hover:bg-violet-200" title="AI 생성 BDD">✦ BDD${editedMark}</button>`;
         }
         if (m.bdd.status === 'needs_more_info') {
+          // 정보 부족 — 주황
           return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-amber-100 text-amber-700 border-amber-300 hover:bg-amber-200">BDD?</button>`;
         }
-        return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-gray-100 text-gray-300 border-gray-200 hover:bg-gray-200" title="BDD 없음">BDD</button>`;
+        // 사람이 직접 작성 — 청록
+        return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-teal-100 text-teal-700 border-teal-300 hover:bg-teal-200" title="직접 작성한 BDD">BDD</button>`;
       })();
 
       return `<div class="bg-gray-50 rounded-xl border border-gray-200 p-3 space-y-2">
