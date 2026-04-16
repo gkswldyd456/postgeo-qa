@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 11:28",
+    "lastUpdated": "2026-04-16 11:31",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1716,6 +1716,16 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-16T02:28:02.858Z"
+        },
+        {
+          "id": "ce-37",
+          "name": "점 선택이동",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T02:31:37.829Z"
         },
         {
           "id": "ce-08",
