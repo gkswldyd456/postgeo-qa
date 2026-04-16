@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 06:30",
+    "lastUpdated": "2026-04-16 15:44",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -58,7 +58,7 @@
           "memos": [
             {
               "id": "m-1776303041870oxm",
-              "text": "선분 위의 점이 만들어진 선분 위에서만 이동되고 그 밖으로 움직이지 못하는 상태.",
+              "text": "선분 위의 점이 만들어진 선분 위에서만 이동되고 그 밖으로 움직이지 못하는 상태.\n데스크톱 버전에는 빠져나갈 수 있는 로직이고 빠져 나갈 수 있어야 편함.",
               "issue": null,
               "resolved": false,
               "comments": [],
@@ -69,10 +69,11 @@
                 "source": "ai",
                 "editedByHuman": false,
                 "at": "2026-04-16T06:30:47.982Z"
-              }
+              },
+              "pr": null
             }
           ],
-          "_modified": "2026-04-16T01:31:05.765Z"
+          "_modified": "2026-04-16T06:43:06.411Z"
         },
         {
           "id": "p-03",
