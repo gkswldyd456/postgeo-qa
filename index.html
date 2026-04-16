@@ -236,6 +236,7 @@
       <h2 class="text-base font-bold mb-1">항목 이름 수정</h2>
       <p id="editItemId" class="text-xs text-gray-400 mb-3 font-mono"></p>
       <input id="inputEditName" type="text" placeholder="기능명 입력"
+        onkeydown="if(event.key==='Enter')saveEditItem()"
         class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
       <div class="flex gap-2 justify-end">
         <button onclick="closeEditItemModal()"
