@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 11:25",
+    "lastUpdated": "2026-04-16 11:26",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2312,21 +2312,22 @@
         {
           "id": "x-01",
           "name": "직사각형 모양 경로 찾기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T02:14:07.420Z"
+          "_modified": "2026-04-16T02:25:58.241Z"
         },
         {
           "id": "x-02",
           "name": "평행사변형 모양 경로 찾기",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-16T02:25:59.257Z"
         }
       ]
     }
