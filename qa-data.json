@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 15:44",
+    "lastUpdated": "2026-04-16 06:44",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -63,12 +63,12 @@
               "resolved": false,
               "comments": [],
               "bdd": {
-                "status": "needs_more_info",
-                "note": "선분 위에서만 이동되는 것이 의도된 구속 동작인지, 아니면 자유 이동이 가능해야 하는데 막혀있는 버그인지 확인이 필요합니다.",
-                "content": "",
+                "status": "ready",
                 "source": "ai",
                 "editedByHuman": false,
-                "at": "2026-04-16T06:30:47.982Z"
+                "note": null,
+                "content": "Given 선분 위의 점(선분에 구속된 점)을 생성한 상태에서\nWhen 해당 점을 선분 밖으로 드래그하면\nThen 데스크톱 버전과 동일하게 점이 선분 밖으로 자유롭게 이동할 수 있어야 한다\n\nBut 웹버전에서는 점이 선분 위에서만 이동 가능하고 선분 밖으로 빠져나갈 수 없음",
+                "at": "2026-04-16T06:44:48.345Z"
               },
               "pr": null
             }
