@@ -1,0 +1,220 @@
+{
+  "config": {
+    "project": "PostGeo 웹버전 QA — 개발자 협업 미리보기",
+    "version": "1.1",
+    "developerRepo": "Post-Math/PostGeoWeb",
+    "lastUpdated": "2026-04-16 14:00",
+    "noteTypes": ["버그", "미구현", "요청", "일반", "질문", "기타"]
+  },
+  "categories": [
+    {
+      "id": "demo-points",
+      "name": "점 (Points)",
+      "items": [
+        {
+          "id": "d-01",
+          "name": "자유점",
+          "webMigrated": "yes",
+          "qa": "pass",
+          "issues": [],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": []
+        },
+        {
+          "id": "d-02",
+          "name": "선분 위의 점",
+          "webMigrated": "yes",
+          "qa": "fail",
+          "issues": ["63"],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": [
+            {
+              "id": "m-demo-1",
+              "text": "모바일에서 클릭 2번 필요함. 데스크톱은 1번인데 웹버전만 2번 클릭해야 선분 위에 점이 생김",
+              "issue": "63",
+              "pr": "45",
+              "resolved": false,
+              "devStatus": "done",
+              "devStatusAt": "2026-04-15T14:30:00.000Z",
+              "comments": [
+                {
+                  "id": "c-demo-1",
+                  "role": "dev",
+                  "text": "이벤트 핸들러 중복 등록 문제 확인. PR#45에서 수정 완료했습니다. 재확인 부탁드립니다.",
+                  "at": "2026-04-15T14:30:00.000Z"
+                },
+                {
+                  "id": "c-demo-2",
+                  "role": "qa",
+                  "text": "내일 오후 재테스트 예정입니다.",
+                  "at": "2026-04-15T16:00:00.000Z"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d-03",
+          "name": "교점",
+          "webMigrated": "partial",
+          "qa": "fail",
+          "issues": ["61"],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": [
+            {
+              "id": "m-demo-2",
+              "text": "두 선분의 교점이 정확하지 않음. 끝점 근처에서 오차 발생",
+              "issue": "61",
+              "pr": null,
+              "resolved": false,
+              "devStatus": "in-progress",
+              "devStatusAt": "2026-04-16T09:00:00.000Z",
+              "comments": [
+                {
+                  "id": "c-demo-3",
+                  "role": "dev",
+                  "text": "부동소수점 계산 오차 이슈 확인 중. 수정에 시간이 다소 걸릴 것 같습니다.",
+                  "at": "2026-04-16T09:00:00.000Z"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d-04",
+          "name": "원 위의 점",
+          "webMigrated": "yes",
+          "qa": "not-tested",
+          "issues": [],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": [
+            {
+              "id": "m-demo-3",
+              "text": "이번 주 내 확인 예정",
+              "issue": "X",
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-lines",
+      "name": "선분 (Lines)",
+      "items": [
+        {
+          "id": "d-05",
+          "name": "두 점으로 선분",
+          "webMigrated": "yes",
+          "qa": "pass",
+          "issues": [],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": []
+        },
+        {
+          "id": "d-06",
+          "name": "무한 직선",
+          "webMigrated": "no",
+          "qa": "skip",
+          "issues": ["58"],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": [
+            {
+              "id": "m-demo-4",
+              "text": "웹버전에 무한 직선 메뉴 자체가 없음. 데스크톱 기능이 미이식된 상태",
+              "issue": "58",
+              "pr": null,
+              "resolved": false,
+              "devStatus": "pending",
+              "devStatusAt": "2026-04-16T10:00:00.000Z",
+              "comments": [
+                {
+                  "id": "c-demo-4",
+                  "role": "dev",
+                  "text": "다음 스프린트에서 구현 예정입니다.",
+                  "at": "2026-04-16T10:00:00.000Z"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d-07",
+          "name": "수직이등분선",
+          "webMigrated": "yes",
+          "qa": "fail",
+          "issues": [],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": [
+            {
+              "id": "m-demo-5",
+              "text": "수직이등분선 색상이 일반 선분과 구분이 안 됨. 데스크톱은 다른 색으로 표시됨",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-demo-6",
+              "text": "선분 길이 표시가 소수점 4자리까지 나와서 너무 많음",
+              "issue": "X",
+              "pr": null,
+              "resolved": false,
+              "devStatus": "not-issue",
+              "devStatusAt": "2026-04-16T11:00:00.000Z",
+              "comments": [
+                {
+                  "id": "c-demo-5",
+                  "role": "dev",
+                  "text": "소수점 자리 표시는 설정에서 조절 가능합니다. 이슈가 아니라 사용법 문의로 판단됩니다.",
+                  "at": "2026-04-16T11:00:00.000Z"
+                },
+                {
+                  "id": "c-demo-6",
+                  "role": "qa",
+                  "text": "설정에서 조절 가능한지 몰랐네요! 확인했습니다. 감사합니다.",
+                  "at": "2026-04-16T11:30:00.000Z"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d-08",
+          "name": "각도 이등분선",
+          "webMigrated": "unknown",
+          "qa": "not-tested",
+          "issues": [],
+          "_modified": "2026-04-15T10:00:00.000Z",
+          "memos": []
+        }
+      ]
+    }
+  ],
+  "overallNotes": [
+    {
+      "id": "note-demo-1",
+      "date": "2026-04-15 09:00",
+      "type": "일반",
+      "content": "전반적으로 모바일 터치 반응이 데스크톱 마우스보다 느린 느낌이 있습니다. 특히 드래그 기반 기능에서 체감됩니다.",
+      "issues": [],
+      "pr": null,
+      "devStatus": "pending",
+      "devStatusAt": "2026-04-16T09:30:00.000Z",
+      "comments": [
+        {
+          "id": "c-note-1",
+          "role": "dev",
+          "text": "모바일 터치 최적화 이슈 확인했습니다. 별도 이슈로 등록 후 처리 예정입니다.",
+          "at": "2026-04-16T09:30:00.000Z"
+        }
+      ]
+    }
+  ]
+}
