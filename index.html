@@ -113,14 +113,6 @@
         <option value="no">✗ 미이식</option>
         <option value="unknown">? 미확인</option>
       </select>
-      <select id="filterDetail" onchange="applyFilters()"
-        class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-        <option value="all">구현: 전체</option>
-        <option value="done">완료</option>
-        <option value="in-progress">진행중</option>
-        <option value="planned">계획</option>
-        <option value="not-started">미시작</option>
-      </select>
       <select id="filterQa" onchange="applyFilters()"
         class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
         <option value="all">QA: 전체</option>
@@ -362,11 +354,11 @@
   let editTarget = { catId: null, itemId: null };
   let _dragSrc = { catId: null, itemId: null };
   let _addItemInsertIdx = null;
-  let filters   = { category:'all', migrated:'all', detail:'all', qa:'all' };
+  let filters   = { category:'all', migrated:'all', qa:'all' };
   let collapsed = {};
   let baseSnapshot = null; // 로드·저장 직후 스냅샷 — 병합 기준점
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
-    { id:56, name:220, migrated:88, detail:88, qa:88, issue:200 };
+    { id:48, name:220, migrated:72, qa:72, issue:200 };
 
   // ── 개인 UI 상태 (localStorage — 데이터와 독립, 브라우저 재시작 후에도 유지) ──
   const UI_KEY_COLLAPSED = 'uiCollapsed';
@@ -466,7 +458,6 @@
       `마지막 업데이트: ${qaData.config.lastUpdated || '—'}`;
     // 필터 select UI를 filters 객체에 동기화 (localStorage 복원값 반영)
     document.getElementById('filterMigrated').value = filters.migrated;
-    document.getElementById('filterDetail').value   = filters.detail;
     document.getElementById('filterQa').value       = filters.qa;
     // 스크롤 위치 복원 (sessionStorage — 동일 탭 새로고침만 유지, 탭 닫으면 초기화)
     const _sy = sessionStorage.getItem('uiScrollY');
@@ -537,7 +528,6 @@
 
       const items = cat.items.filter(item => {
         if (filters.migrated !== 'all' && item.webMigrated !== filters.migrated) return false;
-        if (filters.detail  !== 'all' && item.detail      !== filters.detail)   return false;
         if (filters.qa      !== 'all' && item.qa          !== filters.qa)       return false;
         return true;
       });
@@ -566,24 +556,22 @@
           </div>
           <div id="cat-${cat.id}" class="${isCollapsed?'hidden':''}">
             <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto shadow-sm">
-              <table class="text-sm" style="table-layout:fixed;width:100%;min-width:580px">
+              <table class="text-sm" style="table-layout:fixed;width:100%;min-width:460px">
                 <colgroup>
-                  ${isEditMode ? '<col style="width:80px">' : ''}
+                  ${isEditMode ? '<col style="width:72px">' : ''}
                   <col style="width:${colWidths.id}px">
                   <col style="width:${colWidths.name}px">
                   <col style="width:${colWidths.migrated}px">
-                  <col style="width:${colWidths.detail}px">
                   <col style="width:${colWidths.qa}px">
                   <col style="width:${colWidths.issue}px">
                 </colgroup>
                 <thead>
                   <tr class="bg-gray-50 border-b border-gray-200 text-left">
-                    ${isEditMode ? '<th class="px-2 py-2 text-xs font-semibold text-gray-400 text-center">편집</th>' : ''}
-                    <th data-col="id" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">ID<div class="resize-handle"></div></th>
+                    ${isEditMode ? '<th class="px-2 py-2 text-xs font-semibold text-gray-400 text-center whitespace-nowrap">편집</th>' : ''}
+                    <th data-col="id" class="px-2 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">ID<div class="resize-handle"></div></th>
                     <th data-col="name" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">기능명<div class="resize-handle"></div></th>
-                    <th data-col="migrated" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">웹이식<span class="guide-icon" onclick="showGuide('migrated',event)">i</span><div class="resize-handle"></div></th>
-                    <th data-col="detail" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">구현상태<span class="guide-icon" onclick="showGuide('detail',event)">i</span><div class="resize-handle"></div></th>
-                    <th data-col="qa" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">QA<span class="guide-icon" onclick="showGuide('qa',event)">i</span><div class="resize-handle"></div></th>
+                    <th data-col="migrated" class="px-2 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">웹이식<span class="guide-icon" onclick="showGuide('migrated',event)">i</span><div class="resize-handle"></div></th>
+                    <th data-col="qa" class="px-2 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">QA<span class="guide-icon" onclick="showGuide('qa',event)">i</span><div class="resize-handle"></div></th>
                     <th data-col="issue" class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">이슈/메모<span class="guide-icon" onclick="showGuide('issue',event)">i</span></th>
                   </tr>
                 </thead>
@@ -591,7 +579,6 @@
 
       items.forEach((item, i) => {
         const wm = DISPLAY.webMigrated[item.webMigrated] || DISPLAY.webMigrated.unknown;
-        const dt = DISPLAY.detail[item.detail]           || DISPLAY.detail['not-started'];
         const qa = DISPLAY.qa[item.qa]                   || DISPLAY.qa['not-tested'];
         const rowBg = i % 2 ? 'bg-gray-50/40' : '';
 
@@ -620,7 +607,7 @@
         }
 
         const catItemIdx = cat.items.indexOf(item);
-        const colSpan = isEditMode ? 7 : 6;
+        const colSpan = isEditMode ? 6 : 5;
 
         // 첫 행 앞에 삽입 버튼
         if (isEditMode && i === 0) {
@@ -638,32 +625,26 @@
                       ondragleave="dragLeave(event)"
                       ondragend="dragEnd(event)"
                       ondrop="drop(event,'${cat.id}','${item.id}')"` : ''}>
-                    ${isEditMode ? `<td class="px-2 py-2.5 text-center overflow-hidden select-none">
+                    ${isEditMode ? `<td class="px-2 py-2.5 text-center whitespace-nowrap overflow-hidden select-none">
                       <span class="text-gray-300 cursor-grab text-sm mr-1" title="드래그로 순서 변경">⠿</span>
                       <button onclick="openEditItemModal('${cat.id}','${item.id}')" title="이름 수정"
                         class="text-gray-400 hover:text-blue-600 px-1 py-0.5 rounded hover:bg-blue-50 text-sm leading-none">✏</button>
                       <button onclick="deleteItem('${cat.id}','${item.id}')" title="삭제"
                         class="text-gray-400 hover:text-red-500 px-1 py-0.5 rounded hover:bg-red-50 text-sm leading-none ml-0.5">🗑</button>
                     </td>` : ''}
-                    <td class="px-3 py-2.5 text-xs text-gray-400 font-mono overflow-hidden">${item.id}</td>
+                    <td class="px-2 py-2.5 text-xs text-gray-400 font-mono whitespace-nowrap overflow-hidden">${item.id}</td>
                     <td class="px-3 py-2.5 text-gray-800 overflow-hidden">
                       <div class="truncate" title="${item.name}">${item.name}</div>
                     </td>
-                    <td class="px-3 py-2.5 text-center overflow-hidden">
+                    <td class="px-2 py-2.5 text-center overflow-hidden">
                       <button onclick="cycleStatus('${cat.id}','${item.id}','webMigrated')"
-                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${wm.cls}">
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all whitespace-nowrap ${wm.cls}">
                         ${wm.label}
                       </button>
                     </td>
-                    <td class="px-3 py-2.5 text-center overflow-hidden">
-                      <button onclick="cycleStatus('${cat.id}','${item.id}','detail')"
-                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${dt.cls}">
-                        ${dt.label}
-                      </button>
-                    </td>
-                    <td class="px-3 py-2.5 text-center overflow-hidden">
+                    <td class="px-2 py-2.5 text-center overflow-hidden">
                       <button onclick="cycleStatus('${cat.id}','${item.id}','qa')"
-                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all ${qa.cls}">
+                        class="px-2 py-0.5 rounded-full border text-xs font-medium hover:opacity-75 active:scale-95 transition-all whitespace-nowrap ${qa.cls}">
                         ${qa.label}
                       </button>
                     </td>
@@ -685,7 +666,7 @@
 
       // 빈 카테고리 placeholder
       if (cat.items.length === 0) {
-        const colSpan = isEditMode ? 7 : 6;
+        const colSpan = isEditMode ? 6 : 5;
         if (isEditMode) {
           html += `<tr class="insert-row"><td colspan="${colSpan}">
             <div class="insert-btn" onclick="openAddItemModal('${cat.id}',0)">＋ 여기에 추가</div>
@@ -803,15 +784,14 @@
   function applyFilters() {
     filters.category = document.getElementById('filterCategory').value;
     filters.migrated = document.getElementById('filterMigrated').value;
-    filters.detail   = document.getElementById('filterDetail').value;
     filters.qa       = document.getElementById('filterQa').value;
     renderTable();
     localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
   }
 
   function resetFilters() {
-    filters = { category:'all', migrated:'all', detail:'all', qa:'all' };
-    ['filterCategory','filterMigrated','filterDetail','filterQa']
+    filters = { category:'all', migrated:'all', qa:'all' };
+    ['filterCategory','filterMigrated','filterQa']
       .forEach(id => { document.getElementById(id).value = 'all'; });
     renderTable();
     localStorage.removeItem(UI_KEY_FILTERS);
