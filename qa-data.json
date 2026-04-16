@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 11:26",
+    "lastUpdated": "2026-04-16 11:28",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1696,6 +1696,26 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "ce-35",
+          "name": "자유점으로 변경",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T02:28:01.643Z"
+        },
+        {
+          "id": "ce-36",
+          "name": "자유도1 점으로 변경",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T02:28:02.858Z"
         },
         {
           "id": "ce-08",
