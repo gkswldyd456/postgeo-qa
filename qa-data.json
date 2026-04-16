@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 06:44",
+    "lastUpdated": "2026-04-16 15:46",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -485,7 +485,15 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776321884353arh",
+              "text": "예를들어, x축 평행선을 그린 후에 양 끝점에 이어서 두 점 선분을 그리려고 하면 양 끝점을 클릭할수가 없음.",
+              "issue": null,
+              "resolved": false
+            }
+          ],
+          "_modified": "2026-04-16T06:46:28.906Z"
         },
         {
           "id": "l-02",
