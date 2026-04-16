@@ -1198,7 +1198,7 @@
     const cat  = qaData.categories.find(c => c.id === editTarget.catId);
     const item = cat?.items.find(i => i.id === editTarget.itemId);
     if (!item) return;
-    item.memos  = _editMemos.filter(m => m.text || (m.issue && m.issue !== 'X'));
+    item.memos  = _editMemos.filter(m => m.text || (m.issue && m.issue !== 'X') || m.pr || (m.comments && m.comments.length > 0));
     item.issues = item.memos.filter(m => m.issue && m.issue !== 'X' && /^\d+$/.test(m.issue)).map(m => m.issue);
     item._modified = new Date().toISOString();
     markDirty();
