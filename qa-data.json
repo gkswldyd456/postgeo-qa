@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 14:12",
+    "lastUpdated": "2026-04-16 14:17",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2017,6 +2017,36 @@
           "memos": []
         },
         {
+          "id": "cs-09",
+          "name": "격자 굵기 설정",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T05:14:43.669Z"
+        },
+        {
+          "id": "cs-10",
+          "name": "격자 명암 설정",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T05:14:45.408Z"
+        },
+        {
+          "id": "cs-11",
+          "name": "격자 간격 설정",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T05:17:46.983Z"
+        },
+        {
           "id": "cs-02",
           "name": "축 표시 설정",
           "webMigrated": "yes",
@@ -2024,6 +2054,16 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "cs-12",
+          "name": "Y좌표 *배 확대/축소",
+          "webMigrated": "no",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": "",
+          "_modified": "2026-04-16T05:17:48.794Z"
         },
         {
           "id": "cs-03",
