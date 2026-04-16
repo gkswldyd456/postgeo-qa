@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 14:03",
+    "lastUpdated": "2026-04-16 14:12",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2138,6 +2138,42 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "fs-06",
+          "name": "새 파일",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "fs-07",
+          "name": "새 이름으로 저장하기",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "fs-08",
+          "name": "영역지정해서 저장하기",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "fs-09",
+          "name": "영역지정해서 새 이름으로 저장하기",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     },
