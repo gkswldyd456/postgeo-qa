@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 10:44",
+    "lastUpdated": "2026-04-16 10:58",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1894,6 +1894,15 @@
           "qa": "not-tested",
           "issues": [],
           "memos": []
+        },
+        {
+          "id": "cs-08",
+          "name": "O, X, Y 자동넣기",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
         }
       ]
     },
