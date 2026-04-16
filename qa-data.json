@@ -1778,29 +1778,32 @@
         {
           "id": "ce-39",
           "name": "점 회전각 변경 (+10도, -10도, +90도, -90도)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-16T04:35:29.657Z"
         },
         {
           "id": "ce-40",
           "name": "근접점 크기 변경(0~20)",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-16T04:35:30.550Z"
         },
         {
           "id": "ce-41",
           "name": "근접 객체 검색",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "notes": ""
+          "notes": "",
+          "_modified": "2026-04-16T04:35:31.435Z"
         },
         {
           "id": "ce-35",
