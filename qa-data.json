@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 13:22",
+    "lastUpdated": "2026-04-16 13:23",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1768,6 +1768,15 @@
         {
           "id": "ce-39",
           "name": "점 회전각 변경 (+10도, -10도, +90도, -90도)",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-40",
+          "name": "근접점 크기 변경(0~20)",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
