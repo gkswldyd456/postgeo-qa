@@ -1280,6 +1280,9 @@
         }
         const baseItem = baseCat?.items?.find(i => i.id === localItem.id);
 
+        // 항목 이름: 로컬에서 변경됐으면 로컬 우선 (버그 수정)
+        if (baseItem && localItem.name !== baseItem.name) mergedItem.name = localItem.name;
+
         const localMod  = localItem._modified  || '1970-01-01T00:00:00.000Z';
         const mergedMod = mergedItem._modified || '1970-01-01T00:00:00.000Z';
         if (localMod > mergedMod) {
@@ -1579,7 +1582,9 @@
     if (!item) return;
     const newName = document.getElementById('inputEditName').value.trim();
     if (!newName) return;
-    item.name = newName; markDirty(); closeEditItemModal(); renderTable();
+    item.name = newName;
+    item._modified = new Date().toISOString();
+    markDirty(); closeEditItemModal(); renderTable();
   }
 
   let _addItemCatId = null;
