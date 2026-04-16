@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-16 13:30",
+    "lastUpdated": "2026-04-16 13:35",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1787,6 +1787,15 @@
         {
           "id": "ce-40",
           "name": "근접점 크기 변경(0~20)",
+          "webMigrated": "unknown",
+          "detail": "not-started",
+          "qa": "not-tested",
+          "issues": [],
+          "notes": ""
+        },
+        {
+          "id": "ce-41",
+          "name": "근접 객체 검색",
           "webMigrated": "unknown",
           "detail": "not-started",
           "qa": "not-tested",
