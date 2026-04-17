@@ -1208,14 +1208,14 @@
           "qa": "pass",
           "issues": [],
           "memos": [],
-          "_modified": "2026-04-17T05:43:22.413Z"
+          "_modified": "2026-04-17T05:43:46.866Z"
         },
         {
           "id": "pf-26",
           "name": "각 표시 — 둥근 각",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "pass",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
@@ -1226,7 +1226,7 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-17T05:43:26.357Z"
+          "_modified": "2026-04-17T05:43:48.779Z"
         },
         {
           "id": "pf-27",
