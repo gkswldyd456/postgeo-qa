@@ -44,6 +44,8 @@
     .cat-drag-src { opacity: 0.4; }
     .comment-item:hover .comment-del { opacity: 1; }
     .comment-del { opacity: 0; transition: opacity .15s; }
+    #catDropdown::-webkit-scrollbar { width: 4px; }
+    #catDropdown::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen">
@@ -109,10 +111,16 @@
     <div class="space-y-2 mb-4">
       <!-- Row 1: 기존 필터 -->
       <div class="flex flex-wrap gap-2 items-center">
-        <select id="filterCategory" onchange="applyFilters()"
-          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-          <option value="all">전체 카테고리</option>
-        </select>
+        <div class="relative" id="catFilterWrap">
+          <button id="catFilterBtn" onclick="toggleCatDropdown()"
+            class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white flex items-center gap-1.5" style="min-width:140px">
+            <span id="catFilterLabel">전체 카테고리</span>
+            <span class="text-gray-400 text-xs ml-auto pl-1">▾</span>
+          </button>
+          <div id="catDropdown" class="hidden absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1" style="min-width:190px;max-height:280px;overflow-y:auto;">
+            <div id="catDropdownList"></div>
+          </div>
+        </div>
         <select id="filterMigrated" onchange="applyFilters()"
           class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
           <option value="all">웹이식: 전체</option>
@@ -482,7 +490,7 @@
   let editTarget = { catId: null, itemId: null };
   let _dragSrc = { catId: null, itemId: null };
   let _addItemInsertIdx = null;
-  let filters   = { category:'all', migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:'all' };
+  let filters   = { category:[], migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:'all' };
   let collapsed = {};
   let baseSnapshot = null;
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
@@ -496,6 +504,10 @@
   (function restoreUiState() {
     try { const c = localStorage.getItem(UI_KEY_COLLAPSED); if (c) collapsed = JSON.parse(c); } catch {}
     try { const f = localStorage.getItem(UI_KEY_FILTERS);   if (f) Object.assign(filters, JSON.parse(f)); } catch {}
+    // 구버전 호환: category가 문자열이면 배열로 변환
+    if (typeof filters.category === 'string') {
+      filters.category = filters.category === 'all' ? [] : [filters.category];
+    }
   })();
 
   // URL ?view=dev → 개발자 미확인 필터 자동 활성
@@ -661,19 +673,75 @@
   }
 
   // ────────────────────────────────────────
-  // 카테고리 필터 드롭다운
+  // 카테고리 필터 드롭다운 (다중선택)
   // ────────────────────────────────────────
-  function renderCategoryFilter() {
-    const sel = document.getElementById('filterCategory');
-    const cur = filters.category;
-    sel.innerHTML = '<option value="all">전체 카테고리</option>';
+  function renderCategoryDropdown() {
+    const list = document.getElementById('catDropdownList');
+    if (!list) return;
+    const sel = filters.category; // 선택된 카테고리 ID 배열
+    let html = `<label class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm select-none">
+      <input type="checkbox" id="catChk_all" onchange="onCatAllChange(this)" ${sel.length === 0 ? 'checked' : ''} class="rounded accent-blue-600">
+      <span class="font-medium text-gray-700">전체</span>
+    </label>
+    <div class="border-t border-gray-100 my-1"></div>`;
     for (const cat of qaData.categories) {
-      const o = document.createElement('option');
-      o.value = cat.id;
-      o.textContent = cat.name;
-      sel.appendChild(o);
+      const checked = sel.includes(cat.id);
+      html += `<label class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm select-none">
+        <input type="checkbox" class="cat-chk rounded accent-blue-600" value="${cat.id}" onchange="onCatChkChange()" ${checked ? 'checked' : ''}>
+        <span class="text-gray-700 truncate" title="${cat.name}">${cat.name}</span>
+      </label>`;
     }
-    sel.value = cur;
+    list.innerHTML = html;
+    updateCatFilterLabel();
+  }
+
+  function renderCategoryFilter() { renderCategoryDropdown(); }  // 하위호환 alias
+
+  function toggleCatDropdown() {
+    document.getElementById('catDropdown').classList.toggle('hidden');
+  }
+
+  function closeCatDropdown() {
+    const dd = document.getElementById('catDropdown');
+    if (dd) dd.classList.add('hidden');
+  }
+
+  function onCatAllChange(chk) {
+    if (chk.checked) {
+      document.querySelectorAll('.cat-chk').forEach(c => c.checked = false);
+      filters.category = [];
+      updateCatFilterLabel();
+      renderTable();
+      localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
+    } else {
+      // 전체 체크박스는 항상 체크 유지 (개별 선택이 없을 때)
+      const anyChecked = [...document.querySelectorAll('.cat-chk')].some(c => c.checked);
+      if (!anyChecked) chk.checked = true;
+    }
+  }
+
+  function onCatChkChange() {
+    const checked = [...document.querySelectorAll('.cat-chk:checked')].map(c => c.value);
+    const allChk = document.getElementById('catChk_all');
+    if (allChk) allChk.checked = checked.length === 0;
+    filters.category = checked;
+    updateCatFilterLabel();
+    renderTable();
+    localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
+  }
+
+  function updateCatFilterLabel() {
+    const lbl = document.getElementById('catFilterLabel');
+    if (!lbl) return;
+    const sel = filters.category;
+    if (sel.length === 0) {
+      lbl.textContent = '전체 카테고리';
+    } else if (sel.length === 1) {
+      const cat = qaData?.categories?.find(c => c.id === sel[0]);
+      lbl.textContent = cat ? cat.name : '카테고리 1개';
+    } else {
+      lbl.textContent = `카테고리 ${sel.length}개 선택`;
+    }
   }
 
   // ────────────────────────────────────────
@@ -686,7 +754,7 @@
     let totalShown = 0;
 
     for (const cat of qaData.categories) {
-      if (filters.category !== 'all' && filters.category !== cat.id) continue;
+      if (filters.category.length > 0 && !filters.category.includes(cat.id)) continue;
 
       const items = cat.items.filter(item => {
         if (filters.migrated !== 'all' && item.webMigrated !== filters.migrated) return false;
@@ -1002,7 +1070,6 @@
   // 필터
   // ────────────────────────────────────────
   function applyFilters() {
-    filters.category   = document.getElementById('filterCategory').value;
     filters.migrated   = document.getElementById('filterMigrated').value;
     filters.qa         = document.getElementById('filterQa').value;
     filters.devStatus  = document.getElementById('filterDevStatus').value;
@@ -1043,8 +1110,9 @@
   }
 
   function resetFilters() {
-    filters = { category:'all', migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:'all' };
-    ['filterCategory','filterMigrated','filterQa','filterDevStatus','filterBdd'].forEach(id => {
+    filters = { category:[], migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:'all' };
+    renderCategoryDropdown(); // 체크박스 전체 초기화
+    ['filterMigrated','filterQa','filterDevStatus','filterBdd'].forEach(id => {
       const el = document.getElementById(id); if (el) el.value = 'all';
     });
     const iss = document.getElementById('filterIssueSearch');
@@ -2325,6 +2393,14 @@
     qaData.config.noteTypes = qaData.config.noteTypes.filter(x => x !== t);
     renderNoteTypesList(); markDirty();
   }
+
+  // ────────────────────────────────────────
+  // 카테고리 드롭다운 외부 클릭 닫기
+  // ────────────────────────────────────────
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('catFilterWrap');
+    if (wrap && !wrap.contains(e.target)) closeCatDropdown();
+  });
 
   // ────────────────────────────────────────
   // 동기화 배너 & 폴링
