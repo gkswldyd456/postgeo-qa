@@ -121,37 +121,41 @@
             <div id="catDropdownList"></div>
           </div>
         </div>
-        <select id="filterMigrated" onchange="applyFilters()"
-          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-          <option value="all">웹이식: 전체</option>
-          <option value="yes">✓ 완료</option>
-          <option value="partial">△ 부분</option>
-          <option value="no">✗ 미이식</option>
-          <option value="unknown">? 미확인</option>
-        </select>
-        <select id="filterQa" onchange="applyFilters()"
-          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-          <option value="all">QA: 전체</option>
-          <option value="pass">통과</option>
-          <option value="fail">실패</option>
-          <option value="skip">건너뜀</option>
-          <option value="not-tested">미테스트</option>
-        </select>
+        <div class="relative" id="migratedFilterWrap">
+          <button onclick="toggleMultiDropdown('migrated')"
+            class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white flex items-center gap-1.5" style="min-width:100px">
+            <span id="migratedFilterLabel">웹이식</span>
+            <span class="text-gray-400 text-xs ml-auto pl-1">▾</span>
+          </button>
+          <div id="migratedDropdown" class="hidden absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1" style="min-width:150px">
+            <div id="migratedDropdownList"></div>
+          </div>
+        </div>
+        <div class="relative" id="qaFilterWrap">
+          <button onclick="toggleMultiDropdown('qa')"
+            class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white flex items-center gap-1.5" style="min-width:80px">
+            <span id="qaFilterLabel">QA</span>
+            <span class="text-gray-400 text-xs ml-auto pl-1">▾</span>
+          </button>
+          <div id="qaDropdown" class="hidden absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1" style="min-width:140px">
+            <div id="qaDropdownList"></div>
+          </div>
+        </div>
         <button onclick="resetFilters()" class="text-xs text-gray-400 hover:text-gray-700 px-2 py-1">↺ 초기화</button>
         <span id="filterCount" class="text-xs text-gray-400 ml-auto"></span>
       </div>
       <!-- Row 2: 개발자 협업 필터 -->
       <div class="flex flex-wrap gap-2 items-center">
-        <select id="filterDevStatus" onchange="applyFilters()"
-          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-          <option value="all">개발상태: 전체</option>
-          <option value="null">미확인</option>
-          <option value="pending">보류</option>
-          <option value="in-progress">수정중</option>
-          <option value="done">수정완료</option>
-          <option value="hold">홀드</option>
-          <option value="not-issue">이슈아님</option>
-        </select>
+        <div class="relative" id="devStatusFilterWrap">
+          <button onclick="toggleMultiDropdown('devStatus')"
+            class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white flex items-center gap-1.5" style="min-width:100px">
+            <span id="devStatusFilterLabel">개발상태</span>
+            <span class="text-gray-400 text-xs ml-auto pl-1">▾</span>
+          </button>
+          <div id="devStatusDropdown" class="hidden absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1" style="min-width:150px">
+            <div id="devStatusDropdownList"></div>
+          </div>
+        </div>
         <div class="flex items-center gap-1.5 border border-gray-200 rounded-lg px-2 py-1 bg-white">
           <span class="text-xs text-gray-400">이슈</span>
           <input id="filterIssueSearch" type="text" placeholder="#번호" oninput="applyFilters()"
@@ -162,15 +166,16 @@
           <input id="filterPrSearch" type="text" placeholder="#번호" oninput="applyFilters()"
             class="w-16 text-xs border-0 bg-transparent focus:outline-none focus:ring-0 text-purple-600 font-mono">
         </div>
-        <select id="filterBdd" onchange="applyFilters()"
-          class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white">
-          <option value="all">BDD: 전체</option>
-          <option value="has-bdd">BDD 있음</option>
-          <option value="ai">✦ AI 생성</option>
-          <option value="needs-info">BDD? (정보부족)</option>
-          <option value="human">직접 작성</option>
-          <option value="none">BDD 없음</option>
-        </select>
+        <div class="relative" id="bddFilterWrap">
+          <button onclick="toggleMultiDropdown('bdd')"
+            class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 bg-white flex items-center gap-1.5" style="min-width:80px">
+            <span id="bddFilterLabel">BDD</span>
+            <span class="text-gray-400 text-xs ml-auto pl-1">▾</span>
+          </button>
+          <div id="bddDropdown" class="hidden absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1" style="min-width:160px">
+            <div id="bddDropdownList"></div>
+          </div>
+        </div>
         <button id="btnDevUnreviewed" onclick="toggleDevUnreviewed()"
           class="px-3 py-1.5 text-xs rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100">
           🔔 개발자 미확인
@@ -490,7 +495,7 @@
   let editTarget = { catId: null, itemId: null };
   let _dragSrc = { catId: null, itemId: null };
   let _addItemInsertIdx = null;
-  let filters   = { category:[], migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:'all' };
+  let filters   = { category:[], migrated:[], qa:[], devStatus:[], issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:[] };
   let collapsed = {};
   let baseSnapshot = null;
   let colWidths = JSON.parse(localStorage.getItem('colWidths') || 'null') ||
@@ -504,9 +509,11 @@
   (function restoreUiState() {
     try { const c = localStorage.getItem(UI_KEY_COLLAPSED); if (c) collapsed = JSON.parse(c); } catch {}
     try { const f = localStorage.getItem(UI_KEY_FILTERS);   if (f) Object.assign(filters, JSON.parse(f)); } catch {}
-    // 구버전 호환: category가 문자열이면 배열로 변환
-    if (typeof filters.category === 'string') {
-      filters.category = filters.category === 'all' ? [] : [filters.category];
+    // 구버전 호환: 문자열 필터값을 배열로 변환
+    for (const key of ['category','migrated','qa','devStatus','bdd']) {
+      if (typeof filters[key] === 'string') {
+        filters[key] = (filters[key] === 'all' || filters[key] === '') ? [] : [filters[key]];
+      }
     }
   })();
 
@@ -588,9 +595,7 @@
     renderTable();
     document.getElementById('lastUpdated').textContent =
       `마지막 업데이트: ${qaData.config.lastUpdated || '—'}`;
-    document.getElementById('filterMigrated').value  = filters.migrated;
-    document.getElementById('filterQa').value        = filters.qa;
-    document.getElementById('filterDevStatus').value = filters.devStatus;
+    renderAllMultiDropdowns();
     const iss = document.getElementById('filterIssueSearch');
     const prs = document.getElementById('filterPrSearch');
     if (iss) iss.value = filters.issueSearch || '';
@@ -745,6 +750,140 @@
   }
 
   // ────────────────────────────────────────
+  // 다중선택 드롭다운 (웹이식·QA·개발상태·BDD 공통)
+  // ────────────────────────────────────────
+  const MULTI_FILTERS = {
+    migrated: {
+      lblId: 'migratedFilterLabel', ddId: 'migratedDropdown',
+      listId: 'migratedDropdownList', wrapId: 'migratedFilterWrap',
+      defaultLabel: '웹이식',
+      options: [
+        { value: 'yes',     label: '✓ 완료' },
+        { value: 'partial', label: '△ 부분' },
+        { value: 'no',      label: '✗ 미이식' },
+        { value: 'unknown', label: '? 미확인' }
+      ]
+    },
+    qa: {
+      lblId: 'qaFilterLabel', ddId: 'qaDropdown',
+      listId: 'qaDropdownList', wrapId: 'qaFilterWrap',
+      defaultLabel: 'QA',
+      options: [
+        { value: 'pass',       label: '통과' },
+        { value: 'fail',       label: '실패' },
+        { value: 'skip',       label: '건너뜀' },
+        { value: 'not-tested', label: '미테스트' }
+      ]
+    },
+    devStatus: {
+      lblId: 'devStatusFilterLabel', ddId: 'devStatusDropdown',
+      listId: 'devStatusDropdownList', wrapId: 'devStatusFilterWrap',
+      defaultLabel: '개발상태',
+      options: [
+        { value: 'null',        label: '미확인' },
+        { value: 'pending',     label: '보류' },
+        { value: 'in-progress', label: '수정중' },
+        { value: 'done',        label: '수정완료' },
+        { value: 'hold',        label: '홀드' },
+        { value: 'not-issue',   label: '이슈아님' }
+      ]
+    },
+    bdd: {
+      lblId: 'bddFilterLabel', ddId: 'bddDropdown',
+      listId: 'bddDropdownList', wrapId: 'bddFilterWrap',
+      defaultLabel: 'BDD',
+      options: [
+        { value: 'has-bdd',    label: 'BDD 있음' },
+        { value: 'ai',         label: '✦ AI 생성' },
+        { value: 'needs-info', label: 'BDD? (정보부족)' },
+        { value: 'human',      label: '직접 작성' },
+        { value: 'none',       label: 'BDD 없음' }
+      ]
+    }
+  };
+
+  function renderMultiDropdown(key) {
+    const cfg = MULTI_FILTERS[key];
+    if (!cfg) return;
+    const list = document.getElementById(cfg.listId);
+    if (!list) return;
+    const sel = filters[key] || [];
+    let html = `<label class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm select-none">
+      <input type="checkbox" id="${key}ChkAll" onchange="onMultiAllChange('${key}')" ${sel.length === 0 ? 'checked' : ''} class="rounded accent-blue-600">
+      <span class="font-medium text-gray-700">전체</span>
+    </label>
+    <div class="border-t border-gray-100 my-1"></div>`;
+    for (const opt of cfg.options) {
+      html += `<label class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm select-none">
+        <input type="checkbox" class="${key}-chk rounded accent-blue-600" value="${opt.value}" onchange="onMultiChkChange('${key}')" ${sel.includes(opt.value) ? 'checked' : ''}>
+        <span class="text-gray-700">${opt.label}</span>
+      </label>`;
+    }
+    list.innerHTML = html;
+    updateMultiLabel(key);
+  }
+
+  function renderAllMultiDropdowns() {
+    for (const key of Object.keys(MULTI_FILTERS)) renderMultiDropdown(key);
+  }
+
+  function toggleMultiDropdown(key) {
+    const cfg = MULTI_FILTERS[key];
+    const dd = document.getElementById(cfg.ddId);
+    const isHidden = dd.classList.contains('hidden');
+    closeAllMultiDropdowns();
+    closeCatDropdown();
+    if (isHidden) dd.classList.remove('hidden');
+  }
+
+  function closeAllMultiDropdowns() {
+    for (const key of Object.keys(MULTI_FILTERS)) {
+      const dd = document.getElementById(MULTI_FILTERS[key].ddId);
+      if (dd) dd.classList.add('hidden');
+    }
+  }
+
+  function onMultiAllChange(key) {
+    const allChk = document.getElementById(`${key}ChkAll`);
+    if (allChk?.checked) {
+      document.querySelectorAll(`.${key}-chk`).forEach(c => c.checked = false);
+      filters[key] = [];
+      updateMultiLabel(key);
+      renderTable();
+      localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
+    } else {
+      // 개별 선택이 없으면 전체 강제 유지
+      const anyChecked = [...document.querySelectorAll(`.${key}-chk`)].some(c => c.checked);
+      if (!anyChecked && allChk) allChk.checked = true;
+    }
+  }
+
+  function onMultiChkChange(key) {
+    const checked = [...document.querySelectorAll(`.${key}-chk:checked`)].map(c => c.value);
+    const allChk = document.getElementById(`${key}ChkAll`);
+    if (allChk) allChk.checked = checked.length === 0;
+    filters[key] = checked;
+    updateMultiLabel(key);
+    renderTable();
+    localStorage.setItem(UI_KEY_FILTERS, JSON.stringify(filters));
+  }
+
+  function updateMultiLabel(key) {
+    const cfg = MULTI_FILTERS[key];
+    const lbl = document.getElementById(cfg.lblId);
+    if (!lbl) return;
+    const sel = filters[key] || [];
+    if (sel.length === 0) {
+      lbl.textContent = cfg.defaultLabel;
+    } else if (sel.length === 1) {
+      const opt = cfg.options.find(o => o.value === sel[0]);
+      lbl.textContent = opt ? `${cfg.defaultLabel}: ${opt.label}` : `${cfg.defaultLabel} 1개`;
+    } else {
+      lbl.textContent = `${cfg.defaultLabel} ${sel.length}개`;
+    }
+  }
+
+  // ────────────────────────────────────────
   // 테이블 렌더
   // ────────────────────────────────────────
   function renderTable() {
@@ -757,16 +896,16 @@
       if (filters.category.length > 0 && !filters.category.includes(cat.id)) continue;
 
       const items = cat.items.filter(item => {
-        if (filters.migrated !== 'all' && item.webMigrated !== filters.migrated) return false;
-        if (filters.qa       !== 'all' && item.qa          !== filters.qa)       return false;
-        // devStatus 필터
-        if (filters.devStatus !== 'all') {
+        if (filters.migrated.length > 0 && !filters.migrated.includes(item.webMigrated)) return false;
+        if (filters.qa.length > 0 && !filters.qa.includes(item.qa)) return false;
+        // devStatus 필터 (OR 다중선택)
+        if (filters.devStatus.length > 0) {
           const memos = item.memos || [];
-          if (filters.devStatus === 'null') {
-            if (!memos.some(m => m.text && (m.devStatus === null || m.devStatus === undefined))) return false;
-          } else {
-            if (!memos.some(m => m.devStatus === filters.devStatus)) return false;
-          }
+          const match = filters.devStatus.some(ds => {
+            if (ds === 'null') return memos.some(m => m.text && (m.devStatus === null || m.devStatus === undefined));
+            return memos.some(m => m.devStatus === ds);
+          });
+          if (!match) return false;
         }
         // 이슈번호 검색
         if (filters.issueSearch) {
@@ -786,20 +925,18 @@
         if (filters.qaRecheck) {
           if (!(item.memos||[]).some(m => m.devStatus === 'done' && !m.resolved)) return false;
         }
-        // BDD 필터
-        if (filters.bdd && filters.bdd !== 'all') {
+        // BDD 필터 (OR 다중선택)
+        if (filters.bdd.length > 0) {
           const memos = item.memos || [];
-          if (filters.bdd === 'has-bdd') {
-            if (!memos.some(m => m.bdd?.content || m.bdd?.status === 'needs_more_info')) return false;
-          } else if (filters.bdd === 'ai') {
-            if (!memos.some(m => m.bdd?.source === 'ai' && m.bdd?.content)) return false;
-          } else if (filters.bdd === 'needs-info') {
-            if (!memos.some(m => m.bdd?.status === 'needs_more_info')) return false;
-          } else if (filters.bdd === 'human') {
-            if (!memos.some(m => m.bdd?.content && m.bdd?.source === 'human')) return false;
-          } else if (filters.bdd === 'none') {
-            if (memos.some(m => m.bdd?.content || m.bdd?.status === 'needs_more_info')) return false;
-          }
+          const match = filters.bdd.some(bv => {
+            if (bv === 'has-bdd')    return memos.some(m => m.bdd?.content || m.bdd?.status === 'needs_more_info');
+            if (bv === 'ai')         return memos.some(m => m.bdd?.source === 'ai' && m.bdd?.content);
+            if (bv === 'needs-info') return memos.some(m => m.bdd?.status === 'needs_more_info');
+            if (bv === 'human')      return memos.some(m => m.bdd?.content && m.bdd?.source === 'human');
+            if (bv === 'none')       return !memos.some(m => m.bdd?.content || m.bdd?.status === 'needs_more_info');
+            return false;
+          });
+          if (!match) return false;
         }
         return true;
       });
@@ -1070,10 +1207,6 @@
   // 필터
   // ────────────────────────────────────────
   function applyFilters() {
-    filters.migrated   = document.getElementById('filterMigrated').value;
-    filters.qa         = document.getElementById('filterQa').value;
-    filters.devStatus  = document.getElementById('filterDevStatus').value;
-    filters.bdd        = document.getElementById('filterBdd')?.value || 'all';
     filters.issueSearch = (document.getElementById('filterIssueSearch')?.value || '').trim().replace(/^#/,'');
     filters.prSearch    = (document.getElementById('filterPrSearch')?.value    || '').trim().replace(/^#/,'');
     renderTable();
@@ -1110,11 +1243,9 @@
   }
 
   function resetFilters() {
-    filters = { category:[], migrated:'all', qa:'all', devStatus:'all', issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:'all' };
-    renderCategoryDropdown(); // 체크박스 전체 초기화
-    ['filterMigrated','filterQa','filterDevStatus','filterBdd'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.value = 'all';
-    });
+    filters = { category:[], migrated:[], qa:[], devStatus:[], issueSearch:'', prSearch:'', devUnreviewed:false, qaRecheck:false, bdd:[] };
+    renderCategoryDropdown();
+    renderAllMultiDropdowns();
     const iss = document.getElementById('filterIssueSearch');
     const prs = document.getElementById('filterPrSearch');
     if (iss) iss.value = '';
@@ -2398,8 +2529,17 @@
   // 카테고리 드롭다운 외부 클릭 닫기
   // ────────────────────────────────────────
   document.addEventListener('click', function(e) {
-    const wrap = document.getElementById('catFilterWrap');
-    if (wrap && !wrap.contains(e.target)) closeCatDropdown();
+    // 카테고리 드롭다운
+    const catWrap = document.getElementById('catFilterWrap');
+    if (catWrap && !catWrap.contains(e.target)) closeCatDropdown();
+    // 다중선택 드롭다운들
+    for (const key of Object.keys(MULTI_FILTERS)) {
+      const wrap = document.getElementById(MULTI_FILTERS[key].wrapId);
+      if (wrap && !wrap.contains(e.target)) {
+        const dd = document.getElementById(MULTI_FILTERS[key].ddId);
+        if (dd) dd.classList.add('hidden');
+      }
+    }
   });
 
   // ────────────────────────────────────────
