@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 14:46",
+    "lastUpdated": "2026-04-17 14:49",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1264,16 +1264,17 @@
           "name": "길이점선 (3점형)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
-          "_modified": "2026-04-15T04:09:36.285Z",
+          "_modified": "2026-04-17T05:47:34.693Z",
           "memos": [
             {
               "id": "m-1776226396006-9l5",
-              "text": "실행안됨.",
+              "text": "실행안됨. 및 3점형이라는 의미는 세 점을 선택한다는 의미가 아님.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
           ]
         },
@@ -1282,9 +1283,9 @@
           "name": "길이점선 (선분형)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
-          "_modified": "2026-04-15T04:09:39.824Z",
+          "_modified": "2026-04-17T05:47:35.600Z",
           "memos": [
             {
               "id": "m-1776226396006-fj6",
@@ -1300,9 +1301,9 @@
           "name": "길이점선 (원호형)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
-          "_modified": "2026-04-15T04:09:41.396Z",
+          "_modified": "2026-04-17T05:47:36.349Z",
           "memos": [
             {
               "id": "m-1776226396006-6cd",
@@ -1316,32 +1317,32 @@
         {
           "id": "pf-32",
           "name": "원(중심, 접선)",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T05:14:31.207Z"
+          "_modified": "2026-04-17T05:49:12.542Z"
         },
         {
           "id": "pf-33",
           "name": "원(중심, 접원)",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T05:14:32.729Z"
+          "_modified": "2026-04-17T05:49:13.146Z"
         },
         {
           "id": "pf-34",
           "name": "원(중심, 접그래프)",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-15T05:14:35.199Z"
+          "_modified": "2026-04-17T05:49:13.732Z"
         },
         {
           "id": "pf-35",
