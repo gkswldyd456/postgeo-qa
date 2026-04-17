@@ -317,6 +317,10 @@
         <button onclick="closeBddModal()" class="text-gray-300 hover:text-gray-500 text-xl leading-none shrink-0 ml-2">✕</button>
       </div>
       <div class="flex-1 overflow-y-auto px-5 py-4 min-h-0">
+        <div id="bddNotApplicable" class="hidden mb-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+          <div class="text-xs font-medium text-gray-500 mb-1">— BDD 작성 불필요</div>
+          <div id="bddNaText" class="text-xs text-gray-400 whitespace-pre-wrap"></div>
+        </div>
         <div id="bddNeedsInfo" class="hidden mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
           <div class="text-xs font-medium text-amber-700 mb-1">⚠️ 추가 정보 필요</div>
           <div id="bddNoteText" class="text-xs text-amber-600 whitespace-pre-wrap"></div>
@@ -328,8 +332,8 @@
       <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100 shrink-0">
         <div id="bddAt" class="text-xs text-gray-300"></div>
         <div class="flex gap-2">
-          <button onclick="copyBddContent(event)" class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg hover:bg-gray-100">📋 복사</button>
-          <button onclick="saveBddEdit()" class="px-3 py-1.5 text-xs bg-violet-600 text-white rounded-lg hover:bg-violet-700">저장</button>
+          <button id="bddCopyBtn" onclick="copyBddContent(event)" class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg hover:bg-gray-100">📋 복사</button>
+          <button id="bddSaveBtn" onclick="saveBddEdit()" class="px-3 py-1.5 text-xs bg-violet-600 text-white rounded-lg hover:bg-violet-700">저장</button>
           <button onclick="closeBddModal()" class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg hover:bg-gray-100">닫기</button>
         </div>
       </div>
@@ -1331,9 +1335,9 @@
         ? `<span class="text-xs text-gray-300">${formatAt(m.devStatusAt)}</span>` : '';
 
       const bddBtnHtml = (() => {
-        // BDD 불필요 — 클릭 불가 표시
+        // BDD 불필요 — 클릭 시 안내 표시
         if (m.bdd?.status === 'not_applicable') {
-          return `<span class="text-xs px-2 py-1 rounded border bg-white border-gray-100 text-gray-300 select-none" title="BDD 작성 불필요">—</span>`;
+          return `<button onclick="openBddModal(${i})" class="text-xs border rounded px-2 py-1 transition-colors whitespace-nowrap bg-gray-100 text-gray-400 border-gray-200 hover:bg-gray-200" title="BDD 작성 불필요">BDD✕</button>`;
         }
         // needs_more_info는 content 유무와 관계없이 먼저 체크
         if (m.bdd?.status === 'needs_more_info') {
@@ -1497,6 +1501,15 @@
     const isAi = bdd.source === 'ai';
     document.getElementById('bddAiBadge').classList.toggle('hidden', !isAi);
     document.getElementById('bddEditedBadge').classList.toggle('hidden', !(isAi && bdd.editedByHuman));
+
+    // not_applicable 안내
+    const naEl = document.getElementById('bddNotApplicable');
+    const isNA = bdd.status === 'not_applicable';
+    naEl.classList.toggle('hidden', !isNA);
+    if (isNA) document.getElementById('bddNaText').textContent = bdd.note || '';
+    document.getElementById('bddContentArea').classList.toggle('hidden', isNA);
+    document.getElementById('bddCopyBtn').classList.toggle('hidden', isNA);
+    document.getElementById('bddSaveBtn').classList.toggle('hidden', isNA);
 
     // needs_more_info 경고
     const needsInfoEl = document.getElementById('bddNeedsInfo');
