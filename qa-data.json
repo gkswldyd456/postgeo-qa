@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:32",
+    "lastUpdated": "2026-04-17 18:35",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -866,7 +866,7 @@
           "name": "원의 평행접선",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
@@ -877,7 +877,8 @@
               "comments": [],
               "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T09:35:41.949Z"
         },
         {
           "id": "l-18",
