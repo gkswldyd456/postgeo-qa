@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 14:42",
+    "lastUpdated": "2026-04-17 14:43",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1186,7 +1186,7 @@
           "name": "두 점 정사각형",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "memos": [
             {
@@ -1194,25 +1194,28 @@
               "text": "이건 위에 두 점 정다각형과 동일 기능이라. 없어도 됨.",
               "issue": "X",
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T05:42:55.140Z"
         },
         {
           "id": "pf-25",
           "name": "대각선 정사각형",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-17T05:43:22.413Z"
         },
         {
           "id": "pf-26",
           "name": "각 표시 — 둥근 각",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "memos": [
             {
@@ -1222,7 +1225,8 @@
               "resolved": false,
               "comments": []
             }
-          ]
+          ],
+          "_modified": "2026-04-17T05:43:26.357Z"
         },
         {
           "id": "pf-27",
