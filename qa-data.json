@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 11:45",
+    "lastUpdated": "2026-04-17 14:19",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1058,43 +1058,59 @@
           "name": "특수 삼각형",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
               "id": "m-1776226396006-qvk",
-              "text": "특수삼각형 안에 sss~rha 기능이 합쳐진건데, \n지금 이름만 특수삼각형으로 되어있고 아무 기능 안한 삼각형이 표출되어있음.\n각 기능별 버튼도 따로 있음.",
+              "text": "특수삼각형기능은 원래 sss, sas, aa, rhs, rha 기능이 합쳐진 기능.\n지금 이름만 특수삼각형으로 되어있고 실행하면 아무 기능 안한 삼각형이 표출되며,\nsss, sas, aa, rhs, rha 이 기능들이 따로따로 메뉴로 빠져나가 있음.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T05:14:46.473Z"
         },
         {
           "id": "pf-18",
           "name": "높이 정삼각형",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
               "id": "m-1776226396006-x71",
-              "text": "점 하나 클릭하면 그냥 정삼각형이 생김. 높이를 선택하는 개념이 아님.",
+              "text": "현재 점 하나 클릭하면 그냥 정삼각형이 생기는 상태.\n\n원래 높이에 대응하는걸 선택하는건데\n두 점으로 선택하는 경우 : 꼭짓점 -> 밑변의 중점  (내가 순서 정해서 하는 느낌)\n선분을 선택하는 경우 : 선분이 만들어진 순서를 기준으로 꼭짓점 -> 밑변의 중점 (순서가 정해진 느낌)\n두 경우 모두 TAB을 통해 뒤집어 꼭짓점, 중점 순서 바꿀 수 있음.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T05:14:50.961Z"
         },
         {
           "id": "pf-19",
           "name": "등변사다리꼴",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776402973452nrd",
+              "text": "기존은 연속된 세 점을 눌러서 만들어지는는 기능인데 세번째 점이 연속되지 않은 점으로 대응되어 모양 생성이 자연스럽게 이어지지 않습니다.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T05:17:25.525Z"
         },
         {
           "id": "pf-20",
@@ -2915,6 +2931,17 @@
       "date": "2026-04-17 11:36",
       "type": "일반",
       "content": "전반적인 상황이라 각 항목에 메모는 안남겼습니다.\n기능 실행시 객체 선택에 대한 순서의 자유도가 없어진 상태.\n기능별로 순서가 고정되어야하는 경우들이 있고, 어떤걸 우선 선택해도 상관 없는게 있는데 지금은 아직 순서가 고정된 느낌의 상태.\nex. \n- 점에 대한 대칭점 : 이건 기준이 되는 점을 먼저 선택해야하는지 옮길 점을 먼저 선택해야하는지 구분이 명확\n- 원(점, 점, 선) : 이건 점 점 선 이렇게 선택하던, 선 점 점 선택하던 어떤 순서든 선택 순서 문제가 없는 기능.",
+      "issues": [],
+      "pr": null,
+      "devStatus": null,
+      "devStatusAt": null,
+      "comments": []
+    },
+    {
+      "id": "note-1776403139437",
+      "date": "2026-04-17 14:18",
+      "type": "일반",
+      "content": "생성된 점을 Shift 드래그해서 이동하면 격자로 이동되는 기술은 너무 좋음. (기존에도 있었으면 하던 기능)\n단, 도형 위에서는 예상과 다르게 동작됨.",
       "issues": [],
       "pr": null,
       "devStatus": null,
