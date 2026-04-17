@@ -1045,12 +1045,15 @@
           const _bddAi     = _memos.some(m => m.bdd?.content && m.bdd?.source === 'ai');
           const _bddHuman  = !_bddAi && _memos.some(m => m.bdd?.content && m.bdd?.source !== 'ai');
           const _bddNeeds  = !_bddAi && !_bddHuman && _memos.some(m => m.bdd?.status === 'needs_more_info');
+          const _bddNA     = !_bddAi && !_bddHuman && !_bddNeeds && _memos.every(m => !m.bdd || m.bdd.status === 'not_applicable') && _memos.some(m => m.bdd?.status === 'not_applicable');
           if (_bddAi) {
             _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-violet-100 text-violet-600 border-violet-200 whitespace-nowrap">✦ BDD</span>`);
           } else if (_bddHuman) {
             _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-teal-100 text-teal-600 border-teal-200 whitespace-nowrap">BDD</span>`);
           } else if (_bddNeeds) {
             _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-amber-100 text-amber-600 border-amber-200 whitespace-nowrap">BDD?</span>`);
+          } else if (_bddNA) {
+            _parts.push(`<span class="px-1 py-0.5 rounded border text-xs bg-gray-100 text-gray-400 border-gray-200 whitespace-nowrap">BDD✕</span>`);
           }
           if (_parts.length) cellHtml += `<div class="flex flex-wrap items-center gap-0.5 mt-0.5">${_parts.join('')}</div>`;
         }
