@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 11:17",
+    "lastUpdated": "2026-04-17 11:18",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -872,9 +872,19 @@
               "devStatus": null,
               "devStatusAt": null,
               "comments": []
+            },
+            {
+              "id": "m-1776392285854o4b",
+              "text": "생성될 때, 원의 중심도 같이 표시되어야하는데 표시 안되는 상태.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
             }
           ],
-          "_modified": "2026-04-17T02:17:39.139Z"
+          "_modified": "2026-04-17T02:18:06.850Z"
         },
         {
           "id": "pf-08",
