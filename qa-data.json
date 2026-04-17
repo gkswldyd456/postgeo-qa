@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 17:23",
+    "lastUpdated": "2026-04-17 17:52",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -530,36 +530,39 @@
           "name": "두 점 직선",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
               "id": "m-1776322022844uvo",
-              "text": "조절점을 직선 바깥점으로 움직일때 직선의 길이의 변화가 없음. 즉, 처음 두 점 직선으로 그린 선분의 길이가 유지됨.",
+              "text": "조절점을 직선 바깥점으로 움직일때 직선의 길이의 변화가 없음. 즉, 처음 두 점 직선으로 그린 선분의 길이가 유지됨. 기존은 조절했던 거 비율로 같으 조정됨.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
           ],
-          "_modified": "2026-04-16T06:48:32.290Z"
+          "_modified": "2026-04-17T08:50:21.811Z"
         },
         {
           "id": "l-04",
-          "name": "X축",
+          "name": "X축으로의 수선",
           "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-17T08:51:49.109Z"
         },
         {
           "id": "l-05",
-          "name": "Y축",
+          "name": "Y축으로의 수선",
           "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-17T08:52:01.298Z"
         },
         {
           "id": "l-06",
