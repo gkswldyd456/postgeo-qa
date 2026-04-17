@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 11:38",
+    "lastUpdated": "2026-04-17 11:44",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -953,9 +953,31 @@
           "name": "원 (점, 점, 원)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776393584339rpt",
+              "text": "마지막 원 선택할 때, 원 클릭하는 마우스 위치에 따라 원이 1개씩만 생기는 상태. 원 생성시 모든 원 생성되거나 1개만 생성할거라면 미리보기가 나오고 어떤 원을 만들지 선택하는 UI로 변경 필요.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776393598757xus",
+              "text": "생성될 때, 원의 중심과 접점(수선의 발)이 같이 표시되어야하는데 표시 안되는 상태.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T02:39:59.938Z"
         },
         {
           "id": "pf-10",
