@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:16",
+    "lastUpdated": "2026-04-17 18:22",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -772,18 +772,42 @@
           "name": "x축 평행선 (점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17764177550981yh",
+              "text": "점을 기준으로 양 쪽이 독립된 객체나와야하는데 한 객체로 나오는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:22:38.100Z"
         },
         {
           "id": "l-14",
           "name": "y축 평행선 (점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17764177607787i9",
+              "text": "점을 기준으로 양 쪽이 독립된 객체나와야하는데 한 객체로 나오는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:22:42.267Z"
         },
         {
           "id": "l-15",
