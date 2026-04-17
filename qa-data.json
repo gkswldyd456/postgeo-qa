@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:07",
+    "lastUpdated": "2026-04-17 18:13",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -710,9 +710,41 @@
           "name": "중선",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17764170470775yx",
+              "text": "중선은 생기는데 중점이 안생김.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-17764170676554gy",
+              "text": "점 클릭하고 선분 클릭 또는 선분에 대응하는 양끝점 클릭하면 작동되어야하는데 선분클릭이 안되는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776417128727y8x",
+              "text": "데스크톱버전에서는 원래 기능 있었다가, 보통 중선기능을 안쓰고 중점 기능 + 선분 기능 을 이용해서 그리다보니 이 기능을 거의 안써서 삭제해뒀었습니다. (굳이 단축키 아깝기도 하고 중점, 선분은 단축키가 필수인데 중선은 클릭해서 써야하니까 굳이)",
+              "issue": "X",
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:13:48.471Z"
         },
         {
           "id": "l-12",
