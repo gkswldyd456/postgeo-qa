@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 17:52",
+    "lastUpdated": "2026-04-17 17:58",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -549,20 +549,42 @@
           "name": "X축으로의 수선",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": [],
-          "_modified": "2026-04-17T08:51:49.109Z"
+          "memos": [
+            {
+              "id": "m-1776415942887a8z",
+              "text": "기존 기능으로는 x축으로 수선이 내리면서 점선으로 나와야하는데, \n현재는 y축 평행선(점) 기능과 동일하게 나옵니다. (단 양쪽 끝 점이 없는 형태)",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T08:54:50.290Z"
         },
         {
           "id": "l-05",
           "name": "Y축으로의 수선",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": [],
-          "_modified": "2026-04-17T08:52:01.298Z"
+          "memos": [
+            {
+              "id": "m-1776416081395y35",
+              "text": "기존 기능으로는 y축으로 수선이 내리면서 점선으로 나와야하는데, \n현재는 x축 평행선(점) 기능과 동일하게 나옵니다. (단 양쪽 끝 점이 없는 형태)",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T08:54:50.906Z"
         },
         {
           "id": "l-06",
@@ -577,16 +599,19 @@
               "text": "각의 이등분선만 구현됨. n등분(n:2~15) 기능 미구현 (데스크톱 지원)",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             },
             {
               "id": "m-1776226703858-l06brl",
-              "text": "조절점 없음",
+              "text": "각의 이등분선 기준으로 기존 내가 선택한 점 순서에 따라 한 방향으로만 나오고 끝 점 조절이 가능한데 현재는 양방향으로 나오고 조절점이 없는상태. \n만약 양방향으로 나와야하는거면 양 쪽이 독립된 객체나와야함. (보통 한 방향으로가 대부분임)",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T08:57:20.515Z"
         },
         {
           "id": "l-07",
