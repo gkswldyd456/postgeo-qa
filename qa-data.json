@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:40",
+    "lastUpdated": "2026-04-17 09:44",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -520,7 +520,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": null,
+                "status": "not_applicable",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "데스크톱 삭제 기능 잔존 여부 확인 요청 메모 — 버그/결함 시나리오 아님",
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T07:46:55.303Z"
@@ -539,7 +547,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 두 점 직선이 생성된 상태\nWhen 조절점을 직선 바깥 방향으로 드래그할 때\nThen 조절한 비율에 맞게 직선이 함께 늘어나야 함 (데스크톱 버전 동작)\nBut 직선 길이가 변하지 않고 처음 그린 선분의 길이가 유지됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:32:18.839Z"
@@ -560,7 +576,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given X축으로의 수선 도구에서 점을 선택한 상태\nWhen X축으로의 수선을 생성할 때\nThen 선택한 점에서 X축으로 점선 형태의 수선이 생성되어야 함\nBut Y축 평행선(점) 기능과 동일하게 동작하며, 양쪽 끝 점이 없는 형태로 표시됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T08:54:50.290Z"
@@ -581,7 +605,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given Y축으로의 수선 도구에서 점을 선택한 상태\nWhen Y축으로의 수선을 생성할 때\nThen 선택한 점에서 Y축으로 점선 형태의 수선이 생성되어야 함\nBut X축 평행선(점) 기능과 동일하게 동작하며, 양쪽 끝 점이 없는 형태로 표시됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T08:54:50.906Z"
@@ -600,7 +632,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 각의 이등분선 (n등분) 도구를 실행한 상태\nWhen n값을 3 이상으로 설정하여 n등분선을 생성하려 할 때\nThen 각을 n등분하는 선들이 생성되어야 함\nBut 각의 이등분선(n=2)만 구현되어 있으며 n등분 기능이 제공되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-1776226703858-l06brl",
@@ -608,7 +648,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 각의 이등분선 도구로 이등분선을 생성한 상태\nWhen 이등분선의 방향과 끝점을 확인할 때\nThen 선택한 점 순서에 따라 한 방향으로만 이등분선이 생성되고 끝점 조절이 가능해야 함 (데스크톱 버전 동작)\nBut 양방향으로 이등분선이 생성되고 조절점이 없음; 양방향으로 나올 경우 각각 독립 객체여야 함",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T08:58:17.638Z"
@@ -629,7 +677,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 수선 도구에서 점과 직선을 선택하여 수선이 생성된 상태\nWhen 수선이 캔버스에 표시될 때\nThen 수선과 함께 수선의 발(직선과의 교점)이 표시되어야 함\nBut 수선의 발이 표시되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:01:34.647Z"
@@ -650,7 +706,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 수선 도구에서 점과 두 점을 선택하여 수선이 생성된 상태\nWhen 수선이 캔버스에 표시될 때\nThen 수선과 함께 수선의 발(직선과의 교점)이 표시되어야 함\nBut 수선의 발이 표시되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:02:15.995Z"
@@ -669,7 +733,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 수직선 (직선→점 선택) 도구를 실행한 상태\nWhen 직선과 점을 선택할 때\nThen 선택한 점을 지나며 직선에 수직인 수직선이 생성되어야 함\nBut 수선 기능과 동일하게 동작하여 수직선이 아닌 수선이 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:05:30.982Z"
@@ -690,7 +762,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 수직선 도구에서 두 점과 기준점을 선택하여 수직선이 생성된 상태\nWhen 수직선이 캔버스에 표시될 때\nThen 수직선의 양쪽 끝에 조절점이 표시되어야 함\nBut 조절점이 없는 상태로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-1776416832631ou3",
@@ -700,7 +780,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 수직선 도구로 수직선이 생성된 상태\nWhen 수직선이 캔버스에 표시될 때\nThen 기준점을 중심으로 양쪽이 각각 독립된 객체로 생성되어야 함\nBut 양쪽이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:07:28.987Z"
@@ -721,7 +809,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 중선 도구로 중선이 생성된 상태\nWhen 중선이 캔버스에 표시될 때\nThen 중선과 함께 선분의 중점이 표시되어야 함\nBut 중점이 표시되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-17764170676554gy",
@@ -731,7 +827,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 중선 도구에서 점을 클릭한 상태\nWhen 선분을 클릭하여 중선을 생성하려 할 때\nThen 선분 클릭으로 중선이 생성되어야 함 (선분 양끝점 클릭 방식도 지원)\nBut 선분 클릭이 동작하지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-1776417128727y8x",
@@ -741,7 +845,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": null,
+                "status": "not_applicable",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "데스크톱에서 중선 기능을 사용하지 않아 삭제했다는 배경 설명 메모 — 버그/결함 시나리오 아님",
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:13:48.471Z"
@@ -762,7 +874,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 평행선 도구에서 직선과 점을 선택하여 평행선이 생성된 상태\nWhen 평행선이 캔버스에 표시될 때\nThen 기준점을 중심으로 양쪽이 각각 독립된 객체로 생성되어야 함\nBut 양쪽이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:16:17.175Z"
@@ -783,7 +903,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given x축 평행선 도구에서 점을 선택하여 평행선이 생성된 상태\nWhen 평행선이 캔버스에 표시될 때\nThen 기준점을 중심으로 양쪽이 각각 독립된 객체로 생성되어야 함\nBut 양쪽이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:22:38.100Z"
@@ -804,7 +932,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given y축 평행선 도구에서 점을 선택하여 평행선이 생성된 상태\nWhen 평행선이 캔버스에 표시될 때\nThen 기준점을 중심으로 양쪽이 각각 독립된 객체로 생성되어야 함\nBut 양쪽이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:22:42.267Z"
@@ -825,7 +961,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 접선 도구에서 곡선 위의 점을 선택하여 접선이 생성된 상태\nWhen 접선이 캔버스에 표시될 때\nThen 접점을 중심으로 양쪽이 각각 독립된 객체로 생성되어야 함\nBut 양쪽이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-1776418703105zv4",
@@ -835,7 +979,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 접선 도구에서 곡선 위의 두 점을 기준으로 접선들이 생성된 상태\nWhen 접선들이 캔버스에 표시될 때\nThen 두 접점 각각을 기준으로 독립된 접선 객체가 생성되어야 함\nBut 모든 접선이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:38:44.521Z"
@@ -856,7 +1008,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 접선 (곡선 밖의 점에서) 도구에서 외부 점과 원/타원을 선택한 상태\nWhen 접선을 생성할 때\nThen 공통 접선 2개가 동시에 생성되어야 함 (데스크톱 버전 동작)\nBut 마우스 클릭 위치 근방에 접선 1개만 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-1776418261472fei",
@@ -866,7 +1026,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 접선 (곡선 밖의 점에서) 도구로 접선이 생성된 상태\nWhen 접선이 캔버스에 표시되고 조절점을 드래그할 때\nThen 기준점을 중심으로 양쪽이 각각 독립된 직선 객체로 생성되고, 두 점 직선처럼 조절점이 연동되어야 함\nBut 한 객체로 생성되며 조절점 이동 시 반대쪽이 연동되지 않고 초기 길이가 유지됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:32:40.658Z"
@@ -885,7 +1053,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 원의 평행접선 도구를 활성화한 상태\nWhen 도구를 실행하려 할 때\nThen 원의 평행접선이 정상적으로 생성되어야 함\nBut 화면이 사라지고 오류가 발생함",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:35:41.949Z"
@@ -906,7 +1082,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 두 원의 공통외접선 도구에서 두 번째 원을 선택한 상태\nWhen 공통외접선을 생성할 때\nThen 두 원의 공통외접선 2개가 동시에 생성되어야 함\nBut 두 번째 원의 클릭 위치 근방에 외접선 1개만 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:37:42.517Z"
@@ -927,7 +1111,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 두 원의 공통내접선 도구에서 두 번째 원을 선택한 상태\nWhen 공통내접선을 생성할 때\nThen 두 원의 공통내접선 2개가 동시에 생성되어야 함\nBut 두 번째 원의 클릭 위치 반대 방향에 내접선 1개만 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             },
             {
               "id": "m-1776418726605sxr",
@@ -937,7 +1129,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 두 원의 공통내접선이 생성된 상태\nWhen 내접선이 캔버스에 표시될 때\nThen 두 접점 각각을 기준으로 독립된 내접선 객체가 생성되어야 함\nBut 모든 내접선이 한 객체로 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:38:47.637Z"
@@ -958,7 +1158,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 두 원의 근축 도구로 근축이 생성된 상태\nWhen 근축이 캔버스에 표시될 때\nThen 근축이 캔버스 범위 내에 표시되고 양 끝점이 함께 생성되어야 함\nBut 양 끝점이 없으며 화면을 벗어나는 형태로 그려짐",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:39:52.163Z"
@@ -977,7 +1185,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 교각직선 도구를 활성화한 상태\nWhen 선분을 선택할 때\nThen 교각에 해당하는 직선이 생성되어야 함\nBut 선분 선택 후 아무런 변화가 없음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-17T09:44:28.665Z"
+              }
             }
           ],
           "_modified": "2026-04-17T09:40:48.649Z"
