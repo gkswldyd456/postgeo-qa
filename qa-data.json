@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:35",
+    "lastUpdated": "2026-04-17 18:38",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -826,9 +826,19 @@
               "devStatus": null,
               "devStatusAt": null,
               "comments": []
+            },
+            {
+              "id": "m-1776418703105zv4",
+              "text": "두 접점을 기준으로 각각 독립된 객체가 되어야하는데 한 객체로 나오는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
             }
           ],
-          "_modified": "2026-04-17T09:24:41.369Z"
+          "_modified": "2026-04-17T09:38:44.521Z"
         },
         {
           "id": "l-16",
@@ -885,18 +895,52 @@
           "name": "두 원의 공통외접선",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776418615325poz",
+              "text": "기존 실행시 두 원의 공통외접선 2개가 같이 표출되었는데 두 번째 원 선택한 마우스 근방으로 접선1개 생김.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:37:42.517Z"
         },
         {
           "id": "l-19",
           "name": "두 원의 공통내접선",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776418665765a2c",
+              "text": "기존 실행시 두 원의 공통내접선 2개가 같이 표출되었는데 두 번째 원 선택한 마우스 근방 반대방향으로 접선1개 생김.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776418726605sxr",
+              "text": "두 접점을 기준으로 각각 독립된 객체가 되어야하는데 한 객체로 나오는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:38:47.637Z"
         },
         {
           "id": "l-20",
