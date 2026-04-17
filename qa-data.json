@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 09:44",
+    "lastUpdated": "2026-04-17 09:47",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -515,7 +515,7 @@
             {
               "id": "m-1776411962175a5v",
               "text": "이 기능은 두 점 직선으로 사용해서 하나 삭제하는 방식으로 이용하다보니 데스크톱에서는 삭제된 기능입니다. 웹버전에는 있는데 이 기능을 필요에 의해 추가하신건지 살리고 가는건지 아닌지 확인 필요합니다.",
-              "issue": null,
+              "issue": "X",
               "pr": null,
               "resolved": false,
               "devStatus": null,
@@ -531,7 +531,7 @@
               }
             }
           ],
-          "_modified": "2026-04-17T07:46:55.303Z"
+          "_modified": "2026-04-17T09:47:05.031Z"
         },
         {
           "id": "l-03",
