@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:22",
+    "lastUpdated": "2026-04-17 18:32",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -535,14 +535,14 @@
           "memos": [
             {
               "id": "m-1776322022844uvo",
-              "text": "조절점을 직선 바깥점으로 움직일때 직선의 길이의 변화가 없음. 즉, 처음 두 점 직선으로 그린 선분의 길이가 유지됨. 기존은 조절했던 거 비율로 같으 조정됨.",
+              "text": "조절점을 직선 바깥점으로 움직일때 직선의 길이의 변화가 없음. 즉, 처음 두 점 직선으로 그린 선분의 길이가 유지됨. 기존은 조절했던 거 비율로 같이 조정됨.",
               "issue": null,
               "resolved": false,
               "comments": [],
               "pr": null
             }
           ],
-          "_modified": "2026-04-17T08:50:21.811Z"
+          "_modified": "2026-04-17T09:32:18.839Z"
         },
         {
           "id": "l-04",
@@ -814,18 +814,52 @@
           "name": "접선 (곡선 위의 점에서)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17764178799318zc",
+              "text": "접점을 기준으로 양 쪽이 독립된 객체나와야하는데 한 객체로 나오는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:24:41.369Z"
         },
         {
           "id": "l-16",
           "name": "접선 (곡선 밖의 점에서)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776418056315czb",
+              "text": "기존 원, 타원 등에 대해서는 바로 2개 접선을 만들어줬는데 현재는 모든 객체에 대해 내가 선택한 마우스 근방에서 만들어줌.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776418261472fei",
+              "text": "한 접선을 기준으로 밖의 한 점을 기준으로 양 쪽이 독립된 직선의 객체로 나와야하는데 한 객체로 나오는 상태이고, 두 점 직선처럼 점 이동시 양쪽 조절점이 같이 조정 안되고 처음 두 점 직선으로 그린 선분의 길이가 유지됨",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:32:40.658Z"
         },
         {
           "id": "l-17",
@@ -840,7 +874,8 @@
               "text": "기능실행시 화면 없어짐 및 오류 발생",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
           ]
         },
