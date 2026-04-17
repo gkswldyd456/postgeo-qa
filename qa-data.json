@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 14:43",
+    "lastUpdated": "2026-04-17 14:46",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1231,11 +1231,33 @@
         {
           "id": "pf-27",
           "name": "각 표시 — 직각",
-          "webMigrated": "partial",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776404714389txt",
+              "text": "실행시 기능은 발생해서 아주 작은 직각표시는 생성되고 있으나 각 선택 및 각 크기 조정이 안됨 (기존 드래그로 조정가능)",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776404759869p5n",
+              "text": "세 점 선택시 직각이 생기는 순서가 잘못됨. (첫 선택 점에서 직각이 생김)\n두 변 선택해서도 가능해야하는데 선 선택이 안됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T05:46:45.656Z"
         },
         {
           "id": "pf-28",
