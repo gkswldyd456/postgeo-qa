@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:02",
+    "lastUpdated": "2026-04-17 18:07",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -660,26 +660,50 @@
           "name": "수직선 (직선→점 선택)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
               "id": "m-1776226396006-6vo",
-              "text": "수직선이 아니라 수선으로 되어있음.",
+              "text": "수직선이 아니라 수선 기능으로 작동되는 상태.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T09:05:30.982Z"
         },
         {
           "id": "l-10",
           "name": "수직선 (두 점→점 선택)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776416752670sqs",
+              "text": "수직선은 만들어지는데, 양쪽 조절점이 없음.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776416832631ou3",
+              "text": "점을 기준으로 양 쪽이 독립된 객체나와야하는데 한 객체로 나오는 상태",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:07:28.987Z"
         },
         {
           "id": "l-11",
