@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 14:58",
+    "lastUpdated": "2026-04-17 15:05",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1319,30 +1319,96 @@
           "name": "원(중심, 접선)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "pass",
+          "qa": "fail",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-17T05:56:39.105Z"
+          "_modified": "2026-04-17T06:00:17.363Z",
+          "memos": [
+            {
+              "id": "m-17764055153206wt",
+              "text": "중심 클릭하고 선분 클릭으로는 잘 되는데 선분 대신 선분에 대응하는 두 점을 클릭했을 때는 안됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-17764056023692br",
+              "text": "접선과 원의 접점이 안나옴.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ]
         },
         {
           "id": "pf-33",
           "name": "원(중심, 접원)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-17T05:49:13.146Z"
+          "_modified": "2026-04-17T06:00:33.560Z",
+          "memos": [
+            {
+              "id": "m-1776405632196yb4",
+              "text": "접선과 원의 접점이 안나옴.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ]
         },
         {
           "id": "pf-34",
           "name": "원(중심, 접그래프)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-17T05:49:13.732Z"
+          "_modified": "2026-04-17T06:05:01.481Z",
+          "memos": [
+            {
+              "id": "m-1776405755601nfk",
+              "text": "중심 선택 후 그래프 선택할 때, 선택한 마우스 쪽으로 자연스럽게 접해지는 원이 생겨야하는데 중심으로부터 가장 가까운 접점이 있는 곳으로만 원이 생김.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776405858785cjf",
+              "text": "접그래프와 원의 접점이 안나옴.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776405881017j6e",
+              "text": "생성 후 중심이동할 때 접하지 않게 이동되게 되는 경우들 존재.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ]
         },
         {
           "id": "pf-35",
