@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 18:38",
+    "lastUpdated": "2026-04-17 18:40",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -947,16 +947,28 @@
           "name": "두 원의 근축",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776418759605ihb",
+              "text": "근축은 생기는데 양 끝점이 없고, 화면 벋어나게 그려지는 상태.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-17T09:39:52.163Z"
         },
         {
           "id": "l-22",
           "name": "교각직선",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
@@ -964,9 +976,11 @@
               "text": "실행하면 선분 선택되게는 되는데, 아무런 변화가 없음.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-17T09:40:48.649Z"
         }
       ]
     },
