@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 12:05",
+    "lastUpdated": "2026-04-20 12:48",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2547,6 +2547,13 @@
               "devStatus": null,
               "devStatusAt": null,
               "comments": []
+            },
+            {
+              "id": "m-1776226396006-noy",
+              "text": "점근선 생기는데 가로 점근선 안생김",
+              "issue": null,
+              "resolved": false,
+              "comments": []
             }
           ],
           "_modified": "2026-04-20T02:48:12.201Z"
@@ -2985,18 +2992,19 @@
           "name": "이차곡선 (계수 입력)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T03:43:45.892Z"
         },
         {
           "id": "fi-10",
           "name": "미분 (도함수 그래프)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "_modified": "2026-04-15T04:09:07.771Z",
+          "_modified": "2026-04-20T03:47:04.837Z",
           "memos": []
         },
         {
@@ -3004,9 +3012,9 @@
           "name": "적분 (적분 그래프)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "_modified": "2026-04-15T04:09:05.388Z",
+          "_modified": "2026-04-20T03:47:08.197Z",
           "memos": []
         },
         {
