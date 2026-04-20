@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 16:40",
+    "lastUpdated": "2026-04-20 16:41",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3712,7 +3712,7 @@
           "name": "배경 이미지 추가",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
@@ -3726,14 +3726,14 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-20T07:08:06.717Z"
+          "_modified": "2026-04-20T07:41:20.973Z"
         },
         {
           "id": "cs-06",
           "name": "배경 이미지 제거",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
@@ -3745,7 +3745,7 @@
               "pr": null
             }
           ],
-          "_modified": "2026-04-20T07:07:20.105Z"
+          "_modified": "2026-04-20T07:41:21.762Z"
         },
         {
           "id": "cs-07",
