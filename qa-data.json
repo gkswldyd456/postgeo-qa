@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 13:06",
+    "lastUpdated": "2026-04-20 13:13",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3268,7 +3268,8 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T04:35:29.657Z"
+          "_modified": "2026-04-16T04:35:29.657Z",
+          "memos": []
         },
         {
           "id": "ce-40",
@@ -3400,11 +3401,12 @@
         {
           "id": "ce-14",
           "name": "객체 삭제",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T04:13:11.026Z"
         },
         {
           "id": "ce-15",
@@ -4138,7 +4140,7 @@
       "id": "note-1776657649573",
       "date": "2026-04-20 13:00",
       "type": "일반",
-      "content": "점 회전할 때 각각 한번만 회전 가능한데, 누를 때마다 회전이 가능하면 좋을거 같습니다.!",
+      "content": "현재는 점 회전이 0도, 45도, 90도, 180도 선택이 가능하고, 각각 한번만 회전 가능한데, 누를 때마다 회전이 가능하면 좋을 것 같습니다.!\n그리고 플러스마이너스 10도씩, 플러스마이너스 90도씩 회전도 가능하면 좋을 것 같습니다.",
       "issues": [],
       "pr": null,
       "devStatus": null,
