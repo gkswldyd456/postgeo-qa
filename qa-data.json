@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 13:13",
+    "lastUpdated": "2026-04-20 14:18",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2553,7 +2553,8 @@
               "text": "점근선 생기는데 가로 점근선 안생김",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
           ],
           "_modified": "2026-04-20T02:48:12.201Z"
@@ -2696,45 +2697,81 @@
         {
           "id": "fp-20",
           "name": "포물선 (준선과 초점)",
-          "webMigrated": "partial",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
               "id": "m-1776226396006-zi2",
-              "text": "준선 선택이 아님.",
+              "text": "현재 준선을 선택해서 기능 실행되지 않음. 초점과 꼭짓점의 연장선에 있는 준선 위의 점으로만 실행됨.",
               "issue": null,
               "resolved": false,
+              "comments": [],
+              "pr": null
+            },
+            {
+              "id": "m-1776662263761owx",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
               "comments": []
             }
-          ]
+          ],
+          "_modified": "2026-04-20T05:18:37.008Z"
         },
         {
           "id": "fp-21",
           "name": "포물선 (꼭짓점과 초점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776662274345jm7",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T05:18:32.018Z"
         },
         {
           "id": "fp-22",
           "name": "포물선 (준선과 꼭짓점)",
-          "webMigrated": "partial",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
               "id": "m-1776226396006-ocd",
-              "text": "준선 선택이 아님.",
+              "text": "현재 준선을 선택해서 기능 실행되지 않음. 초점과 꼭짓점의 연장선에 있는 준선 위의 점으로만 실행됨.",
               "issue": null,
               "resolved": false,
+              "comments": [],
+              "pr": null
+            },
+            {
+              "id": "m-1776662277288hbv",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
               "comments": []
             }
-          ]
+          ],
+          "_modified": "2026-04-20T05:18:36.440Z"
         },
         {
           "id": "fp-23",
