@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 12:01",
+    "lastUpdated": "2026-04-20 12:05",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2670,9 +2670,21 @@
           "name": "정규분포곡선 (두 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776654252764qv6",
+              "text": "기존 데스크톱버전에서 실제계산으로 x축에 붙였었다가 너무 안이뻐서 x축에 붙지 않도록 변경되었는데, 웹 버전은 실제 x축에 붙이고 있는 상태.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T03:05:20.793Z"
         },
         {
           "id": "fp-20",
