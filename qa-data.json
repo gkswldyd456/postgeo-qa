@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 16:39",
+    "lastUpdated": "2026-04-20 16:40",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3156,7 +3156,7 @@
           "name": "객체 선택",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
@@ -3175,14 +3175,15 @@
               "comments": [],
               "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-20T07:40:33.746Z"
         },
         {
           "id": "ce-02",
           "name": "객체 이동 (드래그)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "memos": [
             {
@@ -3193,7 +3194,8 @@
               "comments": [],
               "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-20T07:40:35.762Z"
         },
         {
           "id": "ce-03",
