@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:43",
+    "lastUpdated": "2026-04-20 11:48",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2540,7 +2540,7 @@
             },
             {
               "id": "m-177665290221241h",
-              "text": "점근선이 생기는데 가로 점근선 안생기고 세로로 조정할 수 없는 상황이고, 점근선은 토글로 보이고 감추고 할 수 있게 설정되어야하는데 안됨.",
+              "text": "점근선이 생기는데 가로 점근선 안생기고 세로로 조정할 수 없는 상황이고, 점근선은 점으로부터 각각 독립된 객체여야하는데 한 객체로 되어있음.",
               "issue": null,
               "pr": null,
               "resolved": false,
@@ -2549,7 +2549,7 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-20T02:43:33.294Z"
+          "_modified": "2026-04-20T02:48:12.201Z"
         },
         {
           "id": "fp-13",
@@ -2568,7 +2568,19 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17766531417902hf",
+              "text": "점근선이 생기는데 가로로 무한 길이라 조정할 수 없는 상황이고, 점근선은 점으로부터 각각 독립된 객체여야하는데 한 객체로 되어있음.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:48:20.570Z"
         },
         {
           "id": "fp-15",
