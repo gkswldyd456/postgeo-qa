@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 14:45",
+    "lastUpdated": "2026-04-20 14:47",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3697,7 +3697,19 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-177666397384209b",
+              "text": "이미지를 저장해서 파일로 업로드를 해야하는게 불편합니다. 파일 말고 이미지가 그냥 복붙하듯이 올라가면 좋겠습니다.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T05:47:01.790Z"
         },
         {
           "id": "cs-06",
@@ -3712,9 +3724,11 @@
               "text": "배경 이미지 제거 — 배경이미지 표시 버튼으로 클릭 가능한지 확인 필요",
               "issue": "X",
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
-          ]
+          ],
+          "_modified": "2026-04-20T05:46:05.651Z"
         },
         {
           "id": "cs-07",
