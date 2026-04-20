@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 13:00",
+    "lastUpdated": "2026-04-20 13:01",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3235,18 +3235,20 @@
           "name": "스타일 변경 — 굵기",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T04:01:35.684Z"
         },
         {
           "id": "ce-07",
           "name": "스타일 변경 — 화살표",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T04:01:38.512Z"
         },
         {
           "id": "ce-38",
