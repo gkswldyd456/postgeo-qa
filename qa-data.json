@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 10:12",
+    "lastUpdated": "2026-04-20 10:21",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3774,14 +3774,6 @@
       "comments": []
     },
     {
-      "id": "note-1776229483089",
-      "date": "2026-04-15 14:04",
-      "type": "기타",
-      "content": "선 메뉴 중에 X축, Y축은 각각 축으로의 수선을 뜻하는 건가요?",
-      "issues": [],
-      "comments": []
-    },
-    {
       "id": "note-1776309422405",
       "date": "2026-04-16 12:17",
       "type": "일반",
@@ -3816,6 +3808,17 @@
       "date": "2026-04-17 14:58",
       "type": "일반",
       "content": "가능한 각 기능에마다 쓸테지만 못 쓸수 있어서 여기 한 번 더 씁니다.\n기존 프로그램에서 전반적으로 선분을 선택할 수 있는 기능은 선분 대신 선분에 대응하는 두 점을 선택할 수 있게 됩니다! \n예전에는 기능을 나눴었고 그걸 일부 통합하고 있었습니다. 참고로 필요하실 듯 하여 남깁니다.",
+      "issues": [],
+      "pr": null,
+      "devStatus": null,
+      "devStatusAt": null,
+      "comments": []
+    },
+    {
+      "id": "note-1776648061723",
+      "date": "2026-04-20 10:21",
+      "type": "일반",
+      "content": "x축, y축에 대한 전반적인 조정 필요.\n기존 프로그램처럼 화살표 모양 밑 두께 등 미리 디폴트 처리\n화살표 마우스로 움직일 수 있도록",
       "issues": [],
       "pr": null,
       "devStatus": null,
