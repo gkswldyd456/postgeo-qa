@@ -2566,7 +2566,7 @@
           "name": "지수함수 (점근선과 두 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
@@ -2580,7 +2580,7 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-20T02:48:20.570Z"
+          "_modified": "2026-04-20T02:48:32.848Z"
         },
         {
           "id": "fp-15",
