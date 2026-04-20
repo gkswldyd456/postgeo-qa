@@ -1006,9 +1006,10 @@
       const _cDone    = cat.items.filter(i => i.webMigrated === 'yes').length;
       const _cPartial = cat.items.filter(i => i.webMigrated === 'partial').length;
       const _cMig     = _cDone + _cPartial;
-      const _cPass    = cat.items.filter(i => i.qa === 'pass').length;
-      const _cFail    = cat.items.filter(i => i.qa === 'fail' || i.qa === 'skip').length;
-      const _cNT      = cat.items.filter(i => !i.qa || i.qa === 'not-tested').length;
+      const _cMigItems = cat.items.filter(i => i.webMigrated === 'yes' || i.webMigrated === 'partial');
+      const _cPass    = _cMigItems.filter(i => i.qa === 'pass').length;
+      const _cFail    = _cMigItems.filter(i => i.qa === 'fail' || i.qa === 'skip').length;
+      const _cNT      = _cMigItems.filter(i => !i.qa || i.qa === 'not-tested').length;
       const _cMigPct  = _cTotal ? Math.round(_cMig / _cTotal * 100) : 0;
       const _cDonePct = _cTotal ? _cDone    / _cTotal * 100 : 0;
       const _cPartPct = _cTotal ? _cPartial / _cTotal * 100 : 0;
