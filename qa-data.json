@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 16:11",
+    "lastUpdated": "2026-04-20 16:27",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3794,7 +3794,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T07:17:34.700Z"
         },
         {
           "id": "fs-04",
@@ -3803,7 +3804,8 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T07:17:35.876Z"
         },
         {
           "id": "fs-05",
@@ -3837,22 +3839,22 @@
         {
           "id": "fs-08",
           "name": "영역지정해서 저장하기",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T05:18:02.028Z"
+          "_modified": "2026-04-20T07:17:17.975Z"
         },
         {
           "id": "fs-09",
           "name": "영역지정해서 새 이름으로 저장하기",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T05:18:03.273Z"
+          "_modified": "2026-04-20T07:17:18.777Z"
         }
       ]
     },
@@ -3867,7 +3869,19 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776669467532out",
+              "text": "우선 개발 요청",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T07:17:53.217Z"
         },
         {
           "id": "ti-02",
@@ -4324,6 +4338,17 @@
       "date": "2026-04-20 13:06",
       "type": "질문",
       "content": "잘라내기(CUT)와 분할이 같은 기능인가요???",
+      "issues": [],
+      "pr": null,
+      "devStatus": null,
+      "devStatusAt": null,
+      "comments": []
+    },
+    {
+      "id": "note-1776669431246",
+      "date": "2026-04-20 16:17",
+      "type": "질문",
+      "content": "내보내기 기능을 누르면 json으로 파일이 내보내지던데, 이것을 다시 불러오려면 어떤 방법으로 불러와야 하나요?",
       "issues": [],
       "pr": null,
       "devStatus": null,
