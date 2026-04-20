@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:26",
+    "lastUpdated": "2026-04-20 11:27",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2286,9 +2286,19 @@
               "devStatus": null,
               "devStatusAt": null,
               "comments": []
+            },
+            {
+              "id": "m-17766516737211tp",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
             }
           ],
-          "_modified": "2026-04-20T02:16:14.878Z"
+          "_modified": "2026-04-20T02:21:54.461Z"
         },
         {
           "id": "fp-02",
@@ -2325,45 +2335,105 @@
           "name": "삼차함수 (두 극점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776651565597cg6",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:21:56.157Z"
         },
         {
           "id": "fp-05",
           "name": "삼차함수 (한 극점과 두 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17766517179530qr",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:21:59.101Z"
         },
         {
           "id": "fp-06",
           "name": "삼차함수 (네 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-177665172134942c",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:22:02.939Z"
         },
         {
           "id": "fp-07",
           "name": "사차함수 (세 극점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776652029232r7y",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:27:10.117Z"
         },
         {
           "id": "fp-08",
           "name": "사차함수 — 대칭 (두 극점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17766520339729ry",
+              "text": "처음 생성시 생성 위치에 따라 화면 벗어나게 끝 조절점들이 생성됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:27:15.130Z"
         },
         {
           "id": "fp-09",
