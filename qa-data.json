@@ -2295,18 +2295,20 @@
           "name": "이차함수 (꼭짓점과 한 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T02:18:17.845Z"
         },
         {
           "id": "fp-03",
           "name": "이차함수 (세 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T02:18:18.374Z"
         },
         {
           "id": "fp-35",
