@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:31",
+    "lastUpdated": "2026-04-20 11:32",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2816,7 +2816,7 @@
           "name": "y=f(x) 입력",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
@@ -2840,14 +2840,14 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-20T02:25:22.986Z"
+          "_modified": "2026-04-20T02:28:17.412Z"
         },
         {
           "id": "fi-02",
           "name": "x=g(y) 입력",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
@@ -2861,25 +2861,38 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-20T02:27:58.901Z"
+          "_modified": "2026-04-20T02:28:25.153Z"
         },
         {
           "id": "fi-03",
           "name": "매개변수 함수 x=f(t), y=g(t)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T02:31:40.828Z"
         },
         {
           "id": "fi-04",
           "name": "다항함수 (계수 입력)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17766523278363s5",
+              "text": "다항함수 입력창이 1개뿐이라서 x축에 평행한 직선만 구현됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:32:41.969Z"
         },
         {
           "id": "fi-05",
