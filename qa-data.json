@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 14:43",
+    "lastUpdated": "2026-04-20 14:45",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3370,23 +3370,34 @@
         {
           "id": "ce-38",
           "name": "스타일 변경 - 점 모양 변경 (25종)",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T04:16:03.760Z"
+          "_modified": "2026-04-20T05:34:31.490Z"
         },
         {
           "id": "ce-39",
           "name": "점 회전각 변경 (+10도, -10도, +90도, -90도)",
-          "webMigrated": "no",
+          "webMigrated": "partial",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T04:35:29.657Z",
-          "memos": []
+          "_modified": "2026-04-20T05:35:55.497Z",
+          "memos": [
+            {
+              "id": "m-1776663321109r5q",
+              "text": "휠로 0~180도까지 회전 가능한데, +10도, -10도, +90도, -90도 회전 버튼은 없음",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ]
         },
         {
           "id": "ce-40",
@@ -3605,9 +3616,10 @@
           "name": "격자 설정",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T05:38:02.037Z"
         },
         {
           "id": "cs-09",
@@ -3632,12 +3644,12 @@
         {
           "id": "cs-11",
           "name": "격자 간격 설정",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T05:17:46.983Z"
+          "_modified": "2026-04-20T05:38:20.631Z"
         },
         {
           "id": "cs-02",
@@ -3663,18 +3675,20 @@
           "name": "좌표 범위 설정",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T05:40:33.413Z"
         },
         {
           "id": "cs-04",
           "name": "확대/축소 (Zoom)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T05:40:39.984Z"
         },
         {
           "id": "cs-05",
@@ -3719,7 +3733,19 @@
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T02:23:32.753Z"
+          "_modified": "2026-04-20T05:43:17.657Z",
+          "memos": [
+            {
+              "id": "m-1776663788680gnp",
+              "text": "우선 개발 요청",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ]
         }
       ]
     },
