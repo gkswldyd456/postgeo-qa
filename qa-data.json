@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:32",
+    "lastUpdated": "2026-04-20 11:43",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2525,26 +2525,41 @@
           "name": "유리함수 (대칭점과 한점)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
           "memos": [
             {
-              "id": "m-1776226396006-noy",
-              "text": "점근선 생기는데 가로 점근선 안생김",
+              "id": "m-1776652842358nx8",
+              "text": "대칭점을 기준으로 양 쪽이 독립된 객체로 생성되어야하는데, 하나의 함수로 생성되어 각각 조정이 되지 않고 점근선쪽으로 조정이 안되는 상태.",
               "issue": null,
+              "pr": null,
               "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-177665290221241h",
+              "text": "점근선이 생기는데 가로 점근선 안생기고 세로로 조정할 수 없는 상황이고, 점근선은 토글로 보이고 감추고 할 수 있게 설정되어야하는데 안됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
               "comments": []
             }
-          ]
+          ],
+          "_modified": "2026-04-20T02:43:33.294Z"
         },
         {
           "id": "fp-13",
           "name": "무리함수 (꼭짓점과 한 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T02:43:32.253Z"
         },
         {
           "id": "fp-14",
