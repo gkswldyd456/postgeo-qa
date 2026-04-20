@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:27",
+    "lastUpdated": "2026-04-20 11:28",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2801,7 +2801,19 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776652050474c6d",
+              "text": "식 입력했을대 그래프 구현이 안됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:27:58.901Z"
         },
         {
           "id": "fi-03",
