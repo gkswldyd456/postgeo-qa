@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 16:41",
+    "lastUpdated": "2026-04-20 07:55",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2276,7 +2276,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 일차함수 (한 점과 기울기)를 생성한 상태에서\nWhen 기울기 입력 필드에 루트(√), 탄젠트(tan) 등 수학 문자 표현을 입력하면\nThen 해당 표현이 유효한 수학 값으로 해석되어 기울기에 반영되어야 한다\n\nBut 현재 소숫점 숫자만 입력 가능하며 수학 문자 표현 입력이 허용되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-1776651354605gxg",
@@ -2286,7 +2294,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 일차함수 (한 점과 기울기)가 이미 생성된 상태에서\nWhen 생성된 함수의 기울기 값을 수정하려 하면\nThen 기울기를 변경할 수 있는 UI(입력 필드 또는 수정 옵션)가 제공되어야 한다\n\nBut 현재 기울기 수정 UI가 없어 생성 후 기울기를 변경할 수 없음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-17766516737211tp",
@@ -2296,10 +2312,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 일차함수 (한 점과 기울기)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:21:54.461Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-02",
@@ -2347,10 +2371,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 삼차함수 (두 극점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:21:56.157Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-05",
@@ -2368,10 +2400,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 삼차함수 (한 극점과 두 점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:21:59.101Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-06",
@@ -2389,10 +2429,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 삼차함수 (네 점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:22:02.939Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-07",
@@ -2410,10 +2458,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 사차함수 (세 극점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:27:10.117Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-08",
@@ -2431,10 +2487,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 사차함수 — 대칭 (두 극점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:27:15.130Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-09",
@@ -2452,10 +2516,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 사차함수 — 극점+변곡점 (미분계수 0)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:29:01.157Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-10",
@@ -2473,10 +2545,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 사차함수 — 극점+변곡점+한점을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:30:24.841Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-41",
@@ -2516,10 +2596,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 사차함수 (다섯점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:30:29.802Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-12",
@@ -2586,10 +2674,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 지수함수 (점근선과 두 점)을 생성한 상태에서\nWhen 생성된 점근선을 확인하거나 조정하려 하면\nThen 점근선이 각 점으로부터 독립된 객체로 생성되어야 하고, 길이 조절이 가능해야 한다\n\nBut 점근선이 가로로 무한 길이로 생성되어 조절 불가하며, 각 점의 독립 객체가 아닌 하나의 객체로 묶여 있음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:49:20.809Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-15",
@@ -2607,10 +2703,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 로그함수 (점근선과 두 점)을 생성한 상태에서\nWhen 생성된 점근선을 확인하거나 조정하려 하면\nThen 점근선이 각 점으로부터 독립된 객체로 생성되어야 하고, 길이 조절이 가능해야 한다\n\nBut 점근선이 세로로 무한 길이로 생성되어 조절 불가하며, 각 점의 독립 객체가 아닌 하나의 객체로 묶여 있음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:49:30.245Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-16",
@@ -2659,7 +2763,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 삼각함수 tan을 생성한 상태에서\nWhen 생성된 점근선을 확인하면\nThen 점근선이 각 점으로부터 독립된 객체로 생성되어야 하고, 생성된 탄젠트함수 범위 안의 점근선만 표시되어야 한다\n\nBut 점근선이 세로로 무한 길이로 생성되어 조절 불가하고, 단일 객체로 묶여 있으며, 함수 범위 밖의 모든 점근선까지 표현되고 있음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-1776653774193ch3",
@@ -2669,10 +2781,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 삼각함수 tan 생성 중 마지막 점을 선택하는 단계에서\nWhen 한 주기 범위 밖의 점을 클릭하면\nThen 한 주기 안에 대응하는 점만 선택 가능하도록 입력이 제한되어야 한다\n\nBut 현재 아무 점이나 선택 가능하여 주기 밖 점 클릭 시 계산 오류 및 점근선 값 클릭 가능성이 존재함",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T03:01:16.365Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-19",
@@ -2690,10 +2810,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 정규분포곡선 (두 점)을 생성한 상태에서\nWhen 생성된 정규분포곡선의 모양을 확인하면\nThen 곡선의 양 끝이 x축에 닿지 않고 자연스럽게 이어져야 한다\n\nBut 웹 버전에서는 곡선이 실제 계산값에 따라 x축에 밀착되어 표현되고 있음 (데스크톱 버전에서는 x축에 붙지 않도록 수정된 상태)",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T03:05:20.793Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-20",
@@ -2709,7 +2837,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 포물선 (준선과 초점) 기능을 실행하려는 상태에서\nWhen 준선 객체를 직접 클릭하여 기능을 실행하면\nThen 준선이 올바르게 인식되어 포물선이 생성되어야 한다\n\nBut 현재 준선 객체를 직접 선택해서는 기능이 실행되지 않고, 초점과 꼭짓점의 연장선 위에 있는 준선 위의 특정 점으로만 실행됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-1776662263761owx",
@@ -2719,10 +2855,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 포물선 (준선과 초점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:18:37.008Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-21",
@@ -2740,10 +2884,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 포물선 (꼭짓점과 초점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:18:32.018Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-22",
@@ -2759,7 +2911,15 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 포물선 (준선과 꼭짓점) 기능을 실행하려는 상태에서\nWhen 준선 객체를 직접 클릭하여 기능을 실행하면\nThen 준선이 올바르게 인식되어 포물선이 생성되어야 한다\n\nBut 현재 준선 객체를 직접 선택해서는 기능이 실행되지 않고, 초점과 꼭짓점의 연장선 위에 있는 준선 위의 특정 점으로만 실행됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-1776662277288hbv",
@@ -2769,10 +2929,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 포물선 (준선과 꼭짓점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:18:36.440Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-23",
@@ -2790,10 +2958,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 타원 (두 초점과 한 점)을 생성하면\nWhen 객체가 생성될 때\nThen 타원의 꼭짓점(장축·단축 끝점)이 독립된 점 객체로 함께 생성되어야 한다\n\nBut 현재 생성 시 타원의 꼭짓점(장축·단축 끝점) 점 객체가 함께 생성되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:22:23.431Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-24",
@@ -2811,10 +2987,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 타원 (장축 양 끝점과 한 점)을 생성하면\nWhen 객체가 생성될 때\nThen 단축 양 끝점과 초점이 독립된 점 객체로 함께 생성되어야 한다\n\nBut 현재 생성 시 단축 양 끝점과 초점 점 객체가 함께 생성되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:23:19.812Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-25",
@@ -2832,10 +3016,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 타원 (두 꼭짓점)을 생성하면\nWhen 객체가 생성될 때\nThen 나머지 두 꼭짓점과 초점이 독립된 점 객체로 함께 생성되어야 한다\n\nBut 현재 생성 시 나머지 두 꼭짓점과 초점 점 객체가 함께 생성되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:24:02.899Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-26",
@@ -2853,7 +3045,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 쌍곡선 (두 초점과 한 점)을 생성하면\nWhen 객체가 생성될 때\nThen 쌍곡선의 꼭짓점이 독립된 점 객체로 함께 생성되어야 한다\n\nBut 현재 생성 시 쌍곡선의 꼭짓점 점 객체가 함께 생성되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-1776663757239mhk",
@@ -2863,10 +3063,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 쌍곡선 (두 초점과 한 점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:42:38.533Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-27",
@@ -2884,7 +3092,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 쌍곡선 (두 꼭짓점과 한 점)을 생성하면\nWhen 객체가 생성될 때\nThen 쌍곡선의 초점이 독립된 점 객체로 함께 생성되어야 한다\n\nBut 현재 생성 시 쌍곡선의 초점 점 객체가 함께 생성되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-17766637810440q6",
@@ -2894,10 +3110,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스의 특정 위치에서 쌍곡선 (두 꼭짓점과 한 점)을 생성하면\nWhen 객체가 초기 생성될 때\nThen 끝 조절점들이 현재 화면 범위 안에 위치해야 한다\n\nBut 생성 위치에 따라 끝 조절점들이 화면 밖으로 벗어나게 생성됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T05:43:02.147Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fp-42",
@@ -3038,7 +3262,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given y=f(x) 입력 기능으로 여러 함수를 추가 입력한 상태에서\nWhen 각 함수의 보기 예시 레이블을 확인하면\nThen 추가된 순서에 따라 a(x), b(x), c(x)... 순서로 레이블이 표시되어야 한다\n\nBut 현재 함수 추가 시 예시 레이블이 해당 순서로 표시되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             },
             {
               "id": "m-17766519011388dz",
@@ -3048,10 +3280,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given y=f(x) 입력 기능을 사용하는 상태에서\nWhen 삼각함수 등 주기함수를 입력하려 하면\nThen 주기(period) 값을 입력할 수 있는 전용 입력 칸이 제공되어야 한다\n\nBut 현재 주기함수 입력 칸이 없어 주기 값을 설정할 수 없음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:28:17.412Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fi-02",
@@ -3069,10 +3309,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given x=g(y) 입력 기능에서 수식을 입력한 상태에서\nWhen 입력한 식을 확인하면\nThen 입력한 수식에 해당하는 그래프가 캔버스에 표현되어야 한다\n\nBut 수식 입력 후 그래프가 구현되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:28:25.153Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fi-03",
@@ -3100,10 +3348,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 다항함수 (계수 입력) 기능을 사용하는 상태에서\nWhen 차수가 1 이상인 다항함수를 입력하려 하면\nThen 각 차수의 계수를 별도로 입력할 수 있는 입력창이 제공되어야 한다\n\nBut 현재 입력창이 1개뿐이라 상수항만 설정 가능하여 x축에 평행한 직선만 구현됨",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:32:41.969Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "fi-05",
@@ -3219,10 +3475,18 @@
               "text": "점 크기 조정은 됨.",
               "issue": "X",
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": null,
+                "status": "not_applicable",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "부분 동작 확인 메모(\"점 크기 조정은 됨\") — 결함 시나리오 아님",
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T03:53:00.201Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "ce-16",
@@ -3616,10 +3880,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스에서 분할 대상 객체를 선택한 상태에서\nWhen 분할 기능을 실행하면\nThen 선택한 객체가 지정된 방식으로 분할되어야 한다\n\nBut 현재 분할 기능 실행 시 아무 동작도 일어나지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T03:51:17.253Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         }
       ]
     },
@@ -3723,10 +3995,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스에 배경 이미지를 추가하려는 상태에서\nWhen 이미지를 클립보드에서 붙여넣기(Ctrl+V)하면\nThen 붙여넣은 이미지가 캔버스 배경으로 즉시 적용되어야 한다\n\nBut 현재 파일 업로드 방식만 지원하며 클립보드 이미지 붙여넣기가 불가능함",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T07:41:20.973Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "cs-06",
@@ -3742,10 +4022,18 @@
               "issue": "X",
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": null,
+                "status": "not_applicable",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "배경이미지 표시 버튼 동작 확인 요청 메모 — 버그/결함 시나리오 아님",
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T07:41:21.762Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         },
         {
           "id": "cs-07",
@@ -4072,10 +4360,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 단축키 설정 창을 열어 기능별 단축키를 설정하려는 상태에서\nWhen 설정 가능한 기능 목록을 확인하면\nThen 웹버전에 구현된 모든 기능이 단축키 설정 대상으로 나타나야 한다\n\nBut 현재 일부 기능만 단축키 설정창에 표시되어 있음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T07:55:57.938Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T07:10:04.361Z"
+          "_modified": "2026-04-20T07:55:57.938Z"
         }
       ]
     },
