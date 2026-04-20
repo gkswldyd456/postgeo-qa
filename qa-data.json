@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:18",
+    "lastUpdated": "2026-04-20 11:26",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2700,7 +2700,29 @@
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776651673384mch",
+              "text": "여러함수를 추가해서 입력해야하는 경우 보기 예시는 a(x),b(x),... 순서로 나오게끔 변경 요청",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-17766519011388dz",
+              "text": "주기함수를 입력하는 칸이 없음.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:25:22.986Z"
         },
         {
           "id": "fi-02",
