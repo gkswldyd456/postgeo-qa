@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 08:02",
+    "lastUpdated": "2026-04-20 08:14",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3453,7 +3453,15 @@
               "issue": "X",
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": null,
+                "status": "not_applicable",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "단일 선택 동작 확인 메모 — 긍정적 동작 확인 내용, BDD 작성 불필요",
+                "at": "2026-04-20T08:14:45.418Z"
+              }
             },
             {
               "id": "m-1776226703858-c01bly",
@@ -3461,10 +3469,18 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 캔버스에 여러 객체가 있는 상태에서\nWhen Shift+클릭 또는 드래그 선택으로 여러 객체를 동시에 선택하면\nThen 선택한 객체들이 모두 선택 상태로 표시되어야 한다\n\nBut 현재 다중 선택 기능이 구현되어 있지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:14:45.418Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T07:40:33.746Z"
+          "_modified": "2026-04-20T08:14:45.418Z"
         },
         {
           "id": "ce-02",
@@ -3480,10 +3496,18 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 캔버스에 다양한 종류의 객체(도형, 함수, 텍스트 등)가 있는 상태에서\nWhen 각 객체를 드래그하여 이동하면\nThen 모든 종류의 객체가 드래그로 이동되어야 한다\n\nBut 현재 점·선분 정도만 이동 가능하며 나머지 객체는 대부분 드래그 이동이 되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:14:45.418Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T07:40:35.762Z"
+          "_modified": "2026-04-20T08:14:45.418Z"
         },
         {
           "id": "ce-03",
@@ -3687,7 +3711,7 @@
           "qa": "skip",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-20T07:39:03.867Z",
+          "_modified": "2026-04-20T08:14:45.418Z",
           "memos": [
             {
               "id": "m-1776663321109r5q",
@@ -3697,7 +3721,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 캔버스에 회전 가능한 객체를 선택한 상태에서\nWhen +10도, -10도, +90도, -90도 회전 버튼을 클릭하면\nThen 해당 각도만큼 객체가 회전되어야 한다\n\nBut 현재 해당 회전 버튼이 없으며 휠을 통한 0~180도 회전만 가능함",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:14:45.418Z"
+              }
             },
             {
               "id": "m-1776670712247vcc",
@@ -3707,7 +3739,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 다른 객체 위에 종속된 점이 있는 상태에서\nWhen 해당 객체의 회전각이 변경되면\nThen 객체 위의 점이 회전각을 자동으로 따라가야 한다\n\nBut 현재 객체 위의 점이 회전각 변경을 따라가지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:14:45.418Z"
+              }
             }
           ]
         },
