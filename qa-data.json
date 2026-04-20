@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 14:47",
+    "lastUpdated": "2026-04-20 16:11",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -145,7 +145,8 @@
                 "source": "ai",
                 "editedByHuman": false,
                 "at": "2026-04-16T06:30:47.982Z"
-              }
+              },
+              "pr": null
             }
           ],
           "_modified": "2026-04-16T03:23:28.610Z"
@@ -3656,9 +3657,10 @@
           "name": "축 표시 설정",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T07:08:20.651Z"
         },
         {
           "id": "cs-12",
@@ -3700,7 +3702,7 @@
           "memos": [
             {
               "id": "m-177666397384209b",
-              "text": "이미지를 저장해서 파일로 업로드를 해야하는게 불편합니다. 파일 말고 이미지가 그냥 복붙하듯이 올라가면 좋겠습니다.",
+              "text": "이미지를 저장해서 파일로 업로드를 해야하는게 불편함. 파일을 업로드하는 형태가 아니라 이미지를 복붙해서 웹버전위에 올라가면 좋겠음.",
               "issue": null,
               "pr": null,
               "resolved": false,
@@ -3709,7 +3711,7 @@
               "comments": []
             }
           ],
-          "_modified": "2026-04-20T05:47:01.790Z"
+          "_modified": "2026-04-20T07:08:06.717Z"
         },
         {
           "id": "cs-06",
@@ -3728,7 +3730,7 @@
               "pr": null
             }
           ],
-          "_modified": "2026-04-20T05:46:05.651Z"
+          "_modified": "2026-04-20T07:07:20.105Z"
         },
         {
           "id": "cs-07",
@@ -4020,18 +4022,31 @@
           "name": "언어 옵션 설정",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T07:08:46.482Z"
         },
         {
           "id": "st-02",
           "name": "단축키 설정",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776668943176abq",
+              "text": "일부기능만 단축키 설정창에 구현됨. 미이식된 기능들도 차츰 넣어야함.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T07:10:04.361Z"
         }
       ]
     },
