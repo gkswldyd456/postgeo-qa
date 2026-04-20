@@ -102,7 +102,7 @@
     <div id="panel-checklist">
 
     <!-- ── Stats Bar ── -->
-    <div id="statsBar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3"></div>
+    <div id="statsBar" class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3"></div>
 
     <!-- ── Dev Progress Bar ── -->
     <div id="devProgressBar" class="mb-4"></div>
@@ -613,33 +613,84 @@
   // 통계
   // ────────────────────────────────────────
   function renderStats() {
-    let total=0, migrated=0, passN=0, failN=0, notTested=0;
+    let total=0, migratedDone=0, migratedPartial=0, notMigrated=0;
+    let passM=0, failM=0, skipM=0, ntM=0;
     for (const cat of qaData.categories) {
       for (const item of cat.items) {
         total++;
-        if (item.webMigrated==='yes') migrated++;
-        if (item.qa==='pass')         passN++;
-        if (item.qa==='fail')         failN++;
-        if (item.qa==='not-tested')   notTested++;
+        const mig = item.webMigrated;
+        if (mig==='yes')          migratedDone++;
+        else if (mig==='partial') migratedPartial++;
+        else if (mig==='no')      notMigrated++;
+        if (mig==='yes' || mig==='partial') {
+          if (item.qa==='pass')       passM++;
+          else if (item.qa==='fail')  failM++;
+          else if (item.qa==='skip')  skipM++;
+          else                        ntM++;
+        }
       }
     }
-    const pct = total ? Math.round(migrated/total*100) : 0;
+    const migrated   = migratedDone + migratedPartial;
+    const failedM    = failM + skipM;
+    const notMigrated2 = total - migrated;
+    const migratedPct = total    ? Math.round(migrated / total * 100)    : 0;
+    const notMigPct   = total    ? Math.round(notMigrated2 / total * 100): 0;
+    const passPct     = migrated ? Math.round(passM   / migrated * 100)  : 0;
+    const failPct     = migrated ? Math.round(failedM / migrated * 100)  : 0;
+    const ntPct       = migrated ? Math.round(ntM     / migrated * 100)  : 0;
+    const donePct     = total    ? migratedDone    / total * 100          : 0;
+    const partialPct  = total    ? migratedPartial / total * 100          : 0;
     document.getElementById('statsBar').innerHTML = `
-      <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+      <div class="bg-white rounded-xl border border-gray-200 p-4 flex flex-col items-center justify-center text-center">
         <div class="text-3xl font-bold text-gray-800">${total}</div>
         <div class="text-xs text-gray-500 mt-1">전체 기능</div>
       </div>
-      <div class="bg-white rounded-xl border border-green-200 p-4 text-center">
-        <div class="text-3xl font-bold text-green-600">${migrated}</div>
-        <div class="text-xs text-gray-500 mt-1">웹 이식 완료 <span class="text-gray-400">(${pct}%)</span></div>
+      <div class="bg-white rounded-xl border border-green-100 p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-gray-600">웹이식 현황</span>
+          <span class="text-xs text-gray-400">전체 기준</span>
+        </div>
+        <div class="flex rounded-full overflow-hidden h-2 bg-gray-100 mb-3">
+          <div style="width:${donePct}%" class="bg-green-500 h-full"></div>
+          <div style="width:${partialPct}%" class="bg-yellow-400 h-full"></div>
+        </div>
+        <div class="flex justify-between items-end">
+          <div>
+            <div class="text-2xl font-bold text-green-600">${migrated}</div>
+            <div class="text-xs text-gray-500 mt-0.5">이식됨 <span class="text-green-600 font-medium">${migratedPct}%</span></div>
+            <div class="text-xs text-gray-400 mt-0.5">완료 ${migratedDone} · 부분 ${migratedPartial}</div>
+          </div>
+          <div class="text-right">
+            <div class="text-2xl font-bold text-gray-300">${notMigrated2}</div>
+            <div class="text-xs text-gray-400 mt-0.5">미이식 <span class="font-medium">${notMigPct}%</span></div>
+          </div>
+        </div>
       </div>
-      <div class="bg-white rounded-xl border border-green-200 p-4 text-center">
-        <div class="text-3xl font-bold text-green-600">${passN}</div>
-        <div class="text-xs text-gray-500 mt-1">QA 통과</div>
-      </div>
-      <div class="bg-white rounded-xl border border-red-200 p-4 text-center">
-        <div class="text-3xl font-bold text-red-500">${failN}</div>
-        <div class="text-xs text-gray-500 mt-1">QA 실패 <span class="text-gray-400">(미테스트 ${notTested})</span></div>
+      <div class="bg-white rounded-xl border border-purple-100 p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-gray-600">QA 결과</span>
+          <span class="text-xs text-gray-400">이식됨 ${migrated}개 기준</span>
+        </div>
+        <div class="flex rounded-full overflow-hidden h-2 bg-gray-100 mb-3">
+          <div style="width:${passPct}%" class="bg-green-500 h-full"></div>
+          <div style="width:${failPct}%" class="bg-red-400 h-full"></div>
+          <div style="width:${ntPct}%" class="bg-gray-200 h-full"></div>
+        </div>
+        <div class="flex justify-between items-end">
+          <div>
+            <div class="text-xl font-bold text-green-600">${passM}</div>
+            <div class="text-xs text-gray-500 mt-0.5">통과 <span class="text-green-600 font-medium">${passPct}%</span></div>
+          </div>
+          <div class="text-center">
+            <div class="text-xl font-bold text-red-500">${failedM}</div>
+            <div class="text-xs text-gray-500 mt-0.5">실패 <span class="text-red-500 font-medium">${failPct}%</span></div>
+            ${skipM > 0 ? `<div class="text-xs text-gray-400">건너띔 ${skipM} 포함</div>` : ''}
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-bold text-gray-300">${ntM}</div>
+            <div class="text-xs text-gray-400 mt-0.5">미테스트 <span class="font-medium">${ntPct}%</span></div>
+          </div>
+        </div>
       </div>`;
   }
 
@@ -951,23 +1002,46 @@
       totalShown += items.length;
 
       const isCollapsed = collapsed[cat.id];
+      const _cTotal   = cat.items.length;
+      const _cDone    = cat.items.filter(i => i.webMigrated === 'yes').length;
+      const _cPartial = cat.items.filter(i => i.webMigrated === 'partial').length;
+      const _cMig     = _cDone + _cPartial;
+      const _cPass    = cat.items.filter(i => i.qa === 'pass').length;
+      const _cFail    = cat.items.filter(i => i.qa === 'fail' || i.qa === 'skip').length;
+      const _cNT      = cat.items.filter(i => !i.qa || i.qa === 'not-tested').length;
+      const _cMigPct  = _cTotal ? Math.round(_cMig / _cTotal * 100) : 0;
+      const _cDonePct = _cTotal ? _cDone    / _cTotal * 100 : 0;
+      const _cPartPct = _cTotal ? _cPartial / _cTotal * 100 : 0;
       html += `
         <div class="mb-5" id="catblock-${cat.id}"
           ${isEditMode ? `ondragover="catDragOver(event)" ondragenter="catDragEnter(event,'${cat.id}')" ondragleave="catDragLeave(event)" ondrop="catDrop(event,'${cat.id}')"` : ''}>
-          <div class="flex items-center gap-2 w-full mb-2">
+          <div class="flex items-center gap-2 w-full mb-1">
             ${isEditMode ? `<span class="text-gray-300 cursor-grab text-sm select-none shrink-0" title="드래그로 카테고리 순서 변경" draggable="true" ondragstart="catDragStart(event,'${cat.id}')" ondragend="catDragEnd(event,'${cat.id}')">⠿</span>` : ''}
             <button class="flex items-center gap-2 flex-1 min-w-0 text-left group"
               onclick="toggleCategory('${cat.id}')">
               <span class="text-gray-400 text-sm group-hover:text-gray-600 transition-transform ${isCollapsed?'':'rotate-90'}"
                 id="arrow-${cat.id}">▶</span>
               <span class="font-semibold text-gray-700 group-hover:text-gray-900 truncate">${cat.name}</span>
-              <span class="text-xs text-gray-400 font-normal shrink-0">${items.length}개</span>
+              <span class="text-xs text-gray-400 font-normal shrink-0">${_cTotal}개</span>
             </button>
             ${isEditMode ? `
               <button onclick="openEditCatModal('${cat.id}')" title="카테고리 이름 수정"
                 class="text-gray-400 hover:text-blue-600 px-1.5 py-0.5 rounded hover:bg-blue-50 text-sm leading-none shrink-0">✏</button>
               <button onclick="deleteCat('${cat.id}')" title="카테고리 삭제"
                 class="text-gray-400 hover:text-red-500 px-1.5 py-0.5 rounded hover:bg-red-50 text-sm leading-none shrink-0">🗑</button>` : ''}
+          </div>
+          <div class="flex items-center gap-2 mb-2 ${isEditMode ? 'ml-5' : 'ml-4'} flex-wrap">
+            <div class="flex items-center gap-1.5 shrink-0">
+              <div class="relative flex rounded overflow-hidden bg-gray-100 shrink-0" style="width:52px;height:5px">
+                <div style="width:${_cDonePct}%;background:#22c55e" class="h-full"></div>
+                <div style="width:${_cPartPct}%;background:#facc15" class="h-full"></div>
+              </div>
+              <span class="text-xs text-gray-500">이식 <span class="font-semibold text-gray-700">${_cMig}</span><span class="text-gray-400">/${_cTotal}</span> <span class="font-medium text-green-600">${_cMigPct}%</span></span>
+            </div>
+            <span class="text-gray-300 text-xs select-none">|</span>
+            <span class="inline-flex items-center text-xs px-1.5 py-0.5 rounded-full font-medium ${_cPass > 0 ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-400'}">통과 ${_cPass}</span>
+            <span class="inline-flex items-center text-xs px-1.5 py-0.5 rounded-full font-medium ${_cFail > 0 ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-400'}">실패 ${_cFail}</span>
+            <span class="inline-flex items-center text-xs px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-400">미테 ${_cNT}</span>
           </div>
           <div id="cat-${cat.id}" class="${isCollapsed?'hidden':''}">
             <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto shadow-sm">
