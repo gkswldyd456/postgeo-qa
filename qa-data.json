@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 16:27",
+    "lastUpdated": "2026-04-20 16:39",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3164,14 +3164,16 @@
               "text": "단일 객체 선택 동작함",
               "issue": "X",
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             },
             {
               "id": "m-1776226703858-c01bly",
               "text": "다중 선택(Shift+클릭 등) 미구현",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
           ]
         },
@@ -3188,7 +3190,8 @@
               "text": "점, 선분 정도만 이동되고 나머지는 대부분 안됨.",
               "issue": null,
               "resolved": false,
-              "comments": []
+              "comments": [],
+              "pr": null
             }
           ]
         },
@@ -3383,14 +3386,24 @@
           "name": "점 회전각 변경 (+10도, -10도, +90도, -90도)",
           "webMigrated": "partial",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "skip",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-20T05:35:55.497Z",
+          "_modified": "2026-04-20T07:39:03.867Z",
           "memos": [
             {
               "id": "m-1776663321109r5q",
               "text": "휠로 0~180도까지 회전 가능한데, +10도, -10도, +90도, -90도 회전 버튼은 없음",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            },
+            {
+              "id": "m-1776670712247vcc",
+              "text": "객체위의 점 등일때 자동으로 회전각 따라가지는 것 아직 구현 안됨",
               "issue": null,
               "pr": null,
               "resolved": false,
