@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 12:58",
+    "lastUpdated": "2026-04-20 13:00",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -4123,6 +4123,17 @@
       "date": "2026-04-20 10:21",
       "type": "일반",
       "content": "x축, y축에 대한 전반적인 조정 필요.\n기존 프로그램처럼 화살표 모양 밑 두께 등 미리 디폴트 처리\n화살표 마우스로 움직일 수 있도록",
+      "issues": [],
+      "pr": null,
+      "devStatus": null,
+      "devStatusAt": null,
+      "comments": []
+    },
+    {
+      "id": "note-1776657649573",
+      "date": "2026-04-20 13:00",
+      "type": "일반",
+      "content": "점 회전할 때 각각 한번만 회전 가능한데, 누를 때마다 회전이 가능하면 좋을거 같습니다.!",
       "issues": [],
       "pr": null,
       "devStatus": null,
