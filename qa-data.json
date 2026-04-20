@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 13:01",
+    "lastUpdated": "2026-04-20 13:06",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3325,47 +3325,50 @@
           "name": "영역 채우기",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T04:05:01.326Z"
         },
         {
           "id": "ce-33",
           "name": "영역 채우기 색상 선택",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-20T01:01:08.650Z"
+          "_modified": "2026-04-20T04:04:58.618Z"
         },
         {
           "id": "ce-34",
           "name": "영역 채우기 무늬 선택",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-20T01:01:09.226Z"
+          "_modified": "2026-04-20T04:05:22.409Z"
         },
         {
           "id": "ce-09",
           "name": "실행 취소 (Undo)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T04:05:24.246Z"
         },
         {
           "id": "ce-10",
           "name": "다시 실행 (Redo)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T04:05:24.936Z"
         },
         {
           "id": "ce-11",
@@ -4136,6 +4139,17 @@
       "date": "2026-04-20 13:00",
       "type": "일반",
       "content": "점 회전할 때 각각 한번만 회전 가능한데, 누를 때마다 회전이 가능하면 좋을거 같습니다.!",
+      "issues": [],
+      "pr": null,
+      "devStatus": null,
+      "devStatusAt": null,
+      "comments": []
+    },
+    {
+      "id": "note-1776657983663",
+      "date": "2026-04-20 13:06",
+      "type": "질문",
+      "content": "잘라내기(CUT)와 분할이 같은 기능인가요???",
       "issues": [],
       "pr": null,
       "devStatus": null,
