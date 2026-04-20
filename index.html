@@ -1013,6 +1013,9 @@
       const _cMigPct  = _cTotal ? Math.round(_cMig / _cTotal * 100) : 0;
       const _cDonePct = _cTotal ? _cDone    / _cTotal * 100 : 0;
       const _cPartPct = _cTotal ? _cPartial / _cTotal * 100 : 0;
+      const _cPassPct = _cMig ? Math.round(_cPass / _cMig * 100) : 0;
+      const _cFailPct = _cMig ? Math.round(_cFail / _cMig * 100) : 0;
+      const _cNTPct   = _cMig ? Math.round(_cNT   / _cMig * 100) : 0;
       html += `
         <div class="mb-5" id="catblock-${cat.id}"
           ${isEditMode ? `ondragover="catDragOver(event)" ondragenter="catDragEnter(event,'${cat.id}')" ondragleave="catDragLeave(event)" ondrop="catDrop(event,'${cat.id}')"` : ''}>
@@ -1039,10 +1042,10 @@
               </div>
               <span class="text-xs text-gray-500">이식 <span class="font-semibold text-gray-700">${_cMig}</span><span class="text-gray-400">/${_cTotal}</span> <span class="font-medium text-green-600">${_cMigPct}%</span></span>
             </div>
-            <span class="text-gray-300 text-xs select-none">|</span>
-            <span class="inline-flex items-center text-xs px-1.5 py-0.5 rounded-full font-medium ${_cPass > 0 ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-400'}">통과 ${_cPass}</span>
-            <span class="inline-flex items-center text-xs px-1.5 py-0.5 rounded-full font-medium ${_cFail > 0 ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-400'}">실패 ${_cFail}</span>
-            <span class="inline-flex items-center text-xs px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-400">미테 ${_cNT}</span>
+            <span class="text-xs text-gray-400 shrink-0">이식된 ${_cMig}개 중</span>
+            <span class="inline-flex items-center gap-0.5 text-xs px-1.5 py-0.5 rounded-full font-medium ${_cPass > 0 ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-400'}">통과 ${_cPass}<span class="opacity-60">(${_cPassPct}%)</span></span>
+            <span class="inline-flex items-center gap-0.5 text-xs px-1.5 py-0.5 rounded-full font-medium ${_cFail > 0 ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-400'}">실패 ${_cFail}<span class="opacity-60">(${_cFailPct}%)</span></span>
+            <span class="inline-flex items-center gap-0.5 text-xs px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-400">미테 ${_cNT}<span class="opacity-60">(${_cNTPct}%)</span></span>
           </div>
           <div id="cat-${cat.id}" class="${isCollapsed?'hidden':''}">
             <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto shadow-sm">
