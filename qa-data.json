@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 14:18",
+    "lastUpdated": "2026-04-20 14:23",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2778,18 +2778,42 @@
           "name": "타원 (두 초점과 한 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776662525804ad0",
+              "text": "생성시 타원의 꼭짓점이 따로 생기지 않고 있음.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T05:22:23.431Z"
         },
         {
           "id": "fp-24",
           "name": "타원 (장축 양 끝점과 한 점)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "fail",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-17766625768991tm",
+              "text": "생성시 타원의 단축 양 끝점과 초점이 생기고 있지 않음.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T05:23:19.812Z"
         },
         {
           "id": "fp-25",
