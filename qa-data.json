@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-17 09:47",
+    "lastUpdated": "2026-04-20 10:12",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -3046,22 +3046,22 @@
         {
           "id": "ce-33",
           "name": "영역 채우기 색상 선택",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T02:25:45.796Z"
+          "_modified": "2026-04-20T01:01:08.650Z"
         },
         {
           "id": "ce-34",
           "name": "영역 채우기 무늬 선택",
-          "webMigrated": "no",
+          "webMigrated": "yes",
           "detail": "not-started",
           "qa": "not-tested",
           "issues": [],
           "notes": "",
-          "_modified": "2026-04-16T02:25:46.943Z"
+          "_modified": "2026-04-20T01:01:09.226Z"
         },
         {
           "id": "ce-09",
