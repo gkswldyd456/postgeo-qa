@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 11:50",
+    "lastUpdated": "2026-04-20 11:52",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2608,18 +2608,31 @@
           "name": "삼각함수 sin (y=A·sin(px+q)+n)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-20T02:51:34.333Z"
         },
         {
           "id": "fp-17",
           "name": "삼각함수 cos (y=A·cos(px+q)+n)",
           "webMigrated": "yes",
           "detail": "not-started",
-          "qa": "not-tested",
+          "qa": "pass",
           "issues": [],
-          "memos": []
+          "memos": [
+            {
+              "id": "m-1776653496769vl9",
+              "text": "점기반 함수에서 sin 이 있는데 cos과 동일 로직이라 굳이 기능이 나뉠 필요 없이 통합하는게 좋음. (데스크톱 버전도 나뉘어있는데 현재 굳이 삭제안했던 상태.)",
+              "issue": "X",
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-20T02:52:38.865Z"
         },
         {
           "id": "fp-18",
