@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 07:55",
+    "lastUpdated": "2026-04-20 08:02",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -2625,7 +2625,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 유리함수 (대칭점과 한점)을 생성한 상태에서\nWhen 생성된 두 곡선 가지를 각각 조정하려 하면\nThen 대칭점을 기준으로 양 쪽 곡선이 독립된 객체로 생성되어 각각 조정 가능해야 한다\n\nBut 현재 하나의 함수로 생성되어 독립 조정이 불가하고, 점근선 방향으로의 조정도 되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:02:52.511Z"
+              }
             },
             {
               "id": "m-177665290221241h",
@@ -2635,7 +2643,15 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": "Given 유리함수 (대칭점과 한점)을 생성한 상태에서\nWhen 생성된 점근선을 확인하면\nThen 가로 점근선과 세로 점근선이 각각 독립된 객체로 생성되어야 하고 길이 조절이 가능해야 한다\n\nBut 가로 점근선이 생성되지 않고, 세로 점근선은 조절 불가하며 단일 객체로 묶여 있음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:02:52.511Z"
+              }
             },
             {
               "id": "m-1776226396006-noy",
@@ -2643,10 +2659,18 @@
               "issue": null,
               "resolved": false,
               "comments": [],
-              "pr": null
+              "pr": null,
+              "bdd": {
+                "content": "Given 유리함수 (대칭점과 한점)을 생성한 상태에서\nWhen 생성된 점근선을 확인하면\nThen 가로 점근선과 세로 점근선이 모두 생성되어야 한다\n\nBut 현재 가로 점근선이 생성되지 않음",
+                "status": "ready",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": null,
+                "at": "2026-04-20T08:02:52.511Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:48:12.201Z"
+          "_modified": "2026-04-20T08:02:52.511Z"
         },
         {
           "id": "fp-13",
@@ -2742,10 +2766,18 @@
               "resolved": false,
               "devStatus": null,
               "devStatusAt": null,
-              "comments": []
+              "comments": [],
+              "bdd": {
+                "content": null,
+                "status": "not_applicable",
+                "source": "ai",
+                "editedByHuman": false,
+                "note": "sin·cos 기능 통합 제안 메모 — 설계 의견성 메모, BDD 작성 불필요",
+                "at": "2026-04-20T08:02:52.511Z"
+              }
             }
           ],
-          "_modified": "2026-04-20T02:52:38.865Z"
+          "_modified": "2026-04-20T08:02:52.511Z"
         },
         {
           "id": "fp-18",
