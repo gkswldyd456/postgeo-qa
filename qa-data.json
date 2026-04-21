@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-21 15:10",
+    "lastUpdated": "2026-04-21 15:18",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1198,6 +1198,22 @@
             }
           ],
           "_modified": "2026-04-17T09:40:48.649Z"
+        },
+        {
+          "id": "l-23",
+          "name": "선 색상 번경",
+          "webMigrated": "unknown",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": []
+        },
+        {
+          "id": "l-24",
+          "name": "선밀도 휠로조절",
+          "webMigrated": "unknown",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": []
         }
       ]
     },
@@ -3830,6 +3846,44 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-20T04:05:22.409Z"
+        },
+        {
+          "id": "ce-43",
+          "name": "색상점",
+          "webMigrated": "yes",
+          "qa": "pass",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:12:40.137Z"
+        },
+        {
+          "id": "ce-44",
+          "name": "색상점 on/off",
+          "webMigrated": "yes",
+          "qa": "pass",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:13:00.994Z"
+        },
+        {
+          "id": "ce-45",
+          "name": "색상 점 일괄지우기",
+          "webMigrated": "partial",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [
+            {
+              "id": "m-1776752010470py8",
+              "text": "색상점을 각각 지우는것은 가능한데, 일괄 지우기는 안됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
+          "_modified": "2026-04-21T06:13:48.777Z"
         },
         {
           "id": "ce-09",
