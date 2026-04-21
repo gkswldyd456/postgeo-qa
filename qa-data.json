@@ -3891,7 +3891,18 @@
           "webMigrated": "no",
           "qa": "not-tested",
           "issues": [],
-          "memos": [],
+          "memos": [
+            {
+              "id": "m-1776752010470py8",
+              "text": "색상점을 각각 지우는것은 가능한데, 일괄 지우기는 안됨.",
+              "issue": null,
+              "pr": null,
+              "resolved": false,
+              "devStatus": null,
+              "devStatusAt": null,
+              "comments": []
+            }
+          ],
           "_modified": "2026-04-21T06:27:20.808Z"
         },
         {
