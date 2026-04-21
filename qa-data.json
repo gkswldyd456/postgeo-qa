@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-21 14:53",
+    "lastUpdated": "2026-04-21 15:10",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -4762,6 +4762,17 @@
       "date": "2026-04-20 16:17",
       "type": "질문",
       "content": "내보내기 기능을 누르면 json으로 파일이 내보내지던데, 이것을 다시 불러오려면 어떤 방법으로 불러와야 하나요?",
+      "issues": [],
+      "pr": null,
+      "devStatus": null,
+      "devStatusAt": null,
+      "comments": []
+    },
+    {
+      "id": "note-1776751830387",
+      "date": "2026-04-21 15:10",
+      "type": "미구현",
+      "content": "x축, y축의 화살표 필요.",
       "issues": [],
       "pr": null,
       "devStatus": null,
