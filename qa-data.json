@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-21 15:33",
+    "lastUpdated": "2026-04-21 15:41",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -500,7 +500,8 @@
                 "editedByHuman": false,
                 "note": null,
                 "at": "2026-04-17T06:31:48.330Z"
-              }
+              },
+              "pr": null
             }
           ],
           "_modified": "2026-04-16T06:50:25.961Z"
@@ -1225,6 +1226,24 @@
           "issues": [],
           "memos": [],
           "_modified": "2026-04-21T06:19:39.627Z"
+        },
+        {
+          "id": "l-26",
+          "name": "선 유형 변경 7종",
+          "webMigrated": "no",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:40:37.155Z"
+        },
+        {
+          "id": "l-27",
+          "name": "화살표 모양 설정",
+          "webMigrated": "yes",
+          "qa": "pass",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:40:58.583Z"
         }
       ]
     },
