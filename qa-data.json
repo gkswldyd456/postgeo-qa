@@ -1971,10 +1971,11 @@
         {
           "id": "pf-36",
           "name": "각 유형 변경 24종",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-21T06:26:39.950Z"
         },
         {
           "id": "pf-28",
