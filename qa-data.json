@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-21 15:27",
+    "lastUpdated": "2026-04-21 15:29",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1976,6 +1976,15 @@
           "issues": [],
           "memos": [],
           "_modified": "2026-04-21T06:26:39.950Z"
+        },
+        {
+          "id": "pf-37",
+          "name": "두 줄 각의 선간격 변경",
+          "webMigrated": "no",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:29:43.409Z"
         },
         {
           "id": "pf-28",
