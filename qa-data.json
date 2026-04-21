@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-21 15:23",
+    "lastUpdated": "2026-04-21 15:26",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1967,6 +1967,14 @@
             }
           ],
           "_modified": "2026-04-17T05:46:45.656Z"
+        },
+        {
+          "id": "pf-36",
+          "name": "각 유형 변경 24종",
+          "webMigrated": "unknown",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": []
         },
         {
           "id": "pf-28",
