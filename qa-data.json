@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-20 20:16",
+    "lastUpdated": "2026-04-21 14:53",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -4602,6 +4602,24 @@
           "issues": [],
           "notes": "",
           "_modified": "2026-04-16T02:08:14.365Z"
+        },
+        {
+          "id": "x-15",
+          "name": "화면 밖 x축 화면 안으로 당겨오기",
+          "webMigrated": "no",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T05:53:30.499Z"
+        },
+        {
+          "id": "x-16",
+          "name": "화면 밖 y축 화면 안으로 당겨오기",
+          "webMigrated": "no",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T05:53:27.498Z"
         }
       ]
     },
