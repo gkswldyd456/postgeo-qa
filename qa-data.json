@@ -2005,6 +2005,15 @@
           "_modified": "2026-04-21T06:30:58.927Z"
         },
         {
+          "id": "pf-40",
+          "name": "360도 이상의 각 표현",
+          "webMigrated": "no",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:31:32.300Z"
+        },
+        {
           "id": "pf-28",
           "name": "길이점선 (3점형)",
           "webMigrated": "partial",
