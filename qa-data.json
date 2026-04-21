@@ -3,7 +3,7 @@
     "project": "PostGeo 웹버전 QA",
     "version": "1.1",
     "developerRepo": "Post-Math/PostGeoWeb",
-    "lastUpdated": "2026-04-21 15:18",
+    "lastUpdated": "2026-04-21 15:19",
     "statusCycles": {
       "webMigrated": [
         "unknown",
@@ -1202,18 +1202,29 @@
         {
           "id": "l-23",
           "name": "선 색상 번경",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-21T06:19:04.061Z"
         },
         {
           "id": "l-24",
           "name": "선밀도 휠로조절",
-          "webMigrated": "unknown",
+          "webMigrated": "no",
           "qa": "not-tested",
           "issues": [],
-          "memos": []
+          "memos": [],
+          "_modified": "2026-04-21T06:19:08.509Z"
+        },
+        {
+          "id": "l-25",
+          "name": "점선 간격 설정",
+          "webMigrated": "no",
+          "qa": "not-tested",
+          "issues": [],
+          "memos": [],
+          "_modified": "2026-04-21T06:19:39.627Z"
         }
       ]
     },
